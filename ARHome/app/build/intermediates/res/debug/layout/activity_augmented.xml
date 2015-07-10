@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:architect="http://schemas.android.com/apk/res/com.mobilizy.wikitude.content.camview.architect.view"
+android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="horizontal">
+
+<com.wikitude.architect.ArchitectView android:id="@+id/architectView"
+    android:layout_width="fill_parent" android:layout_height="fill_parent"/>
+
+</LinearLayout>
+
+<!-- From: file:/Users/swethark/Downloads/ARHome/app/src/main/res/layout/activity_augmented.xml -->
