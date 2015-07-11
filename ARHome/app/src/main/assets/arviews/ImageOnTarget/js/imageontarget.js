@@ -12,8 +12,11 @@ var World = {
 			Important: If you replace the tracker file with your own, make sure to change the target name accordingly.
 			Use a specific target name to respond only to a certain target or use a wildcard to respond to any or a certain group of targets.
 		*/
-		this.tracker = new AR.ClientTracker("assets/magazine.wtc", {
-			onLoaded: this.worldLoaded
+		this.tracker = new AR.ClientTracker("assets/virtualhometarget.wtc", {
+			onLoaded: this.worldLoaded,
+			physicalTargetImageHeights: {
+                      pageOne:    268
+            }
 		});
 
 		/*
@@ -21,10 +24,26 @@ var World = {
 		*/
 
 		/* Create overlay for page one */
-		var imgOne = new AR.ImageResource("assets/imageOne.png");
+		var imgOne = new AR.ImageResource("assets/furniture1.png");
 		var overlayOne = new AR.ImageDrawable(imgOne, 1, {
 			offsetX: -0.15,
 			offsetY: 0
+		});
+
+		var pageOne = new AR.Trackable2DObject(this.tracker, "*", {
+			drawables: {
+				cam: overlayOne
+			},
+			distanceToTarget: {
+				changedThreshold: 1,
+				onDistanceChanged: function(distance) {
+					//document.getElementById('distanceDisplay').innerHTML = "Distance from target: " + distance / 10 + " cm";
+					overlayOne.rotation = distance;
+				}
+			},
+			onExitFieldOfVision: function() {
+				document.getElementById('distanceDisplay').innerHTML = "Distance from target: unknown";
+			}
 		});
 
 		/*
@@ -40,16 +59,16 @@ var World = {
 
 	worldLoaded: function worldLoadedFn() {
 		var cssDivLeft = " style='display: table-cell;vertical-align: middle; text-align: right; width: 50%; padding-right: 15px;'";
-		var cssDivRight = " style='display: table-cell;vertical-align: middle; text-align: left;'";
-		document.getElementById('loadingMessage').innerHTML =
-			"<div" + cssDivLeft + ">Scan Target &#35;1 (surfer):</div>" +
-			"<div" + cssDivRight + "><img src='assets/surfer.png'></img></div>";
+    		var cssDivRight = " style='display: table-cell;vertical-align: middle; text-align: left;'";
+    		document.getElementById('loadingMessage').innerHTML =
+    			"<div" + cssDivLeft + ">Scan Target &#35;1 (home), then move closer to the target</div>" +
+    			"<div" + cssDivRight + "><img src='assets/target.png'></img></div>";
 
-		// Remove Scan target message after 10 sec.
-		setTimeout(function() {
-			var e = document.getElementById('loadingMessage');
-			e.parentElement.removeChild(e);
-		}, 10000);
+    		// Remove Scan target message after 10 sec.
+    		setTimeout(function() {
+    			var e = document.getElementById('loadingMessage');
+    			e.parentElement.removeChild(e);
+    		}, 10000);
 	}
 };
 
