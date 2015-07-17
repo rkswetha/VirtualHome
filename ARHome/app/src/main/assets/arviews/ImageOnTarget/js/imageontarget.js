@@ -48,7 +48,14 @@ var World = {
 	// reload places from content source
     captureScreen: function captureScreenFn() {
     	if (World.loaded) {
-    			document.location = "architectsdk://button?action=captureScreen";
+    			document.location = "architectsdk://button1?action=captureScreen";
+    		}
+    },
+
+// reload places from content source
+    displayProductInfo: function displayProductInfoFn() {
+    	if (World.loaded) {
+    			document.location = "architectsdk://button2?action=productInfo";
     		}
     },
 

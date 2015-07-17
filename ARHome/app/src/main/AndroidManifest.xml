@@ -51,6 +51,10 @@
         android:smallScreens="false"
         android:xlargeScreens="true" />
 
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
     <!--
  set android:debuggable="false" or remove android:debuggable="true" to disable debugging for Android 4.4+
     In case of a compile-error you have to update "Project - Properties - Android Lint Preferences" - Security - HardcodedDebugMode (set "Severity" to "Warning")
@@ -61,9 +65,8 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-
         <activity
-            android:name="com.wikitude.virtualhome.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/title_activity_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -72,9 +75,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.wikitude.virtualhome.AugmentedActivity"
+            android:name=".AugmentedActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_augmented" >
+        </activity>
+        <activity
+            android:name=".ProductInfo"
+            android:label="@string/title_activity_product_info" >
         </activity>
     </application>
 

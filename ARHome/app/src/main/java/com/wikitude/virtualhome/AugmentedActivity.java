@@ -171,7 +171,7 @@ public class AugmentedActivity extends Activity {
                 Uri invokedUri = Uri.parse(uriString);
 
                 // pressed snapshot button. check if host is button to fetch e.g. 'architectsdk://button?action=captureScreen', you may add more checks if more buttons are used inside AR scene
-                if ("button".equalsIgnoreCase(invokedUri.getHost())) {
+                if ("button1".equalsIgnoreCase(invokedUri.getHost())) {
                     Log.e(this.getClass().getName(), " VIRTUALHOME: Snapshot button pressed ");
                     architectView.captureScreen(ArchitectView.CaptureScreenCallback.CAPTURE_MODE_CAM_AND_WEBVIEW, new ArchitectView.CaptureScreenCallback() {
 
@@ -211,6 +211,17 @@ public class AugmentedActivity extends Activity {
                         }
                     });
                     return true;
+                }
+                else if ("button2".equalsIgnoreCase(invokedUri.getHost())) {
+
+                    Log.e(this.getClass().getName(), " VIRTUALHOME: Product Info button pressed ");
+                    Intent intent = new Intent (getApplication(), ProductInfo.class);
+                    intent.putExtra("ProductName", "MyProductName");
+                    intent.putExtra("Dimension", "MyDimension");
+                    intent.putExtra("Price", "MyPrice");
+                    intent.putExtra("Description", "MyDescription");
+                    startActivity(intent);
+
                 }
                 return false;
             }
