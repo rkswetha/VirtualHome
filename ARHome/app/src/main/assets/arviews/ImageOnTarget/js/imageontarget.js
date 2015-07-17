@@ -3,6 +3,7 @@ var World = {
 
 	init: function initFn() {
 		this.createOverlays();
+		World.loaded = true; // Overlay is complete
 	},
 
 	createOverlays: function createOverlaysFn() {
@@ -20,7 +21,9 @@ var World = {
 		});
 
 		/*
-			The next step is to create the augmentation. In this example an image resource is created and passed to the AR.ImageDrawable. A drawable is a visual component that can be connected to an IR target (AR.Trackable2DObject) or a geolocated object (AR.GeoObject). The AR.ImageDrawable is initialized by the image and its size. Optional parameters allow for position it relative to the recognized target.
+			The next step is to create the augmentation. In this example an image resource is created and passed to the AR.ImageDrawable.
+			A drawable is a visual component that can be connected to an IR target (AR.Trackable2DObject) or a geolocated object (AR.GeoObject).
+			The AR.ImageDrawable is initialized by the image and its size. Optional parameters allow for position it relative to the recognized target.
 		*/
 
 		/* Create overlay for page one */
@@ -30,24 +33,8 @@ var World = {
 			offsetY: 0
 		});
 
-		var pageOne = new AR.Trackable2DObject(this.tracker, "*", {
-			drawables: {
-				cam: overlayOne
-			},
-			distanceToTarget: {
-				changedThreshold: 1,
-				onDistanceChanged: function(distance) {
-					//document.getElementById('distanceDisplay').innerHTML = "Distance from target: " + distance / 10 + " cm";
-					overlayOne.rotation = distance;
-				}
-			},
-			onExitFieldOfVision: function() {
-				document.getElementById('distanceDisplay').innerHTML = "Distance from target: unknown";
-			}
-		});
 
-		/*
-			The last line combines everything by creating an AR.Trackable2DObject with the previously created tracker, the name of the image target and the drawable that should augment the recognized image.
+		/*	The last line combines everything by creating an AR.Trackable2DObject with the previously created tracker, the name of the image target and the drawable that should augment the recognized image.
 			Please note that in this case the target name is a wildcard. Wildcards can be used to respond to any target defined in the target collection. If you want to respond to a certain target only for a particular AR.Trackable2DObject simply provide the target name as specified in the target collection.
 		*/
 		var pageOne = new AR.Trackable2DObject(this.tracker, "*", {
@@ -55,21 +42,26 @@ var World = {
 				cam: overlayOne
 			}
 		});
+
 	},
 
-	worldLoaded: function worldLoadedFn() {
-		var cssDivLeft = " style='display: table-cell;vertical-align: middle; text-align: right; width: 50%; padding-right: 15px;'";
-    		var cssDivRight = " style='display: table-cell;vertical-align: middle; text-align: left;'";
-    		document.getElementById('loadingMessage').innerHTML =
-    			"<div" + cssDivLeft + ">Scan Target &#35;1 (home), then move closer to the target</div>" +
-    			"<div" + cssDivRight + "><img src='assets/target.png'></img></div>";
+	// reload places from content source
+    captureScreen: function captureScreenFn() {
+    	if (World.loaded) {
+    			document.location = "architectsdk://button?action=captureScreen";
+    		}
+    },
 
-    		// Remove Scan target message after 10 sec.
+	worldLoaded: function worldLoadedFn() {
+			// Remove Scan target message after 10 sec.
     		setTimeout(function() {
-    			var e = document.getElementById('loadingMessage');
+    			var e = document.getElementById('loadingMessage1');
     			e.parentElement.removeChild(e);
+    			var e = document.getElementById('loadingMessage2');
+                    			e.parentElement.removeChild(e);
     		}, 10000);
 	}
+
 };
 
 World.init();
