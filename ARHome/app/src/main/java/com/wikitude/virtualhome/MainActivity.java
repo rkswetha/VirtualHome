@@ -2,14 +2,20 @@ package com.wikitude.virtualhome;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.wikitude.virtualhome.R;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Toast;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 
 public class MainActivity extends Activity {
+
+    String markerPresent = null;
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,20 +45,61 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void invokeARActivity(View v)
-    {
-        try{
+    public void invokeARActivity(View v) {
 
-            Intent theIntent = new Intent (getApplication(), AugmentedActivity.class);
-            startActivity(theIntent);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
-        } catch (Exception e) {
-			/*
-			 * may never occur, as long as all SampleActivities exist and are
-			 * listed in manifest
-			 */
-            Toast.makeText(this, "\n className not defined/accessible",
-                    Toast.LENGTH_SHORT).show();
-        }
+        // set title
+        alertDialogBuilder.setTitle("Virtual Home");
+
+        // set dialog message
+        alertDialogBuilder
+                .setMessage("Do you have marker with you?")
+                .setCancelable(false)
+
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int id) {
+                        markerPresent = "YES";
+                        Toast.makeText(getApplicationContext(),
+                                "You clicked on YES", Toast.LENGTH_SHORT)
+                                .show();
+                        try {
+                            Intent theIntent = new Intent (getApplication(), AugmentedActivity.class);
+                            theIntent.putExtra("MarkerPresent", "YES");
+                            startActivity(theIntent);
+                        } catch (Exception e) {
+                            Toast.makeText(getApplicationContext(), "\n className not defined/accessible",
+                                Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int id) {
+                        markerPresent = "NO";
+                        Toast.makeText(getApplicationContext(),
+                                "You clicked on NO", Toast.LENGTH_SHORT)
+                                .show();
+                        dialog.cancel();
+                        try{
+                            Intent theIntent = new Intent (getApplication(), AugmentedActivity.class);
+                            theIntent.putExtra("MarkerPresent", "NO");
+                            startActivity(theIntent);
+                        } catch (Exception e) {
+                            Toast.makeText(getApplicationContext(), "\n className not defined/accessible",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
+
     }
 }

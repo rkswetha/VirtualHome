@@ -41,6 +41,7 @@ public class AugmentedActivity extends Activity {
     protected ArchitectView.ArchitectUrlListener urlListener;
 
     StartupConfiguration startupConfiguration;
+    String markerPresent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,10 @@ public class AugmentedActivity extends Activity {
         setContentView(R.layout.activity_augmented);
 
         this.setTitle("AR Virtual Home");
+
+        markerPresent = getIntent().getStringExtra("MarkerPresent");
+        Log.e(TAG, "VIRTUALHOME: User has marker?"+markerPresent);
+
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             if ( 0 != ( getApplicationInfo().flags &= ApplicationInfo.FLAG_DEBUGGABLE ) ) {
@@ -93,13 +98,16 @@ public class AugmentedActivity extends Activity {
             // call mandatory live-cycle method of architectView
             this.architectView.onPostCreate();
 
-            try {
-                this.architectView.load("arviews/ImageOnTarget/index.html");
-
-                Log.e(TAG, "VIRTUALHOME: Loaded the asset folder/web app correctly");
-
-                Toast.makeText(this, " asset  folder loaded",
-                        Toast.LENGTH_SHORT).show();
+            try  {
+                    if(markerPresent.equals("YES")){
+                        Log.e(this.getClass().getName(), " VIRTUALHOME: Invoking Marker based AR View");
+                        this.architectView.load("arviews/ImageOnTarget/index.html");
+                    }
+                    else if (markerPresent.equals("NO")){
+                        Log.e(this.getClass().getName(), " VIRTUALHOME: Invoking Markerless based AR View");
+                        this.architectView.load("arviews/MarkerlessImageOnTarget/index.html");
+                    }
+                    Log.e(TAG, "VIRTUALHOME: Loaded the asset folder/web app correctly");
 
             } catch (IOException e1) {
                 e1.printStackTrace();

@@ -1,4 +1,5 @@
 var World = {
+
 	loaded: false,
 
 	init: function initFn() {
@@ -25,6 +26,7 @@ var World = {
 			A drawable is a visual component that can be connected to an IR target (AR.Trackable2DObject) or a geolocated object (AR.GeoObject).
 			The AR.ImageDrawable is initialized by the image and its size. Optional parameters allow for position it relative to the recognized target.
 		*/
+
 
 		/* Create overlay for page one */
 		var imgOne = new AR.ImageResource("assets/furniture1.png");
@@ -68,7 +70,6 @@ var World = {
                     			e.parentElement.removeChild(e);
     		}, 10000);
 	}
-
 };
 
 World.init();
