@@ -2,40 +2,36 @@
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes" name="viewport">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes" name="viewport">
 
 	<title></title>
 
 	<script src="architect://architect.js"></script>
 	<script type="text/javascript" src="../ade.js"></script>
-
 	<link rel="stylesheet" href="css/default.css">
 
-
+	<!-- JQuery UI Touch Punch -->
+	<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.8.21/jquery-ui.min.js"></script>
+	<script src="js/jquery.ui.touch-punch.min.js"></script>
 
 </head>
-
 <body>
 
+<div id="droppable"  class="info" style="display:block;">
+	<button type="button" id = "button1" onClick="scaleUp()">Size +</button>
+	<button type="button" id = "button2" onClick="scaleDown()">Size -</button>
+	<button type="button" id = "button3" onClick="showInfo()">Website</button>
+	<button type="button" value = "off" id = "button4" onClick="flipImage()">Flip</button>
+	<button type="button" id = "button5" onClick="captureScreen()">Snapshot</button>
+	<button type="button" id = "button6" onClick="displayProductInfo()">Product Info</button>
+	<button type="button" id = "button7" value = "off" onClick="setImage()">Use Background Image</button>
+</div>
 
+<img id="draggable" class="ui-widget-content" src="assets/coffeetable.png" width=100% height=auto>
 
-	<div id="loadingMessage" class="info" style="display:none;">
+<script src="js/imageoverlay.js"></script>
 
-	<button type="button" id = "button1" onClick="scaleUp()"> <p>+</p> </button>
-	<button type="button" id = "button2" onClick="scaleDown()"><p>-</p> </button>
-	<button type="button" id = "button3" onClick="rotate()"> <p>R</p> </button>
-	<button type="button" id = "button4" onClick="moveNorth()"><p>N</p> </button>
-	<button type="button" id = "button5" onClick="moveSouth()"><p>S</p> </button>
-	<button type="button" id = "button6" onClick="moveEast()"><p>E</p> </button>
-	<button type="button" id = "button7" onClick="moveWest()"><p>W</p> </button>
-	<button type="button" id = "button8" onClick="moveHigher()"><p>H</p> </button>
-	<button type="button" id = "button9" onClick="moveLower()"><p>L</p> </button>
-	<button type="button" id = "button10" onClick="showInfo()"><p>I</p> </button>
-	<button type="button" id = "button11" onClick="flip()"><p>F</p> </button>
-	<button type="button" id = "button12" onClick="deleteObject()"><p>X</p> </button>
-	</div>
-
-	<script src="js/imageoverlay.js"></script>
 </body>
 </html>
