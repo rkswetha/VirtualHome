@@ -66,7 +66,7 @@ public class AugmentedActivity extends Activity {
 //		This can either be done directly by providing the key as a string and the call the onCreate(final String key) method or creating an
 //		StartupConfiguration object, passing it the license as a string and then call the onCreate(final StartupConfiguration config) method.
 //		Please refer to the AbstractArchitectCamActivity of the SDK Examples project for a practical example of how to set the license key.
-        final StartupConfiguration config = new StartupConfiguration( WIKITUDE_SDK_KEY, StartupConfiguration.Features.Geo, StartupConfiguration.CameraPosition.BACK );
+        final StartupConfiguration config = new StartupConfiguration( WIKITUDE_SDK_KEY, StartupConfiguration.Features.Tracking2D, StartupConfiguration.CameraPosition.BACK );
         try{
 
             this.architectView.onCreate(config);
