@@ -1,94 +1,84 @@
-
 var current;
+
+$(function() {
+     $( "#draggable" ).draggable({
+          start: function(){
+          	var getid = this.id;
+          	//alert(getid);
+          	current = getid;
+          }
+ });
+
+
+	$( "#droppable" ).droppable({
+           drop: function( event, ui ) {
+              var currentId = $(ui.draggable).attr("id");
+              //alert(currentId);
+              var deleteconfirmation = confirm("Delete object?");
+    		  if (deleteconfirmation == true) {
+              	deleteObject(currentId);
+              }
+              //currentId.parentNode.removeChild(currentId);
+            }
+          });
+
+ 	alert("Markerless Augmented Reality: \n\n Drag the image to move image around camera \n\n Drag image to div bar to delete image \n\n Click on use background image to use a image rather than camera background. Click again to get back to camera background.");
+});
 
 
 function scaleUp(){
-	//alert("increasing image size");
-	current.scale++;
-};
+        var x = document.getElementById(current);
+        x.height+=100;
+		x.width+=100;
+}
 
 function scaleDown(){
-	//alert("decreasing image size");
-	current.scale--;
-};
+        var x = document.getElementById(current);
+        x.height-=50;
+		x.width-=50;
+}
 
-function rotate(){
-	//alert("rotating image size");
-	current.rotation+=30;
-};
-
-function moveNorth(){
-	//alert("moving north");
-	location1.northing++;
-};
-
-function moveSouth(){
-	//alert("moving south");
- 	location1.northing--;
-};
-
-function moveEast(){
-	//alert("moving east");
-	location1.easting++;
-};
-
-function moveWest(){
-	//alert("moving west");
-	location1.easting--;
-};
-
-function moveHigher(){
-	//alert("moving up");
-	location1.altitudeDelta++;
-};
-
-function moveLower(){
-	//alert("moving down");
-	location1.altitudeDelta--;
-};
-
-function flip(){
-	//alert("image flip");
-	current.rotate.heading+=180;
-};
-
-function deleteObject(){
-    var deleteconfirmation = confirm("Delete virtual object?");
-    if (deleteconfirmation == true) {
-       current.destroy();
-    }
-};
 
 function showInfo(){
-  AR.context.openInBrowser("http://www.ikea.com/us/en/catalog/products/00104291/");
-  
-}     
+		var website = "http://www.ikea.com/us/en/catalog/products/00104291/";
+  		AR.context.openInBrowser(website);
+}
 
-	
-var image = new AR.ImageDrawable(new AR.ImageResource("assets/coffeetable.png"), 1, {
-          enabled: true,
-          scale: 2, 
-          onClick: function(){
-        	  //alert("image selected");
-         	  var div = document.getElementById('loadingMessage');
-    		    if (div.style.display !== 'none') {
-       			  div.style.display = 'none';
-    		    }
-    		    else {
-        		  div.style.display = 'block';
-    		    }
-         	  current=this;
-         	}     
-});
+function deleteObject(id){
+	var child = document.getElementById(id);
+	child.parentNode.removeChild(child);
+}
+
+function flipImage(){
+	var x = document.getElementById(current);
+	currentvalue = document.getElementById("button4").value;
+  	if(currentvalue == "off"){
+  			x.classList.add("img");
+    		document.getElementById("button4").value="on";
+  	}else{
+  			x.classList.remove("img");
+   			document.getElementById("button4").value="off";
+  	}
+}
+
+function setImage(){
+	currentvalue = document.getElementById("button7").value;
+  	if(currentvalue == "off"){
+  		document.body.style.backgroundImage = "url('assets/emptyRoom.png')";
+  		document.body.style.backgroundRepeat = "no-repeat";
+  		document.body.style.backgroundSize = "cover";
+    	document.getElementById("button7").value="on";
+  	} else{
+  		document.body.style.backgroundImage = "none";
+   		document.getElementById("button7").value="off";
+  	}
+}
+
+function captureScreen() {
+	document.location = "architectsdk://button1?action=captureScreen";
+}
 
 
-var location1 = new AR.RelativeLocation(null, 10, 0, 0);
-
-var geoObject1 = new AR.GeoObject(location1, { 
-        drawables: {
-           cam: image
-        }
-});
-       
-
-  
+function displayProductInfo() {
+    document.location = "architectsdk://button2?action=productInfo";
+}
