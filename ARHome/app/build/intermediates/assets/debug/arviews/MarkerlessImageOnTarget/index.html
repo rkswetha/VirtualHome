@@ -12,29 +12,30 @@
 
 	<link rel="stylesheet" href="css/default.css">
 
-	<!-- jquery mobile CSS -->
-	<link rel="stylesheet" href="jquery/jquery.mobile-1.3.2.min.css" />
-	<!-- required to set background transparent & enable "click through" -->
-	<link rel="stylesheet" href="jquery/jquery-mobile-transparent-ui-overlay.css" />
-
-	<!-- jquery JS files -->
-	<script type="text/javascript" src="jquery/jquery-1.9.1.min.js"></script>
-	<script type="text/javascript" src="jquery/jquery.mobile-1.3.2.min.js"></script>
-
 
 
 </head>
 
 <body>
-	<div id ="header-status" data-role="header" data-position="fixed" data-theme="c">
-		<a href="javascript: World.captureScreen()" data-icon="refresh" >Snapshot</a>
-		<a href="javascript: World.displayProductInfo();" data-icon="gear" data-inline="true" data-mini="true">Product Info</a>
-		<h1></h1>
+
+
+
+	<div id="loadingMessage" class="info" style="display:none;">
+
+	<button type="button" id = "button1" onClick="scaleUp()"> <p>+</p> </button>
+	<button type="button" id = "button2" onClick="scaleDown()"><p>-</p> </button>
+	<button type="button" id = "button3" onClick="rotate()"> <p>R</p> </button>
+	<button type="button" id = "button4" onClick="moveNorth()"><p>N</p> </button>
+	<button type="button" id = "button5" onClick="moveSouth()"><p>S</p> </button>
+	<button type="button" id = "button6" onClick="moveEast()"><p>E</p> </button>
+	<button type="button" id = "button7" onClick="moveWest()"><p>W</p> </button>
+	<button type="button" id = "button8" onClick="moveHigher()"><p>H</p> </button>
+	<button type="button" id = "button9" onClick="moveLower()"><p>L</p> </button>
+	<button type="button" id = "button10" onClick="showInfo()"><p>I</p> </button>
+	<button type="button" id = "button11" onClick="flip()"><p>F</p> </button>
+	<button type="button" id = "button12" onClick="deleteObject()"><p>X</p> </button>
 	</div>
 
-	<div id="loadingMessage" class="info">Loading ...</div>
-
-	<script src="js/imageontarget.js"></script>
-
+	<script src="js/imageoverlay.js"></script>
 </body>
 </html>
