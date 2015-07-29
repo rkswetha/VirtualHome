@@ -1,3 +1,5 @@
+var overlayOne;
+
 var World = {
 
 	loaded: false,
@@ -10,7 +12,6 @@ var World = {
 	createOverlays: function createOverlaysFn() {
 		/*
 			First an AR.ClientTracker needs to be created in order to start the recognition engine. It is initialized with a URL specific to the target collection. Optional parameters are passed as object in the last argument. In this case a callback function for the onLoaded trigger is set. Once the tracker is fully loaded the function worldLoaded() is called.
-
 			Important: If you replace the tracker file with your own, make sure to change the target name accordingly.
 			Use a specific target name to respond only to a certain target or use a wildcard to respond to any or a certain group of targets.
 		*/
@@ -30,7 +31,8 @@ var World = {
 
 		/* Create overlay for page one */
 		var imgOne = new AR.ImageResource("assets/furniture1.png");
-		var overlayOne = new AR.ImageDrawable(imgOne, 1, {
+		overlayOne = new AR.ImageDrawable(imgOne, 1, {
+			enabled:true,
 			offsetX: -0.15,
 			offsetY: 0
 		});
@@ -69,7 +71,28 @@ var World = {
     			var e = document.getElementById('loadingMessage2');
                     			e.parentElement.removeChild(e);
     		}, 10000);
-	}
+	},
+
+	scaleUp: function scaleUpFn(){
+		console.log(overlayOne.scale);
+		if(overlayOne.scale >= 5) // Dont support over scaling of image
+		   	overlayOne.scale = 5;
+		else
+			overlayOne.scale++;
+    },
+
+    scaleDown: function scaleDownFn(){
+        if(overlayOne.scale == 0)
+        	overlayOne.scale = 0;
+        else
+        	overlayOne.scale--;
+    },
+
+    rotate: function rotateFn(){
+        overlayOne.rotation+=30;
+    }
+
 };
 
 World.init();
+

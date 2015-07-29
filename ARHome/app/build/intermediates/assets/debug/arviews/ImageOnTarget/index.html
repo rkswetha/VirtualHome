@@ -14,28 +14,32 @@
 
 	<!-- jquery mobile CSS -->
 	<link rel="stylesheet" href="jquery/jquery.mobile-1.3.2.min.css" />
-	<!-- required to set background transparent & enable "click through" -->
+	<!-- required to set background transparent  & enable "click through" -->
 	<link rel="stylesheet" href="jquery/jquery-mobile-transparent-ui-overlay.css" />
 
-	<!-- jquery JS files -->
-	<script type="text/javascript" src="jquery/jquery-1.9.1.min.js"></script>
+	<!-- jquery JS files  -->
+	<script type="text/javascript" src="jquery/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" src="jquery/jquery.mobile-1.3.2.min.js"></script>
-
-
 
 </head>
 
 <body>
+
 	<div id ="header-status" data-role="header" data-position="fixed" data-theme="c">
-		<a href="javascript: World.captureScreen()" data-icon="refresh" >Snapshot</a>
-		<a href="javascript: World.displayProductInfo();" data-icon="gear" data-inline="true" data-mini="true">Product Info</a>
+		<a href="javascript: World.captureScreen()" data-icon="star" data-inline="true" data-mini="true">Snapshot</a>
+		<a href="javascript: World.displayProductInfo();" data-icon="info" data-inline="true" data-mini="true">Product Info</a>
 		<h1></h1>
 	</div>
 
 	<div id="loadingMessage1" style='display: table-cell;vertical-align: middle; text-align: right; width: 50%; padding-right: 15px;'>Scan Target &#35;1 (home), then move closer to the target</div>
 	<div id="loadingMessage2" style='display: table-cell;vertical-align: middle; text-align: left;'><img src='assets/target.png'></img></div>
 
-	<!--<div id="distanceDisplay" class="dist">Distance from target: unknown</div>-->
+	<div data-role="footer" data-id="footernavbar" data-position="fixed" data-theme="c">
+			<a href="javascript: World.scaleUp()" data-inline="true" data-icon="plus">ZoomIn</a>
+			<a href="javascript: World.scaleDown()" data-icon="minus" data-inline="true" data-mini="true">ZoomOut</a>
+			<a href="javascript: World.rotate()" data-icon="refresh" data-inline="true" data-mini="true">Rotate</a>
+	</div>
+
 	<script src="js/imageontarget.js"></script>
 
 </body>
