@@ -25,9 +25,9 @@ Android application for Real-estate with Augmented Reality and Data mining
 
 ##Project Contributors
 ----------------------
-Anusha Ravikumar
-Karanjot Singh
-Radhika SNM
-Swetha RK
+* Anusha Ravikumar
+* Karanjot Singh
+* Radhika SNM
+* Swetha RK
 
 
