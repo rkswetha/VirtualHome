@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string-array name="familytypelist">
+        <item>@string/family1</item>
+        <item>@string/family2</item>
+        <item>@string/family3</item>
+    </string-array>
+
+    <string-array name="professiontypelist">
+        <item>@string/job1</item>
+        <item>@string/job2</item>
+        <item>@string/job3</item>
+    </string-array>
+
+
+
+
+
+
+
+</resources>

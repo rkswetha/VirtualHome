@@ -74,11 +74,18 @@ var World = {
 	},
 
 	scaleUp: function scaleUpFn(){
-    	overlayOne.scale++;
+		console.log(overlayOne.scale);
+		if(overlayOne.scale >= 5) // Dont support over scaling of image
+		   	overlayOne.scale = 5;
+		else
+			overlayOne.scale++;
     },
 
     scaleDown: function scaleDownFn(){
-        overlayOne.scale--;
+        if(overlayOne.scale == 0)
+        	overlayOne.scale = 0;
+        else
+        	overlayOne.scale--;
     },
 
     rotate: function rotateFn(){

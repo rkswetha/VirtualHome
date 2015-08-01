@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/action_camera"
+        android:icon="@drawable/ic_camera_black_24dp"
+        android:title="camera"
+        android:showAsAction="always"
+        />
+
+    <item android:id="@+id/action_preference"
+        android:icon="@drawable/ic_build_black_24dp"
+        android:title="settings"
+        android:showAsAction="always|withText"
+        />
+
+</menu><!-- From: file:/C:/Users/Radhika/AndroidStudioProjects/VirtualHome/ARHome/app/src/main/res/menu/home_actions.xml -->

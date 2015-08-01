@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" tools:context="com.wikitude.virtualhome.Home">
+    <item android:id="@+id/action_settings" android:title="@string/action_settings"
+        android:orderInCategory="100" android:showAsAction="never" />
+
+    <item android:id="@+id/action_camera"
+        android:icon="@drawable/ic_camera_black_24dp"
+        android:title="camera"
+        android:showAsAction="always"
+        />
+
+    <item android:id="@+id/action_preference"
+        android:icon="@drawable/ic_build_black_24dp"
+        android:title="settings"
+        android:showAsAction="always|withText"
+        />
+
+</menu>
+<!-- From: file:/C:/Users/Radhika/AndroidStudioProjects/VirtualHome/ARHome/app/src/main/res/menu/menu_home.xml -->

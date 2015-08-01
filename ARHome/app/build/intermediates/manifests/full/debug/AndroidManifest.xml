@@ -6,7 +6,7 @@
     android:versionName="4.0.0" >
 
     <uses-sdk
-        android:minSdkVersion="9"
+        android:minSdkVersion="11"
         android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -17,6 +17,7 @@
     <uses-permission android:name="android.permission.ACCESS_GPS" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <!-- Tell the system this app requires OpenGL ES 2.0. -->
     <uses-feature
@@ -63,17 +64,12 @@
     <application
         android:allowBackup="true"
         android:debuggable="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/ic_logo"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@android:style/Theme.Holo.Light" >
         <activity
             android:name="com.wikitude.virtualhome.MainActivity"
             android:label="@string/title_activity_main" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <!--  -->
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.wikitude.virtualhome.AugmentedActivity"
@@ -83,6 +79,35 @@
         <activity
             android:name="com.wikitude.virtualhome.ProductInfo"
             android:label="@string/title_activity_product_info" >
+        </activity>
+        <activity
+            android:name="com.wikitude.virtualhome.Login"
+            android:label="@string/title_activity_login" >
+        </activity>
+        <activity
+            android:name="com.wikitude.virtualhome.Home"
+            android:label="@string/title_activity_home" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <!--  -->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.wikitude.virtualhome.Preferences"
+            android:label="@string/title_activity_preferences" >
+        </activity>
+        <activity
+            android:name="com.wikitude.virtualhome.SofaGallery_Old"
+            android:label="@string/title_activity_sofa_gallery" >
+        </activity>
+        <activity
+            android:name="com.wikitude.virtualhome.SofaGallery"
+            android:label="@string/title_activity_sofa_gallery" >
+        </activity>
+        <activity
+            android:name="com.wikitude.virtualhome.ProductView"
+            android:label="@string/title_activity_product_view" >
         </activity>
     </application>
 
