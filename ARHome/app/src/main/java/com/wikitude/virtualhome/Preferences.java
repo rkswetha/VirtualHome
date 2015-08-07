@@ -46,6 +46,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -72,6 +73,8 @@ public class Preferences extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preferences);
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         //Obtaining the email id
         userEmail = getIntent().getStringExtra("email");
@@ -175,7 +178,7 @@ public class Preferences extends Activity {
         String result = family + " " + gender + " " + profession + " " + "1:" + chstate1 + "2:" + chstate2 + "3:" + chstate3 + "4:" + chstate4 + "5:" + chstate5 + "6:" + chstate6;
 
 
-        Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
 
         //Add code to insert data into preferences table in database.
 

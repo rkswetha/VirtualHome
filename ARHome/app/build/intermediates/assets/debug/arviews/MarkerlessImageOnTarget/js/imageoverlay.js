@@ -22,7 +22,7 @@ $(function() {
             }
           });
 
- 	alert("Markerless Augmented Reality: \n\n Drag the image to move image around camera \n\n Drag image to div bar to delete image \n\n Click on use background image to use a image rather than camera background. Click again to get back to camera background.");
+ 	//alert("Markerless Augmented Reality: \n\n Drag the image to move image around camera \n\n Drag image to div bar to delete image \n\n Click on use background image to use a image rather than camera background. Click again to get back to camera background.");
 });
 
 

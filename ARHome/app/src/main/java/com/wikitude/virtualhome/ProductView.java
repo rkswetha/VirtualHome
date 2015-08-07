@@ -67,8 +67,8 @@ public class ProductView extends Activity {
                 //Intent intent = new Intent(Augented.this, ProductView.class);
                 location = getIntent().getStringExtra("location");
 
-                Toast.makeText(getApplicationContext(), "The AR View will be opened!", Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(), "The location is:" + location, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "The AR View will be opened!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "The location is:" + location, Toast.LENGTH_SHORT).show();
 
                 openARView();
             }
@@ -103,7 +103,6 @@ public class ProductView extends Activity {
 
     public void openARView()
     {
-        Toast.makeText(getApplicationContext(), "The AR View will be opened!", Toast.LENGTH_SHORT).show();
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
         // set title
@@ -118,14 +117,16 @@ public class ProductView extends Activity {
 
                     public void onClick(DialogInterface dialog, int id) {
                         markerPresent = "YES";
-                        Toast.makeText(getApplicationContext(),
+                        /*Toast.makeText(getApplicationContext(),
                                 "You clicked on YES", Toast.LENGTH_SHORT)
-                                .show();
+                                .show(); */
                         try {
+
                             Intent theIntent = new Intent (getApplication(), AugmentedActivity.class);
                             theIntent.putExtra("MarkerPresent", "YES");
                             theIntent.putExtra("ImagePath", location);
                             startActivity(theIntent);
+
                         } catch (Exception e) {
                             Toast.makeText(getApplicationContext(), "\n className not defined/accessible",
                                     Toast.LENGTH_SHORT).show();
@@ -138,9 +139,9 @@ public class ProductView extends Activity {
 
                     public void onClick(DialogInterface dialog, int id) {
                         markerPresent = "NO";
-                        Toast.makeText(getApplicationContext(),
+                        /*Toast.makeText(getApplicationContext(),
                                 "You clicked on NO", Toast.LENGTH_SHORT)
-                                .show();
+                                .show();*/
                         dialog.cancel();
                         try{
                             Intent theIntent = new Intent (getApplication(), AugmentedActivity.class);
