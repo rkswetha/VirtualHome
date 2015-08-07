@@ -1,13 +1,22 @@
 var overlayOne;
+var imagePath;
 
 var World = {
 
 	loaded: false,
 
 	init: function initFn() {
-		this.createOverlays();
+
 		World.loaded = true; // Overlay is complete
 	},
+
+ 	// called to read user selected image path
+	readImagePath: function readImagePathFn(readPath) {
+
+		imagePath = decodeURIComponent(readPath);
+        this.createOverlays();
+	},
+
 
 	createOverlays: function createOverlaysFn() {
 		/*
@@ -28,10 +37,9 @@ var World = {
 			The AR.ImageDrawable is initialized by the image and its size. Optional parameters allow for position it relative to the recognized target.
 		*/
 
-
 		/* Create overlay for page one */
-		var imgOne = new AR.ImageResource("assets/furniture1.png");
-		overlayOne = new AR.ImageDrawable(imgOne, 1, {
+		var imgOne = new AR.ImageResource(decodeURIComponent(imagePath));
+        overlayOne = new AR.ImageDrawable(imgOne, 1, {
 			enabled:true,
 			offsetX: -0.15,
 			offsetY: 0

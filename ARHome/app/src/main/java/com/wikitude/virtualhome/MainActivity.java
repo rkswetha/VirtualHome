@@ -67,6 +67,7 @@ public class MainActivity extends Activity {
                         try {
                             Intent theIntent = new Intent (getApplication(), AugmentedActivity.class);
                             theIntent.putExtra("MarkerPresent", "YES");
+                            theIntent.putExtra("ImagePath", "assets/furniture1.png");
                             startActivity(theIntent);
                         } catch (Exception e) {
                             Toast.makeText(getApplicationContext(), "\n className not defined/accessible",
@@ -87,6 +88,7 @@ public class MainActivity extends Activity {
                         try{
                             Intent theIntent = new Intent (getApplication(), AugmentedActivity.class);
                             theIntent.putExtra("MarkerPresent", "NO");
+                            theIntent.putExtra("ImagePath", "assets/furniture1.png");
                             startActivity(theIntent);
                         } catch (Exception e) {
                             Toast.makeText(getApplicationContext(), "\n className not defined/accessible",

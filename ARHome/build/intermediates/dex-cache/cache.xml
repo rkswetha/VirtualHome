@@ -2,32 +2,32 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Radhika\AndroidStudioProjects\VirtualHome\ARHome\app\libs\wikitudesdk.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="7c5e5c9b24600f61ff5348ab0a7310e5d84138c7">
-        <dex dex="C:\Users\Radhika\AndroidStudioProjects\VirtualHome\ARHome\app\build\intermediates\pre-dexed\debug\wikitudesdk-b2fdfb7093f25909d4ba89724d2451fffa26e8ff.jar" />
-    </item>
-    <item
-        jar="C:\Users\Radhika\AndroidStudioProjects\VirtualHome\ARHome\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\libs\internal_impl-22.2.0.jar"
+        jar="/Users/swethark/Downloads/VirtualHome-master/ARHome/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/libs/internal_impl-22.2.0.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
-        <dex dex="C:\Users\Radhika\AndroidStudioProjects\VirtualHome\ARHome\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.0-735cfe21673d056ecd00b123fd9b737f196a9a1e.jar" />
+        <dex dex="/Users/swethark/Downloads/VirtualHome-master/ARHome/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-e73f096ad28747e0dd3a6f93b03d647cbf801417.jar" />
     </item>
     <item
-        jar="C:\Users\Radhika\AndroidStudioProjects\VirtualHome\ARHome\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
-        <dex dex="C:\Users\Radhika\AndroidStudioProjects\VirtualHome\ARHome\app\build\intermediates\pre-dexed\debug\classes-83cca869069834bde284139af0655f5a84080245.jar" />
-    </item>
-    <item
-        jar="C:\Users\Radhika\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.0\support-annotations-22.2.0.jar"
+        jar="/Users/swethark/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.0/support-annotations-22.2.0.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
-        <dex dex="C:\Users\Radhika\AndroidStudioProjects\VirtualHome\ARHome\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.0-a5543cedf1e25c9d4b6b97841336c0819fc6a5e6.jar" />
+        <dex dex="/Users/swethark/Downloads/VirtualHome-master/ARHome/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.0-9d665d06fecbe89f9597615cde05c489439a1e70.jar" />
+    </item>
+    <item
+        jar="/Users/swethark/Downloads/VirtualHome-master/ARHome/app/libs/wikitudesdk.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="7c5e5c9b24600f61ff5348ab0a7310e5d84138c7">
+        <dex dex="/Users/swethark/Downloads/VirtualHome-master/ARHome/app/build/intermediates/pre-dexed/debug/wikitudesdk-dc85ee72988f4b721f1044ecfdffd72d38b4cf43.jar" />
+    </item>
+    <item
+        jar="/Users/swethark/Downloads/VirtualHome-master/ARHome/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
+        <dex dex="/Users/swethark/Downloads/VirtualHome-master/ARHome/app/build/intermediates/pre-dexed/debug/classes-21c6d671be6fe8387fe100a4688223871cad3ed1.jar" />
     </item>
 
 </items>

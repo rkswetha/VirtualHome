@@ -11,4 +11,4 @@
     <item android:drawable="@android:color/darker_gray" android:state_selected="true" />
     <item android:drawable="@android:color/white" />
 
-</selector><!-- From: file:/C:/Users/Radhika/AndroidStudioProjects/VirtualHome/ARHome/app/src/main/res/drawable/grid_background.xml -->
+</selector><!-- From: file:/Users/swethark/Downloads/VirtualHome-master/ARHome/app/src/main/res/drawable/grid_background.xml -->

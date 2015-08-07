@@ -1,13 +1,25 @@
 var overlayOne;
+var imagePath;
 
 var World = {
 
 	loaded: false,
 
 	init: function initFn() {
-		this.createOverlays();
+
+		//this.createOverlays();
 		World.loaded = true; // Overlay is complete
 	},
+
+ 	// called to read user selected image path
+	readImagePath: function readImagePathFn(readPath) {
+
+		imagePath = decodeURIComponent(readPath);
+
+        alert(imagePath);
+        this.createOverlays();
+	},
+
 
 	createOverlays: function createOverlaysFn() {
 		/*
@@ -28,10 +40,11 @@ var World = {
 			The AR.ImageDrawable is initialized by the image and its size. Optional parameters allow for position it relative to the recognized target.
 		*/
 
-
+		alert(imagePath);
 		/* Create overlay for page one */
-		var imgOne = new AR.ImageResource("assets/furniture1.png");
-		overlayOne = new AR.ImageDrawable(imgOne, 1, {
+		//var imgOne = new AR.ImageResource(decodeURIComponent("http%3A%2F%2Fwww.ikea.com%2Fca%2Fen%2Fimages%2Fproducts%2Fkivik-loveseat-and-chaise-lilac__0252355_PE391172_S4.JPG"));
+		var imgOne = new AR.ImageResource(decodeURIComponent(imagePath));
+        overlayOne = new AR.ImageDrawable(imgOne, 1, {
 			enabled:true,
 			offsetX: -0.15,
 			offsetY: 0

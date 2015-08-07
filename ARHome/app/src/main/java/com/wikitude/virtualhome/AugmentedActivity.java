@@ -8,20 +8,18 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import android.opengl.GLES20;
 import android.util.Log;
 import android.webkit.WebView;
 import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileOutputStream;
+
+import java.io.*;
 import java.io.IOException;
+import java.net.URLEncoder;
 import com.wikitude.architect.ArchitectView;
 import com.wikitude.architect.StartupConfiguration;
-import com.wikitude.virtualhome.R;
 
 
 
@@ -42,6 +40,7 @@ public class AugmentedActivity extends Activity {
 
     StartupConfiguration startupConfiguration;
     String markerPresent;
+    String imagePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +50,10 @@ public class AugmentedActivity extends Activity {
         this.setTitle("AR Virtual Home");
 
         markerPresent = getIntent().getStringExtra("MarkerPresent");
-        Log.e(TAG, "VIRTUALHOME: User has marker?"+markerPresent);
+        imagePath = getIntent().getStringExtra("ImagePath");
 
+        Log.e(TAG, "VIRTUALHOME: User has marker?"+markerPresent);
+        Log.e(TAG, "VIRTUALHOME: User selected image path:" +imagePath);
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             if ( 0 != ( getApplicationInfo().flags &= ApplicationInfo.FLAG_DEBUGGABLE ) ) {
@@ -99,13 +100,19 @@ public class AugmentedActivity extends Activity {
             this.architectView.onPostCreate();
 
             try  {
+
                     if(markerPresent.equals("YES")){
+
                         Log.e(this.getClass().getName(), " VIRTUALHOME: Invoking Marker based AR View");
+
                         this.architectView.load("arviews/ImageOnTarget/index.html");
+                        callJavaScript("World.readImagePath", URLEncoder.encode(imagePath, "UTF-8"));
                     }
                     else if (markerPresent.equals("NO")){
+
                         Log.e(this.getClass().getName(), " VIRTUALHOME: Invoking Markerless based AR View");
                         this.architectView.load("arviews/MarkerlessImageOnTarget/index.html");
+
                     }
                     Log.e(TAG, "VIRTUALHOME: Loaded the asset folder/web app correctly");
 
@@ -157,10 +164,28 @@ public class AugmentedActivity extends Activity {
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        if ( this.architectView != null ) {
+        if (this.architectView != null) {
             this.architectView.onLowMemory();
         }
     }
+
+        /**
+         * call JacaScript in architectView
+         * @param methodName
+         * @param imagePath
+         */
+        private void callJavaScript(final String methodName, final String imagePath) {
+
+            if (this.architectView!=null) {
+
+                final String js = ( methodName + "(\"" + imagePath +  "\");" );
+                Log.e(this.getClass().getName(), " VIRTUALHOME: calling JS method:" + js);
+
+                //this.architectView.callJavascript("World.readImagePath( \"http://www.ikea.com/ca/en/images/products/kivik-loveseat-and-chaise-lilac__0252355_PE391172_S4.JPG\");");
+                this.architectView.callJavascript(js);
+
+            }
+        }
 
     /**
      * url listener fired once e.g. 'document.location = "architectsdk://foo?bar=123"' is called in JS

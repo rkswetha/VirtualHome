@@ -52,11 +52,12 @@
         android:smallScreens="false"
         android:xlargeScreens="true" />
 
-    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <android:uses-permission
+    <!-- <android:uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
+    <!--
+<android:uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
-
+    -->
     <!--
  set android:debuggable="false" or remove android:debuggable="true" to disable debugging for Android 4.4+
     In case of a compile-error you have to update "Project - Properties - Android Lint Preferences" - Security - HardcodedDebugMode (set "Severity" to "Warning")

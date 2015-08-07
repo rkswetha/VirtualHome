@@ -10,18 +10,19 @@ Android application for Real-estate with Augmented Reality and Data mining
 ##Features supported
 --------------
  Features supported as part of Phase 1(CMPE295A)
- * Overlay augmented image
  * User signup/register page
  * User Preference configuration
  * Display list of Furniture gallery
+ * Overlay augmented image(marker & markerless)
+ * Edit options for overlay image.
  * Web server backend with database support. 
 
 ##Tools being used
 --------------
-* Android Studio (API 22)
+* Android Studio (API 21)
 * Wikitude SDK 4.1
-* NodeJS
-* MongoHQ
+* Java Spring
+* MongoLab
 
 ##Project Contributors
 ----------------------
