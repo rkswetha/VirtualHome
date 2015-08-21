@@ -138,6 +138,7 @@ function deleteObject(){
       	var deleteconfirmation = confirm("Delete object?");
           if (deleteconfirmation == true) {
                    child.parentNode.removeChild(child);
+                   current = '';
           }
   }
 };
