@@ -112,6 +112,7 @@ public class AugmentedActivity extends Activity {
 
                         Log.e(this.getClass().getName(), " VIRTUALHOME: Invoking Markerless based AR View");
                         this.architectView.load("arviews/MarkerlessImageOnTarget/index.html");
+                        callJavaScript("addImage", URLEncoder.encode(imagePath, "UTF-8"));
 
                     }
                     Log.e(TAG, "VIRTUALHOME: Loaded the asset folder/web app correctly");
