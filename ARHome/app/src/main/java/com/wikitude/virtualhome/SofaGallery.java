@@ -213,6 +213,8 @@ public class SofaGallery extends Activity {
                     imageLocations[i]=new URL(jsonAttributes.getString("url"));
                     images[i] = BitmapFactory.decodeStream(imageLocations[i].openConnection().getInputStream());
 
+
+
                     Log.i("Name", jsonAttributes.getString("name"));
                     Log.i("decription", jsonAttributes.getString("description"));
                     Log.i("price", jsonAttributes.getString("price"));

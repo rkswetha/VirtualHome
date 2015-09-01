@@ -1,21 +1,3 @@
-.info {
-	font-size: large;
-	position: absolute;
-	width: 100%;
-	padding-top: 12px;
-	padding-bottom: 12px;
-	background-color: #BBBBBB;
-	text-align: center;
-	top: 0;
-	left: 0;
-	opacity: 0.5;
-    display: table;
-
-}
-
-p {
-    font-size: 3px;
-}
 
 .img {
     transform: scale(-1, 1);
@@ -24,4 +6,16 @@ p {
     -o-transform: scale(-1, 1);
     -khtml-transform: scale(-1, 1);
     -ms-transform: scale(-1, 1);
+    background-color: #000000;
+}
+
+.imgIcon {
+    position: relative;
+    float: left;
+    width:  35px;
+    height: 35px;
+    background-position: 50% 50%;
+    background-repeat:   no-repeat;
+    background-size:     cover;
+
 }

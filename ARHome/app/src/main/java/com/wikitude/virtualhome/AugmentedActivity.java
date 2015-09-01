@@ -1,4 +1,4 @@
-package com.wikitude.virtualhome;
+ package com.wikitude.virtualhome;
 
 import android.app.Activity;
 import android.content.Intent;

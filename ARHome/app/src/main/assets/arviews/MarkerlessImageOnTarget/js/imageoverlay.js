@@ -1,3 +1,17 @@
+Skip to content
+This repository
+Pull requests
+Issues
+Gist
+ @RadhikaSNM
+ Unwatch 3
+  Star 0
+  Fork 0
+rkswetha/VirtualHome
+Branch: master  VirtualHome/ARHome/app/src/main/assets/arviews/MarkerlessImageOnTarget/js/imageoverlay.js
+@anusharavikumaranusharavikumar 11 days ago update delete functionality
+2 contributors @rkswetha @anusharavikumar
+RawBlameHistory     Executable File  184 lines (166 sloc)  5.284 kB
 var current = '';
 var imageId= 0;
 var imageWebsite = {};
@@ -165,7 +179,7 @@ function flipImage(){
 
 var Usebackground = "off"
 function setImage2(){
-  
+
     if(Usebackground == "off"){
       document.body.style.backgroundImage = "url('assets/emptyRoom.png')";
       document.body.style.backgroundRepeat = "no-repeat";
