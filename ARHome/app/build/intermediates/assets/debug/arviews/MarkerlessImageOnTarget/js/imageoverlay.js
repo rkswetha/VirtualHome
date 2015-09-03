@@ -65,101 +65,16 @@ function addImage(sourceUrl){
       var x = document.createElement("IMG");
       x.setAttribute("src", sourceUrl);
       x.setAttribute("width", '30%');
-      x.setAttribute("height", '40%');
-    //  x.setAttribute("height", 'auto');
+      x.setAttribute("height", 'auto');
       x.setAttribute("id", "virtualObject"+imageId)
-      //x.setAttribute("style","background-color: red;");
-
       document.body.appendChild(x);
-
-       var img1= document.getElementById("virtualObject"+imageId);
-
-
-      /*var doc=document.createElement("CANVAS");
-      doc.setAttribute("id", "document"+imageId);
-      doc.setAttribute("width", '30%');
-      doc.setAttribute("height", 'auto');*/
-
-            var doc=document.createElement("CANVAS");
-            doc.setAttribute("id", "document"+imageId);
-          /*  doc.setAttribute("width", '200');
-            doc.setAttribute("height", '100');
-*/
-            alert("img ht "+img1.height);
-            alert("img wt "+img1.width);
-
-            doc.setAttribute("width", img1.width);
-            doc.setAttribute("height", '40');
-
-             alert("can ht "+doc.height);
-             alert("can wt "+doc.width);
-
-        document.body.appendChild(doc);
-
-
-        //Working:
-       /* var c = document.getElementById("document"+imageId);
-        var ctx = c.getContext("2d");
-        ctx.fillStyle = "#FF0000";
-        ctx.fillRect(0,0,150,75);*/
-
-
-
-
-      //Trying to edit pixels
-        // var ctx = document.getElementById("virtualObject"+imageId).data.getContext("2d");
-
-        //From here
-
-         var c = document.getElementById("document"+imageId);
-         var ctx = c.getContext("2d");
-
-         //ctx.fillStyle="rgba(0,0,0,0.5)";
-         ctx.drawImage(img1, 0, 0, img1.width, img1.height);
-
-
-        alert("C w2 "+ c.width);
-        alert("c h2 "+ c.height);
-
-
-        //HERE
-        //It was doc instead of c
-         var imgData = ctx.getImageData(0, 0, c.width, c.height);
-         ctx.putImageData(this.adjustImage(imgData), 0, 0);
-
-
-
-
-
-
-
-
       //$("virtualObject"+imageId).addClass("enableDrag");
       document.getElementById("virtualObject"+imageId).className = "enableDrag";
-      document.getElementById("document"+imageId).className = "enableDrag";
       //alert(document.getElementById("virtualObject"+imageId).className);
       imageWebsite["virtualObject"+imageId] = sourceUrl;
       //imageDescr["virtualObject"+imageId] = imageDescription;
       //alert(imageInfo["virtualObject"+imageId]);
       draggableObjects();
-};
-
-
- function adjustImage(iArray) {
-    var imageData = iArray.data;
-    /*for (var i = 0; i < imageData.length; i+= 4) {
-        if(imageData[i] === 255 && imageData[i+1] === 255 && imageData[i+2] === 255){
-            imageData[i+3] = 0;
-        }
-    }*/
-
-    for (var i = 0; i < imageData.length; i+= 4) {
-            if((imageData[i] >= 150 && imageData[i] <=  255) && (imageData[i+1] >= 150 && imageData[i+1] <=  255) && (imageData[i+2] >= 150 && imageData[i+2] <=  255)){
-                imageData[i+3] = 0;
-            }
-        }
-
-    return iArray;
 };
 
 var scale = 1;
@@ -250,7 +165,7 @@ function flipImage(){
 
 var Usebackground = "off"
 function setImage2(){
-  
+
     if(Usebackground == "off"){
       document.body.style.backgroundImage = "url('assets/emptyRoom.png')";
       document.body.style.backgroundRepeat = "no-repeat";
