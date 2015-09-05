@@ -1,10 +1,16 @@
 var current = '';
 var imageId= 0;
 var imageWebsite = {};
+var virtualObjectInfo = {};
 //var imageDescr = {}
 $(function() {
      //addImage("http://www.endicottfurniture.com/uploads/6/0/6/7/6067323/8303341_orig.jpg");
-     addImage("http://www.cheapwallarts.com/images/Orchard%20Apples.jpg");
+     //addImage("http://www.cheapwallarts.com/images/Orchard%20Apples.jpg");
+     addImage("http://anushar.com/cmpe295Images/coffeetable.png");
+     addImage("http://anushar.com/cmpe295Images/sofa.png");
+     //addImage("http://anushar.com/cmpe295Images/plant.png");
+     //addImage("http://anushar.com/cmpe295Images/sidetable.png");
+     //addImage("/Users/anusha/Downloads/VirtualHome-master/ARHome/app/src/main/assets/arviews/MarkerlessImageOnTarget/assets/sidetable.png");
      //addImage("http://www.cheapwallarts.com/images/Orchard%20Apples.jpg");
      setButtons();
      draggableObjects();
@@ -47,15 +53,41 @@ function setButtons(){
           backgroundIconElement.onclick = function() {
               setImage2();
           };
+      var bringtofrontIconElement = document.getElementById('bringtofrontIcon');
+          bringtofrontIconElement.style.cursor = 'pointer';
+          bringtofrontIconElement.onclick = function() {
+              bringToFront();
+          };
+      //plusIconElement.setAttribute("z-index", 1);
 };
 
+var xposofcurrent, yposofcurrent;
+var xposofcurrent2, yposofcurrent2;
 function draggableObjects(){
       $( ".enableDrag" ).draggable({
                 start: function(){
                   var getid = this.id;
                   current = getid;
-                  //alert(current);
-                }
+                  /*var offset = $(this).offset();
+                  var xPos = offset.left;
+                  var yPos = offset.top;
+                  xposofcurrent = xPos;
+                  yposofcurrent=yPos;
+                  //alert(xPos +" "+ yPos);
+                  //alert(current);*/
+                }/*,
+                stop: function(){
+                  var offset = this.offset();
+                  var xPos = offset.left;
+                  var yPos = offset.top;
+                  xposofcurrent = xPos;
+                  yposofcurrent= yPos;
+                  xposofcurrent2 = current.parent().offset.left;
+                  yposofcurrent2= current.parent().offset.top;
+                  
+                  //alert(xposofcurrent+''+yposofcurrent);
+                }*/
+
        });
 };
 
@@ -66,18 +98,28 @@ function addImage(sourceUrl){
       x.setAttribute("src", sourceUrl);
       x.setAttribute("width", '30%');
       x.setAttribute("height", 'auto');
-      x.setAttribute("id", "virtualObject"+imageId)
+      x.setAttribute("id", "virtualObject"+imageId);
+      x.style.position='absolute';
+      //x.setAttribute("position", "absolute");
+      x.setAttribute("z-index", 1);
+      virtualObjectInfo["virtualObject"+imageId]={};
+      virtualObjectInfo["virtualObject"+imageId]["scale"] = 1;
+      virtualObjectInfo["virtualObject"+imageId]["source"] = sourceUrl;
+      virtualObjectInfo["virtualObject"+imageId]["zValue"] = 1;
+      // alert(x.style.z-index.value);
+      //x.style.z-index = 0;
       document.body.appendChild(x);
       //$("virtualObject"+imageId).addClass("enableDrag");
       document.getElementById("virtualObject"+imageId).className = "enableDrag";
       //alert(document.getElementById("virtualObject"+imageId).className);
-      imageWebsite["virtualObject"+imageId] = sourceUrl;
+     // imageWebsite["virtualObject"+imageId] = sourceUrl;
+      //var "virtualObject"+imageId =
       //imageDescr["virtualObject"+imageId] = imageDescription;
       //alert(imageInfo["virtualObject"+imageId]);
       draggableObjects();
 };
 
-var scale = 1;
+//var scale = 1;
 var scaleIncrement = 0.2;
 
 function scaleUp2(){
@@ -85,9 +127,12 @@ function scaleUp2(){
         alert("Select virtual object");
       }
       else{
-      scale+=scaleIncrement;
+      var currentScaleValue = virtualObjectInfo[current]["scale"];
+      newValue = currentScaleValue+scaleIncrement;
+      //scale+=scaleIncrement;
       //alert(scale);
-      imageSize(scale);
+      imageSize(newValue);
+      //imageSize(scale);
       }
 };
 
@@ -96,10 +141,17 @@ function scaleDown2(){
         alert("Select virtual object");
       }
   else{
-     if ((scale-scaleIncrement)> scaleIncrement)
+      var currentScaleValue = virtualObjectInfo[current]["scale"];
+     /*if ((scale-scaleIncrement)> scaleIncrement)
        {
         scale-=scaleIncrement;
         imageSize(scale);
+       }*/
+      if ((currentScaleValue-scaleIncrement)> scaleIncrement)
+       {
+        newValue = currentScaleValue-scaleIncrement;
+        //imageSize(scale);
+        imageSize(newValue);
        }
      else{
         alert("Cannot decrease image size");
@@ -115,6 +167,7 @@ function imageSize(scaleValue){
     //console.log(img.width, img.height);
     x.height = changelHt;
     x.width = changeWdth;
+    virtualObjectInfo[current]["scale"] = scaleValue;
 };
 
 
@@ -123,8 +176,9 @@ function showInfo(){
         alert("Select virtual object");
       }
   else{
-		var website = imageWebsite[current];
-  	AR.context.openInBrowser(website);
+    var website =virtualObjectInfo[current]["source"];
+    //var website = imageWebsite[current];
+    AR.context.openInBrowser(website);
   }
 };
 
@@ -134,12 +188,13 @@ function deleteObject(){
         alert("Select virtual object");
       }
   else{
-      	var child = document.getElementById(current);
-      	var deleteconfirmation = confirm("Delete object?");
+        var child = document.getElementById(current);
+        var deleteconfirmation = confirm("Delete object?");
           if (deleteconfirmation == true) {
                    child.parentNode.removeChild(child);
-                   current = '';
+                   delete virtualObjectInfo[current];
           }
+
   }
 };
 
@@ -149,35 +204,57 @@ function flipImage(){
         alert("Select virtual object");
       }
   else{
-	var x = document.getElementById(current);
-	//currentvalue = document.getElementById("button4").value;
+  var x = document.getElementById(current);
+  //currentvalue = document.getElementById("button4").value;
   if(flipValue == "off"){
-  			x.classList.add("img");
-    		//document.getElementById("button4").value="on";
+        x.classList.add("img");
+        //document.getElementById("button4").value="on";
         flipValue = "on"
     }else{
-  			x.classList.remove("img");
-   			//document.getElementById("button4").value="off";
+        x.classList.remove("img");
+        //document.getElementById("button4").value="off";
         flipValue = "off"
-  	}
+    }
   }
 };
 
 var Usebackground = "off"
 function setImage2(){
-
+    var src;
     if(Usebackground == "off"){
-      document.body.style.backgroundImage = "url('assets/emptyRoom.png')";
+      var bkgfromwebsite = prompt("Enter the source of the image");
+      if (bkgfromwebsite != null) {
+          src = bkgfromwebsite;
+      }
+      else
+      {
+          src = "assets/emptyRoom.png";
+      }
+      document.body.style.backgroundImage = "url("+src+")";
       document.body.style.backgroundRepeat = "no-repeat";
       document.body.style.backgroundSize = "cover";
       Usebackground = "on";
-    } else{
+     } else{
       document.body.style.backgroundImage = "none";
       Usebackground = "off"
     }
+    //getPhoto(pictureSource.PHOTOLIBRARY);
 };
 
 function captureScreenFn() {
     document.location = "architectsdk://button1?action=captureScreen";
 };
 
+//var zvalue= 0;
+function bringToFront(){
+    valueofz = virtualObjectInfo[current]["zValue"];
+    valueofz+=1;
+    //alert(valueofz);
+
+    var x = document.getElementById(current);
+    x.setAttribute("src", virtualObjectInfo[current]["source"]);
+    x.setAttribute('style', 'position: absolute; z-index:'+valueofz);
+    virtualObjectInfo[current]["zValue"] = valueofz;
+
+    //x.style.z-Index = valueofz;+'; top: ' + yposofcurrent+'px; left: '+xposofcurrent+'px'
+}
