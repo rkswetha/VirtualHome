@@ -28,32 +28,34 @@ public final class R {
         public static final int ic_arrow_drop_down_black_24dp=0x7f020002;
         public static final int ic_build_black_24dp=0x7f020003;
         public static final int ic_camera_black_24dp=0x7f020004;
-        public static final int ic_launcher=0x7f020005;
-        public static final int ic_logo=0x7f020006;
-        public static final int loginbackground=0x7f020007;
-        public static final int loginbutton=0x7f020008;
-        public static final int logo=0x7f020009;
-        public static final int sofa10_stockholm=0x7f02000a;
-        public static final int sofa11_stocksund=0x7f02000b;
-        public static final int sofa12_knislinge=0x7f02000c;
-        public static final int sofa1_timsfors=0x7f02000d;
-        public static final int sofa2_beddinge=0x7f02000e;
-        public static final int sofa3_ektorp=0x7f02000f;
-        public static final int sofa4_hawagia=0x7f020010;
-        public static final int sofa5_karlstad=0x7f020011;
-        public static final int sofa6_kivik=0x7f020012;
-        public static final int sofa7_nipprig=0x7f020013;
-        public static final int sofa8_knopparp=0x7f020014;
-        public static final int sofa9_dagarn=0x7f020015;
-        public static final int white_sofa=0x7f020016;
+        public static final int ic_folder_black_24dp=0x7f020005;
+        public static final int ic_launcher=0x7f020006;
+        public static final int ic_logo=0x7f020007;
+        public static final int loginbackground=0x7f020008;
+        public static final int loginbutton=0x7f020009;
+        public static final int logo=0x7f02000a;
+        public static final int sofa10_stockholm=0x7f02000b;
+        public static final int sofa11_stocksund=0x7f02000c;
+        public static final int sofa12_knislinge=0x7f02000d;
+        public static final int sofa1_timsfors=0x7f02000e;
+        public static final int sofa2_beddinge=0x7f02000f;
+        public static final int sofa3_ektorp=0x7f020010;
+        public static final int sofa4_hawagia=0x7f020011;
+        public static final int sofa5_karlstad=0x7f020012;
+        public static final int sofa6_kivik=0x7f020013;
+        public static final int sofa7_nipprig=0x7f020014;
+        public static final int sofa8_knopparp=0x7f020015;
+        public static final int sofa9_dagarn=0x7f020016;
+        public static final int white_sofa=0x7f020017;
     }
     public static final class id {
         public static final int FamilyType=0x7f090009;
         public static final int ProfessionType=0x7f09000a;
         public static final int SexType1=0x7f090008;
-        public static final int action_camera=0x7f090021;
-        public static final int action_preference=0x7f090022;
-        public static final int action_settings=0x7f090023;
+        public static final int action_camera=0x7f090022;
+        public static final int action_folder=0x7f090021;
+        public static final int action_preference=0x7f090023;
+        public static final int action_settings=0x7f090024;
         public static final int architectView=0x7f090000;
         public static final int button=0x7f090007;
         public static final int button_submit=0x7f090005;
@@ -98,15 +100,16 @@ public final class R {
         public static final int spinner_style_preferences=0x7f030009;
     }
     public static final class menu {
-        public static final int home_actions=0x7f080000;
-        public static final int menu_augmented=0x7f080001;
-        public static final int menu_home=0x7f080002;
-        public static final int menu_login=0x7f080003;
-        public static final int menu_main=0x7f080004;
-        public static final int menu_preferences=0x7f080005;
-        public static final int menu_product_info=0x7f080006;
-        public static final int menu_product_view=0x7f080007;
-        public static final int menu_sofa_gallery=0x7f080008;
+        public static final int augmented_actions=0x7f080000;
+        public static final int home_actions=0x7f080001;
+        public static final int menu_augmented=0x7f080002;
+        public static final int menu_home=0x7f080003;
+        public static final int menu_login=0x7f080004;
+        public static final int menu_main=0x7f080005;
+        public static final int menu_preferences=0x7f080006;
+        public static final int menu_product_info=0x7f080007;
+        public static final int menu_product_view=0x7f080008;
+        public static final int menu_sofa_gallery=0x7f080009;
     }
     public static final class string {
         public static final int action_settings=0x7f070000;

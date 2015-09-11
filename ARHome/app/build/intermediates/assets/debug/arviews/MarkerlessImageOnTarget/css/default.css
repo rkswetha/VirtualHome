@@ -6,7 +6,6 @@
     -o-transform: scale(-1, 1);
     -khtml-transform: scale(-1, 1);
     -ms-transform: scale(-1, 1);
-    background-color: #000000;
 }
 
 .imgIcon {
@@ -17,5 +16,4 @@
     background-position: 50% 50%;
     background-repeat:   no-repeat;
     background-size:     cover;
-
 }
