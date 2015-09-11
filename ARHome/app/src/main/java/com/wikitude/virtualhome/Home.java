@@ -44,6 +44,7 @@ public class Home extends Activity {
 import android.app.Activity;
 import android.content.Intent;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -55,8 +56,21 @@ import android.app.ActionBar;
 
 public class Home extends Activity {
 
+    public static final String PREFERENCES_Gallery_FILE_NAME = "VHGalleryPreferences";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        SharedPreferences settings = getSharedPreferences(PREFERENCES_Gallery_FILE_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+
+        boolean exitedStatus = settings.getBoolean("exitedStatus", true);
+        Log.i("Home","After Entry:"+exitedStatus);
+
+
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
     }
@@ -71,6 +85,19 @@ public class Home extends Activity {
         inflater.inflate(R.menu.home_actions, menu);
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        Log.i("Home","DESTROY");
+
+        //Setting exited status
+        SharedPreferences settings = getSharedPreferences(PREFERENCES_Gallery_FILE_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean("exitedStatus", true);
+        editor.commit();
+
     }
 
     @Override

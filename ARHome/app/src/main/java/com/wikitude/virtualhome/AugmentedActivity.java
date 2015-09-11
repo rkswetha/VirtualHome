@@ -1,4 +1,4 @@
-package com.wikitude.virtualhome;
+ package com.wikitude.virtualhome;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,6 +11,9 @@ import android.os.Environment;
 
 import android.opengl.GLES20;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.webkit.WebView;
 import android.widget.Toast;
 
@@ -38,6 +41,9 @@ public class AugmentedActivity extends Activity {
      */
     protected ArchitectView.ArchitectUrlListener urlListener;
 
+
+
+
     StartupConfiguration startupConfiguration;
     String markerPresent;
     String imagePath;
@@ -52,7 +58,10 @@ public class AugmentedActivity extends Activity {
         markerPresent = getIntent().getStringExtra("MarkerPresent");
         imagePath = getIntent().getStringExtra("ImagePath");
 
+
+
         Log.e(TAG, "VIRTUALHOME: User has marker?"+markerPresent);
+
         Log.e(TAG, "VIRTUALHOME: User selected image path:" +imagePath);
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -89,6 +98,55 @@ public class AugmentedActivity extends Activity {
             this.architectView.registerUrlListener( this.urlListener );
         }
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+       /* getMenuInflater().inflate(R.menu.home_actions, menu);
+        return true;*/
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.augmented_actions, menu);
+
+        //Shows the text as a collapsable one
+        /*MenuItem gall=menu.findItem(R.id.action_folder);
+        gall.setTitle("Gal");
+        gall.setShowAsAction(MenuItem.SHOW_AS_ACTION_WITH_TEXT);*/
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+       /* if (id == R.id.action_settings) {
+            return true;
+        }*/
+
+
+        switch (item.getItemId()) {
+            case R.id.action_folder:
+                // OPen gallery to choose wall paper
+                Toast.makeText(getApplicationContext(), "Android Gallery clicked", Toast.LENGTH_SHORT).show();
+
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+        //return super.onOptionsItemSelected(item);
+    }
+
 
     @Override
     protected void onPostCreate( final Bundle savedInstanceState ) {

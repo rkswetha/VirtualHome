@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 public class ProductView extends Activity {
 
     String markerPresent = null;
@@ -28,11 +29,33 @@ public class ProductView extends Activity {
         //Uncompressing:
         //added final
         //final byte[] bytes = getIntent().getByteArrayExtra("BMP");
-        byte[] bytes = getIntent().getByteArrayExtra("BMP");
+
+
+
+
+
+        //***************************
+        /*byte[] bytes = getIntent().getByteArrayExtra("BMP");
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+*/
+        //******************************************************
+
+
+
 
         String title = getIntent().getStringExtra("title");
         String description = getIntent().getStringExtra("description");
+
+        //Trying to get access the image from the storage
+
+        //location:
+        location = getIntent().getStringExtra("location");
+        //BufferedImage image = ImageIO.read(getClass().getResourceAsStream("circle1.bmp"));
+
+        //Added extra
+        Bitmap bitmap = BitmapFactory.decodeFile(location);
+
+
 
 
         TextView titleTextView = (TextView) findViewById(R.id.galleryItemTitle);
@@ -47,7 +70,6 @@ public class ProductView extends Activity {
         TextView descriptionTextView = (TextView) findViewById(R.id.galleryItemDescription);
         descriptionTextView.setText(description);
 
-        //location:
 
 
         //On text click:
@@ -65,7 +87,9 @@ public class ProductView extends Activity {
 
                 //As requested by swetha, sending the address.
                 //Intent intent = new Intent(Augented.this, ProductView.class);
-                location = getIntent().getStringExtra("location");
+
+                //Commenting below from Swetha
+                //location = getIntent().getStringExtra("location");
 
                 //Toast.makeText(getApplicationContext(), "The AR View will be opened!", Toast.LENGTH_SHORT).show();
                 //Toast.makeText(getApplicationContext(), "The location is:" + location, Toast.LENGTH_SHORT).show();

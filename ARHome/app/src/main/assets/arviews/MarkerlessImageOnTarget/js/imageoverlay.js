@@ -1,14 +1,14 @@
 var current = '';
 var imageId= 0;
 var imageWebsite = {};
-//var imageDescr = {}
+var virtualObjectInfo = {};
+
 $(function() {
-     //addImage("http://www.endicottfurniture.com/uploads/6/0/6/7/6067323/8303341_orig.jpg");
-     addImage("http://www.cheapwallarts.com/images/Orchard%20Apples.jpg");
-     //addImage("http://www.cheapwallarts.com/images/Orchard%20Apples.jpg");
+   
+     addImage("http://anushar.com/cmpe295Images/coffeetable.png");
+     addImage("http://anushar.com/cmpe295Images/sofa.png");
      setButtons();
      draggableObjects();
-     //alert(current);
 });
 
 function setButtons(){
@@ -47,15 +47,24 @@ function setButtons(){
           backgroundIconElement.onclick = function() {
               setImage2();
           };
+      var bringtofrontIconElement = document.getElementById('bringtofrontIcon');
+          bringtofrontIconElement.style.cursor = 'pointer';
+          bringtofrontIconElement.onclick = function() {
+              bringToFront();
+          };
+     
 };
 
+var xposofcurrent, yposofcurrent;
+var xposofcurrent2, yposofcurrent2;
 function draggableObjects(){
       $( ".enableDrag" ).draggable({
                 start: function(){
                   var getid = this.id;
                   current = getid;
-                  //alert(current);
+              
                 }
+
        });
 };
 
@@ -66,28 +75,27 @@ function addImage(sourceUrl){
       x.setAttribute("src", sourceUrl);
       x.setAttribute("width", '30%');
       x.setAttribute("height", 'auto');
-      x.setAttribute("id", "virtualObject"+imageId)
+      x.setAttribute("id", "virtualObject"+imageId);
+      x.style.position='absolute';
+      x.setAttribute("z-index", 1);
+      virtualObjectInfo["virtualObject"+imageId]={};
+      virtualObjectInfo["virtualObject"+imageId]["scale"] = 1;
+      virtualObjectInfo["virtualObject"+imageId]["source"] = sourceUrl;
+      virtualObjectInfo["virtualObject"+imageId]["zValue"] = 1;
       document.body.appendChild(x);
-      //$("virtualObject"+imageId).addClass("enableDrag");
       document.getElementById("virtualObject"+imageId).className = "enableDrag";
-      //alert(document.getElementById("virtualObject"+imageId).className);
-      imageWebsite["virtualObject"+imageId] = sourceUrl;
-      //imageDescr["virtualObject"+imageId] = imageDescription;
-      //alert(imageInfo["virtualObject"+imageId]);
       draggableObjects();
 };
 
-var scale = 1;
 var scaleIncrement = 0.2;
-
 function scaleUp2(){
       if (current == ''){
         alert("Select virtual object");
       }
       else{
-      scale+=scaleIncrement;
-      //alert(scale);
-      imageSize(scale);
+      var currentScaleValue = virtualObjectInfo[current]["scale"];
+      newValue = currentScaleValue+scaleIncrement;
+      imageSize(newValue);
       }
 };
 
@@ -96,10 +104,11 @@ function scaleDown2(){
         alert("Select virtual object");
       }
   else{
-     if ((scale-scaleIncrement)> scaleIncrement)
+      var currentScaleValue = virtualObjectInfo[current]["scale"];
+      if ((currentScaleValue-scaleIncrement)> scaleIncrement)
        {
-        scale-=scaleIncrement;
-        imageSize(scale);
+        newValue = currentScaleValue-scaleIncrement;
+        imageSize(newValue);
        }
      else{
         alert("Cannot decrease image size");
@@ -109,22 +118,20 @@ function scaleDown2(){
 
 function imageSize(scaleValue){
     var x = document.getElementById(current);
-    //var img = document.getElementById(id);
     var changeWdth = x.width * scaleValue;
     var changelHt = x.height * scaleValue;
-    //console.log(img.width, img.height);
     x.height = changelHt;
     x.width = changeWdth;
+    virtualObjectInfo[current]["scale"] = scaleValue;
 };
-
 
 function showInfo(){
   if (current == ''){
         alert("Select virtual object");
       }
   else{
-		var website = imageWebsite[current];
-  	AR.context.openInBrowser(website);
+    var website =virtualObjectInfo[current]["source"];
+    AR.context.openInBrowser(website);
   }
 };
 
@@ -134,12 +141,13 @@ function deleteObject(){
         alert("Select virtual object");
       }
   else{
-      	var child = document.getElementById(current);
-      	var deleteconfirmation = confirm("Delete object?");
+        var child = document.getElementById(current);
+        var deleteconfirmation = confirm("Delete object?");
           if (deleteconfirmation == true) {
                    child.parentNode.removeChild(child);
-                   current = '';
+                   delete virtualObjectInfo[current];
           }
+
   }
 };
 
@@ -149,29 +157,34 @@ function flipImage(){
         alert("Select virtual object");
       }
   else{
-	var x = document.getElementById(current);
-	//currentvalue = document.getElementById("button4").value;
+  var x = document.getElementById(current);
   if(flipValue == "off"){
-  			x.classList.add("img");
-    		//document.getElementById("button4").value="on";
+        x.classList.add("img");
         flipValue = "on"
     }else{
-  			x.classList.remove("img");
-   			//document.getElementById("button4").value="off";
+        x.classList.remove("img");
         flipValue = "off"
-  	}
+    }
   }
 };
 
 var Usebackground = "off"
 function setImage2(){
-  
+    var src;
     if(Usebackground == "off"){
-      document.body.style.backgroundImage = "url('assets/emptyRoom.png')";
+      var bkgfromwebsite = prompt("Enter the source of the image");
+      if (bkgfromwebsite != null) {
+          src = bkgfromwebsite;
+      }
+      else
+      {
+          src = "assets/emptyRoom.png";
+      }
+      document.body.style.backgroundImage = "url("+src+")";
       document.body.style.backgroundRepeat = "no-repeat";
       document.body.style.backgroundSize = "cover";
       Usebackground = "on";
-    } else{
+     } else{
       document.body.style.backgroundImage = "none";
       Usebackground = "off"
     }
@@ -181,3 +194,11 @@ function captureScreenFn() {
     document.location = "architectsdk://button1?action=captureScreen";
 };
 
+function bringToFront(){
+    valueofz = virtualObjectInfo[current]["zValue"];
+    valueofz+=1;
+    var x = document.getElementById(current);
+    x.setAttribute("src", virtualObjectInfo[current]["source"]);
+    x.setAttribute('style', 'position: absolute; z-index:'+valueofz);
+    virtualObjectInfo[current]["zValue"] = valueofz;
+}
