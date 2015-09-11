@@ -4,11 +4,9 @@ var imageWebsite = {};
 var virtualObjectInfo = {};
 
 $(function() {
-   
      addImage("http://anushar.com/cmpe295Images/coffeetable.png");
      addImage("http://anushar.com/cmpe295Images/sofa.png");
      setButtons();
-     draggableObjects();
 });
 
 function setButtons(){
@@ -32,10 +30,10 @@ function setButtons(){
           deleteIconElement.onclick = function() {
               deleteObject();
           };
-      var webIconElement = document.getElementById('webIcon');
+      var webIconElement = document.getElementById('rotateIcon');
           webIconElement.style.cursor = 'pointer';
           webIconElement.onclick = function() {
-              showInfo();
+              rotate();
           };
       var cameraIconElement = document.getElementById('cameraIcon');
           cameraIconElement.style.cursor = 'pointer';
@@ -55,29 +53,27 @@ function setButtons(){
      
 };
 
-var xposofcurrent, yposofcurrent;
-var xposofcurrent2, yposofcurrent2;
+
 function draggableObjects(){
       $( ".enableDrag" ).draggable({
                 start: function(){
                   var getid = this.id;
                   current = getid;
-              
                 }
-
        });
+
 };
 
 function addImage(sourceUrl){
       imageId++
-
       var x = document.createElement("IMG");
       x.setAttribute("src", sourceUrl);
-      x.setAttribute("width", '30%');
+      x.setAttribute("width", '50%');
       x.setAttribute("height", 'auto');
       x.setAttribute("id", "virtualObject"+imageId);
       x.style.position='absolute';
       x.setAttribute("z-index", 1);
+      x.classList.add("image");
       virtualObjectInfo["virtualObject"+imageId]={};
       virtualObjectInfo["virtualObject"+imageId]["scale"] = 1;
       virtualObjectInfo["virtualObject"+imageId]["source"] = sourceUrl;
@@ -124,7 +120,7 @@ function imageSize(scaleValue){
     x.width = changeWdth;
     virtualObjectInfo[current]["scale"] = scaleValue;
 };
-
+/*
 function showInfo(){
   if (current == ''){
         alert("Select virtual object");
@@ -134,9 +130,17 @@ function showInfo(){
     AR.context.openInBrowser(website);
   }
 };
+*/
+
+var angle = 0;
+function rotate(){
+    var x = document.getElementById(current);
+    angle = (angle+90)%360;
+    x.className = "rotate"+angle;
+}
+
 
 function deleteObject(){
-
   if (current == ''){
         alert("Select virtual object");
       }
@@ -147,7 +151,6 @@ function deleteObject(){
                    child.parentNode.removeChild(child);
                    delete virtualObjectInfo[current];
           }
-
   }
 };
 
@@ -168,6 +171,15 @@ function flipImage(){
   }
 };
 
+var imgpath;
+function setBackgroundImageUsingImagePath(url){
+    imagepath = url;
+    if (typeof(Storage) !== "undefined") {
+        // Store
+        localStorage.setItem("AndroidImagePath", url);
+        }
+}
+
 var Usebackground = "off"
 function setImage2(){
     var src;
@@ -178,13 +190,16 @@ function setImage2(){
       }
       else
       {
-          src = "assets/emptyRoom.png";
+
+          src = imagepath;
+          //src = "assets/emptyRoom.png";
       }
       document.body.style.backgroundImage = "url("+src+")";
       document.body.style.backgroundRepeat = "no-repeat";
       document.body.style.backgroundSize = "cover";
       Usebackground = "on";
-     } else{
+      }
+      else{
       document.body.style.backgroundImage = "none";
       Usebackground = "off"
     }
