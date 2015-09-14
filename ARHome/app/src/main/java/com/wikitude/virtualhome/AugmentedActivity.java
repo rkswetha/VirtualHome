@@ -1,15 +1,16 @@
  package com.wikitude.virtualhome;
 
-import android.app.Activity;
+ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.opengl.GLES20;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-
-import android.opengl.GLES20;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,12 +18,13 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 import android.widget.Toast;
 
-
-import java.io.*;
-import java.io.IOException;
-import java.net.URLEncoder;
 import com.wikitude.architect.ArchitectView;
 import com.wikitude.architect.StartupConfiguration;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URLEncoder;
 
 
 
@@ -41,12 +43,11 @@ public class AugmentedActivity extends Activity {
      */
     protected ArchitectView.ArchitectUrlListener urlListener;
 
-
-
-
     StartupConfiguration startupConfiguration;
     String markerPresent;
     String imagePath;
+    private static final int SELECT_PICTURE = 1;
+    String selectedImagePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,10 +59,7 @@ public class AugmentedActivity extends Activity {
         markerPresent = getIntent().getStringExtra("MarkerPresent");
         imagePath = getIntent().getStringExtra("ImagePath");
 
-
-
         Log.e(TAG, "VIRTUALHOME: User has marker?"+markerPresent);
-
         Log.e(TAG, "VIRTUALHOME: User selected image path:" +imagePath);
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -99,26 +97,12 @@ public class AugmentedActivity extends Activity {
         }
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-       /* getMenuInflater().inflate(R.menu.home_actions, menu);
-        return true;*/
-
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.augmented_actions, menu);
-
-        //Shows the text as a collapsable one
-        /*MenuItem gall=menu.findItem(R.id.action_folder);
-        gall.setTitle("Gal");
-        gall.setShowAsAction(MenuItem.SHOW_AS_ACTION_WITH_TEXT);*/
-
         return super.onCreateOptionsMenu(menu);
     }
-
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -126,25 +110,59 @@ public class AugmentedActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-       /* if (id == R.id.action_settings) {
-            return true;
-        }*/
-
-
         switch (item.getItemId()) {
-            case R.id.action_folder:
+            case R.id.action_gallery:
                 // OPen gallery to choose wall paper
-                Toast.makeText(getApplicationContext(), "Android Gallery clicked", Toast.LENGTH_SHORT).show();
-
-
+                Toast.makeText(getApplicationContext(), "Opening Android Gallery", Toast.LENGTH_SHORT).show();
+                setBkgImage();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
 
-        //return super.onOptionsItemSelected(item);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == SELECT_PICTURE) {
+                Uri selectedImageUri = data.getData();
+                selectedImagePath = getPath(selectedImageUri);
+            }
+        }
+        try {
+            this.architectView.load("arviews/MarkerlessImageOnTarget/index.html");
+            if (selectedImagePath != null) {
+                callJavaScript("setBackgroundImageUsingImagePath", URLEncoder.encode(selectedImagePath, "UTF-8"));
+            }
+        }
+        catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+
+    public String getPath(Uri uri) {
+        // try to retrieve the image from the media store first
+        // this will only work for images selected from gallery
+        String[] projection = { MediaStore.Images.Media.DATA };
+        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+        if( cursor != null ){
+            int column_index = cursor
+                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        }
+        // this is our fallback here
+        return uri.getPath();
+    }
+
+    public void setBkgImage()
+    {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent,
+                "Select Picture"), SELECT_PICTURE);
     }
 
 
@@ -171,7 +189,6 @@ public class AugmentedActivity extends Activity {
                         Log.e(this.getClass().getName(), " VIRTUALHOME: Invoking Markerless based AR View");
                         this.architectView.load("arviews/MarkerlessImageOnTarget/index.html");
                         callJavaScript("addImage", URLEncoder.encode(imagePath, "UTF-8"));
-
                     }
                     Log.e(TAG, "VIRTUALHOME: Loaded the asset folder/web app correctly");
 

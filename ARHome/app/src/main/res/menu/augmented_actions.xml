@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/action_folder"
-        android:icon="@drawable/ic_folder_black_24dp"
-        android:title="Gallery"
+    <item android:id="@+id/action_gallery"
+        android:icon="@drawable/ic_insert_photo_black_24dp"
+        android:title="Android Gallery"
         android:showAsAction="always|withText"
         />
 
