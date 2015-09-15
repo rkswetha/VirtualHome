@@ -6,8 +6,8 @@ android {
 
     defaultConfig {
         applicationId "com.wikitude.virtualhome"
-        minSdkVersion 11
-        targetSdkVersion 19
+        minSdkVersion 16
+        targetSdkVersion 22
     }
 
     buildTypes {
@@ -17,8 +17,14 @@ android {
         }
     }
 }
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
 
 dependencies {
-    compile files('libs/wikitudesdk.jar')
+    //compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile (name: 'wikitudesdk', ext:'aar')
     compile 'com.android.support:support-v4:22.2.0'
 }

@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="wikitudesdk-">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/wikitudesdk/res" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/wikitudesdk/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

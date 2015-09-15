@@ -1,8 +1,6 @@
 -- Merging decision tree log ---
 manifest
 ADDED from AndroidManifest.xml:2:1
-	xmlns:android
-		ADDED from AndroidManifest.xml:2:11
 	package
 		ADDED from AndroidManifest.xml:3:5
 		INJECTED from AndroidManifest.xml:0:0
@@ -13,10 +11,13 @@ ADDED from AndroidManifest.xml:2:1
 		ADDED from AndroidManifest.xml:5:5
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0
+	xmlns:android
+		ADDED from AndroidManifest.xml:2:11
 	android:installLocation
 		ADDED from AndroidManifest.xml:4:5
 uses-sdk
 ADDED from AndroidManifest.xml:8:5
+MERGED from :wikitudesdk::7:5
 MERGED from com.android.support:support-v4:22.2.0:20:5
 	android:targetSdkVersion
 		ADDED from AndroidManifest.xml:10:9
@@ -60,10 +61,10 @@ ADDED from AndroidManifest.xml:19:5
 		ADDED from AndroidManifest.xml:19:22
 uses-feature#0x00020000
 ADDED from AndroidManifest.xml:23:5
-	android:required
-		ADDED from AndroidManifest.xml:25:9
 	android:glEsVersion
 		ADDED from AndroidManifest.xml:24:9
+	android:required
+		ADDED from AndroidManifest.xml:25:9
 uses-feature#android.hardware.camera
 ADDED from AndroidManifest.xml:28:5
 	android:required
@@ -92,16 +93,17 @@ supports-screens
 ADDED from AndroidManifest.xml:48:5
 	android:largeScreens
 		ADDED from AndroidManifest.xml:50:9
-	android:anyDensity
-		ADDED from AndroidManifest.xml:49:9
+	android:smallScreens
+		ADDED from AndroidManifest.xml:52:9
 	android:normalScreens
 		ADDED from AndroidManifest.xml:51:9
 	android:xlargeScreens
 		ADDED from AndroidManifest.xml:53:9
-	android:smallScreens
-		ADDED from AndroidManifest.xml:52:9
+	android:anyDensity
+		ADDED from AndroidManifest.xml:49:9
 application
 ADDED from AndroidManifest.xml:64:5
+MERGED from :wikitudesdk::11:5
 MERGED from com.android.support:support-v4:22.2.0:22:5
 	android:label
 		ADDED from AndroidManifest.xml:68:9
