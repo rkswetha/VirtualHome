@@ -12,7 +12,7 @@ public class UserDetails {
 
 	public UserDetails(){}
 
-	public UserDetails(int user_id, User user, UserPreference userPref)
+	public UserDetails(User user, UserPreference userPref)
 	{
 	super();
 	System.out.println("User details Creation triggered"); 

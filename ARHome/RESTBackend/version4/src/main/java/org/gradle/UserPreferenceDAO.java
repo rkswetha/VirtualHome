@@ -21,8 +21,8 @@ public class UserPreferenceDAO {
     
     public void save(UserPreference userPref){
 
-        Document document=new Document("_id",userPref.getIdentity());
-        document.append("user_id", userPref.getUser_id());
+        Document document=new Document("user_id",userPref.getUser_id());
+//        document.append("user_id", userPref.getUser_id());
         document.append("ethnicity", userPref.getEthnicity());
         document.append("email", userPref.getEmail());
         document.append("sex", userPref.getSex());
@@ -35,8 +35,8 @@ public class UserPreferenceDAO {
         Document userDoc = find.first();
 //        ArrayList<String> options = new ArrayList<String>();
         UserPreference userPref=new UserPreference();
-        userPref.setIdentity(userDoc.getInteger("_id"));
         userPref.setUser_id(userDoc.getInteger("user_id"));
+//        userPref.setUser_id(userDoc.getInteger("user_id"));
         userPref.setEthnicity(userDoc.getString("ethnicity"));
         userPref.setSex(userDoc.getString("sex"));
         userPref.setEmail(userDoc.getString("email"));

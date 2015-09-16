@@ -30,6 +30,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.http.HttpStatus;
 
 @RestController
+@RequestMapping("/api/v4")
 public class UserController {
 	private AtomicLong along;
     private UserDAO userDAO;
@@ -46,7 +47,7 @@ public class UserController {
 	//Map<String, List<Map<String,UserPreference>>> userPrefData = new HashMap<String, List<Map<String,UserPreference>>>();
 
 	//Add Preference
-	@RequestMapping(value="/api/v1/users", method=RequestMethod.POST, produces="application/json")
+	@RequestMapping(value="/users", method=RequestMethod.POST, produces="application/json")
 	@ResponseBody
 	public ResponseEntity<User> addUserPreferences(@Valid @RequestBody User user)
 	{
@@ -57,21 +58,21 @@ public class UserController {
 	}
 
 	//list bank
-	@RequestMapping(value="/api/v1/users/{id}", method=RequestMethod.GET, produces="application/json")
+	@RequestMapping(value="/users/{id}", method=RequestMethod.GET, produces="application/json")
 	@ResponseBody
 	public ResponseEntity<User> viewUsers(@PathVariable int id){
 		return new ResponseEntity<User>(userDAO.getUser(id),HttpStatus.OK);
 	}
 	
 	
-	@RequestMapping(value="/api/v1/users/{id}", method=RequestMethod.DELETE)
+	@RequestMapping(value="/users/{id}", method=RequestMethod.DELETE)
 	@ResponseBody
 	public ResponseEntity<Object> deleteUsers(@NotBlank @PathVariable int id){
         userDAO.deleteUser(id);
         return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}
 
-	@RequestMapping(value = "/api/v1/users/{id}", method = RequestMethod.PUT, produces="application/json")
+	@RequestMapping(value = "/users/{id}", method = RequestMethod.PUT, produces="application/json")
     @ResponseBody
     public ResponseEntity<User> updateUsers(@NotBlank @PathVariable int id,@Valid @RequestBody User user ){
                     userDAO.updateUser(user, id);

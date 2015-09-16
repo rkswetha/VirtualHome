@@ -35,10 +35,11 @@ public class UserDetailsDAO {
     
     public UserDetails getUserDetails(int id){
         FindIterable<Document> find = userCollection.find(new Document("_id",id));
-        FindIterable<Document> findPref = userPrefCollection.find(new Document("_id",id));
+        FindIterable<Document> findPref = userPrefCollection.find(new Document("user_id",id));
         Document userDoc = find.first();
         Document userPrefDoc = findPref.first();
-        
+        System.out.println(userDoc.toString());
+        System.out.println(userPrefDoc.toString());
         UserDetails userDet=new UserDetails();
 //        UserPreference userPref = new UserPreference();
         userDet.user.setUser_id(userDoc.getInteger("_id"));

@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class UserPreference{
 	
 	
-	private Integer identity;
+//	private Integer identity;
 	private int user_id;
 	private String email;
 	@NotEmpty
@@ -26,20 +26,20 @@ public class UserPreference{
 	{
 		super();
 		this .user_id = user_id;
-		this.identity = identity;
+//		this.identity = identity;
 		this.email = email;
 		this.sex = sex;
 		this.ethnicity = ethnicity;
 		this.options = options;
 	}
 	
-	public Integer getIdentity() {
-		return identity;
-	}
-	public void setIdentity(Integer id) {
-		this.identity = id;
-	}
-	
+//	public Integer getIdentity() {
+//		return identity;
+//	}
+//	public void setIdentity(Integer id) {
+//		this.identity = id;
+//	}
+//	
 	public Integer getUser_id() {
 		return user_id;
 	}

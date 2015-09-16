@@ -38,7 +38,7 @@ import org.gradle.UserPreference;
 
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v4")
 public class UserPreferenceController
 {
 	
@@ -54,32 +54,32 @@ public class UserPreferenceController
     }
 	
 	//Add Preference
-	@RequestMapping(value="/api/v1/userpreferences", method=RequestMethod.POST, produces="application/json")
+	@RequestMapping(value="/userpreferences", method=RequestMethod.POST, produces="application/json")
 	@ResponseBody
 	public ResponseEntity<UserPreference> addUserPreferences(@Valid @RequestBody UserPreference userPref)
 	{
-		userPref.setIdentity((int) along.incrementAndGet());
+		userPref.setUser_id(userPref.getUser_id());
         //userPref.setCreated_at(new Date().toString());
         userPrefDAO.save(userPref);
         return new ResponseEntity<UserPreference>(userPref,HttpStatus.CREATED);
 	}
 
 	//list bank
-	@RequestMapping(value="/api/v1/userpreferences/{id}", method=RequestMethod.GET, produces="application/json")
+	@RequestMapping(value="/userpreferences/{id}", method=RequestMethod.GET, produces="application/json")
 	@ResponseBody
 	public ResponseEntity<UserPreference> viewUserPreferences(@PathVariable int id){
 		return new ResponseEntity<UserPreference>(userPrefDAO.getUserPreference(id),HttpStatus.OK);
 	}
 	
 	
-	@RequestMapping(value="/api/v1/userpreferences/{id}", method=RequestMethod.DELETE)
+	@RequestMapping(value="/userpreferences/{id}", method=RequestMethod.DELETE)
 	@ResponseBody
 	public ResponseEntity<Object> deleteUserPreferences(@NotBlank @PathVariable int id){
         userPrefDAO.deleteUserPref(id);
         return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}
 
-	@RequestMapping(value = "/api/v1/userpreferences/{id}", method = RequestMethod.PUT, produces="application/json")
+	@RequestMapping(value = "/userpreferences/{id}", method = RequestMethod.PUT, produces="application/json")
     @ResponseBody
     public ResponseEntity<Object> updateUserPref(@NotBlank @PathVariable int id,@Valid @RequestBody UserPreference userPref){
                     userPrefDAO.updateUserPreference(userPref, id);
