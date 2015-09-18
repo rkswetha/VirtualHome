@@ -1,43 +1,18 @@
 package com.wikitude.virtualhome;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.apache.http.client.HttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-/*
-public class Login extends Activity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_login, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-}
-*/
 
 
 import android.content.Intent;
@@ -57,12 +32,27 @@ import android.app.ActionBar;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+
 
 public class Login extends Activity {
     private String email;
     private String pwd;
     private boolean newUserFlag;
     JSONObject userDetailsJson;
+    private boolean creationNotSuccess=false;
+
+    public static final String PREFERENCES_Gallery_FILE_NAME = "VHGalleryPreferences";
 
 
     @Override
@@ -103,18 +93,16 @@ public class Login extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void openPreferences()
-    {
+    public void openPreferences() {
         //Check the email error and password empty- If new user;
         //Check  if new user
 
-        CheckBox checkbox= (CheckBox) findViewById(R.id.checkbox_newuser);
+        CheckBox checkbox = (CheckBox) findViewById(R.id.checkbox_newuser);
         //boolean chstate=checkbox.isChecked();
-        newUserFlag=checkbox.isChecked();
+        newUserFlag = checkbox.isChecked();
         EditText emailT = (EditText) findViewById(R.id.text_email);
         //String email = emailT.getText().toString();
         email = emailT.getText().toString();
-
 
 
         EditText pwdT = (EditText) findViewById(R.id.text_password);
@@ -132,24 +120,19 @@ public class Login extends Activity {
             return;
         }
 
-        if(newUserFlag) {
+        if (newUserFlag) {
             //Check email validity
             boolean emailVal = isValidEmailAddress(email);
 
             if (!emailVal) {
                 Toast.makeText(getApplicationContext(), "Not a valid email id", Toast.LENGTH_SHORT).show();
                 return;
-            }
-            else
-            {
+            } else {
                 createUserJson();
                 //Include call to add the user.
             }
 
-        }
-
-        else
-        {
+        } else {
             //Include call to DB to check if correct Password and email
             //Include call to DB to check if correct Password and email
             createUserJson();
@@ -157,13 +140,14 @@ public class Login extends Activity {
 
         Intent intent = new Intent(this, Preferences.class);
         //For now.
-        intent.putExtra("email",email);
+        //TODO: DElete
+        intent.putExtra("email", email);
+        //TODO: Put this on postExecute???
         startActivity(intent);
     }
 
 
-    public boolean isValidEmailAddress(String email)
-    {
+    public boolean isValidEmailAddress(String email) {
         String emailPattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(emailPattern);
         java.util.regex.Matcher m = p.matcher(email);
@@ -171,42 +155,170 @@ public class Login extends Activity {
     }
 
 
-
-    public void createUserJson()
-    {
-        userDetailsJson=new JSONObject();
+    public void createUserJson() {
+        userDetailsJson = new JSONObject();
         try {
-            userDetailsJson.put("email", email);
+           /* userDetailsJson.put("email", email);
             userDetailsJson.put("password", pwd);
-            userDetailsJson.put("newUserFlag", newUserFlag);
-        }
-        catch(JSONException e) {
-            Log.i("VirtualHome-Login","Exception in Json creation");
+            userDetailsJson.put("newUserFlag", newUserFlag);*/
+
+            //Using the below so as to match the format on server side: Needs to be changed
+            userDetailsJson.put("name", "adad");
+            userDetailsJson.put("email", email);
+            userDetailsJson.put("password",pwd);
+
+
+        } catch (JSONException e) {
+            Log.i("VirtualHome-Login", "Exception in Json creation");
             e.printStackTrace();
         }
 
         //Post to the server
-        postToServer();
+
+        new PostAsynTask().execute();
 
 
     }
 
-    public void postToServer()
-    {
-        //Maybe make it as a seperate thread
-        //For now, checking if the json is populated correctly
-
-
-        String jsonData = userDetailsJson.toString();
-        Log.i("VirtualHome userJson",jsonData);
-
-        //Server code
 
 
 
-        //on server Confirmation add in shared preferences
+    private class PostAsynTask extends AsyncTask<String, String, String> {
+        protected String doInBackground(String... arg0) {
+            HttpURLConnection urlConnection = null;
+
+            //String url1= "http://ec2-54-219-182-125.us-west-1.compute.amazonaws.com:8080/api/v1/users";
+            String url1= "http://ec2-54-215-226-210.us-west-1.compute.amazonaws.com:8080/api/v4/users";
+
+            StringBuilder sb = new StringBuilder();
+            try {
+
+                URL url = new URL(url1);
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setDoOutput(true);
+                urlConnection.setRequestMethod("POST");
+                urlConnection.setUseCaches(false);
+                urlConnection.setConnectTimeout(10000);
+                urlConnection.setReadTimeout(10000);
+                urlConnection.setRequestProperty("Content-Type", "application/json");
+
+                //urlConnection.setRequestProperty("Host", "android.schoolportal.gr");
+                urlConnection.connect();
+
+                OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
+                out.write(userDetailsJson.toString());
+                out.flush();
+                out.close();
 
 
+                String responseMessage=urlConnection.getResponseMessage();
+                int HttpResult =urlConnection.getResponseCode();
+                System.out.println("CODE: "+HttpResult);
+
+
+                //TODO: check for created or check for validated. If not throw pop up as error.
+                System.out.println(responseMessage);
+
+//TODO: Check for re entry condition here
+                if (urlConnection.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
+
+               Log.i("Login", "---Failed : HTTP error code : "
+                            + urlConnection.getResponseCode());
+                    creationNotSuccess=true;
+
+                    /*throw new RuntimeException("Failed : HTTP error code : "
+                            + urlConnection.getResponseCode());*/
+                }
+                else {
+                    //It is created:
+
+                    BufferedReader br = new BufferedReader(new InputStreamReader(
+                            (urlConnection.getInputStream())));
+
+                    String serverOutput;
+                    StringBuilder serverSB = new StringBuilder();
+                    System.out.println("Output from Server .... \n");
+                    while ((serverOutput = br.readLine()) != null) {
+
+                        System.out.println(serverOutput);
+                        serverSB.append(serverOutput + "\n");
+
+                    }
+
+                    //Parsing the returned json
+                    JSONObject jsonObject = null;
+                    String userID = null;
+                    try {
+                        Log.i("LoginAsync ", "Retrieve jsonContent");
+
+                        //System.out.println("inside : " + serverSB);
+
+                        jsonObject = new JSONObject(serverSB.toString());
+                        //Assuming only 1 jsonObject is returned.
+                        if (jsonObject != null) {
+                            userID = jsonObject.getString("user_id");
+
+                            //Printing the whole json data obtained:
+                            Log.i("VirtualHome", jsonObject.toString());
+
+
+                            //Saving the userID in shared preferences:
+                            //TODO: save username and password in shared Preferences.
+                            Log.i("Login ", "User ID: " + userID);
+
+
+                            //Save email id, password and user id.
+                            SharedPreferences settings = getSharedPreferences(PREFERENCES_Gallery_FILE_NAME, 0);
+
+                            //Initially for cross checking
+
+                            System.out.println(settings.getString("user_id", "0"));
+                            System.out.println(settings.getString("email", "0"));
+                            System.out.println(settings.getString("password", "0"));
+
+
+                            SharedPreferences.Editor editor = settings.edit();
+                            editor.putString("user_id", userID);
+                            editor.putString("email", email);
+                            editor.putString("password", pwd);
+
+                            editor.commit();
+                            //For confirmation
+
+                            System.out.println(settings.getString("user_id", "0"));
+                            System.out.println(settings.getString("email", "0"));
+                            System.out.println(settings.getString("password", "0"));
+
+                            //Save the preferences data
+                            //Get the data and save the preferences.
+
+
+                        }
+
+
+                    } catch (JSONException ex) {
+                        Log.i("VirtualHome-Gallery", " caught JSON exception");
+                        ex.printStackTrace();
+                        return null;
+                    }
+
+
+                }
+
+            } catch (MalformedURLException e) {
+
+                e.printStackTrace();
+            } catch (IOException e) {
+
+                e.printStackTrace();
+            } finally {
+                if (urlConnection != null)
+                    urlConnection.disconnect();
+            }
+
+            return "";
+
+        }
     }
-
 }
+

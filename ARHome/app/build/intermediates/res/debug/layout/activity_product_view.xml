@@ -1,0 +1,69 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000">
+
+    <LinearLayout
+
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#000"
+        android:orientation="vertical"
+        tools:context="course.examples.virtualhome1.ProductView">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <ImageView
+                android:id="@+id/galleryItemImage"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_gravity="top"
+                android:layout_marginTop="15dp"
+                android:clickable="true"
+                />
+            <TextView android:id="@+id/clicktext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Click image for live view!"
+                android:textSize="12dp"
+                android:textColor="#E91E63"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="40dp"
+
+                />
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/galleryItemTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#00000c"
+            android:padding="10dp"
+            android:textColor="#fff"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            />
+
+
+        <TextView
+            android:id="@+id/galleryItemDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#00000c"
+            android:textColor="#fff"
+            android:textSize="16dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+
+
+
+    </LinearLayout>
+</ScrollView><!-- From: file:/C:/Users/Manohar/Documents/GitHub/VirtualHome/ARHome/app/src/main/res/layout/activity_product_view.xml -->
