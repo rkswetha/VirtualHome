@@ -39,6 +39,7 @@ dependencies {
     compile("org.apache.httpcomponents:httpmime:4.3.4")
     compile("org.json:json:20140107")
     compile("org.springframework.data:spring-data-mongodb:1.6.0.RELEASE")
+    compile("org.springframework.social:spring-social-facebook:2.0.1.RELEASE")
     testCompile("junit:junit")
 }
 

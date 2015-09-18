@@ -64,6 +64,11 @@ public class UserController {
 		return new ResponseEntity<User>(userDAO.getUser(id),HttpStatus.OK);
 	}
 	
+	@RequestMapping(value="/login", method=RequestMethod.POST, produces="application/json")
+	@ResponseBody
+	public ResponseEntity<Integer> authUsers(@Valid @RequestBody User user){
+		return new ResponseEntity<Integer>(userDAO.authUser(user),HttpStatus.OK);
+	}
 	
 	@RequestMapping(value="/users/{id}", method=RequestMethod.DELETE)
 	@ResponseBody

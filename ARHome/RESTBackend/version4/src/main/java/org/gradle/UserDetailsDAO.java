@@ -42,14 +42,14 @@ public class UserDetailsDAO {
         System.out.println(userPrefDoc.toString());
         UserDetails userDet=new UserDetails();
 //        UserPreference userPref = new UserPreference();
-        userDet.user.setUser_id(userDoc.getInteger("_id"));
-        userDet.user.setName(userDoc.getString("name"));
-        userDet.user.setPassword(userDoc.getString("password"));
-        userDet.user.setEmail(userDoc.getString("email"));
-        userDet.user.setCreated_at(userDoc.getString("created_at"));
-        userDet.userPref.setEthnicity(userPrefDoc.getString("ethnicity"));
-        userDet.userPref.setSex(userPrefDoc.getString("sex"));
-        userDet.userPref.setOptions(userPrefDoc.getString("options"));
+//        userDet.user.setUser_id(userDoc.getInteger("_id"));
+//        userDet.user.setName(userDoc.getString("name"));
+//        userDet.user.setPassword(userDoc.getString("password"));
+//        userDet.user.setEmail(userDoc.getString("email"));
+//        userDet.user.setCreated_at(userDoc.getString("created_at"));
+//        userDet.userPref.setEthnicity(userPrefDoc.getString("ethnicity"));
+//        userDet.userPref.setSex(userPrefDoc.getString("sex"));
+//        userDet.userPref.setOptions(userPrefDoc.getString("options"));
         
         return userDet;
     }
