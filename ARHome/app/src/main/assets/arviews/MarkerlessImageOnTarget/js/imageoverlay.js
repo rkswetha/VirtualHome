@@ -5,7 +5,7 @@ var virtualObjectInfo = {};
 
 $(function() {
      addImage("http://anushar.com/cmpe295Images/coffeetable.png");
-     addImage("http://anushar.com/cmpe295Images/sofa.png");
+    // addImage("http://anushar.com/cmpe295Images/sofa.png");
      setButtons();
 });
 
@@ -66,8 +66,43 @@ function draggableObjects(){
 
 function addImage(sourceUrl){
       imageId++
-      var x = document.createElement("IMG");
-      x.setAttribute("src", sourceUrl);
+	  
+	  //Canvas editing - To make the background transparent.
+	  var img = new Image; 	  
+	img.src = sourceUrl;
+	
+	 var doc = document.createElement('canvas');
+     doc.setAttribute("id", "document"+imageId);
+			
+    var ctx = doc.getContext("2d");
+    var img = new Image;
+	img.src = sourceUrl;
+	
+	  // First create the image...
+	img.onload = function(){
+	console.log("inside on load");
+		// ...then set the onload handler...
+	console.log("ht "+img.height);
+	console.log("wt "+img.width);
+	doc.width=img.width;
+	doc.height=img.height;
+	ctx.drawImage(img,0,0,img.width,img.height);
+	var imgData = ctx.getImageData(0, 0, img.width,img.height);
+	ctx.putImageData(adjustImage(imgData), 0, 0);
+
+	
+	//New image:
+		/*var imageMod=new Image();
+		var imgU=doc.toDataURL();
+		imageMod.src=imgU;				
+		document.body.appendChild(img);
+        document.body.appendChild(imageMod);*/
+		
+		
+	  var x = new Image();
+	  var imgU=doc.toDataURL();
+     // x.setAttribute("src", sourceUrl);
+	  x.setAttribute("src", imgU);
       x.setAttribute("width", '50%');
       x.setAttribute("height", 'auto');
       x.setAttribute("id", "virtualObject"+imageId);
@@ -76,12 +111,50 @@ function addImage(sourceUrl){
       x.classList.add("image");
       virtualObjectInfo["virtualObject"+imageId]={};
       virtualObjectInfo["virtualObject"+imageId]["scale"] = 1;
-      virtualObjectInfo["virtualObject"+imageId]["source"] = sourceUrl;
+      virtualObjectInfo["virtualObject"+imageId]["source"] = imgU;
       virtualObjectInfo["virtualObject"+imageId]["zValue"] = 1;
       document.body.appendChild(x);
       document.getElementById("virtualObject"+imageId).className = "enableDrag";
       draggableObjects();
+	  
+	  
+		 		
+		};
+	  
+	  
+	  
+	  
+	  
+	  
+     // var x = document.createElement("IMG");
+	
 };
+
+
+
+function adjustImage(iArray) {
+    var imageData = iArray.data;
+	console.log("inside for loop");
+    /*for (var i = 0; i < imageData.length; i+= 4) {
+        if(imageData[i] === 255 && imageData[i+1] === 255 && imageData[i+2] === 255){
+            imageData[i+3] = 0;
+        }
+    }*/
+
+    for (var i = 0; i < imageData.length; i+= 4) {
+		//console.log("inside for loop");
+            if((imageData[i] >= 170 && imageData[i] <=  255) && (imageData[i+1] >= 170 && imageData[i+1] <=  255) && (imageData[i+2] >= 170 && imageData[i+2] <=  255)){
+                imageData[i+3] = 0;
+            }
+        }
+
+
+
+    return iArray;
+};
+
+
+
 
 var scaleIncrement = 0.2;
 function scaleUp2(){
