@@ -67,17 +67,14 @@ function draggableObjects(){
 function addImage(sourceUrl){
       imageId++
 	  
-	  //Canvas editing
+	  //Canvas editing - To make the background transparent.
 	  var img = new Image; 	  
 	img.src = sourceUrl;
 	
 	 var doc = document.createElement('canvas');
      doc.setAttribute("id", "document"+imageId);
-			
-    var ctx = doc.getContext("2d");
-	
-      var img = new Image; 	 
-	img.src = sourceUrl;
+	var ctx = doc.getContext("2d");
+
 	
 	  // First create the image...
 	img.onload = function(){
@@ -90,8 +87,7 @@ function addImage(sourceUrl){
 	ctx.drawImage(img,0,0,img.width,img.height);
 	var imgData = ctx.getImageData(0, 0, img.width,img.height);
 	ctx.putImageData(adjustImage(imgData), 0, 0);
-	
-	
+
 	
 	//New image:
 		/*var imageMod=new Image();
@@ -149,9 +145,6 @@ function adjustImage(iArray) {
                 imageData[i+3] = 0;
             }
         }
-
-
-
     return iArray;
 };
 

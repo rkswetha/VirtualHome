@@ -73,10 +73,8 @@ function addImage(sourceUrl){
 	
 	 var doc = document.createElement('canvas');
      doc.setAttribute("id", "document"+imageId);
-			
-    var ctx = doc.getContext("2d");
-    var img = new Image;
-	img.src = sourceUrl;
+	var ctx = doc.getContext("2d");
+
 	
 	  // First create the image...
 	img.onload = function(){
@@ -120,12 +118,6 @@ function addImage(sourceUrl){
 	  
 		 		
 		};
-	  
-	  
-	  
-	  
-	  
-	  
      // var x = document.createElement("IMG");
 	
 };
@@ -147,9 +139,6 @@ function adjustImage(iArray) {
                 imageData[i+3] = 0;
             }
         }
-
-
-
     return iArray;
 };
 

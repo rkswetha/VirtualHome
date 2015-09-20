@@ -103,4 +103,3 @@ var World = {
 };
 
 World.init();
-
