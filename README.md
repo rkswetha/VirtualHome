@@ -19,9 +19,9 @@ Android application for Real-estate with Augmented Reality and Data mining
 
 ##Tools being used
 --------------
-* Android Studio (API 21)
-* Wikitude SDK 4.1
-* Java Spring
+* Android Studio (API 22)
+* Wikitude SDK 5.0
+* Java Spring Framework
 * MongoLab
 
 ##Project Contributors

@@ -118,12 +118,6 @@ function addImage(sourceUrl){
 	  
 		 		
 		};
-	  
-	  
-	  
-	  
-	  
-	  
      // var x = document.createElement("IMG");
 	
 };
