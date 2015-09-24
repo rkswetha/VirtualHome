@@ -39,3 +39,18 @@
     -webkit-transform: rotate(270deg) ;
     -ms-transform: rotate(270deg);
 }
+
+.rot90 {
+    /*-moz-transform-origin: right top; */
+    transform: translateY(-100%) rotate(90deg); /* W3C */
+    -webkit-transform-origin: left bottom;
+    -moz-transform-origin: left bottom;
+    -ms-transform-origin: left bottom;
+    -o-transform-origin: left bottom;
+    transform-origin: left bottom;
+}
+
+html{
+    width: "100%";
+    height: "100%";
+}
