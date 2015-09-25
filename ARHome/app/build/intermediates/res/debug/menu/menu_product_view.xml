@@ -4,4 +4,4 @@
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" android:showAsAction="never" />
 </menu>
-<!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/src/main/res/menu/menu_product_view.xml -->
+<!-- From: file:/C:/Users/Manohar/Documents/GitHub/VirtualHome/ARHome/app/src/main/res/menu/menu_product_view.xml -->
