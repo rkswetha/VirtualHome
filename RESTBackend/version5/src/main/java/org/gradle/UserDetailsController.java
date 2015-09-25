@@ -20,7 +20,7 @@ import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoDatabase;
 
 @RestController
-@RequestMapping("/api/v4")
+@RequestMapping("/api/v5")
 public class UserDetailsController {
 	
 	private AtomicLong along;
