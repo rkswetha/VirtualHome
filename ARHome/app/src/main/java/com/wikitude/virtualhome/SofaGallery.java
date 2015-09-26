@@ -51,12 +51,13 @@ public class SofaGallery extends Activity {
     Timestamp endTime;
     long sTime;
     long eTime;
-
+    String morePictures;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         System.out.println("Inside gallery");
         super.onCreate(savedInstanceState);
+
 
         //setContentView(R.layout.activity_gallery_sofa);
 
@@ -68,7 +69,9 @@ public class SofaGallery extends Activity {
 
         System.out.println("just outside listener");
 
-
+        //getting the extra:
+        morePictures = getIntent().getStringExtra("additionalProduct");
+        Log.i("Sofa Gallery", "additionalProduct "+morePictures);
 
         startTime = new Timestamp( new Date().getTime());
         Log.i("VirtualHome-Gallery","start time:"+startTime);
@@ -662,26 +665,44 @@ public class SofaGallery extends Activity {
                     GalleryItem item = (GalleryItem) parent.getItemAtPosition(position);
                     System.out.println("after image creation");
 
-                    //Create intent
-                    Intent intent = new Intent(SofaGallery.this, ProductView.class);
-                    intent.putExtra("title", item.getGalleryItemTitle());
+                    Log.i("Sofa Gallery", "additionalProduct " + morePictures);
+                    if(morePictures.equals("yes"))
+                    {
+                        //This is called if additional images have to be added to the AR screen
+                        Log.i("Sofa Gallery", "inside morePicture");
+                            Intent intent1= new Intent();
+                        intent1.putExtra("location", item.getGalleryItemLocation());
+                        intent1.putExtra("title", item.getGalleryItemTitle());
+                        intent1.putExtra("description", item.getGalleryItemDescription());
+                        setResult(2, intent1);
+                        Log.i("Sofa Gallery", "inside morePicture-end");
+                        finish();
+                    }
+                    else {
+                        //This is called if it is the initial image to be chosen.
+                        Log.i("Sofa Gallery", "inside first picture choice");
 
-                    //Compress --- Commenting it out
+                        //Create intent
+                        Intent intent = new Intent(SofaGallery.this, ProductView.class);
+                        intent.putExtra("title", item.getGalleryItemTitle());
+
+                        //Compress --- Commenting it out
                    /* ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     item.getGalleryItemImage().compress(Bitmap.CompressFormat.PNG, 100, stream);
                     byte[] bytes = stream.toByteArray();
                     intent.putExtra("BMP", bytes);*/
 
 
-                    //decription:
-                    intent.putExtra("description", item.getGalleryItemDescription());
+                        //decription:
+                        intent.putExtra("description", item.getGalleryItemDescription());
 
-                    //location
+                        //location
 
-                    intent.putExtra("location", item.getGalleryItemLocation());
+                        intent.putExtra("location", item.getGalleryItemLocation());
 
-                    //Start details activity
-                    startActivity(intent);
+                        //Start details activity
+                        startActivity(intent);
+                    }
                 }
             });
 

@@ -49,6 +49,7 @@ public class AugmentedActivity extends Activity {
     String markerPresent;
     String imagePath;
     private static final int SELECT_PICTURE = 1;
+    private static final int MORE_PICTURE = 2;
     String selectedImagePath;
 
     @Override
@@ -102,10 +103,14 @@ public class AugmentedActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        if(markerPresent.equals("NO")) {
             MenuInflater inflater = getMenuInflater();
             inflater.inflate(R.menu.augmented_actions, menu);
-        }
+
+        /*if(markerPresent.equals("NO")) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.augmented_actions, menu);
+        }*/
+
         return super.onCreateOptionsMenu(menu);
 
     }
@@ -122,6 +127,11 @@ public class AugmentedActivity extends Activity {
                 Toast.makeText(getApplicationContext(), "Opening Android Gallery", Toast.LENGTH_SHORT).show();
                 setBkgImage();
                 return true;
+            case R.id.action_addPhoto:
+                // Open app gallery to choose additional product images
+                Toast.makeText(getApplicationContext(), "Add additional product", Toast.LENGTH_SHORT).show();
+                chooseMoreImage();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -129,21 +139,46 @@ public class AugmentedActivity extends Activity {
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         if (resultCode == RESULT_OK) {
             if (requestCode == SELECT_PICTURE) {
                 Uri selectedImageUri = data.getData();
                 selectedImagePath = getPath(selectedImageUri);
+                //Changing the location
+                Log.i("AA", "selected Path " + selectedImagePath);
+                try {
+                    //this.architectView.load("arviews/MarkerlessImageOnTarget/index.html");
+                    if (selectedImagePath != null) {
+                        callJavaScript("setBackgroundImageUsingImagePath", URLEncoder.encode(selectedImagePath, "UTF-8"));
+                        //callJavaScript("addImage", URLEncoder.encode("http://anushar.com/cmpe295Images/coffeetable.png", "UTF-8"));
+                    }
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
             }
         }
-        try {
-                this.architectView.load("arviews/MarkerlessImageOnTarget/index.html");
-                if (selectedImagePath != null) {
-                    callJavaScript("setBackgroundImageUsingImagePath", URLEncoder.encode(selectedImagePath, "UTF-8"));
+            else if (resultCode == 2) {
+            Log.i("AugmentedA", "inside result code =2");
+            if (requestCode == MORE_PICTURE) {
+                Log.i("AugmentedA", "inside MORE_PICTURE");
+                String photoPath = data.getStringExtra("location");
+
+                Log.i("Augement-ExtraProd", "Photo Path " + photoPath);
+                try {
+                    if(markerPresent.equals("YES")){
+                        //Yet to be implemented in marker based.
+                        callJavaScript("World.readImagePath", URLEncoder.encode(photoPath, "UTF-8"));
+                    }
+                    else if (markerPresent.equals("NO"))
+                    {
+                        callJavaScript("addImage", URLEncoder.encode(photoPath, "UTF-8"));
+                    }
+                } catch (IOException e1) {
+                    e1.printStackTrace();
                 }
+            }
         }
-        catch (IOException e1) {
-            e1.printStackTrace();
-        }
+
     }
 
 
@@ -162,15 +197,25 @@ public class AugmentedActivity extends Activity {
         return uri.getPath();
     }
 
+/*
+This function is used to add more product images to the AR screen
+ */
+    public void chooseMoreImage()
+    {
+        Intent intent = new Intent(getApplication(),SofaGallery.class);
+        intent.putExtra("additionalProduct", "yes");
+        startActivityForResult(intent, MORE_PICTURE);
+    }
+
+
     public void setBkgImage()
     {
         Intent intent = new Intent();
-        intent.setType("image/*");
+        intent.setType("image");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent,
                 "Select Picture"), SELECT_PICTURE);
     }
-
 
     @Override
     protected void onPostCreate( final Bundle savedInstanceState ) {

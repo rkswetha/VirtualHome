@@ -121,6 +121,7 @@ function loadVirtualObjectsFromLS(){
   
 
 function addImage(sourceUrl){
+alert("inside add image")
       if (isloadedfromLS == false)
       {
       loadVirtualObjectsFromLS();
