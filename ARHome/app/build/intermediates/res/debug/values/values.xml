@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/C:/Users/Manohar/Documents/GitHub/VirtualHome/ARHome/app/src/main/res/values/arrays.xml -->
+    <!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/src/main/res/values/arrays.xml -->
     <eat-comment/>
     <string-array name="familytypelist">
         <item>@string/family1</item>
@@ -12,7 +12,7 @@
         <item>@string/job2</item>
         <item>@string/job3</item>
     </string-array>
-    <!-- From: file:/C:/Users/Manohar/Documents/GitHub/VirtualHome/ARHome/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string-array name="sextypelist">
         <item>@string/sex1</item>
@@ -68,15 +68,18 @@
         <item>STOCKSUND</item>
         <item>KNISLINGE</item>
     </string-array>
-    <!-- From: file:/C:/Users/Manohar/Documents/GitHub/VirtualHome/ARHome/app/src/main/res/values/dimens.xml -->
+    <!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <!-- From: file:/C:/Users/Manohar/Documents/GitHub/VirtualHome/ARHome/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string name="action_addItem">Add Item</string>
     <string name="action_settings">Settings</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
+    <string name="action_snapShot">Share Snapshot</string>
+    <string name="action_snaptoscreen">Snap To Screen</string>
     <string name="app_name">Virtual Home</string>
     <string name="button_name_startar">Start AR</string>
     <string name="description_string">Description: </string>
@@ -121,7 +124,7 @@
     <string name="title_activity_product_info">ProductInfo</string>
     <string name="title_activity_product_view">ProductView</string>
     <string name="title_activity_sofa_gallery">SofaGallery</string>
-    <!-- From: file:/C:/Users/Manohar/Documents/GitHub/VirtualHome/ARHome/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--

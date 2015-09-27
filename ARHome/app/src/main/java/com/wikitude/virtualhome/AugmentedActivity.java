@@ -40,9 +40,6 @@ public class AugmentedActivity extends Activity {
     //As this is a Free Trial License it will put a TRIAL water mark across the screen
     protected ArchitectView architectView;
 
-    /**
-     * urlListener handling "document.location= 'architectsdk://...' " calls in JavaScript"
-     */
     protected ArchitectView.ArchitectUrlListener urlListener;
 
     StartupConfiguration startupConfiguration;
@@ -103,13 +100,17 @@ public class AugmentedActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-            MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.augmented_actions, menu);
+        // Maintain different menu items based on marker/markerless
+        if(markerPresent.equals("YES")) {
 
-        /*if(markerPresent.equals("NO")) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_augmented, menu);
+        }
+        else if(markerPresent.equals("NO")) {
+
             MenuInflater inflater = getMenuInflater();
             inflater.inflate(R.menu.augmented_actions, menu);
-        }*/
+        }
 
         return super.onCreateOptionsMenu(menu);
 
@@ -122,16 +123,29 @@ public class AugmentedActivity extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         switch (item.getItemId()) {
+
             case R.id.action_gallery:
                 // OPen gallery to choose wall paper
                 Toast.makeText(getApplicationContext(), "Opening Android Gallery", Toast.LENGTH_SHORT).show();
                 setBkgImage();
                 return true;
+
             case R.id.action_addPhoto:
                 // Open app gallery to choose additional product images
                 Toast.makeText(getApplicationContext(), "Add additional product", Toast.LENGTH_SHORT).show();
                 chooseMoreImage();
                 return true;
+
+            case R.id.action_snapShot:
+                Toast.makeText(getApplicationContext(), "Take snapshot", Toast.LENGTH_SHORT).show();
+                shareSnapShot();
+                return true;
+
+            case R.id.action_snapToScreen:
+                Toast.makeText(getApplicationContext(), "Snap to Screen", Toast.LENGTH_SHORT).show();
+                this.architectView.callJavascript("World.displaySnapToScreen()");
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -141,42 +155,44 @@ public class AugmentedActivity extends Activity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (resultCode == RESULT_OK) {
+
             if (requestCode == SELECT_PICTURE) {
+
                 Uri selectedImageUri = data.getData();
                 selectedImagePath = getPath(selectedImageUri);
                 //Changing the location
                 Log.i("AA", "selected Path " + selectedImagePath);
+
                 try {
-                    //this.architectView.load("arviews/MarkerlessImageOnTarget/index.html");
                     if (selectedImagePath != null) {
-                        callJavaScript("setBackgroundImageUsingImagePath", URLEncoder.encode(selectedImagePath, "UTF-8"));
-                        //callJavaScript("addImage", URLEncoder.encode("http://anushar.com/cmpe295Images/coffeetable.png", "UTF-8"));
+                            callJavaScript("setBackgroundImageUsingImagePath", URLEncoder.encode(selectedImagePath, "UTF-8"));
+                            //callJavaScript("addImage", URLEncoder.encode("http://anushar.com/cmpe295Images/coffeetable.png", "UTF-8"));
                     }
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
             }
         }
-            else if (resultCode == 2) {
-            Log.i("AugmentedA", "inside result code =2");
-            if (requestCode == MORE_PICTURE) {
-                Log.i("AugmentedA", "inside MORE_PICTURE");
-                String photoPath = data.getStringExtra("location");
+        else if (resultCode == 2) {
 
-                Log.i("Augement-ExtraProd", "Photo Path " + photoPath);
-                try {
-                    if(markerPresent.equals("YES")){
-                        //Yet to be implemented in marker based.
-                        callJavaScript("World.readImagePath", URLEncoder.encode(photoPath, "UTF-8"));
-                    }
-                    else if (markerPresent.equals("NO"))
-                    {
-                        callJavaScript("addImage", URLEncoder.encode(photoPath, "UTF-8"));
-                    }
-                } catch (IOException e1) {
-                    e1.printStackTrace();
+                if (requestCode == MORE_PICTURE) {
+                    Log.i("AugmentedA", "inside MORE_PICTURE");
+                    String photoPath = data.getStringExtra("location");
+
+                    Log.i("Augement-ExtraProd", "Photo Path " + photoPath);
+                    try {
+                            if(markerPresent.equals("YES"))
+                            {
+                                callJavaScript("World.readMoreImages", URLEncoder.encode(photoPath, "UTF-8"));
+                            }
+                            else if (markerPresent.equals("NO"))
+                            {
+                                callJavaScript("addImage", URLEncoder.encode(photoPath, "UTF-8"));
+                            }
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
                 }
-            }
         }
 
     }
@@ -219,7 +235,7 @@ This function is used to add more product images to the AR screen
 
     @Override
     protected void onPostCreate( final Bundle savedInstanceState ) {
-        super.onPostCreate( savedInstanceState );
+        super.onPostCreate(savedInstanceState);
 
         if ( this.architectView != null ) {
 
@@ -296,14 +312,14 @@ This function is used to add more product images to the AR screen
         }
     }
 
-        /**
-         * call JacaScript in architectView
-         * @param methodName
-         * @param imagePath
-         */
-        private void callJavaScript(final String methodName, final String imagePath) {
+    /**
+      * call JacaScript in architectView
+      * @param methodName
+      * @param imagePath
+     * */
+    private void callJavaScript(final String methodName, final String imagePath) {
 
-            if (this.architectView!=null) {
+         if (this.architectView!=null) {
 
                 final String js = ( methodName + "(\"" + imagePath +  "\");" );
                 Log.e(this.getClass().getName(), " VIRTUALHOME: calling JS method:" + js);
@@ -311,13 +327,55 @@ This function is used to add more product images to the AR screen
                 //this.architectView.callJavascript("World.readImagePath( \"http://www.ikea.com/ca/en/images/products/kivik-loveseat-and-chaise-lilac__0252355_PE391172_S4.JPG\");");
                 this.architectView.callJavascript(js);
 
-            }
-        }
+         }
+    }
 
-    /**
-     * url listener fired once e.g. 'document.location = "architectsdk://foo?bar=123"' is called in JS
-     * @return
-     */
+
+    public void shareSnapShot(){
+
+        Log.e(this.getClass().getName(), " VIRTUALHOME: calling captureSnapShot method");
+
+        architectView.captureScreen(ArchitectView.CaptureScreenCallback.CAPTURE_MODE_CAM_AND_WEBVIEW, new ArchitectView.CaptureScreenCallback() {
+
+            @Override
+            public void onScreenCaptured(final Bitmap screenCapture) {
+                // store screenCapture into external cache directory
+                final File screenCaptureFile = new File(Environment.getExternalStorageDirectory().toString(), "screenCapture_" + System.currentTimeMillis() + ".jpg");
+
+                // 1. Save bitmap to file & compress to jpeg. You may use PNG too
+                try {
+                    final FileOutputStream out = new FileOutputStream(screenCaptureFile);
+                    screenCapture.compress(Bitmap.CompressFormat.JPEG, 90, out);
+                    out.flush();
+                    out.close();
+
+                    // 2. create send intent
+                    final Intent share = new Intent(Intent.ACTION_SEND);
+                    share.setType("image/jpg");
+                    share.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(screenCaptureFile));
+
+                    // 3. launch intent-chooser
+                    final String chooserTitle = "Share Snapshot";
+                    startActivity(Intent.createChooser(share, chooserTitle));
+
+                } catch (final Exception e) {
+                    // should not occur when all permissions are set
+                    runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            Log.e(this.getClass().getName(), " VIRTUALHOME: Share Snapshot failed ");
+                            // show toast message in case something went wrong
+                            //Toast.makeText(this, " Unexpected error", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+
+    //url listener fired once e.g. 'document.location = "architectsdk://foo?bar=123"' is called in JS
     public ArchitectView.ArchitectUrlListener getUrlListener() {
 
         Log.e(this.getClass().getName(), " VIRTUALHOME: Called getUrlListener");
@@ -329,61 +387,7 @@ This function is used to add more product images to the AR screen
 
                 Log.e(this.getClass().getName(), " VIRTUALHOME: Called urlWasInvoked- uriString" +uriString);
                 Uri invokedUri = Uri.parse(uriString);
-
-                // pressed snapshot button. check if host is button to fetch e.g. 'architectsdk://button?action=captureScreen', you may add more checks if more buttons are used inside AR scene
-                if ("button1".equalsIgnoreCase(invokedUri.getHost())) {
-                    Log.e(this.getClass().getName(), " VIRTUALHOME: Snapshot button pressed ");
-                    architectView.captureScreen(ArchitectView.CaptureScreenCallback.CAPTURE_MODE_CAM_AND_WEBVIEW, new ArchitectView.CaptureScreenCallback() {
-
-                        @Override
-                        public void onScreenCaptured(final Bitmap screenCapture) {
-                            // store screenCapture into external cache directory
-                            final File screenCaptureFile = new File(Environment.getExternalStorageDirectory().toString(), "screenCapture_" + System.currentTimeMillis() + ".jpg");
-
-                            // 1. Save bitmap to file & compress to jpeg. You may use PNG too
-                            try {
-                                final FileOutputStream out = new FileOutputStream(screenCaptureFile);
-                                screenCapture.compress(Bitmap.CompressFormat.JPEG, 90, out);
-                                out.flush();
-                                out.close();
-
-                                // 2. create send intent
-                                final Intent share = new Intent(Intent.ACTION_SEND);
-                                share.setType("image/jpg");
-                                share.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(screenCaptureFile));
-
-                                // 3. launch intent-chooser
-                                final String chooserTitle = "Share Snaphot";
-                                startActivity(Intent.createChooser(share, chooserTitle));
-
-                            } catch (final Exception e) {
-                                // should not occur when all permissions are set
-                                runOnUiThread(new Runnable() {
-
-                                    @Override
-                                    public void run() {
-                                        Log.e(this.getClass().getName(), " VIRTUALHOME: Share Snapshot failed ");
-                                        // show toast message in case something went wrong
-                                        //Toast.makeText(this, " Unexpected error", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-                        }
-                    });
-                    return true;
-                }
-                else if ("button2".equalsIgnoreCase(invokedUri.getHost())) {
-
-                    Log.e(this.getClass().getName(), " VIRTUALHOME: Product Info button pressed ");
-                    Intent intent = new Intent (getApplication(), ProductInfo.class);
-                    intent.putExtra("ProductName", "MyProductName");
-                    intent.putExtra("Dimension", "MyDimension");
-                    intent.putExtra("Price", "MyPrice");
-                    intent.putExtra("Description", "MyDescription");
-                    startActivity(intent);
-
-                }
-                return false;
+                return true;
             }
         };
     }

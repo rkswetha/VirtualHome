@@ -2,4 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.wikitude.virtualhome.AugmentedActivity">
 
+    <item android:id="@+id/action_addPhoto" android:title="@string/action_addItem"
+        android:orderInCategory="100" android:showAsAction="never" />
+
+    <item android:id="@+id/action_snapShot" android:title="@string/action_snapShot"
+        android:orderInCategory="100" android:showAsAction="never" />
+
+    <item android:id="@+id/action_snapToScreen" android:title="@string/action_snaptoscreen"
+        android:orderInCategory="100" android:showAsAction="never" />
 </menu>
