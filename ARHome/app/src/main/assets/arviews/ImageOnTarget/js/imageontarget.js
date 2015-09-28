@@ -19,6 +19,7 @@ var World = {
 
 
 	createOverlays: function createOverlaysFn() {
+		//this.changeToTransparent();
 		/*
 			First an AR.ClientTracker needs to be created in order to start the recognition engine. It is initialized with a URL specific to the target collection. Optional parameters are passed as object in the last argument. In this case a callback function for the onLoaded trigger is set. Once the tracker is fully loaded the function worldLoaded() is called.
 			Important: If you replace the tracker file with your own, make sure to change the target name accordingly.
@@ -88,68 +89,87 @@ var World = {
         overlayOne.rotation+=30;
     },
 
-    readMoreImages: function readMoreImagesFn(readPath) {
+	changeToTransparent: function changeToTransparentFn(){
+
+	//Canvas editing - To make the background transparent.
+          var img = new Image;
+          var imageId=1;
+
+          img.src = "assets/furniture1.png";
+
+          var doc = document.createElement('canvas');
+          doc.setAttribute("id", "document"+imageId);
+          var ctx = doc.getContext("2d");
+
+
+              // First create the image...
+          img.onload = function(){
+                console.log("inside on load");
+              // ...then set the onload handler...
+                console.log("ht "+img.height);
+                console.log("wt "+img.width);
+                doc.width=img.width;
+                doc.height=img.height;
+                ctx.drawImage(img,0,0,img.width,img.height);
+                var imgData = ctx.getImageData(0, 0, img.width,img.height);
+
+                var imageData = imgData.data;
+                      console.log("inside for loop");
+
+                for (var i = 0; i < imageData.length; i+= 4) {
+                        //console.log("inside for loop");
+                                if((imageData[i] >= 170 && imageData[i] <=  255) && (imageData[i+1] >= 170 && imageData[i+1] <=  255) && (imageData[i+2] >= 170 && imageData[i+2] <=  255)){
+                                    imageData[i+3] = 0;
+                                }
+                }
+				console.log(imageData);
+				console.log(imgData);
+				imgData.data = imageData;
+
+                ctx.putImageData(imgData, 0, 0);
+                var x = new Image();
+                var imgU=doc.toDataURL();
+                console.log(imgU);
+
+                x.setAttribute("src", imgU);
+                //x.setAttribute("src", sourceUrl);
+                x.setAttribute("width", '50%');
+                x.setAttribute("height", 'auto');
+                x.setAttribute("id", "virtualObject"+imageId);
+                x.style.position='relative';
+                x.setAttribute("z-index", 1);
+                x.classList.add("image");
+
+                document.body.appendChild(x);
+			}
+	},
+
+	chooseAnotherImage: function chooseAnotherImagesFn(readPath) {
 
 		window.overlayOne.destroy();
-		alert(readPath);
 
+		this.tracker = new AR.ClientTracker("assets/virtualhometarget.wtc", {
+			onLoaded: this.worldLoaded,
+			physicalTargetImageHeights: {
+                      pageTwo:    268
+            }
+		});
+
+
+		var imgTwo = new AR.ImageResource(decodeURIComponent(readPath));
+		overlayOne = new AR.ImageDrawable(imgTwo, 1, {
+			offsetX: -0.15,
+			offsetY: 0
+		});
 
 		/*
-        	First an AR.ClientTracker needs to be created in order to start the recognition engine. It is initialized with a URL specific to the target collection. Optional parameters are passed as object in the last argument. In this case a callback function for the onLoaded trigger is set. Once the tracker is fully loaded the function worldLoaded() is called.
-
-        	Important: If you replace the tracker file with your own, make sure to change the target name accordingly.
-        	Use a specific target name to respond only to a certain target or use a wildcard to respond to any or a certain group of targets.
-
-        	Adding multiple targets to a target collection is straightforward. Simply follow our Target Management Tool documentation. Each target in the target collection is identified by its target name. By using this target name, it is possible to create an AR.Trackable2DObject for every target in the target collection.
-        */
-        var tracker1 = new AR.ClientTracker("assets/virtualhome_multipletarget.wtc", {
-        		onLoaded: this.worldLoaded,
-        		physicalTargetImageHeights: {
-                      pageOne:    268
-                }
-        });
-		alert("step1");
-
-        /*
-        	The next step is to create the augmentation. In this example an image resource is created and passed to the AR.ImageDrawable. A drawable is a visual component that can be connected to an IR target (AR.Trackable2DObject) or a geolocated object (AR.GeoObject). The AR.ImageDrawable is initialized by the image and its size. Optional parameters allow for position it relative to the recognized target.
-        */
-
-        // Create overlay for page one
-        var imgOne = new AR.ImageResource("assets/furniture1.png");
-        var overlayOne = new AR.ImageDrawable(imgOne, 1, {
-        	offsetX: -0.15,
-        	offsetY: 0
-        });
-        alert("step3");
-
-        /*
-        	This combines everything by creating an AR.Trackable2DObject with the previously created tracker, the name of the image target as defined in the target collection and the drawable that should augment the recognized image.
-        	Note that this time a specific target name is used to create a specific augmentation for that exact target.
-        */
-        var pageOne = new AR.Trackable2DObject(tracker1, "VirtualHome", {
-        		drawables: {
-        			cam: overlayOne
-        		},
-        		onEnterFieldOfVision: function(){
-        			alert("enterfieldofvision");
-
-					var imgTwo = new AR.ImageResource("assets/furniture2.png");
-							var overlayTwo = new AR.ImageDrawable(imgTwo, 1, {
-								offsetX: 0.12,
-								offsetY: -0.01
-							});
-							alert("step4");
-							/*
-								The AR.Trackable2DObject for the second page uses the same tracker but with a different target name and the second overlay.
-							*/
-							var pageTwo = new AR.Trackable2DObject(tracker1, "VirtualHome2", {
-								drawables: {
-									cam: overlayTwo
-								}
-							});
-        		}
-        });
-		alert("last");
+			The AR.Trackable2DObject for the second page uses the same tracker but with a different target name and the second overlay.
+		*/
+		var pageTwo = new AR.Trackable2DObject(this.tracker, "*", {
+			drawables: {
+				cam: overlayOne
+			}
+		});
     },
 
     displaySnapToScreen: function displaySnapToScreenFn(){

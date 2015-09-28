@@ -130,9 +130,9 @@ public class AugmentedActivity extends Activity {
                 setBkgImage();
                 return true;
 
-            case R.id.action_addPhoto:
+            case R.id.action_chooseAnother:
                 // Open app gallery to choose additional product images
-                Toast.makeText(getApplicationContext(), "Add additional product", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Choose another product", Toast.LENGTH_SHORT).show();
                 chooseMoreImage();
                 return true;
 
@@ -183,7 +183,7 @@ public class AugmentedActivity extends Activity {
                     try {
                             if(markerPresent.equals("YES"))
                             {
-                                callJavaScript("World.readMoreImages", URLEncoder.encode(photoPath, "UTF-8"));
+                                callJavaScript("World.chooseAnotherImage", URLEncoder.encode(photoPath, "UTF-8"));
                             }
                             else if (markerPresent.equals("NO"))
                             {

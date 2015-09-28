@@ -37,11 +37,12 @@ int id ProfessionType 0x7f09000a
 int id SexType1 0x7f090008
 int id action_addPhoto 0x7f090022
 int id action_camera 0x7f090023
+int id action_chooseAnother 0x7f090025
 int id action_gallery 0x7f090021
 int id action_preference 0x7f090024
-int id action_settings 0x7f090027
-int id action_snapShot 0x7f090025
-int id action_snapToScreen 0x7f090026
+int id action_settings 0x7f090028
+int id action_snapShot 0x7f090026
+int id action_snapToScreen 0x7f090027
 int id architectView 0x7f090000
 int id button 0x7f090007
 int id button_submit 0x7f090005
@@ -92,7 +93,7 @@ int menu menu_preferences 0x7f080006
 int menu menu_product_info 0x7f080007
 int menu menu_product_view 0x7f080008
 int menu menu_sofa_gallery 0x7f080009
-int string action_addItem 0x7f070000
+int string action_chooseAnother 0x7f070000
 int string action_settings 0x7f070001
 int string action_sign_in 0x7f070002
 int string action_sign_in_short 0x7f070003

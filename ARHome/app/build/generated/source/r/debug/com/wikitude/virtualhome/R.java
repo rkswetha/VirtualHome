@@ -56,11 +56,12 @@ public final class R {
         public static final int SexType1=0x7f090008;
         public static final int action_addPhoto=0x7f090022;
         public static final int action_camera=0x7f090023;
+        public static final int action_chooseAnother=0x7f090025;
         public static final int action_gallery=0x7f090021;
         public static final int action_preference=0x7f090024;
-        public static final int action_settings=0x7f090027;
-        public static final int action_snapShot=0x7f090025;
-        public static final int action_snapToScreen=0x7f090026;
+        public static final int action_settings=0x7f090028;
+        public static final int action_snapShot=0x7f090026;
+        public static final int action_snapToScreen=0x7f090027;
         public static final int architectView=0x7f090000;
         public static final int button=0x7f090007;
         public static final int button_submit=0x7f090005;
@@ -117,7 +118,7 @@ public final class R {
         public static final int menu_sofa_gallery=0x7f080009;
     }
     public static final class string {
-        public static final int action_addItem=0x7f070000;
+        public static final int action_chooseAnother=0x7f070000;
         public static final int action_settings=0x7f070001;
         public static final int action_sign_in=0x7f070002;
         public static final int action_sign_in_short=0x7f070003;
