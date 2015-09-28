@@ -227,7 +227,7 @@ This function is used to add more product images to the AR screen
     public void setBkgImage()
     {
         Intent intent = new Intent();
-        intent.setType("image");
+        intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent,
                 "Select Picture"), SELECT_PICTURE);
@@ -339,7 +339,8 @@ This function is used to add more product images to the AR screen
 
             @Override
             public void onScreenCaptured(final Bitmap screenCapture) {
-                // store screenCapture into external cache directory
+
+            // store screenCapture into external cache directory
                 final File screenCaptureFile = new File(Environment.getExternalStorageDirectory().toString(), "screenCapture_" + System.currentTimeMillis() + ".jpg");
 
                 // 1. Save bitmap to file & compress to jpeg. You may use PNG too
@@ -385,8 +386,12 @@ This function is used to add more product images to the AR screen
             @Override
             public boolean urlWasInvoked(String uriString) {
 
-                Log.e(this.getClass().getName(), " VIRTUALHOME: Called urlWasInvoked- uriString" +uriString);
+                Log.e(this.getClass().getName(), " VIRTUALHOME: uriString: " +uriString);
                 Uri invokedUri = Uri.parse(uriString);
+
+                if ("button1".equalsIgnoreCase(invokedUri.getHost())) {
+                    shareSnapShot();
+                }
                 return true;
             }
         };

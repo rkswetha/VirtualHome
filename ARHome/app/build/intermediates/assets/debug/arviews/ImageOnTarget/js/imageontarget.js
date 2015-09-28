@@ -147,7 +147,6 @@ var World = {
 	chooseAnotherImage: function chooseAnotherImagesFn(readPath) {
 
 		window.overlayOne.destroy();
-		alert(readPath);
 
 		this.tracker = new AR.ClientTracker("assets/virtualhometarget.wtc", {
 			onLoaded: this.worldLoaded,
@@ -159,7 +158,7 @@ var World = {
 
 		var imgTwo = new AR.ImageResource(decodeURIComponent(readPath));
 		overlayOne = new AR.ImageDrawable(imgTwo, 1, {
-			offsetX: 0.15,
+			offsetX: -0.15,
 			offsetY: 0
 		});
 
