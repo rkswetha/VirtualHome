@@ -203,7 +203,7 @@ public class Login extends Activity {
             HttpURLConnection urlConnection = null;
 
             //String url1= "http://ec2-54-219-182-125.us-west-1.compute.amazonaws.com:8080/api/v1/users";
-            String url1= "http://ec2-54-215-226-210.us-west-1.compute.amazonaws.com:8080/api/v4/users";
+              String url1= "http://ec2-54-193-107-243.us-west-1.compute.amazonaws.com:8080/api/v5/users";
 
             StringBuilder sb = new StringBuilder();
             try {
