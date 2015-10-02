@@ -130,7 +130,7 @@ public class AugmentedActivity extends Activity {
                 setBkgImage();
                 return true;
 
-            case R.id.action_chooseAnother:
+            case R.id.action_addPhoto:
                 // Open app gallery to choose additional product images
                 Toast.makeText(getApplicationContext(), "Choose another product", Toast.LENGTH_SHORT).show();
                 chooseMoreImage();
