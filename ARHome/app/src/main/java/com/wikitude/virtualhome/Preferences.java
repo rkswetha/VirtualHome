@@ -27,6 +27,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+
+
 public class Preferences extends Activity {
 
 
@@ -54,7 +56,7 @@ public class Preferences extends Activity {
 
 
         userID = settings.getString("user_id", "-1");
-        emailID=settings.getString("email","-1");
+        emailID=settings.getString("email", "-1");
        /* //For checking:
         userID = "-1";*/
 
@@ -64,8 +66,10 @@ public class Preferences extends Activity {
         //Obtaining the new user flag status flg status
         newUserFlag = getIntent().getStringExtra("newUserFlag");
 
-        //Just for checking:
-        newUserFlag="false";
+
+
+     /*   //Just for checking:
+        newUserFlag="false";*/
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preferences);
@@ -103,9 +107,13 @@ public class Preferences extends Activity {
 
 
 
-//Disabling the button if no user has logged
+/*
+Changed the if(newUserFlag!=null){ }
+changed the braces: changed that if the call is from a different location->then the newUserFlag will be null;
+ */
         if (newUserFlag != null) {
             if (newUserFlag.equals("true")) {
+                //Log.i("new user FLAG",newUserFlag);
 
                 Log.i("pref:", "inside new user");
 
@@ -145,14 +153,17 @@ public class Preferences extends Activity {
                 });
 
 
-            } else {
+            }} else {
                 //getting the preferences:
+
+                //Log.i("pref:", "inside new user");
+
 
                 int gender=settings.getInt("gender",-1);
                 int family=settings.getInt("family",-1);
                 int profession=settings.getInt("profession",-1);
 
-                boolean gardening=settings.getBoolean("gardening", true);
+                boolean gardening=settings.getBoolean("gardening", false);
                 boolean interiorDesign=settings.getBoolean("interiorDesign",false);
                 boolean cooking=settings.getBoolean("cooking",false);
                 boolean painting=settings.getBoolean("painting",false);
@@ -165,7 +176,7 @@ public class Preferences extends Activity {
 
                 Log.i("pref:", "inside returning user");
 
-                Log.i("pref:", "gender"+gender+" family"+family+"profession"+profession);
+               // Log.i("pref:", "gender"+gender+" family"+family+"profession"+profession);
 
 
                 if(gender!=-1&&family!=-1&&profession!=-1)
@@ -222,7 +233,7 @@ public class Preferences extends Activity {
             }
 
         }
-    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -359,22 +370,6 @@ public class Preferences extends Activity {
 
     }
 
-    public void postToServer()
-    {
-        //Maybe make it as a seperate thread
-        //For now, checking if the json is populated correctly
-
-        if(!preferenceCreationNotSuccess) {
-            String jsonData = userPrefJson.toString();
-            Log.i("VirtualHome userJson", jsonData);
-        }
-
-        //Server code
-
-        //on server Confirmation add in shared preferences maybe(?)
-
-
-    }
 
 
 
@@ -442,68 +437,6 @@ public class Preferences extends Activity {
 
                     }
 
-                    //Save to the editor the preferences:
-
-                  /*  //Parsing the returned json
-                    JSONObject jsonObject = null;
-                    String userID = null;
-                    try {
-                        Log.i("New User Async ", "Retrieve jsonContent");
-
-                        //System.out.println("inside : " + serverSB);
-
-                        jsonObject = new JSONObject(serverSB.toString());
-                        //Assuming only 1 jsonObject is returned.
-                        if (jsonObject != null) {
-                            userID = jsonObject.getString("user_id");
-
-                            //Printing the whole json data obtained:
-                            Log.i("VirtualHome", jsonObject.toString());
-
-
-                            //Saving the userID in shared preferences:
-                            //TODO: save username and password in shared Preferences.
-                            Log.i("Login ", "User ID: " + userID);
-
-
-                            //Save email id, password and user id.
-                            SharedPreferences settings = getSharedPreferences(PREFERENCES_Gallery_FILE_NAME, 0);
-
-                            //Initially for cross checking
-                            System.out.println(settings.getString("user_id", "0"));
-                            System.out.println(settings.getString("email", "0"));
-                            System.out.println(settings.getString("password", "0"));
-
-
-                            SharedPreferences.Editor editor = settings.edit();
-                            editor.putString("user_id", userID);
-                            editor.putString("email", email);
-                            editor.putString("password", pwd);
-
-
-
-                            editor.commit();
-
-                            //For confirmation
-                            System.out.println(settings.getString("user_id", "0"));
-                            System.out.println(settings.getString("email", "0"));
-                            System.out.println(settings.getString("password", "0"));
-
-                            //Save the preferences data
-                            //Get the data and save the preferences.
-
-
-
-
-                        }
-
-
-                    } catch (JSONException ex) {
-                        Log.i("VirtualHome-Gallery", " caught JSON exception");
-                        ex.printStackTrace();
-                        return null;
-                    }
-*/
 
                 }
 
@@ -526,21 +459,12 @@ public class Preferences extends Activity {
         protected void onPostExecute(String result) {
             Log.i("VirtualHome-Preferences", "onPostExecute-Create User Preferences");
 
-            //
+            if(preferenceCreationNotSuccess){
+
+                Toast.makeText(getApplicationContext(), "Preferences was not set properly!", Toast.LENGTH_SHORT).show();
+            }
+
             launchGallery();
-
-
-
-/*
-            //TODO: check the creation success and then navigate
-
-
-            if(newUserFlag) {
-                Toast.makeText(getApplicationContext(), "Welcome!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Login.this, Preferences.class);
-                intent.putExtra("newUserFlag","true");
-                startActivity(intent);
-            }*/
 
 
         }
