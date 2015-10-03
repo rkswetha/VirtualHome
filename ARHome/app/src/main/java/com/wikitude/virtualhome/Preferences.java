@@ -111,6 +111,11 @@ public class Preferences extends Activity {
 Changed the if(newUserFlag!=null){ }
 changed the braces: changed that if the call is from a different location->then the newUserFlag will be null;
  */
+
+        /*
+        In this new method, with the delinking of the login and preferences- there is no http call from server, while loading this page.
+        As ideally, during the login, the preferences would have been sent from the server and updated in the local(shared preferences)
+         */
         if (newUserFlag != null) {
             if (newUserFlag.equals("true")) {
                 //Log.i("new user FLAG",newUserFlag);

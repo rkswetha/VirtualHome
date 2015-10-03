@@ -12,4 +12,10 @@
         android:showAsAction="always|withText"
         />
 
+    <item android:id="@+id/action_login"
+        android:icon="@drawable/ic_perm_identity_black_24dp"
+        android:title="login"
+        android:showAsAction="always|withText"
+        />
+
 </menu><!-- From: file:/C:/Users/Manohar/Documents/GitHub/VirtualHome/ARHome/app/src/main/res/menu/home_actions.xml -->

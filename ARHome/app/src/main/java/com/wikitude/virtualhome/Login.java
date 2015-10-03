@@ -598,7 +598,7 @@ public class Login extends Activity {
             else
             {
                 //If returning user, navigating the to the gallery
-                Intent intent = new Intent(Login.this, Preferences.class);
+                Intent intent = new Intent(Login.this, SofaGallery.class);
                 //intent.putExtra("newUserFlag","false");
                 startActivity(intent);
             }

@@ -122,6 +122,11 @@ public class Home extends Activity {
             case R.id.action_preference:
                 // OPen login page
                 Toast.makeText(getApplicationContext(), "Preferences", Toast.LENGTH_SHORT).show();
+                openPreference();
+                return true;
+            case R.id.action_login:
+                // OPen login page
+                Toast.makeText(getApplicationContext(), "Preferences", Toast.LENGTH_SHORT).show();
                 openLogin();
                 return true;
 
@@ -140,6 +145,14 @@ public class Home extends Activity {
         startActivity(intent);
         //System.out.println("Clicked login");
         Log.d("VirtualHome1", "Clicked login");
+    }
+
+
+    public void openPreference() {
+        Intent intent = new Intent(this, Preferences.class);
+        startActivity(intent);
+        //System.out.println("Clicked login");
+        Log.d("VirtualHome1", "Clicked Preference");
     }
 
 
