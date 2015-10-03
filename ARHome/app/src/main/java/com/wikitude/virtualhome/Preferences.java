@@ -3,6 +3,7 @@ package com.wikitude.virtualhome;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -17,6 +18,14 @@ import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class Preferences extends Activity {
 
@@ -33,6 +42,8 @@ public class Preferences extends Activity {
     boolean noUserID=false;
     public static final String PREFERENCES_Gallery_FILE_NAME = "VHGalleryPreferences";
     String userID =null;
+    String emailID=null;
+    private boolean preferenceCreationNotSuccess=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +54,7 @@ public class Preferences extends Activity {
 
 
         userID = settings.getString("user_id", "-1");
+        emailID=settings.getString("email","-1");
        /* //For checking:
         userID = "-1";*/
 
@@ -52,8 +64,8 @@ public class Preferences extends Activity {
         //Obtaining the new user flag status flg status
         newUserFlag = getIntent().getStringExtra("newUserFlag");
 
-      /*  //Just for checking:
-        newUserFlag="false";*/
+        //Just for checking:
+        newUserFlag="false";
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preferences);
@@ -75,7 +87,7 @@ public class Preferences extends Activity {
 
 
         //getting the preferences
-
+//Disabling the button if no user has logged
         if (userID.equals("-1")) {
             noUserID = true;
             Toast.makeText(getApplicationContext(), "You have not logged in! Please login to set preferences", Toast.LENGTH_SHORT).show();
@@ -89,9 +101,9 @@ public class Preferences extends Activity {
         }
 
 
-        //Disabling the button if no user has logged
 
 
+//Disabling the button if no user has logged
         if (newUserFlag != null) {
             if (newUserFlag.equals("true")) {
 
@@ -272,12 +284,8 @@ public class Preferences extends Activity {
         Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
 
 
-/*
-        //Create preferences json
-        createUserJson();*/
-
-
-        //CALL the database here:
+        //Create preferences json and call the server.
+        createUserJson();
 
         //Save the features to local
         SharedPreferences settings = getSharedPreferences(PREFERENCES_Gallery_FILE_NAME, MODE_PRIVATE);
@@ -296,17 +304,10 @@ public class Preferences extends Activity {
 
         editor.commit();
 
-//For now: keeping the call here
-        //Create preferences json
-        createUserJson();
+
 
         //Launching the gallery after data insertion
-        launchGallery();
-
-
-
-
-
+       // launchGallery();
 
 
     }
@@ -329,8 +330,9 @@ public class Preferences extends Activity {
 
             //userEmail
 
-
-            userPrefJson.put("gender", gender);
+            userPrefJson.put("user_id",userID);
+            userPrefJson.put("email",emailID );
+            userPrefJson.put("sex", gender);
             userPrefJson.put("family", family);
             userPrefJson.put("profession", profession);
 
@@ -350,7 +352,9 @@ public class Preferences extends Activity {
 
 
         //Post to the server
-        postToServer();
+       // postToServer();
+        new PreferenceAsynTask().execute();
+
 
 
     }
@@ -360,13 +364,12 @@ public class Preferences extends Activity {
         //Maybe make it as a seperate thread
         //For now, checking if the json is populated correctly
 
-
-        String jsonData = userPrefJson.toString();
-        Log.i("VirtualHome userJson", jsonData);
+        if(!preferenceCreationNotSuccess) {
+            String jsonData = userPrefJson.toString();
+            Log.i("VirtualHome userJson", jsonData);
+        }
 
         //Server code
-
-
 
         //on server Confirmation add in shared preferences maybe(?)
 
@@ -374,6 +377,175 @@ public class Preferences extends Activity {
     }
 
 
+
+    private class PreferenceAsynTask extends AsyncTask<String, String, String> {
+        protected String doInBackground(String... arg0) {
+
+            //check if the json is populated successfully.
+            String jsonData = userPrefJson.toString();
+            Log.i("VirtualHome userJson", jsonData);
+            HttpURLConnection urlConnection = null;
+
+            String url1 = "http://ec2-54-193-107-243.us-west-1.compute.amazonaws.com:8080/api/v5/userpreferences";
+
+            StringBuilder sb = new StringBuilder();
+            try {
+
+                URL url = new URL(url1);
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setDoOutput(true);
+                urlConnection.setRequestMethod("POST");
+                urlConnection.setUseCaches(false);
+                urlConnection.setConnectTimeout(10000);
+                urlConnection.setReadTimeout(10000);
+                urlConnection.setRequestProperty("Content-Type", "application/json");
+
+                //urlConnection.setRequestProperty("Host", "android.schoolportal.gr");
+                urlConnection.connect();
+
+                OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
+                out.write(jsonData);
+                out.flush();
+                out.close();
+
+
+                String responseMessage = urlConnection.getResponseMessage();
+                int HttpResult = urlConnection.getResponseCode();
+                System.out.println("CODE: " + HttpResult);
+
+
+                //TODO: check for created or check for validated. If not throw pop up as error.
+                System.out.println(responseMessage);
+
+                //TODO: Check for re entry condition here
+                if (urlConnection.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
+
+                    Log.i("Login", "---Failed : HTTP error code : "
+                            + urlConnection.getResponseCode());
+                    preferenceCreationNotSuccess = true;
+
+                    /*throw new RuntimeException("Failed : HTTP error code : "
+                            + urlConnection.getResponseCode());*/
+                } else {
+                    //It is created:
+
+                    BufferedReader br = new BufferedReader(new InputStreamReader(
+                            (urlConnection.getInputStream())));
+
+                    String serverOutput;
+                    StringBuilder serverSB = new StringBuilder();
+                    System.out.println("Output from Server .... \n");
+                    while ((serverOutput = br.readLine()) != null) {
+
+                        System.out.println(serverOutput);
+                        serverSB.append(serverOutput + "\n");
+
+                    }
+
+                    //Save to the editor the preferences:
+
+                  /*  //Parsing the returned json
+                    JSONObject jsonObject = null;
+                    String userID = null;
+                    try {
+                        Log.i("New User Async ", "Retrieve jsonContent");
+
+                        //System.out.println("inside : " + serverSB);
+
+                        jsonObject = new JSONObject(serverSB.toString());
+                        //Assuming only 1 jsonObject is returned.
+                        if (jsonObject != null) {
+                            userID = jsonObject.getString("user_id");
+
+                            //Printing the whole json data obtained:
+                            Log.i("VirtualHome", jsonObject.toString());
+
+
+                            //Saving the userID in shared preferences:
+                            //TODO: save username and password in shared Preferences.
+                            Log.i("Login ", "User ID: " + userID);
+
+
+                            //Save email id, password and user id.
+                            SharedPreferences settings = getSharedPreferences(PREFERENCES_Gallery_FILE_NAME, 0);
+
+                            //Initially for cross checking
+                            System.out.println(settings.getString("user_id", "0"));
+                            System.out.println(settings.getString("email", "0"));
+                            System.out.println(settings.getString("password", "0"));
+
+
+                            SharedPreferences.Editor editor = settings.edit();
+                            editor.putString("user_id", userID);
+                            editor.putString("email", email);
+                            editor.putString("password", pwd);
+
+
+
+                            editor.commit();
+
+                            //For confirmation
+                            System.out.println(settings.getString("user_id", "0"));
+                            System.out.println(settings.getString("email", "0"));
+                            System.out.println(settings.getString("password", "0"));
+
+                            //Save the preferences data
+                            //Get the data and save the preferences.
+
+
+
+
+                        }
+
+
+                    } catch (JSONException ex) {
+                        Log.i("VirtualHome-Gallery", " caught JSON exception");
+                        ex.printStackTrace();
+                        return null;
+                    }
+*/
+
+                }
+
+            } catch (MalformedURLException e) {
+
+                e.printStackTrace();
+            } catch (IOException e) {
+
+                e.printStackTrace();
+            } finally {
+                if (urlConnection != null)
+                    urlConnection.disconnect();
+            }
+
+            return "";
+
+        }
+
+
+        protected void onPostExecute(String result) {
+            Log.i("VirtualHome-Preferences", "onPostExecute-Create User Preferences");
+
+            //
+            launchGallery();
+
+
+
+/*
+            //TODO: check the creation success and then navigate
+
+
+            if(newUserFlag) {
+                Toast.makeText(getApplicationContext(), "Welcome!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Login.this, Preferences.class);
+                intent.putExtra("newUserFlag","true");
+                startActivity(intent);
+            }*/
+
+
+        }
+
+    }
 
 }
 
