@@ -69,9 +69,6 @@ public class SofaGallery extends Activity {
 
         System.out.println("just outside listener");
 
-        //getting the extra:
-        morePictures = getIntent().getStringExtra("additionalProduct");
-        Log.i("Sofa Gallery", "additionalProduct "+morePictures);
 
         startTime = new Timestamp( new Date().getTime());
         Log.i("VirtualHome-Gallery","start time:"+startTime);
@@ -424,7 +421,9 @@ public class SofaGallery extends Activity {
 
 
         protected void onPostExecute(String result) {
-            Log.i("VirtualHome", "onPostExecute");
+
+            //Old code
+            /*Log.i("VirtualHome", "onPostExecute");
 
 
             endTime = new Timestamp(new Date().getTime());
@@ -450,10 +449,10 @@ public class SofaGallery extends Activity {
                     intent.putExtra("title", item.getGalleryItemTitle());
 
                     //Compress --- Commenting it out
-                   /* ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                   *//* ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     item.getGalleryItemImage().compress(Bitmap.CompressFormat.PNG, 100, stream);
                     byte[] bytes = stream.toByteArray();
-                    intent.putExtra("BMP", bytes);*/
+                    intent.putExtra("BMP", bytes);*//*
 
 
                     //decription:
@@ -467,7 +466,76 @@ public class SofaGallery extends Activity {
                     startActivity(intent);
                 }
             });
+*/
 
+            Log.i("VirtualHome", "onPostExecute");
+
+
+            endTime = new Timestamp(new Date().getTime());
+            Log.i("VirtualHome-Gallery", "end time:" + endTime);
+            eTime = endTime.getTime();
+            Log.i("VirtualHome-Gallery", "start time:2" + sTime);
+            Log.i("VirtualHome-Gallery", "end time:2" + eTime);
+            Log.i("VirtualHome-Gallery", "Total time taken for gallery load2 " + (eTime - sTime));
+
+
+            gridView = (GridView) findViewById(R.id.gridViewSofa);
+            gridAdapter = new GalleryGridAdapter(SofaGallery.this, R.layout.grid_item_sofa, galleryImages);
+            gridView.setAdapter(gridAdapter);
+
+
+            //getting the extra:
+            morePictures = getIntent().getStringExtra("additionalProduct");
+            Log.i("Sofa Gallery", "morePictures " + morePictures);
+
+            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                    System.out.println("Inside listener");
+                    GalleryItem item = (GalleryItem) parent.getItemAtPosition(position);
+                    System.out.println("after image creation");
+
+                    //Log.i("Sofa Gallery", "morePictures " + morePictures);
+                    if(morePictures!=null) {
+                        Log.i("Sofa Gallery", "inside not null");
+                        if (morePictures.trim().equals("yes")) {
+                            //This is called if additional images have to be added to the AR screen
+                            Log.i("Sofa Gallery", "inside morePicture");
+                            Intent intent1 = new Intent();
+                            intent1.putExtra("location", item.getGalleryItemLocation());
+                            intent1.putExtra("title", item.getGalleryItemTitle());
+                            intent1.putExtra("description", item.getGalleryItemDescription());
+                            setResult(2, intent1);
+                            Log.i("Sofa Gallery", "inside morePicture-end");
+                            finish();
+                        }
+                    }
+                    else {
+                        //This is called if it is the initial image to be chosen.
+                        Log.i("Sofa Gallery", "inside first picture choice");
+
+                        //Create intent
+                        Intent intent = new Intent(SofaGallery.this, ProductView.class);
+                        intent.putExtra("title", item.getGalleryItemTitle());
+
+                        //Compress --- Commenting it out
+                   /* ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    item.getGalleryItemImage().compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    byte[] bytes = stream.toByteArray();
+                    intent.putExtra("BMP", bytes);*/
+
+
+                        //decription:
+                        intent.putExtra("description", item.getGalleryItemDescription());
+
+                        //location
+
+                        intent.putExtra("location", item.getGalleryItemLocation());
+
+                        //Start details activity
+                        startActivity(intent);
+                    }
+                }
+            });
         }
 
 
@@ -659,24 +727,31 @@ public class SofaGallery extends Activity {
             gridAdapter = new GalleryGridAdapter(SofaGallery.this, R.layout.grid_item_sofa, galleryImages);
             gridView.setAdapter(gridAdapter);
 
+
+            //getting the extra:
+            morePictures = getIntent().getStringExtra("additionalProduct");
+            Log.i("Sofa Gallery", "morePictures " + morePictures);
+
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                     System.out.println("Inside listener");
                     GalleryItem item = (GalleryItem) parent.getItemAtPosition(position);
                     System.out.println("after image creation");
 
-                    Log.i("Sofa Gallery", "additionalProduct " + morePictures);
-                    if(morePictures.equals("yes"))
-                    {
-                        //This is called if additional images have to be added to the AR screen
-                        Log.i("Sofa Gallery", "inside morePicture");
-                            Intent intent1= new Intent();
-                        intent1.putExtra("location", item.getGalleryItemLocation());
-                        intent1.putExtra("title", item.getGalleryItemTitle());
-                        intent1.putExtra("description", item.getGalleryItemDescription());
-                        setResult(2, intent1);
-                        Log.i("Sofa Gallery", "inside morePicture-end");
-                        finish();
+                    //Log.i("Sofa Gallery", "morePictures " + morePictures);
+                    if(morePictures!=null) {
+                        Log.i("Sofa Gallery", "inside not null");
+                        if (morePictures.trim().equals("yes")) {
+                            //This is called if additional images have to be added to the AR screen
+                            Log.i("Sofa Gallery", "inside morePicture");
+                            Intent intent1 = new Intent();
+                            intent1.putExtra("location", item.getGalleryItemLocation());
+                            intent1.putExtra("title", item.getGalleryItemTitle());
+                            intent1.putExtra("description", item.getGalleryItemDescription());
+                            setResult(2, intent1);
+                            Log.i("Sofa Gallery", "inside morePicture-end");
+                            finish();
+                        }
                     }
                     else {
                         //This is called if it is the initial image to be chosen.
@@ -709,7 +784,7 @@ public class SofaGallery extends Activity {
         }
 
 
-    }
+ }
 
 
 }
