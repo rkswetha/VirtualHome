@@ -131,6 +131,7 @@ public class AugmentedActivity extends Activity {
                 return true;
 
             case R.id.action_addPhoto:
+            case R.id.action_chooseAnother:
                 // Open app gallery to choose additional product images
                 Toast.makeText(getApplicationContext(), "Choose another product", Toast.LENGTH_SHORT).show();
                 chooseMoreImage();
