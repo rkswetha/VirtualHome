@@ -457,4 +457,4 @@ function getImagePosition(event) {
 
 function clearLSVirtualObjectInfo(){
     localStorage.removeItem(VirtualObjectInfoLS);
-}
+    }

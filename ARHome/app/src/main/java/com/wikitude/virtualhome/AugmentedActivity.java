@@ -275,13 +275,18 @@ This function is used to add more product images to the AR screen
 
     @Override
     public void onResume() {
+
+        Log.i("AugmentedA","in resume");
         super.onResume();
+
 
         this.architectView.onResume();
     }
 
     @Override
     protected void onPause() {
+
+        Log.i("AugmentedA","in pause");
         super.onPause();
 
         // call mandatory live-cycle method of architectView
