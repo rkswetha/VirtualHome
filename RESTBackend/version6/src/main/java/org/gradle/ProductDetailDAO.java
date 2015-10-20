@@ -43,7 +43,7 @@ public class ProductDetailDAO {
     	if(find.first() == null)
     		return null;
 
-        JSONArray jsonarray = new JSONArray();
+        final JSONArray jsonarray = new JSONArray();
 
 	find.forEach(new Block<Document>() {
     		@Override
