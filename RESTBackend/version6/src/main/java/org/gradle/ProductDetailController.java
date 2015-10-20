@@ -48,9 +48,9 @@ public class ProductDetailController {
 	public ResponseEntity<ProductDetail> addProductDetails(@Valid @RequestBody ProductDetail prod)
 	{
 		prod.setProduct_id((int)along.incrementAndGet());
-        //userPref.setCreated_at(new Date().toString());
-        prodDAO.save(prod);
-        return new ResponseEntity<ProductDetail>(prod,HttpStatus.CREATED);
+   	     	//userPref.setCreated_at(new Date().toString());
+        	prodDAO.save(prod);
+        	return new ResponseEntity<ProductDetail>(prod,HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value="/products/{id}", method=RequestMethod.GET, produces="application/json")
@@ -62,14 +62,14 @@ public class ProductDetailController {
 	@RequestMapping(value="/products/{id}", method=RequestMethod.DELETE)
 	@ResponseBody
 	public ResponseEntity<Object> deleteUsers(@NotBlank @PathVariable int id){
-        prodDAO.deleteProduct(id);
-        return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
+        	prodDAO.deleteProduct(id);
+        	return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 	}
 	
 	@RequestMapping(value = "/products/{id}", method = RequestMethod.PUT, produces="application/json")
     @ResponseBody
     public ResponseEntity<ProductDetail> updateProduct(@NotBlank @PathVariable int id,@Valid @RequestBody ProductDetail prod ){
-                    prodDAO.updateProduct(prod, id);
-                    return new ResponseEntity<ProductDetail>(HttpStatus.OK);
+               prodDAO.updateProduct(prod, id);
+               return new ResponseEntity<ProductDetail>(HttpStatus.OK);
     }
 }
