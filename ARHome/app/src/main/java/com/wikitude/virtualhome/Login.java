@@ -123,6 +123,7 @@ public class Login extends Activity {
         CheckBox checkbox = (CheckBox) findViewById(R.id.checkbox_newuser);
         //boolean chstate=checkbox.isChecked();
         newUserFlag = checkbox.isChecked();
+        Log.i("login","new user flag: "+newUserFlag);
         EditText emailT = (EditText) findViewById(R.id.text_email);
         //String email = emailT.getText().toString();
         email = emailT.getText().toString();
@@ -223,8 +224,8 @@ public class Login extends Activity {
             HttpURLConnection urlConnection = null;
 
             //String url1= "http://ec2-54-219-182-125.us-west-1.compute.amazonaws.com:8080/api/v1/users";
-            //String url1= "http://ec2-54-193-107-243.us-west-1.compute.amazonaws.com:8080/api/v5/users";
-            String url1= "http://192.168.0.14:8080/api/v5/users";
+            String url1= "http://ec2-52-11-109-4.us-west-2.compute.amazonaws.com:8080/api/v5/users";
+            //String url1= "http://192.168.0.14:8080/api/v5/users";
 
             StringBuilder sb = new StringBuilder();
             try {
@@ -398,7 +399,8 @@ public class Login extends Activity {
             Log.i("Login","inside returning user aync");
 
             //String url1= "http://ec2-54-193-107-243.us-west-1.compute.amazonaws.com:8080/api/v5/login";
-            String url1= "http://192.168.0.14:8080/api/v5/login";
+            String url1= "http://ec2-52-11-109-4.us-west-2.compute.amazonaws.com:8080/api/v5/login";
+            //String url1= "http://192.168.0.14:8080/api/v5/login";
 
             StringBuilder sb = new StringBuilder();
             try {

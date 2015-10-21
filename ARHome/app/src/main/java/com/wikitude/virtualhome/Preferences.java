@@ -63,8 +63,11 @@ public class Preferences extends Activity {
 
         Log.i("Pref", "UserIDStatus: " + userID);
 
+
+        Log.i("Preference","newUserFlag before getString: "+ newUserFlag);
         //Obtaining the new user flag status flg status
         newUserFlag = getIntent().getStringExtra("newUserFlag");
+        Log.i("Preference","newUserFlag after getString: "+ newUserFlag);
 
 
 
@@ -386,16 +389,36 @@ changed the braces: changed that if the call is from a different location->then 
             Log.i("VirtualHome userJson", jsonData);
             HttpURLConnection urlConnection = null;
 
-//            String url1 = "http://ec2-54-193-107-243.us-west-1.compute.amazonaws.com:8080/api/v5/userpreferences";
-            String url1 = "http://192.168.0.14:8080/api/v5/userpreferences";
 
+
+            //String url1 = "http://ec2-54-193-107-243.us-west-1.compute.amazonaws.com:8080/api/v5/userpreferences";
+
+            //Different url for put & post
+            //21.10.2015:
+            String url1=null;
+            if(newUserFlag==null)
+            {
+                 url1 = "http://ec2-52-11-109-4.us-west-2.compute.amazonaws.com:8080/api/v5/userpreferences"+"/"+userID;
+            }
+            else  if(newUserFlag.equals("true")) {
+                 url1 = "http://ec2-52-11-109-4.us-west-2.compute.amazonaws.com:8080/api/v5/userpreferences";
+            }
+            //String url1 = "http://192.168.0.14:8080/api/v5/userpreferences";
+            Log.i("Preference","URL: "+url1);
             StringBuilder sb = new StringBuilder();
             try {
 
                 URL url = new URL(url1);
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setDoOutput(true);
-                urlConnection.setRequestMethod("POST");
+                //urlConnection.setRequestMethod("POST");
+
+                //21.10.2015:
+                if(newUserFlag==null)
+                    urlConnection.setRequestMethod("PUT");
+                else  if(newUserFlag.equals("true"))
+                    urlConnection.setRequestMethod("POST");
+
                 urlConnection.setUseCaches(false);
                 urlConnection.setConnectTimeout(10000);
                 urlConnection.setReadTimeout(10000);
@@ -419,7 +442,7 @@ changed the braces: changed that if the call is from a different location->then 
                 System.out.println(responseMessage);
 
                 //TODO: Check for re entry condition here
-                if (urlConnection.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
+                if (urlConnection.getResponseCode() != HttpURLConnection.HTTP_OK) {
 
                     Log.i("Login", "---Failed : HTTP error code : "
                             + urlConnection.getResponseCode());

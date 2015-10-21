@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/src/main/res/values/arrays.xml -->
+    <!-- From: file:/C:/Users/radhi/Documents/GitHub/VirtualHome/ARHome/app/src/main/res/values/arrays.xml -->
     <eat-comment/>
     <string-array name="familytypelist">
         <item>@string/family1</item>
@@ -12,7 +12,7 @@
         <item>@string/job2</item>
         <item>@string/job3</item>
     </string-array>
-    <!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/radhi/Documents/GitHub/VirtualHome/ARHome/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string-array name="sextypelist">
         <item>@string/sex1</item>
@@ -68,11 +68,11 @@
         <item>STOCKSUND</item>
         <item>KNISLINGE</item>
     </string-array>
-    <!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/src/main/res/values/dimens.xml -->
+    <!-- From: file:/C:/Users/radhi/Documents/GitHub/VirtualHome/ARHome/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/radhi/Documents/GitHub/VirtualHome/ARHome/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="action_chooseAnother">Choose Another</string>
     <string name="action_settings">Settings</string>
@@ -124,7 +124,7 @@
     <string name="title_activity_product_info">ProductInfo</string>
     <string name="title_activity_product_view">ProductView</string>
     <string name="title_activity_sofa_gallery">SofaGallery</string>
-    <!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/C:/Users/radhi/Documents/GitHub/VirtualHome/ARHome/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
