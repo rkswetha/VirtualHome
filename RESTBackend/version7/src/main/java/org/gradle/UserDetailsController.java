@@ -43,7 +43,18 @@ public class UserDetailsController {
 	@RequestMapping(value="/login", method=RequestMethod.POST, produces="application/json")
 	@ResponseBody
 	public ResponseEntity<UserDetails> authUsers(@Valid @RequestBody UserDetails user){
-		return new ResponseEntity<UserDetails>(userDetailsDAO.authUser(user),HttpStatus.OK);
+
+                UserDetails userStatus =  userDetailsDAO.authUser(user);
+                if(userStatus == null)
+		{
+		   System.out.println(" userDetailsDAO.authUser() returned null");
+		   return new ResponseEntity<UserDetails>(userStatus,HttpStatus.BAD_REQUEST);
+		}
+		else
+		{  
+		  System.out.println(" userDetailsDAO.authUser() returned NOT null");
+		  return new ResponseEntity<UserDetails>(userStatus,HttpStatus.OK);
+		}
 	}
 	
 }

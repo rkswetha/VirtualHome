@@ -223,8 +223,8 @@ public class Login extends Activity {
             HttpURLConnection urlConnection = null;
 
             //String url1= "http://ec2-54-219-182-125.us-west-1.compute.amazonaws.com:8080/api/v1/users";
-            String url1= "http://ec2-54-193-107-243.us-west-1.compute.amazonaws.com:8080/api/v5/users";
-            //String url1= "http://192.168.0.14:8080/api/v5/users";
+            //String url1= "http://ec2-54-193-107-243.us-west-1.compute.amazonaws.com:8080/api/v5/users";
+            String url1= "http://192.168.0.14:8080/api/v5/users";
 
             StringBuilder sb = new StringBuilder();
             try {
@@ -369,12 +369,12 @@ public class Login extends Activity {
         protected void onPostExecute(String result) {
             Log.i("VirtualHome-Login", "onPostExecute-Create User");
 
-            if(networkError == true)
+            if(networkError)
             {
                 Toast.makeText(getApplicationContext(), "Network Error: New User registration failed!!", Toast.LENGTH_SHORT).show();
                 networkError = false;
             }
-            else if(creationNotSuccess == true)
+            else if(creationNotSuccess)
             {
                 Toast.makeText(getApplicationContext(), "Email exist: New User registration failed!!", Toast.LENGTH_SHORT).show();
                 creationNotSuccess = false;
@@ -397,8 +397,8 @@ public class Login extends Activity {
             HttpURLConnection urlConnection = null;
             Log.i("Login","inside returning user aync");
 
-            String url1= "http://ec2-54-193-107-243.us-west-1.compute.amazonaws.com:8080/api/v5/login";
-            //String url1= "http://192.168.0.14:8080/api/v5/login";
+            //String url1= "http://ec2-54-193-107-243.us-west-1.compute.amazonaws.com:8080/api/v5/login";
+            String url1= "http://192.168.0.14:8080/api/v5/login";
 
             StringBuilder sb = new StringBuilder();
             try {
@@ -438,8 +438,6 @@ public class Login extends Activity {
 
                     /*throw new RuntimeException("Failed : HTTP error code : "
                             + urlConnection.getResponseCode());*/
-
-
                 }
                 else {
                     //It is verified:
@@ -460,7 +458,6 @@ public class Login extends Activity {
                         serverSB.append(serverOutput + "\n");
 
                     }
-
 
                     if (count == 0) {
                         LoginSuccess = false;
@@ -589,10 +586,10 @@ public class Login extends Activity {
                 }
 
             } catch (MalformedURLException e) {
-
+                networkError =true;
                 e.printStackTrace();
             } catch (IOException e) {
-
+                networkError =true;
                 e.printStackTrace();
             } finally {
                 if (urlConnection != null)
@@ -607,9 +604,14 @@ public class Login extends Activity {
         protected void onPostExecute(String result) {
             Log.i("VirtualHome-Login", "onPostExecute");
 
-            if(!LoginSuccess)
+            if(networkError)
             {
-                Toast.makeText(getApplicationContext(), "Invalid credentials!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Network Error: User login failed!!", Toast.LENGTH_SHORT).show();
+                networkError = false;
+            }
+            else if(!LoginSuccess)
+            {
+                Toast.makeText(getApplicationContext(), "Login failed: Invalid credentials!", Toast.LENGTH_SHORT).show();
             }
             else
             {

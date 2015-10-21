@@ -47,6 +47,8 @@ public class UserDAO {
      }
  
      public User getUser(int id){
+     
+         System.out.println(" getUser called for id" + id);
          FindIterable<Document> find = userCollection.find(new Document("_id",id));
          Document userDoc = find.first();
          User user=new User();

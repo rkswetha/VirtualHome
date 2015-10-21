@@ -386,7 +386,8 @@ changed the braces: changed that if the call is from a different location->then 
             Log.i("VirtualHome userJson", jsonData);
             HttpURLConnection urlConnection = null;
 
-            String url1 = "http://ec2-54-193-107-243.us-west-1.compute.amazonaws.com:8080/api/v5/userpreferences";
+//            String url1 = "http://ec2-54-193-107-243.us-west-1.compute.amazonaws.com:8080/api/v5/userpreferences";
+            String url1 = "http://192.168.0.14:8080/api/v5/userpreferences";
 
             StringBuilder sb = new StringBuilder();
             try {

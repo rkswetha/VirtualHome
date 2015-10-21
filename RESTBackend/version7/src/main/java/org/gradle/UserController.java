@@ -48,8 +48,13 @@ public class UserController {
 	@ResponseBody
 	public ResponseEntity<User> addUserPreferences(@Valid @RequestBody User user)
 	{
+	   String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
+
      	   user.setUser_id((int)along.incrementAndGet());
+	   user.setCreated_at(timeStamp);
+
            boolean status = userDAO.save(user);
+
 	   if(status == false)
      	   {    user.setUser_id((int)along.decrementAndGet()); // decrement back the index that was incremented before save
          	return new ResponseEntity<User>(user,HttpStatus.BAD_REQUEST);
@@ -64,7 +69,9 @@ public class UserController {
 	@RequestMapping(value="/users/{id}", method=RequestMethod.GET, produces="application/json")
 	@ResponseBody
 	public ResponseEntity<User> viewUsers(@PathVariable int id){
-		return new ResponseEntity<User>(userDAO.getUser(id),HttpStatus.OK);
+
+               System.out.println(" /users/id called for id" +id);
+	       return new ResponseEntity<User>(userDAO.getUser(id),HttpStatus.OK);
 	}
 	
 	

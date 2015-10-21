@@ -2,32 +2,32 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\radhi\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.0\support-annotations-22.2.0.jar"
+        jar="/Users/swethark/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.0/support-annotations-22.2.0.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
-        <dex dex="C:\Users\radhi\Documents\GitHub\VirtualHome\ARHome\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.0-e79840b2779531ed3afe016a46848739c3d16f81.jar" />
+        <dex dex="/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.0-9d665d06fecbe89f9597615cde05c489439a1e70.jar" />
     </item>
     <item
-        jar="C:\Users\radhi\Documents\GitHub\VirtualHome\ARHome\app\build\intermediates\exploded-aar\wikitudesdk\jars\classes.jar"
+        jar="/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/exploded-aar/wikitudesdk/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="37832d8c5a8e311a0a7e9f3cf73266887476a89d">
-        <dex dex="C:\Users\radhi\Documents\GitHub\VirtualHome\ARHome\app\build\intermediates\pre-dexed\debug\classes-e09a1bd26052db3865fd84440c6a0d41795592ac.jar" />
+        <dex dex="/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/pre-dexed/debug/classes-cfaf3652c740898cc10637ab0cd8c81e56a91afb.jar" />
     </item>
     <item
-        jar="C:\Users\radhi\Documents\GitHub\VirtualHome\ARHome\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
-        <dex dex="C:\Users\radhi\Documents\GitHub\VirtualHome\ARHome\app\build\intermediates\pre-dexed\debug\classes-df7ef874c145c84b0a90a39404535d80cb72308d.jar" />
-    </item>
-    <item
-        jar="C:\Users\radhi\Documents\GitHub\VirtualHome\ARHome\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\libs\internal_impl-22.2.0.jar"
+        jar="/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/libs/internal_impl-22.2.0.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
-        <dex dex="C:\Users\radhi\Documents\GitHub\VirtualHome\ARHome\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.0-f807051bc3395e197dbdf9ecc3f864226ed6fa5d.jar" />
+        <dex dex="/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-d0fdbb777ee274e3b8e2f8c5f7bae1651bd83cdc.jar" />
+    </item>
+    <item
+        jar="/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
+        <dex dex="/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/pre-dexed/debug/classes-53e2948def4ec78b89cdc859912685d539b6ba05.jar" />
     </item>
 
 </items>
