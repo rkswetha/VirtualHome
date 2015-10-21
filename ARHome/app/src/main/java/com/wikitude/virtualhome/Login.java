@@ -53,6 +53,7 @@ public class Login extends Activity {
     private boolean newUserFlag;
     JSONObject userDetailsJson;
     private boolean creationNotSuccess=false;
+    private boolean networkError=false;
     private boolean LoginSuccess=false;
     String[] genderArray;
     String[] familyArray;
@@ -222,7 +223,8 @@ public class Login extends Activity {
             HttpURLConnection urlConnection = null;
 
             //String url1= "http://ec2-54-219-182-125.us-west-1.compute.amazonaws.com:8080/api/v1/users";
-              String url1= "http://ec2-54-193-107-243.us-west-1.compute.amazonaws.com:8080/api/v5/users";
+            String url1= "http://ec2-54-193-107-243.us-west-1.compute.amazonaws.com:8080/api/v5/users";
+            //String url1= "http://192.168.0.14:8080/api/v5/users";
 
             StringBuilder sb = new StringBuilder();
             try {
@@ -344,11 +346,15 @@ public class Login extends Activity {
 
             } catch (MalformedURLException e) {
 
+                networkError =true;
                 e.printStackTrace();
+
             } catch (IOException e) {
 
+                networkError=true;
                 e.printStackTrace();
             } finally {
+
                 if (urlConnection != null)
                     urlConnection.disconnect();
             }
@@ -363,8 +369,17 @@ public class Login extends Activity {
         protected void onPostExecute(String result) {
             Log.i("VirtualHome-Login", "onPostExecute-Create User");
 
-            //TODO: check the creation success and then navigate
-            if(newUserFlag) {
+            if(networkError == true)
+            {
+                Toast.makeText(getApplicationContext(), "Network Error: New User registration failed!!", Toast.LENGTH_SHORT).show();
+                networkError = false;
+            }
+            else if(creationNotSuccess == true)
+            {
+                Toast.makeText(getApplicationContext(), "Email exist: New User registration failed!!", Toast.LENGTH_SHORT).show();
+                creationNotSuccess = false;
+            }
+            else if(newUserFlag) {   //ODO: check the creation success and then navigate
                 Toast.makeText(getApplicationContext(), "Welcome!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Login.this, Preferences.class);
                 intent.putExtra("newUserFlag","true");
@@ -383,6 +398,7 @@ public class Login extends Activity {
             Log.i("Login","inside returning user aync");
 
             String url1= "http://ec2-54-193-107-243.us-west-1.compute.amazonaws.com:8080/api/v5/login";
+            //String url1= "http://192.168.0.14:8080/api/v5/login";
 
             StringBuilder sb = new StringBuilder();
             try {
