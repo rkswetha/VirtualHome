@@ -28,10 +28,14 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Timestamp;
@@ -52,23 +56,17 @@ public class SofaGallery extends Activity {
     long sTime;
     long eTime;
     String morePictures;
+    boolean GalleryJsonStreamSuccess;
+    boolean networkError;
+    String filePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         System.out.println("Inside gallery");
         super.onCreate(savedInstanceState);
 
-
-        //setContentView(R.layout.activity_gallery_sofa);
-
         setContentView(R.layout.activity_sofa_gallery);
-
-       /* gridView = (GridView) findViewById(R.id.gridViewSofa);
-        gridAdapter = new GalleryGridAdapter(this, R.layout.grid_item_sofa, getImages());
-        gridView.setAdapter(gridAdapter); */
-
         System.out.println("just outside listener");
-
 
         startTime = new Timestamp( new Date().getTime());
         Log.i("VirtualHome-Gallery","start time:"+startTime);
@@ -116,37 +114,6 @@ public class SofaGallery extends Activity {
 
 
 
-
-
-
-
-        //Confirming if the preferences is working
-      /*  if(lastEntryTime==sTime)
-        {
-            Log.i("Gallery-inital pref val", "not set");
-            //Set the value to the present entry and
-            editor.putLong("lastEntryTime", sTime);
-            //editor.apply();
-            editor.commit();
-
-            //For intital confirmation
-            long trial = settings.getLong("lastEntryTime", sTime);
-            Log.i("The value set is: ",""+trial);
-
-        }
-        else {
-            Log.i("Gallery-inital pref val", "SET");
-            Log.i("The val initially was:", "" + lastEntryTime);
-            //Setting the time of entry
-            editor.putLong("lastEntryTime", sTime);
-        }
-*/
-
-
-        //OLD
-        //new GalleryAsynTask().execute();
-
-
     }
 
     @Override
@@ -191,15 +158,6 @@ public class SofaGallery extends Activity {
     protected void onDestroy()
     {
         super.onDestroy();
-
-        /*
-        Log.i("Gallery","DESTROY");
-
-        //Setting exited status
-        SharedPreferences settings = getSharedPreferences(PREFERENCES_Gallery_FILE_NAME, 0);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putBoolean("exitedStatus", true);
-*/
     }
 
     protected void onPause()
@@ -232,64 +190,169 @@ public class SofaGallery extends Activity {
         private String[] prices;
 
         private String[] imageLocations;
-        //For data saving and giving url:
-        //private URL[] imageLocations;
         Bitmap[] images;
 
+        private void createJSONProductFile(String jsonStr) {
 
-        protected String doInBackground(String... arg0) {
-            String jsonContent = null;
-            InputStream inputStream = null;
-            BufferedReader reader = null;
+            try{
+            boolean externalMounted= isExternalStorageWritable();
+            File myDir=null;
+            if(externalMounted)
+            {
+                String root = Environment.getExternalStorageDirectory().toString();
 
+                Log.i("VirtualHome-Gallery", "Sofa gallery Directory---" + root);
 
-            try {
-                AssetManager aMan = getAssets();
-                String[] filelist = aMan.list("");
-                //Log.i("VirtualHome1","before list");
-                //Log.i("VirtualHome1", filelist.length+"---");
+                myDir = new File(root + "/VirtualHome/Ikea");
 
-                //File list display
-                /*for (String file : filelist) {
-
-
-                    ("VirtualHome1", file);
-                }
-*/
-                inputStream = getAssets().open("galleryObj.json");
-                int size = inputStream.available();
-                reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), size);
-
-                StringBuilder theStringBuilder = new StringBuilder(size);
-                String line = null;
-
-                while ((line = reader.readLine()) != null) {
-                    theStringBuilder.append(line + "\n");
-                }
-                jsonContent = theStringBuilder.toString();
-                // Log.i("VirtualHome-size", Integer.toString(jsonContent.length()));
-
-                //Commenting out the json printing
-                //Log.i("VirtualHome", jsonContent);
-
-
-            } catch (IOException e) {
-                Log.i("VirtualHome", "raised exception");
-                e.printStackTrace();
-            } finally {
-                Log.i("VirtualHome", " at finally");
-                try {
-                    if (inputStream != null) inputStream.close();
-                    if (reader != null) reader.close();
-                } catch (Exception e) {
+                if (!myDir.exists()) {
+                    if (myDir.mkdirs()) {
+                        System.out.println("Directory is created!");
+                    } else {
+                        System.out.println("Failed to create directory!");
+                    }
                 }
             }
+
+            File file ;
+            FileOutputStream out;
+              if(externalMounted && myDir!=null) {
+                file = new File(myDir, "sofa.json");
+                filePath = file.getAbsolutePath();
+                FileWriter filewr = new FileWriter(filePath);
+                filewr.write(jsonStr);
+                filewr.flush();
+                filewr.close();
+            }
+          }
+         catch(IOException ioe)
+        {
+            Log.i("VirtualHome-Gallery", " caught IO exception");
+            ioe.printStackTrace();
+        }
+        }
+
+        protected String doInBackground(String... arg0) {
+            InputStream inputStream = null;
+            BufferedReader reader = null;
+            StringBuilder serverSB = new StringBuilder();
+
+
+
+                //Get the json from a GET Rest end point
+                //**********************************************************
+                HttpURLConnection urlConnection = null;
+                Log.i("Login","inside gallery");
+                String url1= "http://ec2-52-11-109-4.us-west-2.compute.amazonaws.com:8080/api/v5/products/sofa";
+
+                StringBuilder sb = new StringBuilder();
+                try {
+
+                    URL url = new URL(url1);
+                    urlConnection = (HttpURLConnection) url.openConnection();
+                    urlConnection.setRequestMethod("GET");
+                    urlConnection.setUseCaches(false);
+                    urlConnection.setConnectTimeout(10000);
+                    urlConnection.connect();
+
+                    String responseMessage=urlConnection.getResponseMessage();
+                    int HttpResult =urlConnection.getResponseCode();
+                    System.out.println("CODE: "+HttpResult);
+                   int len= urlConnection.getContentLength();
+                    Log.i("gallery:","content length: "+len+"");
+
+                    //TODO: check for created or check for validated. If not throw pop up as error.
+                    System.out.println(responseMessage);
+
+                    //TODO: this should be different status code
+                    if (urlConnection.getResponseCode() != HttpURLConnection.HTTP_OK ) {
+
+                        Log.i("Login", "---Failed : HTTP error code : "
+                                + urlConnection.getResponseCode());
+                        GalleryJsonStreamSuccess=false;
+
+                    /*throw new RuntimeException("Failed : HTTP error code : "
+                            + urlConnection.getResponseCode());*/
+                    }
+                    else {
+                        //It is verified:
+                        GalleryJsonStreamSuccess = true;
+
+                        BufferedReader br = new BufferedReader(new InputStreamReader(
+                                (urlConnection.getInputStream())));
+
+                        String serverOutput;
+
+                        System.out.println("Output from Server .... \n");
+
+                        //To ensure the body is not zero
+                        int count = 0;
+                        while ((serverOutput = br.readLine()) != null) {
+                            count++;
+                            System.out.println(serverOutput);
+                            //serverSB.append(serverOutput + "\n");
+                            serverSB.append(serverOutput);
+
+                        }
+                        System.out.println("Full server output: "+ serverSB.toString());
+                        Log.i("gallery", "count:" + count);
+
+                        if (count == 0) {
+                            GalleryJsonStreamSuccess = false;
+
+                        } else {
+                            GalleryJsonStreamSuccess =true;
+
+                            //Parsing the returned json
+                            JSONObject jsonObject = null;
+
+                            try {
+                                Log.i("LoginAsync ", "Retrieve jsonContent");
+
+                                //System.out.println("inside : " + serverSB);
+
+                                jsonObject = new JSONObject(serverSB.toString());
+                                System.out.println("Full json object: "+jsonObject.toString());
+
+                                JSONArray queryArray = jsonObject.getJSONArray("results");
+                                int resultSize = queryArray.length();
+
+                                Log.i("gallery","resultSize:"+resultSize);
+                                Log.i("gallery","queryArray:"+queryArray);
+
+                                //write to Sofa.json in SD Card
+                                createJSONProductFile(jsonObject.toString());
+
+                                 }catch(JSONException e)
+                            {
+                                Log.i("VirtualHome-Gallery", " caught JSON exception");
+                                e.printStackTrace();
+                                return null;
+                            }
+                        }
+                    }}
+                    catch (MalformedURLException e) {
+                        networkError =true;
+                        GalleryJsonStreamSuccess = true;
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        networkError =true;
+                        e.printStackTrace();
+                    } finally {
+                        if (urlConnection != null)
+                            urlConnection.disconnect();
+                    }
+
+
+                //***********************************************************
+
 
             JSONObject jsonObject;
             try {
                 Log.i("MyAsyncTask- ", "Retrieve jsonContent");
 
-                jsonObject = new JSONObject(jsonContent);
+                //Changing the logic from reading the file to populating the data from the existing json.
+                jsonObject = new JSONObject(serverSB.toString());
 
                 JSONArray queryArray = jsonObject.getJSONArray("results");
                 int resultSize = queryArray.length();
@@ -331,9 +394,6 @@ public class SofaGallery extends Activity {
                 File file ;
                 FileOutputStream out;
                 String filePath;
-                //*************************** File Save*******************
-
-
 
                 for (int i = 0; i < queryArray.length(); i++) {
                     JSONObject jsonAttributes = queryArray.getJSONObject(i);
@@ -374,24 +434,6 @@ public class SofaGallery extends Activity {
                     }
 
 
-
-
-                    //*************************** File Save*******************
-
-
-
-                    //Commenting out the array printing
-                   /* Log.i("Name", jsonAttributes.getString("name"));
-                    Log.i("decription", jsonAttributes.getString("description"));
-                    Log.i("price", jsonAttributes.getString("price"));
-                    Log.i("url", jsonAttributes.getString("url"));*/
-
-
-
-
-
-
-
                     galleryImages.add(new GalleryItem(images[i], names[i], descriptions[i], imageLocations[i].toString()));
 
 
@@ -416,57 +458,11 @@ public class SofaGallery extends Activity {
             // Read from image URL and creates a BitMap for each image.
             //createImages();
 
-            return jsonContent;
+            return serverSB.toString();
         }
 
 
         protected void onPostExecute(String result) {
-
-            //Old code
-            /*Log.i("VirtualHome", "onPostExecute");
-
-
-            endTime = new Timestamp(new Date().getTime());
-            Log.i("VirtualHome-Gallery", "end time:" + endTime);
-            eTime = endTime.getTime();
-            Log.i("VirtualHome-Gallery", "start time:2" + sTime);
-            Log.i("VirtualHome-Gallery", "end time:2" + eTime);
-            Log.i("VirtualHome-Gallery", "Total time taken for gallery load2 " + (eTime - sTime));
-
-
-            gridView = (GridView) findViewById(R.id.gridViewSofa);
-            gridAdapter = new GalleryGridAdapter(SofaGallery.this, R.layout.grid_item_sofa, galleryImages);
-            gridView.setAdapter(gridAdapter);
-
-            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                    System.out.println("Inside listener");
-                    GalleryItem item = (GalleryItem) parent.getItemAtPosition(position);
-                    System.out.println("after image creation");
-
-                    //Create intent
-                    Intent intent = new Intent(SofaGallery.this, ProductView.class);
-                    intent.putExtra("title", item.getGalleryItemTitle());
-
-                    //Compress --- Commenting it out
-                   *//* ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    item.getGalleryItemImage().compress(Bitmap.CompressFormat.PNG, 100, stream);
-                    byte[] bytes = stream.toByteArray();
-                    intent.putExtra("BMP", bytes);*//*
-
-
-                    //decription:
-                    intent.putExtra("description", item.getGalleryItemDescription());
-
-                    //location
-
-                    intent.putExtra("location", item.getGalleryItemLocation());
-
-                    //Start details activity
-                    startActivity(intent);
-                }
-            });
-*/
 
             Log.i("VirtualHome", "onPostExecute");
 
@@ -563,17 +559,33 @@ public class SofaGallery extends Activity {
 
 
             try {
-                AssetManager aMan = getAssets();
-                String[] filelist = aMan.list("");
-                //Log.i("VirtualHome1","before list");
-                //Log.i("VirtualHome1", filelist.length+"---");
 
 
-                 /*   for (String file : filelist) {
-                        Log.i("VirtualHome1", file);
-                    }*/
+                //Opening file in SD card
+                boolean externalMounted= isExternalStorageWritable();
+                File myDir=null;
+                if(externalMounted)
+                {
+                    String root = Environment.getExternalStorageDirectory().toString();
+                    myDir = new File(root + "/VirtualHome/Ikea");
 
-                inputStream = getAssets().open("galleryObj.json");
+                    if (!myDir.exists()) {
+                        Log.i("Gallery", "ERROR : file does not exits!");
+                        //Throw exception
+                    }
+                }
+
+                File file ;
+                if(externalMounted && myDir!=null) {
+                    file = new File(myDir, "sofa.json");
+                    filePath = file.getAbsolutePath();
+
+
+
+
+                    //inputStream = getAssets().open("galleryObj.json");
+                inputStream = new FileInputStream(filePath);
+                    //TODO: Throw exception
                 int size = inputStream.available();
                 reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), size);
 
@@ -588,7 +600,7 @@ public class SofaGallery extends Activity {
                 //Log.i("VirtualHome", jsonContent);
 
 
-            } catch (IOException e) {
+            }} catch (IOException e) {
                 Log.i("VirtualHome", "raised exception");
                 e.printStackTrace();
             } finally {
@@ -618,16 +630,10 @@ public class SofaGallery extends Activity {
 
                 galleryImages = new ArrayList<GalleryItem>();
 
-
-                //*************************** File Save*******************
-
                 boolean externalMounted = isExternalStorageWritable();
                 File myDir = null;
                 if (externalMounted) {
                     String root = Environment.getExternalStorageDirectory().toString();
-
-                  //  Log.i("VirtualHome-Gallery", "Root Directory---" + root);
-
                     myDir = new File(root + "/VirtualHome/Ikea/Sofa");
 
                     if (!myDir.exists()) {
@@ -644,8 +650,6 @@ public class SofaGallery extends Activity {
                 File file;
 
                 String filePath;
-                //*************************** File Save*******************
-
 
                 for (int i = 0; i < queryArray.length(); i++) {
                     JSONObject jsonAttributes = queryArray.getJSONObject(i);
@@ -654,11 +658,7 @@ public class SofaGallery extends Activity {
                     descriptions[i] = jsonAttributes.getString("description");
                     prices[i] = jsonAttributes.getString("price");
                     //imageLocations[i] = new URL(jsonAttributes.getString("url"));
-
                     // images[i] = BitmapFactory.decodeStream(new URL(jsonAttributes.getString("url")).openConnection().getInputStream());
-
-                    //images[i] = BitmapFactory.decodeStream(new URL(jsonAttributes.getString("url")).openConnection().getInputStream());
-
 
                     //CHECK to get the names programatically
                     if (externalMounted && myDir != null) {
@@ -672,17 +672,7 @@ public class SofaGallery extends Activity {
                         imageLocations[i] = jsonAttributes.getString("url");
                     }
 
-                    //*************************** File Save*******************
 
-
-                    //*************************** File Save*******************
-
-
-                    /*Log.i("Name", jsonAttributes.getString("name"));
-                    Log.i("decription", jsonAttributes.getString("description"));
-                    Log.i("price", jsonAttributes.getString("price"));
-                    Log.i("url", jsonAttributes.getString("url"));
-*/
 
                     galleryImages.add(new GalleryItem(images[i], names[i], descriptions[i], imageLocations[i].toString()));
 
