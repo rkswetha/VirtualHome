@@ -29,7 +29,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.http.HttpStatus;
 
 @RestController
-@RequestMapping("/api/v5")
+@RequestMapping("/api/v8")
 
 public class ProductDetailController {
 

@@ -38,7 +38,7 @@ import org.gradle.UserPreference;
 
 
 @RestController
-@RequestMapping("/api/v5")
+@RequestMapping("/api/v8")
 public class UserPreferenceController
 {
 	
