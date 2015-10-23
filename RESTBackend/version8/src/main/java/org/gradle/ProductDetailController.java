@@ -56,6 +56,7 @@ public class ProductDetailController {
 	@RequestMapping(value="/products/{id}", method=RequestMethod.GET, produces="application/json")
 	@ResponseBody
 	public ResponseEntity<String> viewProducts(@PathVariable String id){
+		System.out.println("inside viewProducts , calling getProductByCategory with "+ id	);
 		return new ResponseEntity<String>(prodDAO.getProductByCategory(id),HttpStatus.OK);
 	}
 	
