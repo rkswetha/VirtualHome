@@ -1,0 +1,204 @@
+diff -r version6/.gradle/2.7/taskArtifacts/cache.properties version7/.gradle/2.7/taskArtifacts/cache.properties
+1c1
+< #Tue Oct 20 05:18:19 UTC 2015
+---
+> #Sun Oct 18 19:07:22 PDT 2015
+Binary files version6/.gradle/2.7/taskArtifacts/cache.properties.lock and version7/.gradle/2.7/taskArtifacts/cache.properties.lock differ
+Binary files version6/.gradle/2.7/taskArtifacts/fileHashes.bin and version7/.gradle/2.7/taskArtifacts/fileHashes.bin differ
+Binary files version6/.gradle/2.7/taskArtifacts/fileSnapshots.bin and version7/.gradle/2.7/taskArtifacts/fileSnapshots.bin differ
+Binary files version6/.gradle/2.7/taskArtifacts/outputFileStates.bin and version7/.gradle/2.7/taskArtifacts/outputFileStates.bin differ
+Binary files version6/.gradle/2.7/taskArtifacts/taskArtifacts.bin and version7/.gradle/2.7/taskArtifacts/taskArtifacts.bin differ
+diff -r version6/src/main/java/org/gradle/ProductDetailDAO.java version7/src/main/java/org/gradle/ProductDetailDAO.java
+46c46
+<         final JSONArray jsonarray = new JSONArray();
+---
+>         JSONArray jsonarray = new JSONArray();
+diff -r version6/src/main/java/org/gradle/UserController.java version7/src/main/java/org/gradle/UserController.java
+51,54c51,65
+< 		user.setUser_id((int)along.incrementAndGet());
+<         //userPref.setCreated_at(new Date().toString());
+<         userDAO.save(user);
+<         return new ResponseEntity<User>(user,HttpStatus.CREATED);
+---
+> 	   String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
+> 
+>      	   user.setUser_id((int)along.incrementAndGet());
+> 	   user.setCreated_at(timeStamp);
+> 
+>            boolean status = userDAO.save(user);
+> 
+> 	   if(status == false)
+>      	   {    user.setUser_id((int)along.decrementAndGet()); // decrement back the index that was incremented before save
+>          	return new ResponseEntity<User>(user,HttpStatus.BAD_REQUEST);
+> 	   }
+> 	   else
+> 	   {
+>               return new ResponseEntity<User>(user,HttpStatus.CREATED);
+>            }
+61c72,74
+< 		return new ResponseEntity<User>(userDAO.getUser(id),HttpStatus.OK);
+---
+> 
+>                System.out.println(" /users/id called for id" +id);
+> 	       return new ResponseEntity<User>(userDAO.getUser(id),HttpStatus.OK);
+diff -r version6/src/main/java/org/gradle/UserDAO.java version7/src/main/java/org/gradle/UserDAO.java
+15c15
+< 
+---
+> import com.mongodb.Block;
+28,29c28,29
+<      
+<      public void save(User user){
+---
+>     
+>      public boolean save(User user){
+31,36c31,33
+<          Document document=new Document("_id",user.getUser_id());
+<          document.append("email", user.getEmail());
+<          document.append("password", user.getPassword());
+<          document.append("created_at", user.getCreated_at());
+<          userCollection.insertOne(document);
+<      }
+---
+>          System.out.println("Input user registration entry :" + user.email + user.password);
+>          long count = userCollection.count(new Document("email",user.email));
+>          System.out.println("Duplicate user registration entry :" +count);
+37a35,48
+> 	 if(count == 0)
+>          {
+>            System.out.println("Not Duplicate user registration entry :" + user.email + user.password);
+>            Document document=new Document("_id",user.getUser_id());
+>            document.append("email", user.getEmail());
+>            document.append("password", user.getPassword());
+>            document.append("created_at", user.getCreated_at());
+>            userCollection.insertOne(document);
+>            return true;
+>         }
+>         else
+>            return false;
+>      }
+>  
+38a50,51
+>      
+>          System.out.println(" getUser called for id" + id);
+diff -r version6/src/main/java/org/gradle/UserDetailsController.java version7/src/main/java/org/gradle/UserDetailsController.java
+46c46,57
+< 		return new ResponseEntity<UserDetails>(userDetailsDAO.authUser(user),HttpStatus.OK);
+---
+> 
+>                 UserDetails userStatus =  userDetailsDAO.authUser(user);
+>                 if(userStatus == null)
+> 		{
+> 		   System.out.println(" userDetailsDAO.authUser() returned null");
+> 		   return new ResponseEntity<UserDetails>(userStatus,HttpStatus.BAD_REQUEST);
+> 		}
+> 		else
+> 		{  
+> 		  System.out.println(" userDetailsDAO.authUser() returned NOT null");
+> 		  return new ResponseEntity<UserDetails>(userStatus,HttpStatus.OK);
+> 		}
+diff -r version6/src/main/java/org/gradle/UserDetailsDAO.java version7/src/main/java/org/gradle/UserDetailsDAO.java
+26d25
+<     
+32a32
+> 
+34,41c34,41
+<     	 System.out.println("Inside auth user");
+<         FindIterable<Document> find = userCollection.find(new Document("email",user.getEmail()));
+<         Document userDoc = find.first();
+<         System.out.println(userDoc.toString());
+<         if(userDoc.isEmpty())
+<         {
+<        	 System.out.println("Invalid email");
+<        	 return null;
+---
+> 
+>     	System.out.println("Inside auth user");
+> 
+>         long count = userCollection.count(new Document("email",user.getEmail()));
+> 	if(count == 0)
+>        	{
+> 	   System.out.println("Invalid email");
+>  	   return null;
+43c43
+<         if(user.password.equals(userDoc.getString("password")))
+---
+> 	else
+45,64c45,96
+<         	
+<        
+<       	     FindIterable<Document> userPref = userPrefCollection.find(new Document("user_id",userDoc.getInteger("_id")));
+<             Document userPrefDoc = userPref.first();
+<             System.out.println(userPrefDoc.toString());
+<         	UserDetails userDet=new UserDetails();
+<             userDet.setUser_id			(userPrefDoc.getInteger("user_id"));
+<             userDet.setSex				(userPrefDoc.getString("gender"));
+<             userDet.setFamily			(userPrefDoc.getString("family"));
+<             userDet.setProfession		(userPrefDoc.getString("profession"));
+<             userDet.setGardening 		(userPrefDoc.getBoolean("gardening", true));
+<             userDet.setInteriorDesign	(userPrefDoc.getBoolean("interiorDesign", true));
+<             userDet.setCooking 			(userPrefDoc.getBoolean("cooking", true));
+<             userDet.setPainting 		(userPrefDoc.getBoolean("painting", true));
+<             userDet.setReading 			(userPrefDoc.getBoolean("reading", true));
+<             userDet.setMusic 			(userPrefDoc.getBoolean("music", true));
+<             return userDet;
+<         }
+<         System.out.println("Invalid Password");
+<         return null;
+---
+>            FindIterable<Document> find = userCollection.find(new Document("email",user.getEmail()));
+>            Document userDoc = find.first();
+>            System.out.println(userDoc.toString());
+> 	   if(user.password.equals(userDoc.getString("password")))
+>            {
+>              count = userPrefCollection.count(new Document("user_id",userDoc.getInteger("_id"))); 
+>  	     if(count == 0)
+>              {
+> 	       System.out.println(" User hasnt configured preference previously:" + user.email + user.password);
+> 	       System.out.println(" Reply with default preference" + user.email + user.password);
+>                //return null; // TODO: Need to set all preference parameters as true 
+> 	       
+>                UserDetails userDet=new UserDetails();
+>                userDet.setUser_id(userDoc.getInteger("_id"));
+>                userDet.setSex("Male");
+>                userDet.setFamily("Single");
+>                userDet.setProfession("IT field");
+>                userDet.setGardening(true);
+>                userDet.setInteriorDesign(true);
+>                userDet.setCooking(true);
+>                userDet.setPainting(true);
+>                userDet.setReading(true);
+>                userDet.setMusic(true);
+>                return userDet;
+>              }
+> 	     else 
+> 	     {
+>                System.out.println(" Retreiving preference for given user:" + user.email + user.password);
+>       	       FindIterable<Document> userPref = userPrefCollection.find(new Document("user_id",userDoc.getInteger("_id")));
+>                Document userPrefDoc = userPref.first();
+>       
+>                System.out.println(userPrefDoc.toString());
+>                UserDetails userDet=new UserDetails();
+>                userDet.setUser_id(userPrefDoc.getInteger("user_id"));
+>                userDet.setSex(userPrefDoc.getString("gender"));
+>                userDet.setFamily(userPrefDoc.getString("family"));
+>                userDet.setProfession(userPrefDoc.getString("profession"));
+>                userDet.setGardening(userPrefDoc.getBoolean("gardening", true));
+>                userDet.setInteriorDesign(userPrefDoc.getBoolean("interiorDesign", true));
+>                userDet.setCooking(userPrefDoc.getBoolean("cooking", true));
+>                userDet.setPainting(userPrefDoc.getBoolean("painting", true));
+>                userDet.setReading(userPrefDoc.getBoolean("reading", true));
+>                userDet.setMusic(userPrefDoc.getBoolean("music", true));
+>                return userDet;
+>              }
+> 	  }
+> 	  else
+> 	  {
+>             System.out.println("Invalid Password");
+>             return null;
+> 	  }
+> 	}
+66,67d97
+< 
+< 
+Only in version7/src/main/java/org/gradle: .UserDetailsDAO.java.swp
