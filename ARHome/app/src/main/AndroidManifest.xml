@@ -98,15 +98,15 @@
             android:label="@string/title_activity_preferences" >
         </activity>
         <activity
-            android:name=".SofaGallery_Old"
-            android:label="@string/title_activity_sofa_gallery" >
-        </activity>
-        <activity
             android:name=".SofaGallery"
             android:label="@string/title_activity_sofa_gallery" >
         </activity>
         <activity
             android:name=".ProductView"
+            android:label="@string/title_activity_product_view" >
+        </activity>
+        <activity
+            android:name=".ProductGalleryTabPage"
             android:label="@string/title_activity_product_view" >
         </activity>
     </application>

@@ -43,7 +43,6 @@ public class Home extends Activity {
 
 import android.app.Activity;
 import android.content.Intent;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,7 +50,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
-import android.app.ActionBar;
 
 
 public class Home extends Activity {
@@ -162,7 +160,7 @@ public class Home extends Activity {
         Log.d("VirtualHome1", "Clicked gallery");
 
         //Intent intent = new Intent(this, SofaGallery_new.class);
-        Intent intent = new Intent(this, SofaGallery.class);
+        Intent intent = new Intent(this, ProductGalleryTabPage.class);
         startActivity(intent);
     }
 

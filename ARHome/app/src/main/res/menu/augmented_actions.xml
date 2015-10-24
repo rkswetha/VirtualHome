@@ -11,5 +11,10 @@
         android:title="Android Gallery"
         android:showAsAction="always|withText"
         />
+    <item android:id="@+id/action_snapShotOnMarkerless"
+        android:icon="@drawable/ic_camera_black_24dp"
+        android:title="Take Snapshot"
+        android:showAsAction="always|withText"
+        />
 
 </menu>

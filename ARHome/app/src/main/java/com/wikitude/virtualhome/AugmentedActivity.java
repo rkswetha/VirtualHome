@@ -136,7 +136,7 @@ public class AugmentedActivity extends Activity {
                 Toast.makeText(getApplicationContext(), "Choose another product", Toast.LENGTH_SHORT).show();
                 chooseMoreImage();
                 return true;
-
+            case R.id.action_snapShotOnMarkerless:
             case R.id.action_snapShot:
                 Toast.makeText(getApplicationContext(), "Take snapshot", Toast.LENGTH_SHORT).show();
                 shareSnapShot();
@@ -219,7 +219,7 @@ This function is used to add more product images to the AR screen
  */
     public void chooseMoreImage()
     {
-        Intent intent = new Intent(getApplication(),SofaGallery.class);
+        Intent intent = new Intent(getApplication(),ProductGalleryTabPage.class);
         intent.putExtra("additionalProduct", "yes");
         startActivityForResult(intent, MORE_PICTURE);
     }
