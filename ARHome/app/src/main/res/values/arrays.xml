@@ -6,6 +6,7 @@
         <item>@string/family1</item>
         <item>@string/family2</item>
         <item>@string/family3</item>
+        <item>@string/family4</item>
     </string-array>
 
     <string-array name="professiontypelist">

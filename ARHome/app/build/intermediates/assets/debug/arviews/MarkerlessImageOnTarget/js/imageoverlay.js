@@ -6,26 +6,17 @@ var virtualObjectInfo = {};
       "src": value,
       "scale": value,
       "zValue": value,
+      "width":value,
+      "height":value,
       "offsetTopValue": value,
       "offsetLeftValue": value
-    },
-    "VirtualObjectId": {
     }
 */
 
 $(function() {
-
-    //addImage("http://anushar.com/cmpe295Images/coffeetable.png");
     setButtons();
-
-    //draggableObjects();
+    draggableObjects();
 });
-
-function saveBeforeUnload() {
-    //clearLSVirtualObjectInfo();
-    // localStorage.setItem("VirtualObjectInfoLS", JSON.stringify(virtualObjectInfo);
-    setLSVirtualObjectInfo(virtualObjectInfo);
-}
 
 function setButtons(){
       var plusIconElement = document.getElementById('plusIcon');
@@ -53,11 +44,7 @@ function setButtons(){
           webIconElement.onclick = function() {
               rotate();
           };
-      var cameraIconElement = document.getElementById('snapshot');
-          cameraIconElement.style.cursor = 'pointer';
-          cameraIconElement.onclick = function() {
-              captureScreenFn();
-          };
+
       var backgroundIconElement = document.getElementById('backgroundIcon');
           backgroundIconElement.style.cursor = 'pointer';
           backgroundIconElement.onclick = function() {
@@ -68,8 +55,14 @@ function setButtons(){
           bringtofrontIconElement.onclick = function() {
               bringToFront();
           };
-};
 
+      var recommendationIconElement = document.getElementById('recommendationIcon');
+          recommendationIconElement.style.cursor = 'pointer';
+          recommendationIconElement.onclick = function() {
+               showDataMiningThumbnail();
+          };
+
+};
 
 function draggableObjects(){
       $( ".enableDrag" ).draggable({
@@ -84,52 +77,73 @@ function draggableObjects(){
        });
 };
 
-//var isloadedfromLS = false;
-function loadVirtualObjectsFromLS(){
-    var tempCount=0;
-    //alert(Object.keys(virtualObjectInfo).length);
-    //if (localStorage.getItem("VirtualObjectInfoLS") != null)
+function updateImageElements(){
+    var temp = virtualObjectInfo;
     var virtualObjectInfo2 = getLSVirtualObjectInfo();
-    if (Object.keys(virtualObjectInfo2).length >0)
-    {
-        //alert("doing loadVirtualObjectsFromLS");
-        //virtualObjectInfo = JSON.parse(getLSVirtualObjectInfo());
-        //if ((Object.keys(virtualObjectInfo).length >0) && virtualObjectInfo != null )
-        for (var key in virtualObjectInfo2) {
-            //alert(key);
-          var x = document.createElement("IMG");
-          x.setAttribute("id", key);
-          tempCount++;
-          var obj = virtualObjectInfo2[key];
-          x.setAttribute("src", obj["source"])
-          x.style.position='absolute';
-          x.setAttribute("z-index", obj["zValue"]);
-          x.classList.add("image");
-          //scale image according to storage
-          var changeWdth = x.width * obj["scale"];
-          var changeHt = x.height * obj["scale"];
-          //x.height = changelHt;
-          //x.width = changeWdth;
-          x.setAttribute("width", changeWdth);
-          x.setAttribute("height", changeHt);
-          document.body.appendChild(x);
-          x.style.left = obj["offsetLeftValue"] + "px";
-          x.style.top = obj["offsetTopValue"] + "px";
-          document.getElementById(key).className = "enableDrag";
-        }
+    var imgs = document.getElementsByClassName("enableDrag");
+    if ((Object.keys(virtualObjectInfo2).length >0) && imgs.length>0 ) {
+        var imgSrcs = [];
 
+        for (var i = 0; i < imgs.length; i++) {
+            imgSrcs.push(imgs[i].id);
+        };
+
+        for (var x=0; x<imgSrcs.length; x++){
+            var k = imgSrcs[x];
+            if (virtualObjectInfo2.hasOwnProperty(k)){
+                var e = document.getElementById(k);
+                var obj = virtualObjectInfo2[k];
+                e.setAttribute("z-index", obj["zValue"]);
+                e.setAttribute("width", obj["width"]);
+                e.setAttribute("height", obj["height"]);
+                e.style.left = obj["offsetLeftValue"] + "px";
+                e.style.top = obj["offsetTopValue"] + "px";
+                };
+        };
+        virtualObjectInfo = virtualObjectInfo2;
+        console.log("TEST: Restore Element from Saved State: " + assert(virtualObjectInfo2 == temp));
     }
-    draggableObjects();
-    alert("after loadVirtualObjectsFromLS and adding this many objects" + tempCount);
-    imageId = tempCount;
-    virtualObjectInfo = virtualObjectInfo2;
-    //isloadedfromLS = true;
 };
 
+function showDataMiningThumbnail(){
+
+    var elem = document.getElementById("thumbnails");
+    if (elem.style.display == "none"){
+    //if(elem.style.display == 'block'){
+    src1 = "http://www.ikea.com/us/en/images/products/stocksund-chair-red__0286585_PE423173_S4.JPG";
+    //src2 = src1;
+    //src3 = src1;
+
+    var d1 = document.getElementById("datamining1");
+    d1.src = src1;
+    d1.addEventListener('click', function () {
+        addImage(d1.src);
+    });
+    var d2 = document.getElementById("datamining2");
+    d2.src = src1;
+    d2.addEventListener('click', function () {
+            addImage(d2.src);
+        });
+    var d3 = document.getElementById("datamining3");
+    d3.src = src1;
+    d3.addEventListener('click', function () {
+                addImage(d3.src);
+            });
+
+    elem.style.display = 'inline-block';
+    }else
+    {
+    elem.style.display = 'none';
+    }
+    var d4 = document.getElementById("datamining4");
+        d4.addEventListener('click', function () {
+             alert("For more product recommendations, please see Recommendation Gallery")
+             //document.getElementById("thumbnails").style.display = 'none';
+        });
+}
 
 function addImage(sourceUrl){
-      loadVirtualObjectsFromLS();
-      //alert("after load");
+      //updateImageElements();
       imageId++;
       //Canvas editing - To make the background transparent.
       var img = new Image;
@@ -142,30 +156,16 @@ function addImage(sourceUrl){
 
           // First create the image...
       img.onload = function(){
-            //console.log("inside on load");
-          // ...then set the onload handler...
-            //console.log("ht "+img.height);
-            //console.log("wt "+img.width);
             doc.width=img.width;
             doc.height=img.height;
             ctx.drawImage(img,0,0,img.width,img.height);
             var imgData = ctx.getImageData(0, 0, img.width,img.height);
             ctx.putImageData(adjustImage(imgData), 0, 0);
 
-
-            //New image:
-          /*var imageMod=new Image();
-          var imgU=doc.toDataURL();
-          imageMod.src=imgU;
-          document.body.appendChild(img);
-              document.body.appendChild(imageMod);*/
-
             var x = new Image();
             var imgU=doc.toDataURL();
 
-            //var x = document.createElement("IMG");
             x.setAttribute("src", imgU);
-            //x.setAttribute("src", sourceUrl);
             x.setAttribute("width", '50%');
             x.setAttribute("height", 'auto');
             x.setAttribute("id", "virtualObject"+imageId);
@@ -178,29 +178,21 @@ function addImage(sourceUrl){
             virtualObjectInfo["virtualObject"+imageId]["source"] = imgU;
             virtualObjectInfo["virtualObject"+imageId]["zValue"] = 2;
             document.body.appendChild(x);
-            //document.getElementById("virtualObject"+imageId).className = "enableDrag";
+            console.log("TEST: AddImage function converting image transparency: " + assert(sourceUrl != imgU));
+            console.log("TEST: AddImage function inserted new image to data structure: " + assert(virtualObjectInfo.hasOwnProperty("virtualObject"+imageId)));
+            console.log("TEST: AddImage function inserted image to DOM: " + assert(document.getElementById("virtualObject"+imageId).hasAttribute("id")));
             ot = document.getElementById("virtualObject"+imageId).offsetTop;
             ol = document.getElementById("virtualObject"+imageId).offsetLeft;
             virtualObjectInfo["virtualObject"+imageId]["offsetTopValue"] = ot;
             virtualObjectInfo["virtualObject"+imageId]["offsetLeftValue"] = ol;
             draggableObjects();
-            //alert("done");
-            //alert(Object.keys(virtualObjectInfo).length);
             }
-
 };
 
 function adjustImage(iArray) {
     var imageData = iArray.data;
-  console.log("inside for loop");
-    /*for (var i = 0; i < imageData.length; i+= 4) {
-        if(imageData[i] === 255 && imageData[i+1] === 255 && imageData[i+2] === 255){
-            imageData[i+3] = 0;
-        }
-    }*/
 
     for (var i = 0; i < imageData.length; i+= 4) {
-    //console.log("inside for loop");
             if((imageData[i] >= 170 && imageData[i] <=  255) && (imageData[i+1] >= 170 && imageData[i+1] <=  255) && (imageData[i+2] >= 170 && imageData[i+2] <=  255)){
                 imageData[i+3] = 0;
             }
@@ -208,73 +200,71 @@ function adjustImage(iArray) {
     return iArray;
 };
 
+
 var scaleIncrement = 0.2;
 function scaleUp(){
     if (current == ''){
-        alert("Select virtual object");
+        alert("Please choose image");
+        var testresult = assert(current == '');
+        console.log("TEST: Increase Image Size When Image not selected results in no change = " + testresult);
     }
     else{
-        var currentScaleValue = virtualObjectInfo[current]["scale"];
-        newValue = currentScaleValue+scaleIncrement;
-        imageSize(newValue);
+       var x = document.getElementById(current);
+       var beforeWidth = x.width;
+       var afterHeight = x.height;
+       x.width = x.width + x.width*scaleIncrement;
+       x.height = x.height + x.height*scaleIncrement;
+       console.log("TEST: Decrease image size on valid input: "+ assert((beforeWidth<x.width) && (beforeHeight<x.height)));
+       virtualObjectInfo[current]["width"] = x.width;
+       virtualObjectInfo[current]["height"] =  x.height;
+       //virtualObjectInfo[current]["scale"] = scaleValue;
+       saveBeforeUnload();
     }
 };
+
 
 function scaleDown(){
   if (current == ''){
-        alert("Select virtual object");
+        alert("Please choose image");
+        var testresult = assert(current == '');
+        console.log("TEST: Decrease Image when Image not selected results in no change = " + testresult);
       }
   else{
-      var currentScaleValue = virtualObjectInfo[current]["scale"];
-      if ((currentScaleValue-scaleIncrement)> scaleIncrement)
-       {
-        newValue = currentScaleValue-scaleIncrement;
-        imageSize(newValue);
-       }
-      else{
-        alert("Cannot decrease image size");
-      }
+     var x = document.getElementById(current);
+     var beforeWidth = x.width;
+     var afterHeight = x.height;
+     x.width = x.width - x.width*scaleIncrement;
+     x.height = x.height - x.height*scaleIncrement;
+     console.log("TEST: Decrease image size on valid input: "+ assert((beforeWidth>x.width) && (beforeHeight>x.height)));
+     virtualObjectInfo[current]["width"] = x.width;
+     virtualObjectInfo[current]["height"] =  x.height;
+     //virtualObjectInfo[current]["scale"] = scaleValue;
+     saveBeforeUnload();
     }
 };
 
-function imageSize(scaleValue){
-    var x = document.getElementById(current);
-    var changeWdth = x.width * scaleValue;
-    var changelHt = x.height * scaleValue;
-    x.height = changelHt;
-    x.width = changeWdth;
-    virtualObjectInfo[current]["scale"] = scaleValue;
-    saveBeforeUnload();
-};
-/*
-function showInfo(){
-  if (current == ''){
-        alert("Select virtual object");
-      }
-  else{
-    var website =virtualObjectInfo[current]["source"];
-    AR.context.openInBrowser(website);
-  }
-};
-*/
 var angle = 0;
 function rotate(){
   if (current == ''){
-        alert("Select virtual object");
+        alert("Please choose image");
+        var testresult = assert(angle==0);
+        console.log("TEST: Rotate Image not selected results in no change = " + testresult);
   }
   else{
     var x = document.getElementById(current);
     angle = (angle+90)%360;
     x.className = "rotate"+angle;
-    //saveBeforeUnload();
-    //x.classList.add("rotate"+angle);
-    //alert(x.classList);
+    var testresult = assert(angle>0);
+    console.log("TEST: Rotate Image Angle Changed = " + testresult);
   }
-}
+};
 
 function deleteObject(){
+  var itemsInDataStructure = Object.keys(virtualObjectInfo).length;
   if (current == ''){
-        alert("Select virtual object");
+        alert("Please choose image");
+        var testresult = assert(itemsInDataStructure==itemsInDataStructure);
+        console.log("TEST: Delete Image When Image not selected results in no change = " + testresult);
   }
   else{
         var child = document.getElementById(current);
@@ -282,7 +272,11 @@ function deleteObject(){
         if (deleteconfirmation == true) {
             child.parentNode.removeChild(child);
             delete virtualObjectInfo[current];
+            //console.log("TEST: Delete selected image results in deletion from DOM = " + assert(!document.getElementById(current).hasAttribute("id")));
             saveBeforeUnload();
+            current = '';
+            //console.log("TEST: Delete selected image results in deletion from Data Structure = " + assert(itemsInDataStructure< Object.keys(virtualObjectInfo).length));
+            //console.log("TEST: Delete selected image results in Image Unselected = " + assert(current == ''));
         }
   }
 };
@@ -290,171 +284,114 @@ function deleteObject(){
 var flipValue = "off";
 function flipImage(){
   if (current == ''){
-        alert("Select virtual object");
+        alert("Please choose image");
+        console.log("TEST: Flip Image When Image not Selected Results in no change = " + assert(current == ''));
   }
   else{
     var x = document.getElementById(current);
     if(flipValue == "off"){
-        //x.classList.add("img");
         x.className = "img";
         flipValue = "on"
+        console.log("TEST: Flip Image modifications applied = " + assert(x.className == "img"));
     }
     else{
         x.classList.remove("img");
         flipValue = "off"
+        console.log("TEST: Flip Image modifications applied = " + assert(x.className != "img"));
     }
-    //saveBeforeUnload();
   }
 };
 
-
-function setLSVirtualObjectInfo(vo){
+function saveBeforeUnload() {
     if (typeof(Storage) !== "undefined") {
-        localStorage.setItem("VirtualObjectInfoLS", JSON.stringify(vo));
+        localStorage.setItem("VirtualObjectInfoLS", JSON.stringify(virtualObjectInfo));
+        console.log("TEST: Local Storage Updated with Data Structure = " + assert(Object.keys(getLSVirtualObjectInfo()).length == Object.keys(virtualObjectInfo).length));
     };
 };
 
 function getLSVirtualObjectInfo(){
-   //alert(localStorage.getItem("VirtualObjectInfoLS"));
     var temp = localStorage.getItem("VirtualObjectInfoLS");
+    if (temp === null){
+        temp = {};
+    }
     return JSON.parse(temp);
 };
 
-
-function setLSAndroidImagePath(path){
-    if (typeof(Storage) !== "undefined") {
-        localStorage.setItem("AndroidImagePath", path);
+function getLSAndroidImagePath(){
+    if (localStorage.getItem("AndroidImagePath") == null){
+        return "assets/Camera.png";
+    }else{
+        return localStorage.getItem("AndroidImagePath");
     };
 };
 
-function getLSAndroidImagePath(){
-    return localStorage.getItem("AndroidImagePath");
-};
-
-//ar imgpath;
 function setBackgroundImageUsingImagePath(url){
-    //imagepath = url;
-    setLSAndroidImagePath(url);
+    if (typeof(Storage) !== "undefined") {
+        localStorage.setItem("AndroidImagePath", url);
+        console.log("TEST: Local Storage Updated with Android Gallery Image Path = " + assert(localStorage.getItem("AndroidImagePath")));
+    };
 };
 
 var Usebackground = "off"
 function setImage(){
     var src;
     src = getLSAndroidImagePath();
-    if(Usebackground == "off"){
-    var img = new Image();
-    var orient;
-    img.onload = function() {
-       //alert(this.width +" and " + this.height);
-
-       if (this.width > this.height)
-            {
-               orient = 1;
-               var x = true;
-               while(x){
-                    if(window.orientation == 0){
-                        alert("Switch to landscape mode");
-                    }
-                    else{
-                        setbgk(src);
-                        x = false;
-                    }
-
-                }
-
-            }
-        else{
-                orient = 0;
-                var x = true;
-                while(x){
-                     if(window.orientation != 0){
-                          alert("Switch to portrait mode");
-                     }
-                     else{
-                         setbgk(src);
-                        x = false;
-                     }
-
-                 }
-            }
-        }
-    img.src = src;
-    Usebackground = "on";
-     window.addEventListener('orientationchange', function(){
-         switch(window.orientation)
-             {
-             case -90:
-                //alert('landscape');
-                if (orient == 0){
-                    document.body.style.backgroundImage = "none";
-                    Usebackground = "off"
-                }
-                break;
-             case 90:
-                //alert('landscape');
-                if (orient == 0){
-                     document.body.style.backgroundImage = "none";
-                     Usebackground = "off"
-                }
-                break;
-             default:
-                //alert('portrait');
-                if (orient == 1){
-                    document.body.style.backgroundImage = "none";
-                    Usebackground = "off"
-                }
-                break;
-             }
-
-       });
-
-     }
-    else{
-      document.body.style.backgroundImage = "none";
-      Usebackground = "off"
+    if (src){
+      console.log("TEST: Background Image = " + assert(src));
+      if(Usebackground == "off"){
+         document.body.background= src;
+         document.body.style.backgroundSize = 'cover';
+         document.body.style.backgroundRepeat = "no-repeat";
+         Usebackground = "on";
+       }
+      else{
+        document.body.style.backgroundImage = "none";
+        Usebackground = "off"
+      }
+    } else
+    {
+        alert("Please Choose Image from Android Gallery");
     }
 };
-
-function setbgk(imageSrc){
-
-        document.body.background= imageSrc;
-        document.body.style.backgroundSize = 'cover';
-        document.body.style.backgroundRepeat = "no-repeat";
-
-}
 
 function captureScreenFn() {
     document.location = "architectsdk://button1?action=captureScreen";
 };
 
 function bringToFront(){
-    valueofz = virtualObjectInfo[current]["zValue"];
-    valueofz+=1;
-    var x = document.getElementById(current);
-    x.setAttribute("src", virtualObjectInfo[current]["source"]);
-    x.setAttribute('style', 'position: absolute; z-index:'+valueofz);
-    virtualObjectInfo[current]["zValue"] = valueofz;
-    //x.style.left= xpos + "px";
-    x.style.left = ol + "px";
-    x.style.top = ot + "px";
-    saveBeforeUnload();
+    if (current == ''){
+        alert("Please choose image");
+        console.log("TEST: Bring Image to Front When No Image Selected Results In No Change = " + assert(current == ''));
+    }
+    else{
+      valueofz = virtualObjectInfo[current]["zValue"];
+      var before = valueofz;
+      valueofz+=1;
+      var x = document.getElementById(current);
+      x.setAttribute("src", virtualObjectInfo[current]["source"]);
+      x.setAttribute('style', 'position: absolute; z-index:'+valueofz);
+      virtualObjectInfo[current]["zValue"] = valueofz;
+      x.style.left = ol + "px";
+      x.style.top = ot + "px";
+      console.log("TEST: Bring Image to Front With Valid Image = " + assert(before<virtualObjectInfo[current]["zValue"]));
+      saveBeforeUnload();
+    }
 };
-
 
 var ot, ol;
 function getImagePosition(event) {
-    //xpos = event.clientX;
-    //ypos = event.clientY;
-    //var coords = "X coords: " + xpos + ", Y coords: " + ypos;
-    //alert(coords);
     ot = document.getElementById(current).offsetTop;
     ol = document.getElementById(current).offsetLeft;
     virtualObjectInfo[current]["offsetTopValue"] = ot;
     virtualObjectInfo[current]["offsetLeftValue"] = ol;
-    //alert(ot);
-    //alert(virtualObjectInfo[current]["offsetTopValue"]);
 };
 
-function clearLSVirtualObjectInfo(){
-    localStorage.removeItem(VirtualObjectInfoLS);
-    }
+function clearLocalStorage(){
+    localStorage.removeItem("VirtualObjectInfoLS");
+    console.log("TEST: Clear Local Storage = " + assert(!localStorage.getItem("VirtualObjectInfoLS") && !localStorage.getItem("AndroidImagePath")));
+};
+
+function assert(outcome) { 
+    var ans = outcome ? 'PASS' : 'FAIL';
+    return ans;
+};

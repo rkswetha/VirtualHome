@@ -6,6 +6,7 @@
         <item>@string/family1</item>
         <item>@string/family2</item>
         <item>@string/family3</item>
+        <item>@string/family4</item>
     </string-array>
     <string-array name="professiontypelist">
         <item>@string/job1</item>
@@ -68,6 +69,10 @@
         <item>STOCKSUND</item>
         <item>KNISLINGE</item>
     </string-array>
+    <!-- From: file:/C:/Users/radhi/Documents/GitHub/VirtualHome/ARHome/app/build/intermediates/exploded-aar/com.astuetz/pagerslidingtabstrip/1.0.1/res/values/values.xml -->
+    <eat-comment/>
+    <color name="background_tab_pressed">#6633B5E5</color>
+    <declare-styleable name="PagerSlidingTabStrip"><attr format="color" name="pstsIndicatorColor"/><attr format="color" name="pstsUnderlineColor"/><attr format="color" name="pstsDividerColor"/><attr format="dimension" name="pstsIndicatorHeight"/><attr format="dimension" name="pstsUnderlineHeight"/><attr format="dimension" name="pstsDividerPadding"/><attr format="dimension" name="pstsTabPaddingLeftRight"/><attr format="dimension" name="pstsScrollOffset"/><attr format="reference" name="pstsTabBackground"/><attr format="boolean" name="pstsShouldExpand"/><attr format="boolean" name="pstsTextAllCaps"/></declare-styleable>
     <!-- From: file:/C:/Users/radhi/Documents/GitHub/VirtualHome/ARHome/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
@@ -90,7 +95,8 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="family1">Single</string>
     <string name="family2">Family</string>
-    <string name="family3">Family with Kids</string>
+    <string name="family3">Family with boy kids</string>
+    <string name="family4">Family with girl kids</string>
     <string name="hello_world">Hello world!</string>
     <string name="hobby1">Gardening</string>
     <string name="hobby2">Interior Design</string>

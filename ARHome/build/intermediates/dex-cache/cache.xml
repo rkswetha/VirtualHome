@@ -9,6 +9,13 @@
         <dex dex="C:\Users\radhi\Documents\GitHub\VirtualHome\ARHome\app\build\intermediates\pre-dexed\debug\classes-e09a1bd26052db3865fd84440c6a0d41795592ac.jar" />
     </item>
     <item
+        jar="C:\Users\radhi\Documents\GitHub\VirtualHome\ARHome\app\build\intermediates\exploded-aar\com.astuetz\pagerslidingtabstrip\1.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="7912610ed96381c25c36d986eba422731b9641b6">
+        <dex dex="C:\Users\radhi\Documents\GitHub\VirtualHome\ARHome\app\build\intermediates\pre-dexed\debug\classes-70dee54d2393b6bbe00706455c447af35ebe9b69.jar" />
+    </item>
+    <item
         jar="C:\Users\radhi\Documents\GitHub\VirtualHome\ARHome\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\libs\internal_impl-22.2.0.jar"
         jumboMode="false"
         revision="22.0.1"

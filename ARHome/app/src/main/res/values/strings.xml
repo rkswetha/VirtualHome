@@ -48,7 +48,8 @@
 
     <string name="family1">Single</string>
     <string name="family2">Family</string>
-    <string name="family3">Family with Kids</string>
+    <string name="family3">Family with boy kids</string>
+    <string name="family4">Family with girl kids</string>
 
     <string name="sextype">Gender</string>
     <string name="prompt_sex">Enter Gender</string>

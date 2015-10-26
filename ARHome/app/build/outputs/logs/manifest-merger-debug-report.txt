@@ -19,6 +19,8 @@ uses-sdk
 ADDED from AndroidManifest.xml:8:5
 MERGED from :wikitudesdk::7:5
 MERGED from com.android.support:support-v4:22.2.0:20:5
+MERGED from com.astuetz:pagerslidingtabstrip:1.0.1:2:5
+MERGED from com.android.support:support-v4:22.2.0:20:5
 	android:targetSdkVersion
 		ADDED from AndroidManifest.xml:10:9
 		INJECTED from AndroidManifest.xml:0:0
@@ -105,6 +107,8 @@ application
 ADDED from AndroidManifest.xml:64:5
 MERGED from :wikitudesdk::11:5
 MERGED from com.android.support:support-v4:22.2.0:22:5
+MERGED from com.astuetz:pagerslidingtabstrip:1.0.1:4:5
+MERGED from com.android.support:support-v4:22.2.0:22:5
 	android:label
 		ADDED from AndroidManifest.xml:68:9
 	android:debuggable
@@ -163,19 +167,19 @@ ADDED from AndroidManifest.xml:96:9
 		ADDED from AndroidManifest.xml:98:13
 	android:name
 		ADDED from AndroidManifest.xml:97:13
-activity#com.wikitude.virtualhome.SofaGallery_Old
+activity#com.wikitude.virtualhome.SofaGallery
 ADDED from AndroidManifest.xml:100:9
 	android:label
 		ADDED from AndroidManifest.xml:102:13
 	android:name
 		ADDED from AndroidManifest.xml:101:13
-activity#com.wikitude.virtualhome.SofaGallery
+activity#com.wikitude.virtualhome.ProductView
 ADDED from AndroidManifest.xml:104:9
 	android:label
 		ADDED from AndroidManifest.xml:106:13
 	android:name
 		ADDED from AndroidManifest.xml:105:13
-activity#com.wikitude.virtualhome.ProductView
+activity#com.wikitude.virtualhome.ProductGalleryTabPage
 ADDED from AndroidManifest.xml:108:9
 	android:label
 		ADDED from AndroidManifest.xml:110:13

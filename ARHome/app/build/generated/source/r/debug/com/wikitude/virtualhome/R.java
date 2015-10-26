@@ -17,83 +17,187 @@ public final class R {
         public static final int sofanamelist=0x7f060005;
     }
     public static final class attr {
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int pstsDividerColor=0x7f010002;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int pstsDividerPadding=0x7f010005;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int pstsIndicatorColor=0x7f010000;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int pstsIndicatorHeight=0x7f010003;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int pstsScrollOffset=0x7f010007;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int pstsShouldExpand=0x7f010009;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int pstsTabBackground=0x7f010008;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int pstsTabPaddingLeftRight=0x7f010006;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int pstsTextAllCaps=0x7f01000a;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int pstsUnderlineColor=0x7f010001;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int pstsUnderlineHeight=0x7f010004;
+    }
+    public static final class color {
+        public static final int background_tab_pressed=0x7f070000;
     }
     public static final class dimen {
         public static final int activity_horizontal_margin=0x7f050000;
         public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
-        public static final int grid_background=0x7f020000;
-        public static final int ic_arrow_drop_down_black_18dp=0x7f020001;
-        public static final int ic_arrow_drop_down_black_24dp=0x7f020002;
-        public static final int ic_build_black_24dp=0x7f020003;
-        public static final int ic_camera_black_24dp=0x7f020004;
-        public static final int ic_folder_black_24dp=0x7f020005;
-        public static final int ic_insert_photo_black_24dp=0x7f020006;
-        public static final int ic_launcher=0x7f020007;
-        public static final int ic_library_add_black_24dp=0x7f020008;
-        public static final int ic_logo=0x7f020009;
-        public static final int ic_perm_identity_black_24dp=0x7f02000a;
-        public static final int loginbackground=0x7f02000b;
-        public static final int loginbutton=0x7f02000c;
-        public static final int logo=0x7f02000d;
-        public static final int sofa10_stockholm=0x7f02000e;
-        public static final int sofa11_stocksund=0x7f02000f;
-        public static final int sofa12_knislinge=0x7f020010;
-        public static final int sofa1_timsfors=0x7f020011;
-        public static final int sofa2_beddinge=0x7f020012;
-        public static final int sofa3_ektorp=0x7f020013;
-        public static final int sofa4_hawagia=0x7f020014;
-        public static final int sofa5_karlstad=0x7f020015;
-        public static final int sofa6_kivik=0x7f020016;
-        public static final int sofa7_nipprig=0x7f020017;
-        public static final int sofa8_knopparp=0x7f020018;
-        public static final int sofa9_dagarn=0x7f020019;
-        public static final int white_sofa=0x7f02001a;
+        public static final int background_tab=0x7f020000;
+        public static final int grid_background=0x7f020001;
+        public static final int ic_arrow_drop_down_black_18dp=0x7f020002;
+        public static final int ic_arrow_drop_down_black_24dp=0x7f020003;
+        public static final int ic_build_black_24dp=0x7f020004;
+        public static final int ic_camera_black_24dp=0x7f020005;
+        public static final int ic_folder_black_24dp=0x7f020006;
+        public static final int ic_insert_photo_black_24dp=0x7f020007;
+        public static final int ic_launcher=0x7f020008;
+        public static final int ic_library_add_black_24dp=0x7f020009;
+        public static final int ic_logo=0x7f02000a;
+        public static final int ic_perm_identity_black_24dp=0x7f02000b;
+        public static final int loginbackground=0x7f02000c;
+        public static final int loginbutton=0x7f02000d;
+        public static final int logo=0x7f02000e;
+        public static final int sofa10_stockholm=0x7f02000f;
+        public static final int sofa11_stocksund=0x7f020010;
+        public static final int sofa12_knislinge=0x7f020011;
+        public static final int sofa1_timsfors=0x7f020012;
+        public static final int sofa2_beddinge=0x7f020013;
+        public static final int sofa3_ektorp=0x7f020014;
+        public static final int sofa4_hawagia=0x7f020015;
+        public static final int sofa5_karlstad=0x7f020016;
+        public static final int sofa6_kivik=0x7f020017;
+        public static final int sofa7_nipprig=0x7f020018;
+        public static final int sofa8_knopparp=0x7f020019;
+        public static final int sofa9_dagarn=0x7f02001a;
+        public static final int white_sofa=0x7f02001b;
     }
     public static final class id {
-        public static final int FamilyType=0x7f090009;
-        public static final int ProfessionType=0x7f09000a;
-        public static final int SexType1=0x7f090008;
-        public static final int action_addPhoto=0x7f090022;
-        public static final int action_camera=0x7f090023;
-        public static final int action_chooseAnother=0x7f090026;
-        public static final int action_gallery=0x7f090021;
-        public static final int action_login=0x7f090025;
-        public static final int action_preference=0x7f090024;
-        public static final int action_settings=0x7f090029;
-        public static final int action_snapShot=0x7f090027;
-        public static final int action_snapToScreen=0x7f090028;
-        public static final int architectView=0x7f090000;
-        public static final int button=0x7f090007;
-        public static final int button_submit=0x7f090005;
-        public static final int button_submit_preferences=0x7f090011;
-        public static final int checkbox_hobby1=0x7f09000b;
-        public static final int checkbox_hobby2=0x7f09000c;
-        public static final int checkbox_hobby3=0x7f09000d;
-        public static final int checkbox_hobby4=0x7f09000e;
-        public static final int checkbox_hobby5=0x7f09000f;
-        public static final int checkbox_hobby6=0x7f090010;
-        public static final int checkbox_newuser=0x7f090004;
-        public static final int clicktext=0x7f09001b;
-        public static final int descriptionEditText=0x7f090019;
-        public static final int descriptionTextView=0x7f090018;
-        public static final int dimensionEditText=0x7f090015;
-        public static final int dimensionTextView=0x7f090014;
-        public static final int galleryItemDescription=0x7f09001d;
-        public static final int galleryItemImage=0x7f09001a;
-        public static final int galleryItemTitle=0x7f09001c;
-        public static final int gridViewSofa=0x7f09001e;
-        public static final int gridimage=0x7f09001f;
-        public static final int gridtext=0x7f090020;
-        public static final int priceEditText=0x7f090017;
-        public static final int priceTextView=0x7f090016;
-        public static final int productNameEditText=0x7f090013;
-        public static final int productNameTextView=0x7f090012;
-        public static final int scrollView1=0x7f090001;
-        public static final int textView=0x7f090006;
-        public static final int text_email=0x7f090002;
-        public static final int text_password=0x7f090003;
+        public static final int FamilyType=0x7f0a0009;
+        public static final int ProfessionType=0x7f0a000a;
+        public static final int SexType1=0x7f0a0008;
+        public static final int action_addPhoto=0x7f0a0024;
+        public static final int action_camera=0x7f0a0026;
+        public static final int action_chooseAnother=0x7f0a0029;
+        public static final int action_gallery=0x7f0a0023;
+        public static final int action_login=0x7f0a0028;
+        public static final int action_preference=0x7f0a0027;
+        public static final int action_settings=0x7f0a002c;
+        public static final int action_snapShot=0x7f0a002a;
+        public static final int action_snapShotOnMarkerless=0x7f0a0025;
+        public static final int action_snapToScreen=0x7f0a002b;
+        public static final int architectView=0x7f0a0000;
+        public static final int button=0x7f0a0007;
+        public static final int button_submit=0x7f0a0005;
+        public static final int button_submit_preferences=0x7f0a0011;
+        public static final int checkbox_hobby1=0x7f0a000b;
+        public static final int checkbox_hobby2=0x7f0a000c;
+        public static final int checkbox_hobby3=0x7f0a000d;
+        public static final int checkbox_hobby4=0x7f0a000e;
+        public static final int checkbox_hobby5=0x7f0a000f;
+        public static final int checkbox_hobby6=0x7f0a0010;
+        public static final int checkbox_newuser=0x7f0a0004;
+        public static final int clicktext=0x7f0a001b;
+        public static final int descriptionEditText=0x7f0a0019;
+        public static final int descriptionTextView=0x7f0a0018;
+        public static final int dimensionEditText=0x7f0a0015;
+        public static final int dimensionTextView=0x7f0a0014;
+        public static final int galleryItemDescription=0x7f0a001d;
+        public static final int galleryItemImage=0x7f0a001a;
+        public static final int galleryItemTitle=0x7f0a001c;
+        public static final int gridViewSofa=0x7f0a001e;
+        public static final int gridimage=0x7f0a0021;
+        public static final int gridtext=0x7f0a0022;
+        public static final int pager=0x7f0a0020;
+        public static final int priceEditText=0x7f0a0017;
+        public static final int priceTextView=0x7f0a0016;
+        public static final int productNameEditText=0x7f0a0013;
+        public static final int productNameTextView=0x7f0a0012;
+        public static final int scrollView1=0x7f0a0001;
+        public static final int tabs=0x7f0a001f;
+        public static final int textView=0x7f0a0006;
+        public static final int text_email=0x7f0a0002;
+        public static final int text_password=0x7f0a0003;
     }
     public static final class layout {
         public static final int activity_augmented=0x7f030000;
@@ -104,72 +208,74 @@ public final class R {
         public static final int activity_product_info=0x7f030005;
         public static final int activity_product_view=0x7f030006;
         public static final int activity_sofa_gallery=0x7f030007;
-        public static final int grid_item_sofa=0x7f030008;
-        public static final int spinner_style_preferences=0x7f030009;
+        public static final int activity_tabpage_main=0x7f030008;
+        public static final int grid_item_sofa=0x7f030009;
+        public static final int spinner_style_preferences=0x7f03000a;
     }
     public static final class menu {
-        public static final int augmented_actions=0x7f080000;
-        public static final int home_actions=0x7f080001;
-        public static final int menu_augmented=0x7f080002;
-        public static final int menu_home=0x7f080003;
-        public static final int menu_login=0x7f080004;
-        public static final int menu_main=0x7f080005;
-        public static final int menu_preferences=0x7f080006;
-        public static final int menu_product_info=0x7f080007;
-        public static final int menu_product_view=0x7f080008;
-        public static final int menu_sofa_gallery=0x7f080009;
+        public static final int augmented_actions=0x7f090000;
+        public static final int home_actions=0x7f090001;
+        public static final int menu_augmented=0x7f090002;
+        public static final int menu_home=0x7f090003;
+        public static final int menu_login=0x7f090004;
+        public static final int menu_main=0x7f090005;
+        public static final int menu_preferences=0x7f090006;
+        public static final int menu_product_info=0x7f090007;
+        public static final int menu_product_view=0x7f090008;
+        public static final int menu_sofa_gallery=0x7f090009;
     }
     public static final class string {
-        public static final int action_chooseAnother=0x7f070000;
-        public static final int action_settings=0x7f070001;
-        public static final int action_sign_in=0x7f070002;
-        public static final int action_sign_in_short=0x7f070003;
-        public static final int action_snapShot=0x7f070004;
-        public static final int action_snaptoscreen=0x7f070005;
-        public static final int app_name=0x7f070006;
-        public static final int button_name_startar=0x7f070007;
-        public static final int description_string=0x7f070008;
-        public static final int dimension_string=0x7f070009;
-        public static final int error_field_required=0x7f07000a;
-        public static final int error_incorrect_password=0x7f07000b;
-        public static final int error_invalid_email=0x7f07000c;
-        public static final int error_invalid_password=0x7f07000d;
-        public static final int family1=0x7f07000e;
-        public static final int family2=0x7f07000f;
-        public static final int family3=0x7f070010;
-        public static final int hello_world=0x7f070011;
-        public static final int hobby1=0x7f070012;
-        public static final int hobby2=0x7f070013;
-        public static final int hobby3=0x7f070014;
-        public static final int hobby4=0x7f070015;
-        public static final int hobby5=0x7f070016;
-        public static final int hobby6=0x7f070017;
-        public static final int hobbytitle=0x7f070018;
-        public static final int job1=0x7f070019;
-        public static final int job2=0x7f07001a;
-        public static final int job3=0x7f07001b;
-        public static final int price_string=0x7f07001c;
-        public static final int product_name=0x7f07001d;
-        public static final int professiontitle=0x7f07001e;
-        public static final int prompt_email=0x7f07001f;
-        public static final int prompt_password=0x7f070020;
-        public static final int prompt_sex=0x7f070021;
-        public static final int sex1=0x7f070022;
-        public static final int sex2=0x7f070023;
-        public static final int sextype=0x7f070024;
-        public static final int text_testing_ar=0x7f070025;
-        public static final int title_activity_augmented=0x7f070026;
-        public static final int title_activity_detail__image_display=0x7f070027;
-        public static final int title_activity_gallery=0x7f070028;
-        public static final int title_activity_gallery__furniture=0x7f070029;
-        public static final int title_activity_gallery__sofa1=0x7f07002a;
-        public static final int title_activity_home=0x7f07002b;
-        public static final int title_activity_login=0x7f07002c;
-        public static final int title_activity_main=0x7f07002d;
-        public static final int title_activity_preferences=0x7f07002e;
-        public static final int title_activity_product_info=0x7f07002f;
-        public static final int title_activity_product_view=0x7f070030;
-        public static final int title_activity_sofa_gallery=0x7f070031;
+        public static final int action_chooseAnother=0x7f080000;
+        public static final int action_settings=0x7f080001;
+        public static final int action_sign_in=0x7f080002;
+        public static final int action_sign_in_short=0x7f080003;
+        public static final int action_snapShot=0x7f080004;
+        public static final int action_snaptoscreen=0x7f080005;
+        public static final int app_name=0x7f080006;
+        public static final int button_name_startar=0x7f080007;
+        public static final int description_string=0x7f080008;
+        public static final int dimension_string=0x7f080009;
+        public static final int error_field_required=0x7f08000a;
+        public static final int error_incorrect_password=0x7f08000b;
+        public static final int error_invalid_email=0x7f08000c;
+        public static final int error_invalid_password=0x7f08000d;
+        public static final int family1=0x7f08000e;
+        public static final int family2=0x7f08000f;
+        public static final int family3=0x7f080010;
+        public static final int family4=0x7f080011;
+        public static final int hello_world=0x7f080012;
+        public static final int hobby1=0x7f080013;
+        public static final int hobby2=0x7f080014;
+        public static final int hobby3=0x7f080015;
+        public static final int hobby4=0x7f080016;
+        public static final int hobby5=0x7f080017;
+        public static final int hobby6=0x7f080018;
+        public static final int hobbytitle=0x7f080019;
+        public static final int job1=0x7f08001a;
+        public static final int job2=0x7f08001b;
+        public static final int job3=0x7f08001c;
+        public static final int price_string=0x7f08001d;
+        public static final int product_name=0x7f08001e;
+        public static final int professiontitle=0x7f08001f;
+        public static final int prompt_email=0x7f080020;
+        public static final int prompt_password=0x7f080021;
+        public static final int prompt_sex=0x7f080022;
+        public static final int sex1=0x7f080023;
+        public static final int sex2=0x7f080024;
+        public static final int sextype=0x7f080025;
+        public static final int text_testing_ar=0x7f080026;
+        public static final int title_activity_augmented=0x7f080027;
+        public static final int title_activity_detail__image_display=0x7f080028;
+        public static final int title_activity_gallery=0x7f080029;
+        public static final int title_activity_gallery__furniture=0x7f08002a;
+        public static final int title_activity_gallery__sofa1=0x7f08002b;
+        public static final int title_activity_home=0x7f08002c;
+        public static final int title_activity_login=0x7f08002d;
+        public static final int title_activity_main=0x7f08002e;
+        public static final int title_activity_preferences=0x7f08002f;
+        public static final int title_activity_product_info=0x7f080030;
+        public static final int title_activity_product_view=0x7f080031;
+        public static final int title_activity_sofa_gallery=0x7f080032;
     }
     public static final class style {
         /**  API 11 theme customizations can go here. 
@@ -185,4 +291,204 @@ public final class R {
          */
         public static final int AppTheme=0x7f040001;
     }
+    public static final class styleable {
+        /** Attributes that can be used with a PagerSlidingTabStrip.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_pstsDividerColor com.wikitude.virtualhome:pstsDividerColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_pstsDividerPadding com.wikitude.virtualhome:pstsDividerPadding}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_pstsIndicatorColor com.wikitude.virtualhome:pstsIndicatorColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_pstsIndicatorHeight com.wikitude.virtualhome:pstsIndicatorHeight}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_pstsScrollOffset com.wikitude.virtualhome:pstsScrollOffset}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_pstsShouldExpand com.wikitude.virtualhome:pstsShouldExpand}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_pstsTabBackground com.wikitude.virtualhome:pstsTabBackground}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_pstsTabPaddingLeftRight com.wikitude.virtualhome:pstsTabPaddingLeftRight}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_pstsTextAllCaps com.wikitude.virtualhome:pstsTextAllCaps}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_pstsUnderlineColor com.wikitude.virtualhome:pstsUnderlineColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_pstsUnderlineHeight com.wikitude.virtualhome:pstsUnderlineHeight}</code></td><td></td></tr>
+           </table>
+           @see #PagerSlidingTabStrip_pstsDividerColor
+           @see #PagerSlidingTabStrip_pstsDividerPadding
+           @see #PagerSlidingTabStrip_pstsIndicatorColor
+           @see #PagerSlidingTabStrip_pstsIndicatorHeight
+           @see #PagerSlidingTabStrip_pstsScrollOffset
+           @see #PagerSlidingTabStrip_pstsShouldExpand
+           @see #PagerSlidingTabStrip_pstsTabBackground
+           @see #PagerSlidingTabStrip_pstsTabPaddingLeftRight
+           @see #PagerSlidingTabStrip_pstsTextAllCaps
+           @see #PagerSlidingTabStrip_pstsUnderlineColor
+           @see #PagerSlidingTabStrip_pstsUnderlineHeight
+         */
+        public static final int[] PagerSlidingTabStrip = {
+            0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003,
+            0x7f010004, 0x7f010005, 0x7f010006, 0x7f010007,
+            0x7f010008, 0x7f010009, 0x7f01000a
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.wikitude.virtualhome.R.attr#pstsDividerColor}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.wikitude.virtualhome:pstsDividerColor
+        */
+        public static final int PagerSlidingTabStrip_pstsDividerColor = 2;
+        /**
+          <p>This symbol is the offset where the {@link com.wikitude.virtualhome.R.attr#pstsDividerPadding}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.wikitude.virtualhome:pstsDividerPadding
+        */
+        public static final int PagerSlidingTabStrip_pstsDividerPadding = 5;
+        /**
+          <p>This symbol is the offset where the {@link com.wikitude.virtualhome.R.attr#pstsIndicatorColor}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.wikitude.virtualhome:pstsIndicatorColor
+        */
+        public static final int PagerSlidingTabStrip_pstsIndicatorColor = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.wikitude.virtualhome.R.attr#pstsIndicatorHeight}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.wikitude.virtualhome:pstsIndicatorHeight
+        */
+        public static final int PagerSlidingTabStrip_pstsIndicatorHeight = 3;
+        /**
+          <p>This symbol is the offset where the {@link com.wikitude.virtualhome.R.attr#pstsScrollOffset}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.wikitude.virtualhome:pstsScrollOffset
+        */
+        public static final int PagerSlidingTabStrip_pstsScrollOffset = 7;
+        /**
+          <p>This symbol is the offset where the {@link com.wikitude.virtualhome.R.attr#pstsShouldExpand}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.wikitude.virtualhome:pstsShouldExpand
+        */
+        public static final int PagerSlidingTabStrip_pstsShouldExpand = 9;
+        /**
+          <p>This symbol is the offset where the {@link com.wikitude.virtualhome.R.attr#pstsTabBackground}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.wikitude.virtualhome:pstsTabBackground
+        */
+        public static final int PagerSlidingTabStrip_pstsTabBackground = 8;
+        /**
+          <p>This symbol is the offset where the {@link com.wikitude.virtualhome.R.attr#pstsTabPaddingLeftRight}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.wikitude.virtualhome:pstsTabPaddingLeftRight
+        */
+        public static final int PagerSlidingTabStrip_pstsTabPaddingLeftRight = 6;
+        /**
+          <p>This symbol is the offset where the {@link com.wikitude.virtualhome.R.attr#pstsTextAllCaps}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.wikitude.virtualhome:pstsTextAllCaps
+        */
+        public static final int PagerSlidingTabStrip_pstsTextAllCaps = 10;
+        /**
+          <p>This symbol is the offset where the {@link com.wikitude.virtualhome.R.attr#pstsUnderlineColor}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.wikitude.virtualhome:pstsUnderlineColor
+        */
+        public static final int PagerSlidingTabStrip_pstsUnderlineColor = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.wikitude.virtualhome.R.attr#pstsUnderlineHeight}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.wikitude.virtualhome:pstsUnderlineHeight
+        */
+        public static final int PagerSlidingTabStrip_pstsUnderlineHeight = 4;
+    };
 }
