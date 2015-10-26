@@ -8,7 +8,7 @@
 
     <item android:id="@+id/action_addPhoto"
         android:icon="@drawable/ic_library_add_black_24dp"
-        android:title="Android Gallery"
+        android:title="Add Product"
         android:showAsAction="always|withText"
         />
     <item android:id="@+id/action_snapShotOnMarkerless"

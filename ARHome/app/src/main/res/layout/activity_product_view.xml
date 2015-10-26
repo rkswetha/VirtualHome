@@ -18,10 +18,14 @@
             <ImageView
                 android:id="@+id/galleryItemImage"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="270dp"
                 android:layout_gravity="top"
                 android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:clickable="true"
+                android:background="#fff"
+
                 />
             <TextView android:id="@+id/clicktext"
                 android:layout_width="wrap_content"
