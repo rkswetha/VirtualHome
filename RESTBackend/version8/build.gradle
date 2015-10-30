@@ -41,6 +41,8 @@ dependencies {
     compile("org.springframework.data:spring-data-mongodb:1.6.0.RELEASE")
     compile("org.springframework.social:spring-social-facebook:2.0.1.RELEASE")
     compile("org.springframework:spring-webmvc:2.5.2")
+    compile("com.cloudinary:cloudinary-taglib:1.2.2")
+    compile("com.cloudinary:cloudinary-http43:1.2.2")
     testCompile("junit:junit")
 }
 

@@ -48,9 +48,11 @@ public class ProductDetailController {
 	public ResponseEntity<ProductDetail> addProductDetails(@Valid @RequestBody ProductDetail prod)
 	{
 		prod.setProduct_id((int)along.incrementAndGet());
-   	     	//userPref.setCreated_at(new Date().toString());
-        	prodDAO.save(prod);
-        	return new ResponseEntity<ProductDetail>(prod,HttpStatus.CREATED);
+	     	boolean ret = prodDAO.save(prod);
+    	if(ret)
+    	   return new ResponseEntity<ProductDetail>(prod,HttpStatus.CREATED);
+    	else
+    		return new ResponseEntity<ProductDetail>(prod,HttpStatus.BAD_REQUEST);
 	}
 
 	@RequestMapping(value="/products/{id}", method=RequestMethod.GET, produces="application/json")
