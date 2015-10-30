@@ -3,6 +3,9 @@ package org.gradle;
 import java.io.IOException;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicLong;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 
 import javax.servlet.http.HttpServletResponse;
 
