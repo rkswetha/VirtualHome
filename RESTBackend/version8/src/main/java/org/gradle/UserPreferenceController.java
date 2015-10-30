@@ -48,8 +48,9 @@ public class UserPreferenceController
     public UserPreferenceController() {
     	final MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://karan:karan345@ds047792.mongolab.com:47792/cmpe295"));
         final MongoDatabase pollDatabase = mongoClient.getDatabase("cmpe295");
-    userPrefDAO=new UserPreferenceDAO(pollDatabase);
-            along = new AtomicLong(123456);
+    	userPrefDAO=new UserPreferenceDAO(pollDatabase);
+	MongoCollection<Document> userPrefCollection = pollDatabase.getCollection("preferences");
+            along = new AtomicLong(123456+userPrefCollection.count());
 
     }
 	

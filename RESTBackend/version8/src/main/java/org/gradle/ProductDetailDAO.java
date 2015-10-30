@@ -44,7 +44,7 @@ public class ProductDetailDAO {
 
 	public ProductDetailDAO(final MongoDatabase blogDatabase) {
 		prodCollection = blogDatabase.getCollection("productdetails");
-		prodCollection.drop();
+		//prodCollection.drop();
 	}
 	
 	private static BufferedImage imageToBufferedImage(final Image image)  

@@ -38,8 +38,9 @@ public class UserController {
     public UserController() {
     	final MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://karan:karan345@ds047792.mongolab.com:47792/cmpe295"));
         final MongoDatabase pollDatabase = mongoClient.getDatabase("cmpe295");
-    userDAO=new UserDAO(pollDatabase);
-            along = new AtomicLong(123456);
+    	userDAO=new UserDAO(pollDatabase);
+        MongoCollection<Document> userCollection = pollDatabase.getCollection("userdetails");
+        along = new AtomicLong(123456+userCollection.count());
 
     }
 

@@ -40,7 +40,8 @@ public class ProductDetailController {
     	final MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://karan:karan345@ds047792.mongolab.com:47792/cmpe295"));
         final MongoDatabase pollDatabase = mongoClient.getDatabase("cmpe295");
         prodDAO=new ProductDetailDAO(pollDatabase);
-        along = new AtomicLong(123456);
+	MongoCollection<Document> prodCollection = pollDatabase.getCollection("productdetails");;
+        along = new AtomicLong(123456+prodCollection.count());
     }
 	
 	@RequestMapping(value="/productadd", method=RequestMethod.POST, produces="application/json")

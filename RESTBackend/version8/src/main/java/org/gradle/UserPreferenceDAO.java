@@ -16,7 +16,7 @@ public class UserPreferenceDAO {
     public UserPreferenceDAO(final MongoDatabase blogDatabase) {
             userPrefCollection = blogDatabase.getCollection("preferences");
             
-            userPrefCollection.drop();
+            //userPrefCollection.drop();
     }
     
     

@@ -23,7 +23,7 @@ public class UserDAO {
      public UserDAO(final MongoDatabase blogDatabase) {
              userCollection = blogDatabase.getCollection("userdetails");
              userPrefCollection = blogDatabase.getCollection("preferences");
-             userCollection.drop();
+             //userCollection.drop();
      }
     
      public boolean save(User user){
