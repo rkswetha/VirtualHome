@@ -403,12 +403,12 @@ public class SofaGalleryFragment extends Fragment {
                     //*************************** File Save*******************
 
                     if(externalMounted && myDir!=null) {
-                        file = new File(myDir, names[i] + ".jpg");
+                        file = new File(myDir, names[i] + ".png");
                         filePath=file.getAbsolutePath();
                         //Log.i("file path",filePath );
                         try {
                             out = new FileOutputStream(file, false);
-                            images[i].compress(Bitmap.CompressFormat.JPEG, 90, out);
+                            images[i].compress(Bitmap.CompressFormat.PNG, 90, out);
                             out.flush();
                             out.close();
 
@@ -656,7 +656,7 @@ public class SofaGalleryFragment extends Fragment {
 
                     //CHECK to get the names programatically
                     if (externalMounted && myDir != null) {
-                        file = new File(myDir, names[i] + ".jpg");
+                        file = new File(myDir, names[i] + ".png");
                         filePath = file.getAbsolutePath();
                         //Log.i("file path", filePath);
                         images[i] = BitmapFactory.decodeFile(filePath);
