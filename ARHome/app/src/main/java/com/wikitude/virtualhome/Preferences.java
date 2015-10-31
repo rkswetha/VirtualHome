@@ -335,8 +335,7 @@ changed the braces: changed that if the call is from a different location->then 
     public void launchGallery()
     {
         Log.d("VirtualHome1", "Clicked gallery");
-        //Intent intent = new Intent(this, SofaGallery_Old.class);
-        Intent intent = new Intent(this, SofaGallery.class);
+        Intent intent = new Intent(this, ProductGalleryTabPage.class);
         startActivity(intent);
     }
 
@@ -380,7 +379,6 @@ changed the braces: changed that if the call is from a different location->then 
 
 
 
-
     private class PreferenceAsynTask extends AsyncTask<String, String, String> {
         protected String doInBackground(String... arg0) {
 
@@ -396,12 +394,16 @@ changed the braces: changed that if the call is from a different location->then 
             //Different url for put & post
             //21.10.2015:
             String url1=null;
+            int expectedResponseCode=0;
+
             if(newUserFlag==null)
             {
-                 url1 = "http://ec2-52-11-109-4.us-west-2.compute.amazonaws.com:8080/api/v5/userpreferences"+"/"+userID;
+                 url1 = "http://ec2-52-11-109-4.us-west-2.compute.amazonaws.com:8080/api/v8/userpreferences"+"/"+userID;
+                expectedResponseCode=HttpURLConnection.HTTP_OK;
             }
             else  if(newUserFlag.equals("true")) {
-                 url1 = "http://ec2-52-11-109-4.us-west-2.compute.amazonaws.com:8080/api/v5/userpreferences";
+                 url1 = "http://ec2-52-11-109-4.us-west-2.compute.amazonaws.com:8080/api/v8/userpreferences";
+                expectedResponseCode=HttpURLConnection.HTTP_CREATED;
             }
             //String url1 = "http://192.168.0.14:8080/api/v5/userpreferences";
             Log.i("Preference","URL: "+url1);
@@ -435,6 +437,7 @@ changed the braces: changed that if the call is from a different location->then 
 
                 String responseMessage = urlConnection.getResponseMessage();
                 int HttpResult = urlConnection.getResponseCode();
+                System.out.println("CODE:Expected " + expectedResponseCode);
                 System.out.println("CODE: " + HttpResult);
 
 
@@ -442,7 +445,7 @@ changed the braces: changed that if the call is from a different location->then 
                 System.out.println(responseMessage);
 
                 //TODO: Check for re entry condition here
-                if (urlConnection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                if (HttpResult != expectedResponseCode) {
 
                     Log.i("Login", "---Failed : HTTP error code : "
                             + urlConnection.getResponseCode());
