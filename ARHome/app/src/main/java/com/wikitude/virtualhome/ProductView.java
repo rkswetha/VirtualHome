@@ -14,6 +14,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+
 
 public class ProductView extends Activity {
 
@@ -26,22 +30,6 @@ public class ProductView extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_view);
 
-        //Uncompressing:
-        //added final
-        //final byte[] bytes = getIntent().getByteArrayExtra("BMP");
-
-
-
-
-
-        //***************************
-        /*byte[] bytes = getIntent().getByteArrayExtra("BMP");
-        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-*/
-        //******************************************************
-
-
-
 
         String title = getIntent().getStringExtra("title");
         String description = getIntent().getStringExtra("description");
@@ -50,21 +38,29 @@ public class ProductView extends Activity {
 
         //location:
         location = getIntent().getStringExtra("location");
-        //BufferedImage image = ImageIO.read(getClass().getResourceAsStream("circle1.bmp"));
 
-        //Added extra
-        Bitmap bitmap = BitmapFactory.decodeFile(location);
+        //CACHING
+
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.ic_stub)
+                .showImageForEmptyUri(R.drawable.ic_empty)
+                .showImageOnFail(R.drawable.ic_error)
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .considerExifParams(true)
+                .bitmapConfig(Bitmap.Config.RGB_565)
+                .displayer(new RoundedBitmapDisplayer(20))
+                .build();
 
 
 
 
         TextView titleTextView = (TextView) findViewById(R.id.galleryItemTitle);
-        //TextView titleTextView = (TextView) findViewById(R.id.title);
         titleTextView.setText(title);
 
         ImageView imageView = (ImageView) findViewById(R.id.galleryItemImage);
-        //ImageView imageView = (ImageView) findViewById(R.id.item);
-        imageView.setImageBitmap(bitmap);
+
+        ImageLoader.getInstance().displayImage(location, imageView, options);
 
         //description:
         TextView descriptionTextView = (TextView) findViewById(R.id.galleryItemDescription);
@@ -75,25 +71,6 @@ public class ProductView extends Activity {
         //On text click:
         imageView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Perform action on click
-
-                //Send the compressed image for NOW to the AR
-
-               /* Intent intent = new Intent(Augented.this, ProductView.class);
-                intent.putExtra("title", title);
-                intent.putExtra("BMP", bytes);*/
-
-
-
-                //As requested by swetha, sending the address.
-                //Intent intent = new Intent(Augented.this, ProductView.class);
-
-                //Commenting below from Swetha
-                //location = getIntent().getStringExtra("location");
-
-                //Toast.makeText(getApplicationContext(), "The AR View will be opened!", Toast.LENGTH_SHORT).show();
-                //Toast.makeText(getApplicationContext(), "The location is:" + location, Toast.LENGTH_SHORT).show();
-
                 openARView();
             }
         });

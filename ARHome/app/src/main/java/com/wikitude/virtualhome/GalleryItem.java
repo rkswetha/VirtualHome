@@ -1,12 +1,9 @@
 package com.wikitude.virtualhome;
 
-/**
- * Created by Radhika on 8/1/2015.
- */
 import android.graphics.Bitmap;
 
 public class GalleryItem {
-    private Bitmap galleryItemImage;
+    //private String galleryItemImageURL;
     private String galleryItemTitle;
     private String galleryItemDescription;
     private String galleryItemLocation;
@@ -19,21 +16,21 @@ public class GalleryItem {
         this.galleryItemLocation = galleryItemLocation;
     }
 
-    public GalleryItem(Bitmap galleryItemImage, String galleryItemTitle, String galleryItemDescription,String galleryItemLocation) {
+    public GalleryItem(String galleryItemTitle, String galleryItemDescription,String galleryItemLocation) {
         super();
-        this.galleryItemImage = galleryItemImage;
+        //this.galleryItemImageURL = galleryItemImage;
         this.galleryItemTitle = galleryItemTitle;
         this.galleryItemDescription = galleryItemDescription;
         this.galleryItemLocation=galleryItemLocation;
     }
 
-    public Bitmap getGalleryItemImage() {
-        return galleryItemImage;
+   /* public String getGalleryItemImage() {
+        return galleryItemImageURL;
     }
 
-    public void setGalleryItemImage(Bitmap galleryItemImage) {
-        this.galleryItemImage = galleryItemImage;
-    }
+   public void setGalleryItemImage(String galleryItemImageURL) {
+        this.galleryItemImageURL = galleryItemImageURL;
+    }*/
 
 
 
