@@ -137,7 +137,7 @@ function showDataMiningThumbnail(){
     }
     var d4 = document.getElementById("datamining4");
         d4.addEventListener('click', function () {
-             alert("For more product recommendations, please see Recommendation Gallery")
+             alert("For more product recommendations, please see Recommendation Gallery");
              //document.getElementById("thumbnails").style.display = 'none';
         });
 }
@@ -211,7 +211,7 @@ function scaleUp(){
     else{
        var x = document.getElementById(current);
        var beforeWidth = x.width;
-       var afterHeight = x.height;
+       var beforeHeight = x.height;
        x.width = x.width + x.width*scaleIncrement;
        x.height = x.height + x.height*scaleIncrement;
        console.log("TEST: Decrease image size on valid input: "+ assert((beforeWidth<x.width) && (beforeHeight<x.height)));
@@ -232,7 +232,7 @@ function scaleDown(){
   else{
      var x = document.getElementById(current);
      var beforeWidth = x.width;
-     var afterHeight = x.height;
+     var beforeHeight = x.height;
      x.width = x.width - x.width*scaleIncrement;
      x.height = x.height - x.height*scaleIncrement;
      console.log("TEST: Decrease image size on valid input: "+ assert((beforeWidth>x.width) && (beforeHeight>x.height)));
