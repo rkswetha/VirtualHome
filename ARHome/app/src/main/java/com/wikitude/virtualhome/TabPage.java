@@ -21,7 +21,7 @@ public class TabPage extends FragmentPagerAdapter {
             f = new SofaGalleryFragment();
         }
         else if(i ==1){
-            f = new SofaGalleryFragment();
+            f = new BedroomGalleryFragment();
 
         }
         return f;

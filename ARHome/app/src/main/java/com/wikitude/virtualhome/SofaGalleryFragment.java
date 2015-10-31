@@ -215,7 +215,7 @@ public class SofaGalleryFragment extends Fragment {
             //**********************************************************
             HttpURLConnection urlConnection = null;
             Log.i("Login","inside gallery");
-            String url1= "http://ec2-52-11-109-4.us-west-2.compute.amazonaws.com:8080/api/v8/products/table";
+            String url1= "http://ec2-52-11-109-4.us-west-2.compute.amazonaws.com:8080/api/v8/products/sofa";
 
             StringBuilder sb = new StringBuilder();
             try {
