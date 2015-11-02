@@ -4,47 +4,41 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import org.apache.http.client.HttpClient;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-
-
 import android.content.Intent;
-
-import android.os.Bundle;
-import android.text.Editable;
+import android.content.pm.*;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
-import android.app.ActionBar;
-
-import com.wikitude.tools.activities.MediaPlayerActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import com.facebook.FacebookSdk;
+import com.facebook.login.*;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.CallbackManager;
+import com.facebook.login.widget.LoginButton;
+import com.facebook.appevents.AppEventsLogger;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
 
 public class Login extends Activity {
@@ -61,15 +55,18 @@ public class Login extends Activity {
 
 
     public static final String PREFERENCES_Gallery_FILE_NAME = "VHGalleryPreferences";
+    public static final String VIRTUALHOME_FB_LOGIN = "VirtualHomeFBLogin";
 
+    CallbackManager callbackManager = CallbackManager.Factory.create();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
 
-
-        //getting the arrays.
+         //getting the arrays.
         // String[] genderArray= R.array.familytypelist;
         genderArray = getResources().getStringArray(R.array.sextypelist);
         familyArray = getResources().getStringArray(R.array.familytypelist);
@@ -80,18 +77,16 @@ public class Login extends Activity {
             Log.i("gender Array",genderArray[i]);
         }
 */
+        handleOnClickSubmitButton();
 
+        handleLoginFromFacebook();
 
+    }
 
-        Button button = (Button) findViewById(R.id.button_submit);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Perform action on click
-                openPreferences();
-            }
-        });
-
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -116,6 +111,119 @@ public class Login extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void handleOnClickSubmitButton() {
+
+        Button button = (Button) findViewById(R.id.button_submit);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+                openPreferences();
+            }
+        });
+    }
+
+    public void handleLoginFromFacebook() {
+
+        Log.d("VirtualHome-Login", "handleLoginFromFacebook called");
+
+        // Generate key hash for FB app
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(
+                    "com.wikitude.virtualhome",
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (NameNotFoundException e) {
+
+        } catch (NoSuchAlgorithmException e) {
+
+        }
+
+        //Place holder for saving FB latest login
+        SharedPreferences.Editor editor = getSharedPreferences(VIRTUALHOME_FB_LOGIN, MODE_PRIVATE).edit();
+        editor.putString("email", "test@test.com");
+        editor.commit();
+
+        LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton.setReadPermissions(Arrays.asList("email"));
+         // Callback registration
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+
+                Log.d("VirtualHome-Login", "Facebook login onSuccess");
+
+                // App code
+                GraphRequest request = GraphRequest.newMeRequest(
+                        loginResult.getAccessToken(),
+                        new GraphRequest.GraphJSONObjectCallback() {
+                            @Override
+                            public void onCompleted(
+                                    JSONObject object,
+                                    GraphResponse response) {
+
+                                // Get the email that the FB user has logged in with.
+                                String fbEmail = object.optString("email");
+                                Log.v("FB Email logged in: ", fbEmail);
+
+                                SharedPreferences prefs = getSharedPreferences(VIRTUALHOME_FB_LOGIN, MODE_PRIVATE);
+                                String prefEmail = prefs.getString("email", "0");
+                                Log.v("Shared pref Email: ", prefEmail);
+
+                                // Check if its returning FB user
+                                if(prefEmail.equals(fbEmail))
+                                {
+                                    Log.v("FB Login", "Returning user");
+                                    // Assign the login values needed for creating User JSON
+                                    email = fbEmail;
+                                    pwd = "testFbPassword";
+                                    newUserFlag = false;
+
+                                    createUserJson();
+                                }
+                                else // Check for NEW FB user
+                                {
+                                    Log.v("FB Login", "New user");
+
+                                    SharedPreferences.Editor editor = prefs.edit();
+                                    editor.putString("email", fbEmail);
+                                    editor.commit();
+                                    // Assign the login values needed for creating User JSON
+                                    email = fbEmail;
+                                    pwd = "testFbPassword";
+                                    newUserFlag = true;
+
+                                    createUserJson();
+                                }
+
+                            }
+                        });
+
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "email");
+                request.setParameters(parameters);
+                request.executeAsync();
+
+            }
+
+            @Override
+            public void onCancel() {
+                // App code
+                Log.i("VirtualHome-Login", "Facebook login cancel");
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                // App code
+                Log.i("VirtualHome-Login", "Facebook login Error");
+            }
+        });
+
+    }
+
     public void openPreferences() {
         //Check the email error and password empty- If new user;
         //Check  if new user
@@ -123,7 +231,7 @@ public class Login extends Activity {
         CheckBox checkbox = (CheckBox) findViewById(R.id.checkbox_newuser);
         //boolean chstate=checkbox.isChecked();
         newUserFlag = checkbox.isChecked();
-        Log.i("login","new user flag: "+newUserFlag);
+        Log.i("VirtualHome-Login","new user flag: "+newUserFlag);
         EditText emailT = (EditText) findViewById(R.id.text_email);
         //String email = emailT.getText().toString();
         email = emailT.getText().toString();
@@ -161,10 +269,6 @@ public class Login extends Activity {
             createUserJson();
         }
 
-    /*    Intent intent = new Intent(this, Preferences.class);
-        //For now.
-        //TODO: Put this on postExecute???
-        startActivity(intent);*/
     }
 
 
@@ -183,7 +287,7 @@ public class Login extends Activity {
             userDetailsJson.put("password", pwd);
             userDetailsJson.put("newUserFlag", newUserFlag);*/
 
-            Log.i("Login","create json user");
+            Log.i("VirtualHome-Login","create json user");
 
             //Using the below so as to match the format on server side: Needs to be changed
             userDetailsJson.put("name", "adad");
@@ -197,7 +301,6 @@ public class Login extends Activity {
         }
 
         //Post to the server
-
         //Depending on the flow.(whether new user or not)
 
         if (newUserFlag) {
@@ -209,9 +312,6 @@ public class Login extends Activity {
             //Call the user validation rest api
             new LoginAsynTask().execute();
         }
-
-
-
 
     }
 
@@ -379,7 +479,7 @@ public class Login extends Activity {
                 Toast.makeText(getApplicationContext(), "Email exist: New User registration failed!!", Toast.LENGTH_SHORT).show();
                 creationNotSuccess = false;
             }
-            else if(newUserFlag) {   //ODO: check the creation success and then navigate
+            else if(newUserFlag ) {   //ODO: check the creation success and then navigate
                 Toast.makeText(getApplicationContext(), "Welcome!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Login.this, Preferences.class);
                 intent.putExtra("newUserFlag","true");
@@ -626,8 +726,21 @@ public class Login extends Activity {
     }
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+        // Logs 'install' and 'app activate' App Events.(Needed for Facebook APIS)
+        AppEventsLogger.activateApp(this);
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        // Logs 'app deactivate' App Event.(Needed for Facebook APIS)
+        AppEventsLogger.deactivateApp(this);
+    }
 
 }
 

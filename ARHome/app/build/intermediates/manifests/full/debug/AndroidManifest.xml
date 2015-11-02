@@ -67,6 +67,10 @@
         android:icon="@drawable/ic_logo"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Holo.Light" >
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
         <activity
             android:name="com.wikitude.virtualhome.MainActivity"
             android:label="@string/title_activity_main" >
@@ -109,6 +113,11 @@
             android:name="com.wikitude.virtualhome.ProductGalleryTabPage"
             android:label="@string/title_activity_product_view" >
         </activity>
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
     </application>
 
 </manifest>

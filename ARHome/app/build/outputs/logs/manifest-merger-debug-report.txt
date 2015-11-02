@@ -21,6 +21,8 @@ MERGED from :wikitudesdk::7:5
 MERGED from com.android.support:support-v4:22.2.0:20:5
 MERGED from com.astuetz:pagerslidingtabstrip:1.0.1:2:5
 MERGED from com.android.support:support-v4:22.2.0:20:5
+MERGED from com.facebook.android:facebook-android-sdk:4.6.0:24:5
+MERGED from com.android.support:support-v4:22.2.0:20:5
 	android:targetSdkVersion
 		ADDED from AndroidManifest.xml:10:9
 		INJECTED from AndroidManifest.xml:0:0
@@ -109,6 +111,8 @@ MERGED from :wikitudesdk::11:5
 MERGED from com.android.support:support-v4:22.2.0:22:5
 MERGED from com.astuetz:pagerslidingtabstrip:1.0.1:4:5
 MERGED from com.android.support:support-v4:22.2.0:22:5
+MERGED from com.facebook.android:facebook-android-sdk:4.6.0:28:5
+MERGED from com.android.support:support-v4:22.2.0:22:5
 	android:label
 		ADDED from AndroidManifest.xml:68:9
 	android:debuggable
@@ -119,69 +123,85 @@ MERGED from com.android.support:support-v4:22.2.0:22:5
 		ADDED from AndroidManifest.xml:67:9
 	android:theme
 		ADDED from AndroidManifest.xml:69:9
-activity#com.wikitude.virtualhome.MainActivity
+meta-data#com.facebook.sdk.ApplicationId
 ADDED from AndroidManifest.xml:70:9
+	android:value
+		ADDED from AndroidManifest.xml:70:66
+	android:name
+		ADDED from AndroidManifest.xml:70:20
+activity#com.wikitude.virtualhome.MainActivity
+ADDED from AndroidManifest.xml:71:9
 	android:label
+		ADDED from AndroidManifest.xml:73:13
+	android:name
 		ADDED from AndroidManifest.xml:72:13
-	android:name
-		ADDED from AndroidManifest.xml:71:13
 activity#com.wikitude.virtualhome.AugmentedActivity
-ADDED from AndroidManifest.xml:74:9
+ADDED from AndroidManifest.xml:75:9
 	android:label
-		ADDED from AndroidManifest.xml:77:13
+		ADDED from AndroidManifest.xml:78:13
 	android:configChanges
+		ADDED from AndroidManifest.xml:77:13
+	android:name
 		ADDED from AndroidManifest.xml:76:13
-	android:name
-		ADDED from AndroidManifest.xml:75:13
 activity#com.wikitude.virtualhome.ProductInfo
-ADDED from AndroidManifest.xml:79:9
+ADDED from AndroidManifest.xml:80:9
 	android:label
+		ADDED from AndroidManifest.xml:82:13
+	android:name
 		ADDED from AndroidManifest.xml:81:13
-	android:name
-		ADDED from AndroidManifest.xml:80:13
 activity#com.wikitude.virtualhome.Login
-ADDED from AndroidManifest.xml:83:9
+ADDED from AndroidManifest.xml:84:9
 	android:label
+		ADDED from AndroidManifest.xml:86:13
+	android:name
 		ADDED from AndroidManifest.xml:85:13
-	android:name
-		ADDED from AndroidManifest.xml:84:13
 activity#com.wikitude.virtualhome.Home
-ADDED from AndroidManifest.xml:87:9
+ADDED from AndroidManifest.xml:88:9
 	android:label
+		ADDED from AndroidManifest.xml:90:13
+	android:name
 		ADDED from AndroidManifest.xml:89:13
-	android:name
-		ADDED from AndroidManifest.xml:88:13
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:90:13
+ADDED from AndroidManifest.xml:91:13
 action#android.intent.action.MAIN
-ADDED from AndroidManifest.xml:91:17
+ADDED from AndroidManifest.xml:92:17
 	android:name
-		ADDED from AndroidManifest.xml:91:25
+		ADDED from AndroidManifest.xml:92:25
 category#android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:93:17
+ADDED from AndroidManifest.xml:94:17
 	android:name
-		ADDED from AndroidManifest.xml:93:27
+		ADDED from AndroidManifest.xml:94:27
 activity#com.wikitude.virtualhome.Preferences
-ADDED from AndroidManifest.xml:96:9
+ADDED from AndroidManifest.xml:97:9
 	android:label
+		ADDED from AndroidManifest.xml:99:13
+	android:name
 		ADDED from AndroidManifest.xml:98:13
-	android:name
-		ADDED from AndroidManifest.xml:97:13
 activity#com.wikitude.virtualhome.SofaGallery
-ADDED from AndroidManifest.xml:100:9
+ADDED from AndroidManifest.xml:101:9
 	android:label
+		ADDED from AndroidManifest.xml:103:13
+	android:name
 		ADDED from AndroidManifest.xml:102:13
-	android:name
-		ADDED from AndroidManifest.xml:101:13
 activity#com.wikitude.virtualhome.ProductView
-ADDED from AndroidManifest.xml:104:9
+ADDED from AndroidManifest.xml:105:9
 	android:label
+		ADDED from AndroidManifest.xml:107:13
+	android:name
 		ADDED from AndroidManifest.xml:106:13
-	android:name
-		ADDED from AndroidManifest.xml:105:13
 activity#com.wikitude.virtualhome.ProductGalleryTabPage
-ADDED from AndroidManifest.xml:108:9
+ADDED from AndroidManifest.xml:109:9
 	android:label
-		ADDED from AndroidManifest.xml:110:13
+		ADDED from AndroidManifest.xml:111:13
 	android:name
-		ADDED from AndroidManifest.xml:109:13
+		ADDED from AndroidManifest.xml:110:13
+activity#com.facebook.FacebookActivity
+ADDED from AndroidManifest.xml:113:9
+	android:label
+		ADDED from AndroidManifest.xml:117:13
+	android:configChanges
+		ADDED from AndroidManifest.xml:114:13
+	android:theme
+		ADDED from AndroidManifest.xml:116:13
+	android:name
+		ADDED from AndroidManifest.xml:113:19

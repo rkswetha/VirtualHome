@@ -21,6 +21,7 @@ repositories {
     flatDir {
         dirs 'libs'
     }
+    mavenCentral()
 }
 
 dependencies {
@@ -29,4 +30,5 @@ dependencies {
     compile 'com.android.support:support-v4:22.2.0'
     compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
     compile files('libs/universal-image-loader-1.9.4.jar')
+    compile 'com.facebook.android:facebook-android-sdk:4.6.0'
 }

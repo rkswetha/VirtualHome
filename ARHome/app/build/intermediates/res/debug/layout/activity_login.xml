@@ -139,6 +139,7 @@
                     -->
 
             </LinearLayout>
+
             <Button
                 android:id="@+id/button_submit"
                 android:layout_width="190dp"
@@ -150,18 +151,13 @@
                 android:textSize="13dp"
                 android:background="#E91E63"/>
 
-
-
-            <Button android:layout_width="190dp"
-                android:layout_height="38dp"
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp"
-                android:text="LOGIN WITH FACEBOOK"
-                android:textColor="#fff"
-                android:textSize="13dp"
-                android:background="#1A237E"/>
-
-
+                android:layout_marginBottom="30dp" />
 
 
         </LinearLayout>
