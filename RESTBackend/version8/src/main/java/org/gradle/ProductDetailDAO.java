@@ -85,6 +85,7 @@ public class ProductDetailDAO {
 	      return Toolkit.getDefaultToolkit().createImage(ip);  
 	}  
 	
+    /*
 	public static String createTransparentImage(String inputImageUrl, String prodName)   
 	{  
 			
@@ -112,7 +113,79 @@ public class ProductDetailDAO {
 	    	  e.printStackTrace();
 	    }
 		return null;
-	}  
+	}  */
+    
+    
+    private static Image TransformColorToTransparency(BufferedImage image, Color c1, Color c2)
+    {
+        // Primitive test, just an example
+        final int r1 = c1.getRed();
+        final int g1 = c1.getGreen();
+        final int b1 = c1.getBlue();
+        final int r2 = c2.getRed();
+        final int g2 = c2.getGreen();
+        final int b2 = c2.getBlue();
+        ImageFilter filter = new RGBImageFilter()
+        {
+            public final int filterRGB(int x, int y, int rgb)
+            {
+                int r = (rgb & 0xFF0000) >> 16;
+                int g = (rgb & 0xFF00) >> 8;
+                int b = rgb & 0xFF;
+                if (r >= r1 && r <= r2 &&
+                    g >= g1 && g <= g2 &&
+                    b >= b1 && b <= b2)
+                {
+                    // Set fully transparent but keep color
+                    return rgb & 0xFFFFFF;
+                }
+                return rgb;
+            }
+        };
+        
+        ImageProducer ip = new FilteredImageSource(image.getSource(), filter);
+        return Toolkit.getDefaultToolkit().createImage(ip);
+    }
+    
+    private static BufferedImage ImageToBufferedImage(Image image, int width, int height)
+    {
+        BufferedImage dest = new BufferedImage(
+                                               width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = dest.createGraphics();
+        g2.drawImage(image, 0, 0, null);
+        g2.dispose();
+        return dest;
+    }
+    
+    
+     public static String createTransparentImage(String inputImageUrl, String prodName)
+     {
+     
+     try{
+     final String tempImgFileName =  "test_altcopy.jpg";
+     
+     System.out.println("Copying file " + inputImageUrl + " to " + tempImgFileName);
+     
+     URL in = new URL(inputImageUrl);
+     final BufferedImage source = ImageIO.read(in);
+     
+     Image transpImg2 = TransformColorToTransparency(source, new Color(180, 180, 180), new Color(255, 255, 255));
+     
+     final BufferedImage transparentImage = ImageToBufferedImage(transpImg2, source.getWidth(), source.getHeight());
+         
+     final File out = new File(tempImgFileName);
+     
+     ImageIO.write(transparentImage, "PNG", out);
+     
+     // Upload the transparent image to Cloudinary and return its location Url
+     return uploadImageToCloudinary(tempImgFileName, prodName);
+     
+     }catch(IOException e){
+     e.printStackTrace();
+	    }
+     return null;
+     }
+    
 	
 	// Method to create transparent image using Cloudinary edit options. (Not used for now)
 	public static void createTransparentImageFromCloudinary(String inputFileName)
