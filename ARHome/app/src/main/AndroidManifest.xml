@@ -98,10 +98,10 @@
             android:name=".Preferences"
             android:label="@string/title_activity_preferences" >
         </activity>
-        <activity
+        <!--<activity
             android:name=".SofaGallery"
             android:label="@string/title_activity_sofa_gallery" >
-        </activity>
+        </activity>-->
         <activity
             android:name=".ProductView"
             android:label="@string/title_activity_product_view" >

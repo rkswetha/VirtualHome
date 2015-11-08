@@ -11,3 +11,9 @@
 	opacity: 0.7;
 	display: table;
 }
+
+.thumbnailFormat {
+    width: 15%;
+    height: auto;
+    border: 2px solid #8AC007;
+}

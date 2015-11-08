@@ -46,6 +46,7 @@ public class Preferences extends Activity {
     String userID =null;
     String emailID=null;
     private boolean preferenceCreationNotSuccess=false;
+    String ConstantURL = URLAPIConstant.URL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -348,7 +349,7 @@ changed the braces: changed that if the call is from a different location->then 
 
             //userEmail
 
-            userPrefJson.put("user_id",userID);
+            userPrefJson.put("user_id",Integer.parseInt(userID));
             userPrefJson.put("email",emailID );
             userPrefJson.put("sex", gender);
             userPrefJson.put("family", family);
@@ -396,13 +397,15 @@ changed the braces: changed that if the call is from a different location->then 
             String url1=null;
             int expectedResponseCode=0;
 
-            if(newUserFlag==null)
+            if(newUserFlag==null || newUserFlag.equals("false") )
             {
-                 url1 = "http://ec2-52-11-109-4.us-west-2.compute.amazonaws.com:8080/api/v8/userpreferences"+"/"+userID;
+                //url1 = "http://ec2-52-11-109-4.us-west-2.compute.amazonaws.com:8080/api/v8/userpreferences"+"/"+userID;
+                url1 = ConstantURL+"userpreferences"+"/"+userID;
                 expectedResponseCode=HttpURLConnection.HTTP_OK;
             }
             else  if(newUserFlag.equals("true")) {
-                 url1 = "http://ec2-52-11-109-4.us-west-2.compute.amazonaws.com:8080/api/v8/userpreferences";
+                url1 = ConstantURL+"userpreferences";
+                //url1 = "http://ec2-52-11-109-4.us-west-2.compute.amazonaws.com:8080/api/v8/userpreferences";
                 expectedResponseCode=HttpURLConnection.HTTP_CREATED;
             }
             //String url1 = "http://192.168.0.14:8080/api/v5/userpreferences";
@@ -414,13 +417,19 @@ changed the braces: changed that if the call is from a different location->then 
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setDoOutput(true);
                 //urlConnection.setRequestMethod("POST");
-
+                System.out.println("New User Flag before put/post: " + newUserFlag);
                 //21.10.2015:
-                if(newUserFlag==null)
+                if(newUserFlag==null || newUserFlag.equals("false")) {
                     urlConnection.setRequestMethod("PUT");
+                }
                 else  if(newUserFlag.equals("true"))
+                {
                     urlConnection.setRequestMethod("POST");
+                    newUserFlag = "false";
+                }
 
+
+                System.out.println("put/post: " +  urlConnection.getRequestMethod().toString());
                 urlConnection.setUseCaches(false);
                 urlConnection.setConnectTimeout(10000);
                 urlConnection.setReadTimeout(10000);
@@ -502,6 +511,5 @@ changed the braces: changed that if the call is from a different location->then 
         }
 
     }
-
 }
 

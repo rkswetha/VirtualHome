@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 /**
  * Created by anusha on 10/3/2015.
+ *
+ * NOT IN USE
  */
 public class TabPage extends FragmentPagerAdapter {
 
@@ -18,7 +20,7 @@ public class TabPage extends FragmentPagerAdapter {
     public Fragment getItem(int i) {
         Fragment f = null;
         if(i == 0) {
-            f = new SofaGalleryFragment();
+            f = new LivingRoomGalleryFragment();
         }
         else if(i ==1){
             f = new BedroomGalleryFragment();

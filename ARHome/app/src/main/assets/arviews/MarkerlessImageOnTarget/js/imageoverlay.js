@@ -1,10 +1,10 @@
 var current = '';
 var imageId= 0;
 var virtualObjectInfo = {};
+var recommendedUrls = [];
 /* DATA STRUCTURE
     "VirtualObjectId": {
       "src": value,
-      "scale": value,
       "zValue": value,
       "width":value,
       "height":value,
@@ -16,6 +16,7 @@ var virtualObjectInfo = {};
 $(function() {
     setButtons();
     draggableObjects();
+    getRecommendedProducts(text);
 });
 
 function setButtons(){
@@ -101,55 +102,117 @@ function updateImageElements(){
                 };
         };
         virtualObjectInfo = virtualObjectInfo2;
-        console.log("TEST: Restore Element from Saved State: " + assert(virtualObjectInfo2 == temp));
+        //console.log("TEST: Restore Element from Saved State: " + assert(virtualObjectInfo2 == temp));
     }
+};
+
+/*
+var httprequesttest=
+function GetJSON() {
+  var xhr = new XMLHttpRequest();
+  var url = 'https://mathiasbynens.be/demo/ip';
+  xhr.open('get', url, true);
+  xhr.responseType = 'json';
+  xhr.onreadystatechange = function() {
+    var status;
+    var data;
+    // https://xhr.spec.whatwg.org/#dom-xmlhttprequest-readystate
+    if (xhr.readyState == 4) { // `DONE`
+      status = xhr.status;
+      if (status == 200) {
+        console.log('Your public IP address is: ' + xhr.response.ip)
+        //successHandler && successHandler(xhr.response);
+      } else {
+        console.log('Something went wrong.');
+      }
+    }
+  };
+  xhr.send();
+};
+setInterval(httprequesttest, 10000);
+*/
+
+//var arrayPointer = 0;
+/*
+function arrayIncrement(){
+    var len = recommendedUrls.length;
+    if (arrayPointer < len){
+        arrayPointer++;
+    };
+    if (arrayPointer == len){
+        arrayPointer = 0;
+    };
+};
+*/
+function getRecommendedProducts(jsonInput){
+    var input = jsonInput;
+    for(var items in input["results"]) {
+	    recommendedUrls.push(input["results"][items]["url"]);
+    };
 };
 
 function showDataMiningThumbnail(){
 
     var elem = document.getElementById("thumbnails");
-    if (elem.style.display == "none"){
-    //if(elem.style.display == 'block'){
-    src1 = "http://www.ikea.com/us/en/images/products/stocksund-chair-red__0286585_PE423173_S4.JPG";
-    //src2 = src1;
-    //src3 = src1;
-
     var d1 = document.getElementById("datamining1");
-    d1.src = src1;
-    d1.addEventListener('click', function () {
-        addImage(d1.src);
-    });
     var d2 = document.getElementById("datamining2");
-    d2.src = src1;
-    d2.addEventListener('click', function () {
-            addImage(d2.src);
-        });
     var d3 = document.getElementById("datamining3");
-    d3.src = src1;
-    d3.addEventListener('click', function () {
-                addImage(d3.src);
+    //var d4 = document.getElementById("datamining4");
+
+    if (elem.style.display == "none"){
+        d1.src = recommendedUrls[0];
+        //arrayIncrement();
+
+        d2.src = recommendedUrls[1];
+        //arrayIncrement();
+
+        d3.src = recommendedUrls[2];
+        //arrayIncrement();
+
+        //d4.src = recommendedUrls[arrayPointer];
+        //arrayIncrement();
+
+        d1.addEventListener('click', function () {
+                addImage(d1.src);
+                //d1.src = recommendedUrls[arrayPointer];
+                //arrayIncrement();
             });
 
-    elem.style.display = 'inline-block';
+            d2.addEventListener('click', function () {
+                addImage(d2.src);
+                //d2.src = recommendedUrls[arrayPointer];
+                //arrayIncrement();
+            });
+
+            d3.addEventListener('click', function () {
+                addImage(d3.src);
+                //d3.src = recommendedUrls[arrayPointer];
+                //arrayIncrement();
+            });
+
+            /*d4.addEventListener('click', function () {
+               addImage(d4.src);
+               d4.src = recommendedUrls[arrayPointer];
+               arrayIncrement();
+            });*/
+
+        elem.style.display = 'inline-block';
     }else
     {
-    elem.style.display = 'none';
+        elem.style.display = 'none';
     }
-    var d4 = document.getElementById("datamining4");
-        d4.addEventListener('click', function () {
-             alert("For more product recommendations, please see Recommendation Gallery");
-             //document.getElementById("thumbnails").style.display = 'none';
-        });
-}
+};
 
 function addImage(sourceUrl){
+      //if (document.getElementsByClassName("enableDrag").length>=1){
       //updateImageElements();
+      //};
       imageId++;
       //Canvas editing - To make the background transparent.
-      var img = new Image;
-      img.src = sourceUrl;
+      //var img = new Image;
+      //img.src = sourceUrl;
 
-      var doc = document.createElement('canvas');
+      /*var doc = document.createElement('canvas');
       doc.setAttribute("id", "document"+imageId);
       var ctx = doc.getContext("2d");
 
@@ -164,8 +227,9 @@ function addImage(sourceUrl){
 
             var x = new Image();
             var imgU=doc.toDataURL();
-
-            x.setAttribute("src", imgU);
+        */
+            var x = new Image();
+            x.setAttribute("src", sourceUrl);
             x.setAttribute("width", '50%');
             x.setAttribute("height", 'auto');
             x.setAttribute("id", "virtualObject"+imageId);
@@ -174,21 +238,22 @@ function addImage(sourceUrl){
             x.classList.add("image");
             x.classList.add("enableDrag");
             virtualObjectInfo["virtualObject"+imageId]={};
-            virtualObjectInfo["virtualObject"+imageId]["scale"] = 1;
-            virtualObjectInfo["virtualObject"+imageId]["source"] = imgU;
+            virtualObjectInfo["virtualObject"+imageId]["source"] = sourceUrl;
             virtualObjectInfo["virtualObject"+imageId]["zValue"] = 2;
+            virtualObjectInfo["virtualObject"+imageId]["width"] = x.width;
+            virtualObjectInfo["virtualObject"+imageId]["height"] = x.height;
             document.body.appendChild(x);
-            console.log("TEST: AddImage function converting image transparency: " + assert(sourceUrl != imgU));
-            console.log("TEST: AddImage function inserted new image to data structure: " + assert(virtualObjectInfo.hasOwnProperty("virtualObject"+imageId)));
-            console.log("TEST: AddImage function inserted image to DOM: " + assert(document.getElementById("virtualObject"+imageId).hasAttribute("id")));
+            //console.log("TEST: AddImage function converting image transparency: " + assert(sourceUrl != imgU));
+           // console.log("TEST: AddImage function inserted new image to data structure: " + assert(virtualObjectInfo.hasOwnProperty("virtualObject"+imageId)));
+           // console.log("TEST: AddImage function inserted image to DOM: " + assert(document.getElementById("virtualObject"+imageId).hasAttribute("id")));
             ot = document.getElementById("virtualObject"+imageId).offsetTop;
             ol = document.getElementById("virtualObject"+imageId).offsetLeft;
             virtualObjectInfo["virtualObject"+imageId]["offsetTopValue"] = ot;
             virtualObjectInfo["virtualObject"+imageId]["offsetLeftValue"] = ol;
             draggableObjects();
-            }
+            //}
 };
-
+/*
 function adjustImage(iArray) {
     var imageData = iArray.data;
 
@@ -199,14 +264,14 @@ function adjustImage(iArray) {
         }
     return iArray;
 };
-
+*/
 
 var scaleIncrement = 0.2;
 function scaleUp(){
     if (current == ''){
         alert("Please choose image");
         var testresult = assert(current == '');
-        console.log("TEST: Increase Image Size When Image not selected results in no change = " + testresult);
+        //console.log("TEST: Increase Image Size When Image not selected results in no change = " + testresult);
     }
     else{
        var x = document.getElementById(current);
@@ -214,10 +279,9 @@ function scaleUp(){
        var beforeHeight = x.height;
        x.width = x.width + x.width*scaleIncrement;
        x.height = x.height + x.height*scaleIncrement;
-       console.log("TEST: Decrease image size on valid input: "+ assert((beforeWidth<x.width) && (beforeHeight<x.height)));
+       //console.log("TEST: Decrease image size on valid input: "+ assert((beforeWidth<x.width) && (beforeHeight<x.height)));
        virtualObjectInfo[current]["width"] = x.width;
        virtualObjectInfo[current]["height"] =  x.height;
-       //virtualObjectInfo[current]["scale"] = scaleValue;
        saveBeforeUnload();
     }
 };
@@ -227,7 +291,7 @@ function scaleDown(){
   if (current == ''){
         alert("Please choose image");
         var testresult = assert(current == '');
-        console.log("TEST: Decrease Image when Image not selected results in no change = " + testresult);
+        //console.log("TEST: Decrease Image when Image not selected results in no change = " + testresult);
       }
   else{
      var x = document.getElementById(current);
@@ -235,10 +299,9 @@ function scaleDown(){
      var beforeHeight = x.height;
      x.width = x.width - x.width*scaleIncrement;
      x.height = x.height - x.height*scaleIncrement;
-     console.log("TEST: Decrease image size on valid input: "+ assert((beforeWidth>x.width) && (beforeHeight>x.height)));
+     //console.log("TEST: Decrease image size on valid input: "+ assert((beforeWidth>x.width) && (beforeHeight>x.height)));
      virtualObjectInfo[current]["width"] = x.width;
      virtualObjectInfo[current]["height"] =  x.height;
-     //virtualObjectInfo[current]["scale"] = scaleValue;
      saveBeforeUnload();
     }
 };
@@ -248,14 +311,14 @@ function rotate(){
   if (current == ''){
         alert("Please choose image");
         var testresult = assert(angle==0);
-        console.log("TEST: Rotate Image not selected results in no change = " + testresult);
+        //console.log("TEST: Rotate Image not selected results in no change = " + testresult);
   }
   else{
     var x = document.getElementById(current);
     angle = (angle+90)%360;
     x.className = "rotate"+angle;
     var testresult = assert(angle>0);
-    console.log("TEST: Rotate Image Angle Changed = " + testresult);
+    //console.log("TEST: Rotate Image Angle Changed = " + testresult);
   }
 };
 
@@ -264,7 +327,7 @@ function deleteObject(){
   if (current == ''){
         alert("Please choose image");
         var testresult = assert(itemsInDataStructure==itemsInDataStructure);
-        console.log("TEST: Delete Image When Image not selected results in no change = " + testresult);
+        //console.log("TEST: Delete Image When Image not selected results in no change = " + testresult);
   }
   else{
         var child = document.getElementById(current);
@@ -285,27 +348,27 @@ var flipValue = "off";
 function flipImage(){
   if (current == ''){
         alert("Please choose image");
-        console.log("TEST: Flip Image When Image not Selected Results in no change = " + assert(current == ''));
+        //console.log("TEST: Flip Image When Image not Selected Results in no change = " + assert(current == ''));
   }
   else{
     var x = document.getElementById(current);
     if(flipValue == "off"){
         x.className = "img";
-        flipValue = "on"
-        console.log("TEST: Flip Image modifications applied = " + assert(x.className == "img"));
+        flipValue = "on";
+        //console.log("TEST: Flip Image modifications applied = " + assert(x.className == "img"));
     }
     else{
         x.classList.remove("img");
-        flipValue = "off"
-        console.log("TEST: Flip Image modifications applied = " + assert(x.className != "img"));
+        flipValue = "off";
+        //console.log("TEST: Flip Image modifications applied = " + assert(x.className != "img"));
     }
   }
 };
 
 function saveBeforeUnload() {
-    if (typeof(Storage) !== "undefined") {
+    if (typeof(Storage) != "undefined") {
         localStorage.setItem("VirtualObjectInfoLS", JSON.stringify(virtualObjectInfo));
-        console.log("TEST: Local Storage Updated with Data Structure = " + assert(Object.keys(getLSVirtualObjectInfo()).length == Object.keys(virtualObjectInfo).length));
+        //console.log("TEST: Local Storage Updated with Data Structure = " + assert(Object.keys(getLSVirtualObjectInfo()).length == Object.keys(virtualObjectInfo).length));
     };
 };
 
@@ -319,25 +382,31 @@ function getLSVirtualObjectInfo(){
 
 function getLSAndroidImagePath(){
     if (localStorage.getItem("AndroidImagePath") == null){
-        return "assets/Camera.png";
-    }else{
+        alert("Choose image from Android Gallery");
+        return null;
+    } else{
         return localStorage.getItem("AndroidImagePath");
     };
 };
+var Usebackground = "off";
 
 function setBackgroundImageUsingImagePath(url){
-    if (typeof(Storage) !== "undefined") {
+    if (typeof(Storage) != "undefined") {
         localStorage.setItem("AndroidImagePath", url);
-        console.log("TEST: Local Storage Updated with Android Gallery Image Path = " + assert(localStorage.getItem("AndroidImagePath")));
+        //console.log("TEST: Local Storage Updated with Android Gallery Image Path = " + assert(localStorage.getItem("AndroidImagePath")));
     };
+    document.body.background= url;
+    document.body.style.backgroundSize = 'cover';
+    document.body.style.backgroundRepeat = "no-repeat";
+    Usebackground = "on";
 };
 
-var Usebackground = "off"
+
 function setImage(){
     var src;
     src = getLSAndroidImagePath();
     if (src){
-      console.log("TEST: Background Image = " + assert(src));
+      //console.log("TEST: Background Image = " + assert(src));
       if(Usebackground == "off"){
          document.body.background= src;
          document.body.style.backgroundSize = 'cover';
@@ -346,7 +415,7 @@ function setImage(){
        }
       else{
         document.body.style.backgroundImage = "none";
-        Usebackground = "off"
+        Usebackground = "off";
       }
     } else
     {
@@ -361,7 +430,7 @@ function captureScreenFn() {
 function bringToFront(){
     if (current == ''){
         alert("Please choose image");
-        console.log("TEST: Bring Image to Front When No Image Selected Results In No Change = " + assert(current == ''));
+        //console.log("TEST: Bring Image to Front When No Image Selected Results In No Change = " + assert(current == ''));
     }
     else{
       valueofz = virtualObjectInfo[current]["zValue"];
@@ -373,7 +442,7 @@ function bringToFront(){
       virtualObjectInfo[current]["zValue"] = valueofz;
       x.style.left = ol + "px";
       x.style.top = ot + "px";
-      console.log("TEST: Bring Image to Front With Valid Image = " + assert(before<virtualObjectInfo[current]["zValue"]));
+      //console.log("TEST: Bring Image to Front With Valid Image = " + assert(before<virtualObjectInfo[current]["zValue"]));
       saveBeforeUnload();
     }
 };
@@ -388,10 +457,35 @@ function getImagePosition(event) {
 
 function clearLocalStorage(){
     localStorage.removeItem("VirtualObjectInfoLS");
-    console.log("TEST: Clear Local Storage = " + assert(!localStorage.getItem("VirtualObjectInfoLS") && !localStorage.getItem("AndroidImagePath")));
+    //console.log("TEST: Clear Local Storage = " + assert(!localStorage.getItem("VirtualObjectInfoLS") && !localStorage.getItem("AndroidImagePath")));
 };
 
 function assert(outcome) { 
     var ans = outcome ? 'PASS' : 'FAIL';
     return ans;
 };
+
+var text = {
+  "results":[
+    {
+      "name": "KNISLINGE",
+      "description": "Width: 80 3/4 , Depth: 35 , Height under furniture: 3 1/8 Width: 205 cm, Depth: 89 cm, Height under furniture: 8 cm \n Product description \n Loveseat frame:\n Back and seat frame: Fiberboard, Moisture resistant particleboard, Plywood, Solid wood\n Armrest frame: Solid wood, Fiberboard, Moisture resistant particleboard, Plywood\n Seat cushion: High-resilience polyurethane foam (cold foam) 2.2 lb/cu.ft., Polyurethane memory foam 3.1 lb/cu.ft, Polyester wadding \n Back cushion: Polyester fiber balls",
+      "price": "$299.00",
+      "url": "http://res.cloudinary.com/cmpe295b/image/upload/c_fit,h_500,w_500/100.PNG"
+    },
+    {
+      "description": "Product dimensions \n Max. width: 110 1/4 '\n Min. depth: 37 3/8 ' \n Max. depth: 64 1/8 ' \n Height: 32 5/8 '\n Min. seat depth: 23 5/8 \n Max. seat depth: 48 7/8 ' \n Seat height: 17 3/4 \n Product description \n Loveseat frame:\n Back and seat frame: Fiberboard, Moisture resistant particleboard, Plywood, Solid wood\n Armrest frame: Solid wood, Fiberboard, Moisture resistant particleboard, Plywood\n Seat cushion: High-resilience polyurethane foam (cold foam) 2.2 lb/cu.ft., Polyurethane memory foam 3.1 lb/cu.ft, Polyester wadding \n Back cushion: Polyester fiber balls" ,
+      "name": "TIMSFORS2",
+      "price": "$1,999.00",
+      "url": "http://res.cloudinary.com/cmpe295b/image/upload/c_fit,h_500,w_500/101.PNG"
+    },
+    {
+      "description": "Product dimensions \n Max. width: 110 1/4 '\n Min. depth: 37 3/8 ' \n Max. depth: 64 1/8 ' \n Height: 32 5/8 '\n Min. seat depth: 23 5/8 \n Max. seat depth: 48 7/8 ' \n Seat height: 17 3/4 \n Product description \n Loveseat frame:\n Back and seat frame: Fiberboard, Moisture resistant particleboard, Plywood, Solid wood\n Armrest frame: Solid wood, Fiberboard, Moisture resistant particleboard, Plywood\n Seat cushion: High-resilience polyurethane foam (cold foam) 2.2 lb/cu.ft., Polyurethane memory foam 3.1 lb/cu.ft, Polyester wadding \n Back cushion: Polyester fiber balls" ,
+      "name": "KLIPPAN",
+      "price": "$399",
+      "url": "http://res.cloudinary.com/cmpe295b/image/upload/c_fit,h_500,w_500/105.PNG"
+    }
+  ]
+};
+
+

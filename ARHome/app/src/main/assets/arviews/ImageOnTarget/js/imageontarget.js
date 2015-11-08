@@ -1,5 +1,29 @@
 var overlayOne;
 var imagePath;
+var recommendedUrls = [];
+var arrayPointer = 0;
+var text = {
+  "results":[
+    {
+      "name": "KNISLINGE",
+      "description": "Width: 80 3/4 , Depth: 35 , Height under furniture: 3 1/8 Width: 205 cm, Depth: 89 cm, Height under furniture: 8 cm \n Product description \n Loveseat frame:\n Back and seat frame: Fiberboard, Moisture resistant particleboard, Plywood, Solid wood\n Armrest frame: Solid wood, Fiberboard, Moisture resistant particleboard, Plywood\n Seat cushion: High-resilience polyurethane foam (cold foam) 2.2 lb/cu.ft., Polyurethane memory foam 3.1 lb/cu.ft, Polyester wadding \n Back cushion: Polyester fiber balls",
+      "price": "$299.00",
+      "url": "http://res.cloudinary.com/cmpe295b/image/upload/c_fit,h_500,w_500/100.PNG"
+    },
+    {
+      "description": "Product dimensions \n Max. width: 110 1/4 '\n Min. depth: 37 3/8 ' \n Max. depth: 64 1/8 ' \n Height: 32 5/8 '\n Min. seat depth: 23 5/8 \n Max. seat depth: 48 7/8 ' \n Seat height: 17 3/4 \n Product description \n Loveseat frame:\n Back and seat frame: Fiberboard, Moisture resistant particleboard, Plywood, Solid wood\n Armrest frame: Solid wood, Fiberboard, Moisture resistant particleboard, Plywood\n Seat cushion: High-resilience polyurethane foam (cold foam) 2.2 lb/cu.ft., Polyurethane memory foam 3.1 lb/cu.ft, Polyester wadding \n Back cushion: Polyester fiber balls" ,
+      "name": "TIMSFORS2",
+      "price": "$1,999.00",
+      "url": "http://res.cloudinary.com/cmpe295b/image/upload/c_fit,h_500,w_500/101.PNG"
+    },
+    {
+      "description": "Product dimensions \n Max. width: 110 1/4 '\n Min. depth: 37 3/8 ' \n Max. depth: 64 1/8 ' \n Height: 32 5/8 '\n Min. seat depth: 23 5/8 \n Max. seat depth: 48 7/8 ' \n Seat height: 17 3/4 \n Product description \n Loveseat frame:\n Back and seat frame: Fiberboard, Moisture resistant particleboard, Plywood, Solid wood\n Armrest frame: Solid wood, Fiberboard, Moisture resistant particleboard, Plywood\n Seat cushion: High-resilience polyurethane foam (cold foam) 2.2 lb/cu.ft., Polyurethane memory foam 3.1 lb/cu.ft, Polyester wadding \n Back cushion: Polyester fiber balls" ,
+      "name": "KLIPPAN",
+      "price": "$399",
+      "url": "http://res.cloudinary.com/cmpe295b/image/upload/c_fit,h_500,w_500/105.PNG"
+    }
+  ]
+};
 
 var World = {
 
@@ -53,7 +77,12 @@ var World = {
 		var pageOne = new AR.Trackable2DObject(this.tracker, "*", {
 			drawables: {
 				cam: overlayOne
-			}
+			},
+			snapToScreen: {
+            				snapContainer: document.getElementById('snapContainer')
+            			},
+            onEnterFieldOfVision: this.appear,
+            onExitFieldOfVision: this.disappear
 		});
 
 	},
@@ -174,8 +203,65 @@ var World = {
 
     displaySnapToScreen: function displaySnapToScreenFn(){
 
+    },
+
+    // Thumbnail Recommendations START
+    getRecommendedProducts: function getRecommendedProducts(jsonInput){
+        var input = jsonInput;
+        for(var items in input["results"]) {
+    	    recommendedUrls.push(input["results"][items]["url"]);
+        };
+    },
+
+
+    showDataMiningThumbnail: function showDataMiningThumbnail(){
+
+        var elem = document.getElementById("thumbnails");
+        var d1 = document.getElementById("datamining1");
+        var d2 = document.getElementById("datamining2");
+        var d3 = document.getElementById("datamining3");
+
+        if (elem.style.display == "none"){
+            d1.src = recommendedUrls[arrayPointer];
+            arrayPointer++;
+
+            d2.src = recommendedUrls[arrayPointer];
+            arrayPointer++;
+
+            d3.src = recommendedUrls[arrayPointer];
+            arrayPointer++;
+
+            d1.addEventListener('click', function () {
+                    World.chooseAnotherImage(d1.src);
+                    alert("Please rescan target");
+                    //d1.src = recommendedUrls[arrayPointer];
+                    //World.arrayIncrement();
+                });
+
+                d2.addEventListener('click', function () {
+                    World.chooseAnotherImage(d2.src);
+                    alert("Please rescan target");
+                    //d2.src = recommendedUrls[arrayPointer];
+                    //World.arrayIncrement();
+                });
+
+                d3.addEventListener('click', function () {
+                    World.chooseAnotherImage(d3.src);
+                    alert("Please rescan target");
+                    //d3.src = recommendedUrls[arrayPointer];
+                    //World.arrayIncrement();
+                });
+
+
+            elem.style.display = 'inline-block';
+        }else
+        {
+            elem.style.display = 'none';
+        }
     }
+    // Thumbnail Recommendations END
 
 };
 
 World.init();
+World.getRecommendedProducts(text);

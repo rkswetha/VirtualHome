@@ -40,7 +40,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class BedroomGalleryFragment extends Fragment {
+public class DiningRoomGalleryFragment extends Fragment {
 
     public static final String PREFERENCES_Gallery_FILE_NAME = "VHGalleryPreferences";
 
@@ -59,6 +59,7 @@ public class BedroomGalleryFragment extends Fragment {
     String filePath;
     String ConstantURL = URLAPIConstant.URL;
 
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // caching initialization
@@ -70,7 +71,7 @@ public class BedroomGalleryFragment extends Fragment {
         System.out.println("just outside listener");
 
         startTime = new Timestamp( new Date().getTime());
-        Log.i("VirtualHome-Bedroom","start time:"+startTime);
+        Log.i("VirtualHome-Dining Room","start time:"+startTime);
         sTime=startTime.getTime();
 
         SharedPreferences settings = this.getActivity().getSharedPreferences(PREFERENCES_Gallery_FILE_NAME, Context.MODE_PRIVATE);
@@ -85,7 +86,7 @@ public class BedroomGalleryFragment extends Fragment {
         new GalleryAsynTask().execute();
         setHasOptionsMenu(true);
         ActionBar actionbar = getActivity().getActionBar();
-        actionbar.setTitle("Bedroom Gallery");
+        actionbar.setTitle("Dining Room Gallery");
         return v;
 
     }
@@ -175,7 +176,7 @@ public class BedroomGalleryFragment extends Fragment {
                 {
                     String root = Environment.getExternalStorageDirectory().toString();
 
-                    Log.i("VirtualHome-Gallery", "Bedroom gallery Directory---" + root);
+                    Log.i("VirtualHome-Gallery", "Dining Room gallery Directory---" + root);
 
                     myDir = new File(root + "/VirtualHome/Ikea");
 
@@ -191,7 +192,7 @@ public class BedroomGalleryFragment extends Fragment {
                 File file ;
                 FileOutputStream out;
                 if(externalMounted && myDir!=null) {
-                    file = new File(myDir, "bedroom.json");
+                    file = new File(myDir, "diningroom.json");
                     filePath = file.getAbsolutePath();
                     FileWriter filewr = new FileWriter(filePath);
                     filewr.write(jsonStr);
@@ -215,8 +216,8 @@ public class BedroomGalleryFragment extends Fragment {
             //**********************************************************
             HttpURLConnection urlConnection = null;
             Log.i("Login","inside gallery");
-            String url1= ConstantURL+"products/bedroom";
-            //String url1= "http://ec2-52-11-109-4.us-west-2.compute.amazonaws.com:8080/api/v8/products/bedroom";
+            String url1= ConstantURL+"products/diningroom";
+            //String url1= "http://ec2-52-11-109-4.us-west-2.compute.amazonaws.com:8080/api/v8/products/diningroom";
 
             StringBuilder sb = new StringBuilder();
             try {
@@ -288,7 +289,7 @@ public class BedroomGalleryFragment extends Fragment {
                             Log.i("gallery","resultSize:"+resultSize);
                             Log.i("gallery","queryArray:"+queryArray);
 
-                            //write to Bedroom.json in SD Card
+                            //write to Dining Room.json in SD Card
                             createJSONProductFile(jsonObject.toString());
 
                         }catch(JSONException e)
@@ -343,7 +344,7 @@ public class BedroomGalleryFragment extends Fragment {
 
                     Log.i("VirtualHome-Gallery", "Root Directory---" + root);
 
-                    myDir = new File(root + "/VirtualHome/Ikea/Bedroom");
+                    myDir = new File(root + "/VirtualHome/Ikea/DiningRoom");
 
                     if (!myDir.exists()) {
                         if (myDir.mkdirs()) {
@@ -404,7 +405,7 @@ public class BedroomGalleryFragment extends Fragment {
 
             //getting the extra:
             morePictures = getActivity().getIntent().getStringExtra("additionalProduct");
-            Log.i("Bedroom Gallery", "morePictures " + morePictures);
+            Log.i("Dining Room Gallery", "morePictures " + morePictures);
 
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
@@ -413,22 +414,22 @@ public class BedroomGalleryFragment extends Fragment {
                     System.out.println("after image creation");
 
                     if(morePictures!=null) {
-                        Log.i("Bedroom Gallery", "inside not null");
+                        Log.i("Dining Room Gallery", "inside not null");
                         if (morePictures.trim().equals("yes")) {
                             //This is called if additional images have to be added to the AR screen
-                            Log.i("Bedroom Gallery", "inside morePicture");
+                            Log.i("Dining Room Gallery", "inside morePicture");
                             Intent intent1 = new Intent();
                             intent1.putExtra("location", item.getGalleryItemLocation());
                             intent1.putExtra("title", item.getGalleryItemTitle());
                             intent1.putExtra("description", item.getGalleryItemDescription());
                             getActivity().setResult(2, intent1);
-                            Log.i("Bedroom Gallery", "inside morePicture-end");
+                            Log.i("Dining Room Gallery", "inside morePicture-end");
                             getActivity().finish();
                         }
                     }
                     else {
                         //This is called if it is the initial image to be chosen.
-                        Log.i("Bedroom Gallery", "inside first picture choice");
+                        Log.i("Dining Room Gallery", "inside first picture choice");
 
                         //Create intent
                         Intent intent = new Intent(getActivity(),  ProductView.class);

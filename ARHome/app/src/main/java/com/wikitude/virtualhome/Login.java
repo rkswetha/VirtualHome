@@ -1,33 +1,36 @@
 package com.wikitude.virtualhome;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.Signature;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.content.Intent;
-import android.content.pm.*;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.util.Log;
-import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-import com.facebook.FacebookSdk;
-import com.facebook.login.*;
+import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.CallbackManager;
-import com.facebook.login.widget.LoginButton;
-import com.facebook.appevents.AppEventsLogger;
+import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -52,6 +55,7 @@ public class Login extends Activity {
     String[] genderArray;
     String[] familyArray;
     String[] occupationArray;
+    String ConstantURL = URLAPIConstant.URL;
 
 
     public static final String PREFERENCES_Gallery_FILE_NAME = "VHGalleryPreferences";
@@ -322,9 +326,10 @@ public class Login extends Activity {
         protected String doInBackground(String... arg0) {
             HttpURLConnection urlConnection = null;
 
-            //String url1= "http://ec2-54-219-182-125.us-west-1.compute.amazonaws.com:8080/api/v1/users";
-            String url1= "http://ec2-52-11-109-4.us-west-2.compute.amazonaws.com:8080/api/v8/users";
-            //String url1= "http://192.168.0.14:8080/api/v5/users";
+            //DO NOT USE String url1= "http://ec2-54-219-182-125.us-west-1.compute.amazonaws.com:8080/api/v1/users";
+            String url1= ConstantURL+"users";
+            //String url1= "http://ec2-52-11-109-4.us-west-2.compute.amazonaws.com:8080/api/v8/users";
+            // DO NOT USE String url1= "http://192.168.0.14:8080/api/v5/users";
 
             StringBuilder sb = new StringBuilder();
             try {
@@ -367,7 +372,7 @@ public class Login extends Activity {
                 }
                 else {
                     //It is created:
-
+                    creationNotSuccess=false;
                     BufferedReader br = new BufferedReader(new InputStreamReader(
                             (urlConnection.getInputStream())));
 
@@ -497,9 +502,10 @@ public class Login extends Activity {
             HttpURLConnection urlConnection = null;
             Log.i("Login","inside returning user aync");
 
-            //String url1= "http://ec2-54-193-107-243.us-west-1.compute.amazonaws.com:8080/api/v5/login";
-            String url1= "http://ec2-52-11-109-4.us-west-2.compute.amazonaws.com:8080/api/v8/login";
-            //String url1= "http://192.168.0.14:8080/api/v5/login";
+            //String url1= " DO NOT USE http://ec2-54-193-107-243.us-west-1.compute.amazonaws.com:8080/api/v5/login";
+            String url1= ConstantURL+"login";
+            //String url1= "http://ec2-52-11-109-4.us-west-2.compute.amazonaws.com:8080/api/v8/login";
+            //String url1= "DO NOT USE http://192.168.0.14:8080/api/v5/login";
 
             StringBuilder sb = new StringBuilder();
             try {
