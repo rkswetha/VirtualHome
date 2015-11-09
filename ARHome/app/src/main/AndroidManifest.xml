@@ -108,7 +108,9 @@
         </activity>
         <activity
             android:name=".ProductGalleryTabPage"
-            android:label="@string/title_activity_product_view" >
+            android:label="@string/title_activity_product_view"
+            android:configChanges=
+                "keyboardHidden|screenLayout|screenSize|orientation">
         </activity>
         <activity android:name="com.facebook.FacebookActivity"
             android:configChanges=
