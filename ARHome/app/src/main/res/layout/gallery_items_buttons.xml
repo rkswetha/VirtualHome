@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id ="@+id/containerid">
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Living Room"
+        android:id="@+id/LivingRoomGalleryButton"
+        android:layout_weight="1"
+        android:background="#ff90ae" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:background="#bcb8bf"
+        android:layout_weight="1" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Dining Room"
+        android:id="@+id/DiningRoomGalleryButton"
+        android:layout_weight="1"
+        android:background="#ffc283" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:background="#bcb8bf"
+        android:layout_weight="1" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Bedroom"
+        android:id="@+id/BedroomGalleryButton"
+        android:layout_weight="1"
+        android:background="#fffba9" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:background="#bcb8bf"
+        android:layout_weight="1" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Home Office"
+        android:id="@+id/HomeOfficeGalleryButton"
+        android:layout_weight="1"
+        android:background="#aaff9a" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:background="#bcb8bf"
+        android:layout_weight="1" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Home Decor"
+        android:id="@+id/HomeDecorGalleryButton"
+        android:layout_weight="1"
+        android:background="#82e2ff" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:background="#bcb8bf"
+        android:layout_weight="1" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Kitchen"
+        android:id="@+id/KitchenGalleryButton"
+        android:layout_weight="1"
+        android:background="#979dff" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:background="#bcb8bf"
+        android:layout_weight="1" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Kids"
+        android:id="@+id/KidsGalleryButton"
+        android:layout_weight="1"
+        android:background="#e0a1fe" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:background="#bcb8bf"
+        android:layout_weight="1" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Misc."
+        android:id="@+id/MiscGalleryButton"
+        android:layout_weight="1"
+        android:background="#b7b4b6" />
+</LinearLayout>
