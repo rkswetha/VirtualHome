@@ -382,7 +382,7 @@ function getLSVirtualObjectInfo(){
 
 function getLSAndroidImagePath(){
     if (localStorage.getItem("AndroidImagePath") == null){
-        alert("Choose image from Android Gallery");
+        //alert("Choose image from Android Gallery");
         return null;
     } else{
         return localStorage.getItem("AndroidImagePath");
