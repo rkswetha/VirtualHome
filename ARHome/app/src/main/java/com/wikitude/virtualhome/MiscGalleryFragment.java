@@ -86,7 +86,7 @@ public class MiscGalleryFragment extends Fragment {
         new GalleryAsynTask().execute();
         setHasOptionsMenu(true);
         ActionBar actionbar = getActivity().getActionBar();
-        actionbar.setTitle("Misc Gallery");
+        actionbar.setTitle("Misc. Gallery");
         return v;
 
     }
