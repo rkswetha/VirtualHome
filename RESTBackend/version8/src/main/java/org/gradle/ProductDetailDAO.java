@@ -306,7 +306,7 @@ public class ProductDetailDAO {
 		mainObj.put("total_results_count", jsonarray.length());
 		mainObj.put("code", "OK");
 		mainObj.put("offset", "0");
-		if(!((category.equals("sofa")) || (category.equals("chairs")) || (category.equals("diningset")) || (category.equals("table")) || (category.equals("bedroom")) || (category.equals("organization")) || (category.equals("intdesign")) || (category.equals("misc")) || (category.equals("datamining"))))
+		if(!((category.equals("livingroom")) || (category.equals("bedroom")) || (category.equals("diningroom")) || (category.equals("homedecor")) || (category.equals("misc")) || (category.equals("homeoffice")) || (category.equals("kitchen")) || (category.equals("kids"))))
 		{
 			System.out.println(mainObj.toString());
 			System.out.println("No correct category selected condition category = "+category);
