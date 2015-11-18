@@ -17,7 +17,7 @@ Android application for Real-estate with Augmented Reality and Data mining
  * Edit options for overlay image.
  * Web server backend with database support. 
  
- Features supported as part of Phase 2(CMPE295B)
+Features supported as part of Phase 2(CMPE295B)
  * User login from Facebook
  * Display Furniture gallery based on product category
  * Cache implementation while loading gallery images. 
