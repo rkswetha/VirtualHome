@@ -51,73 +51,85 @@ public class GalleryButtonsFragment extends Fragment implements View.OnClickList
 
             setHasOptionsMenu(true);
             ActionBar actionbar = getActivity().getActionBar();
-            actionbar.setTitle("Gallery");
+            actionbar.setTitle("Product Gallery Category");
             return v;
         }
 
         @Override
         public void onClick(View v) {
+            Gallery g= new Gallery();
+            Bundle bundle = new Bundle();
             switch (v.getId()) {
                 case R.id.LivingRoomGalleryButton:
-                    LivingRoomGalleryFragment sgf= new LivingRoomGalleryFragment();
+                    //Gallery g= new Gallery();
+                    //Bundle bundle = new Bundle();
+                    bundle.putString("category", "livingroom");
+                    g.setArguments(bundle);
                     this.getFragmentManager().beginTransaction()
-                            .replace(R.id.your_placeholder, sgf)
+                            .replace(R.id.your_placeholder, g)
                             .addToBackStack("livingRoomfragment")
                             .commit();
                     break;
 
                 case R.id.BedroomGalleryButton:
-                    BedroomGalleryFragment bgf= new BedroomGalleryFragment();
+                    bundle.putString("category", "bedroom");
+                    g.setArguments(bundle);
                     this.getFragmentManager().beginTransaction()
-                        .replace(R.id.your_placeholder, bgf)
+                            .replace(R.id.your_placeholder, g)
                         .addToBackStack("bedroomfragment")
                         .commit();
                     break;
 
                 case R.id.DiningRoomGalleryButton:
-                    DiningRoomGalleryFragment drgf= new DiningRoomGalleryFragment();
+                    bundle.putString("category", "diningroom");
+                    g.setArguments(bundle);
                     this.getFragmentManager().beginTransaction()
-                            .replace(R.id.your_placeholder, drgf)
+                            .replace(R.id.your_placeholder, g)
                             .addToBackStack("diningroomfragment")
                             .commit();
                     break;
 
                 case R.id.KitchenGalleryButton:
-                    KitchenGalleryFragment kgf= new KitchenGalleryFragment();
+                    bundle.putString("category", "kitchen");
+                    g.setArguments(bundle);
                     this.getFragmentManager().beginTransaction()
-                            .replace(R.id.your_placeholder, kgf)
+                            .replace(R.id.your_placeholder, g)
                             .addToBackStack("kitchenfragment")
                             .commit();
                     break;
 
                 case R.id.KidsGalleryButton:
-                    KidsGalleryFragment kidsgf= new KidsGalleryFragment();
+                    bundle.putString("category", "kids");
+                    g.setArguments(bundle);
                     this.getFragmentManager().beginTransaction()
-                            .replace(R.id.your_placeholder, kidsgf)
+                            .replace(R.id.your_placeholder, g)
                             .addToBackStack("kidsfragment")
                             .commit();
                     break;
 
                 case R.id.HomeDecorGalleryButton:
-                    HomeDecorGalleryFragment hdgf= new HomeDecorGalleryFragment();
+                    bundle.putString("category", "homedecor");
+                    g.setArguments(bundle);
                     this.getFragmentManager().beginTransaction()
-                            .replace(R.id.your_placeholder, hdgf)
+                            .replace(R.id.your_placeholder, g)
                             .addToBackStack("homedecorfragment")
                             .commit();
                     break;
 
                 case R.id.HomeOfficeGalleryButton:
-                    HomeOfficeGalleryFragment hogf= new HomeOfficeGalleryFragment();
+                    bundle.putString("category", "homeoffice");
+                    g.setArguments(bundle);
                     this.getFragmentManager().beginTransaction()
-                            .replace(R.id.your_placeholder, hogf)
+                            .replace(R.id.your_placeholder, g)
                             .addToBackStack("homeofficefragment")
                             .commit();
                     break;
 
                 case R.id.MiscGalleryButton:
-                    MiscGalleryFragment mgf= new MiscGalleryFragment();
+                    bundle.putString("category", "misc");
+                    g.setArguments(bundle);
                     this.getFragmentManager().beginTransaction()
-                            .replace(R.id.your_placeholder, mgf)
+                            .replace(R.id.your_placeholder, g)
                             .addToBackStack("miscfragment")
                             .commit();
                     break;

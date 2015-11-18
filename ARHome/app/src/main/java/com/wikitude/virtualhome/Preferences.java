@@ -336,7 +336,7 @@ changed the braces: changed that if the call is from a different location->then 
     public void launchGallery()
     {
         Log.d("VirtualHome1", "Clicked gallery");
-        Intent intent = new Intent(this, ProductGalleryTabPage.class);
+        Intent intent = new Intent(this, GalleryCategory.class);
         startActivity(intent);
     }
 

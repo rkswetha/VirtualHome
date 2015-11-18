@@ -723,7 +723,7 @@ public class Login extends Activity {
             else
             {
                 //If returning user, navigating the to the gallery
-                Intent intent = new Intent(Login.this, ProductGalleryTabPage.class);
+                Intent intent = new Intent(Login.this, GalleryCategory.class);
                 //intent.putExtra("newUserFlag","false");
                 startActivity(intent);
             }

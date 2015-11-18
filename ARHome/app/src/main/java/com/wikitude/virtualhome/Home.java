@@ -2,7 +2,6 @@ package com.wikitude.virtualhome;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -104,7 +103,7 @@ public class Home extends Activity {
         Log.d("VirtualHome1", "Clicked gallery");
 
         //Intent intent = new Intent(this, SofaGallery_new.class);
-        Intent intent = new Intent(this, ProductGalleryTabPage.class);
+        Intent intent = new Intent(this, GalleryCategory.class);
         startActivity(intent);
     }
 
