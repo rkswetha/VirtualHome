@@ -219,7 +219,7 @@ This function is used to add more product images to the AR screen
  */
     public void chooseMoreImage()
     {
-        Intent intent = new Intent(getApplication(),GalleryCategory.class);
+        Intent intent = new Intent(getApplication(),ProductGalleryTabPage.class);
         intent.putExtra("additionalProduct", "yes");
         startActivityForResult(intent, MORE_PICTURE);
     }

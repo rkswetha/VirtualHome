@@ -59,13 +59,8 @@ import java.util.Date;
         String morePictures;
         boolean GalleryJsonStreamSuccess;
         boolean networkError;
-
         String filePath;
         String ConstantURL = URLAPIConstant.URL;
-        String input = "";
-        String jsonFileName;
-        String uriproduct;
-        String path;
 
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -92,83 +87,13 @@ import java.util.Date;
 
             new GalleryAsynTask().execute();
             setHasOptionsMenu(true);
-            //ActionBar actionbar = getActivity().getActionBar();
-            //actionbar.setTitle("Bedroom Gallery");
+            ActionBar actionbar = getActivity().getActionBar();
+            actionbar.setTitle("Bedroom Gallery");
             return v;
 
         }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-            super.onActivityCreated(savedInstanceState);
-
-        Bundle bundle = this.getArguments();
-
-        if (bundle != null) {
-            input = bundle.getString("category");
-        }
-
-        if (input.equals("livingroom")){
-            ActionBar actionbar = getActivity().getActionBar();
-            actionbar.setTitle("Living Room Gallery");
-            jsonFileName = "livingroom.json";
-            uriproduct = "products/livingroom";
-            path = "/VirtualHome/Ikea/LivingRoom";
-        }
-        if (input.equals("diningroom")){
-            ActionBar actionbar = getActivity().getActionBar();
-            actionbar.setTitle("Dining Room Gallery");
-            jsonFileName = "diningroom.json";
-            uriproduct = "products/diningroom";
-            path = "/VirtualHome/Ikea/DiningRoom";
-        }
-        if (input.equals("bedroom")){
-            ActionBar actionbar = getActivity().getActionBar();
-            actionbar.setTitle("Bedroom Gallery");
-            jsonFileName = "bedroom.json";
-            uriproduct = "products/bedroom";
-            path = "/VirtualHome/Ikea/Bedroom";
-        }
-        if (input.equals("kitchen")){
-            ActionBar actionbar = getActivity().getActionBar();
-            actionbar.setTitle("Kitchen Gallery");
-            jsonFileName = "kitchen.json";
-            uriproduct = "products/kitchen";
-            path = "/VirtualHome/Ikea/Kitchen";
-        }
-        if (input.equals("homedecor")){
-            ActionBar actionbar = getActivity().getActionBar();
-            actionbar.setTitle("Home Decor Gallery");
-            jsonFileName = "homedecor.json";
-            uriproduct = "products/homedecor";
-            path = "/VirtualHome/Ikea/HomeDecor";
-        }
-        if (input.equals("homeoffice")){
-            ActionBar actionbar = getActivity().getActionBar();
-            actionbar.setTitle("Home Office Gallery");
-            jsonFileName = "homeoffice.json";
-            uriproduct = "products/homeoffice";
-            path = "/VirtualHome/Ikea/HomeOffice";
-        }
-        if (input.equals("kids")){
-            ActionBar actionbar = getActivity().getActionBar();
-            actionbar.setTitle("Kids Gallery");
-            jsonFileName = "kids.json";
-            uriproduct = "products/kids";
-            path = "/VirtualHome/Ikea/Kids";
-        }
-        if (input.equals("misc")){
-            ActionBar actionbar = getActivity().getActionBar();
-            actionbar.setTitle("Misc. Gallery");
-            jsonFileName = "misc.json";
-            uriproduct = "products/misc";
-            path = "/VirtualHome/Ikea/Misc";
-        }
-
-
-    }
-
-    @Override
+        @Override
         public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
             super.onCreateOptionsMenu(menu, inflater);
             menu.clear();
@@ -269,7 +194,7 @@ import java.util.Date;
                     File file ;
                     FileOutputStream out;
                     if(externalMounted && myDir!=null) {
-                        file = new File(myDir, jsonFileName);
+                        file = new File(myDir, "bedroom.json");
                         filePath = file.getAbsolutePath();
                         FileWriter filewr = new FileWriter(filePath);
                         filewr.write(jsonStr);
@@ -293,7 +218,7 @@ import java.util.Date;
                 //**********************************************************
                 HttpURLConnection urlConnection = null;
                 Log.i("Login","inside gallery");
-                String url1= ConstantURL+uriproduct;
+                String url1= ConstantURL+"products/bedroom";
                 //String url1= "http://ec2-52-11-109-4.us-west-2.compute.amazonaws.com:8080/api/v8/products/bedroom";
 
                 StringBuilder sb = new StringBuilder();
@@ -366,7 +291,7 @@ import java.util.Date;
                                 Log.i("gallery","resultSize:"+resultSize);
                                 Log.i("gallery","queryArray:"+queryArray);
 
-                                //write to input json in SD Card
+                                //write to Bedroom.json in SD Card
                                 createJSONProductFile(jsonObject.toString());
 
                             }catch(JSONException e)
@@ -421,7 +346,7 @@ import java.util.Date;
 
                         Log.i("VirtualHome-Gallery", "Root Directory---" + root);
 
-                        myDir = new File(root + path);
+                        myDir = new File(root + "/VirtualHome/Ikea/Bedroom");
 
                         if (!myDir.exists()) {
                             if (myDir.mkdirs()) {
@@ -482,7 +407,7 @@ import java.util.Date;
 
                 //getting the extra:
                 morePictures = getActivity().getIntent().getStringExtra("additionalProduct");
-                Log.i(input.toUpperCase()+ "Gallery", "morePictures " + morePictures);
+                Log.i("Bedroom Gallery", "morePictures " + morePictures);
 
                 gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
@@ -491,22 +416,22 @@ import java.util.Date;
                         System.out.println("after image creation");
 
                         if(morePictures!=null) {
-                            Log.i(input.toUpperCase()+ " Gallery", "inside not null");
+                            Log.i("Bedroom Gallery", "inside not null");
                             if (morePictures.trim().equals("yes")) {
                                 //This is called if additional images have to be added to the AR screen
-                                Log.i(input.toUpperCase()+ " Gallery", "inside morePicture");
+                                Log.i("Bedroom Gallery", "inside morePicture");
                                 Intent intent1 = new Intent();
                                 intent1.putExtra("location", item.getGalleryItemLocation());
                                 intent1.putExtra("title", item.getGalleryItemTitle());
                                 intent1.putExtra("description", item.getGalleryItemDescription());
                                 getActivity().setResult(2, intent1);
-                                Log.i(input.toUpperCase()+ " Gallery", "inside morePicture-end");
+                                Log.i("Bedroom Gallery", "inside morePicture-end");
                                 getActivity().finish();
                             }
                         }
                         else {
                             //This is called if it is the initial image to be chosen.
-                            Log.i(input.toUpperCase()+ " Gallery", "inside first picture choice");
+                            Log.i("Bedroom Gallery", "inside first picture choice");
 
                             //Create intent
                             Intent intent = new Intent(getActivity(),  ProductView.class);

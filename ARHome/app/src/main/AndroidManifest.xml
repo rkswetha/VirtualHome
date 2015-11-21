@@ -107,7 +107,7 @@
             android:label="@string/title_activity_product_view" >
         </activity>
         <activity
-            android:name=".GalleryCategory"
+            android:name=".ProductGalleryTabPage"
             android:label="@string/title_activity_product_view"
             android:configChanges=
                 "keyboardHidden|screenLayout|screenSize|orientation">

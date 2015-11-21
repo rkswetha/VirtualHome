@@ -9,7 +9,7 @@ import android.view.MenuItem;
 /**
  * Created by anusha on 10/23/15.
  */
-public class GalleryCategory extends FragmentActivity {
+public class ProductGalleryTabPage extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
