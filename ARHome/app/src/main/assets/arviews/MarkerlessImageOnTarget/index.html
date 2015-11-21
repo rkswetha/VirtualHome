@@ -28,10 +28,17 @@
 	<div id = "deleteIcon" class="imgIcon" style="background-image:url('assets/delete.png');margin-right: 10px"></div>
 	<div id = "recommendationIcon" class="imgIcon" style="background-image:url('assets/Recommendation.png');margin-right: 1px"></div>
 </div>
+
 <div id="thumbnails" style ="position: fixed; z-index:100; display:none;">
-	<img id ="datamining1" src = "assets/plus.png" class = "thumbnailFormat"/>
-	<img id ="datamining2" src = "assets/plus.png" class = "thumbnailFormat"/>
-	<img id ="datamining3" src = "assets/plus.png" class = "thumbnailFormat"/>
+<div class="container">
+	<img id ="datamining1" src = "" onclick="addThumbnailImage(this.src)"/>
+</div>
+<div class="container">
+	<img id ="datamining2" src = "" onclick="addThumbnailImage(this.src)"/>
+</div>
+<div class="container">
+	<img id ="datamining3" src = "" onclick="addThumbnailImage(this.src)"/>
+</div>
 </div>
 
 <script src="js/imageoverlay.js"></script>

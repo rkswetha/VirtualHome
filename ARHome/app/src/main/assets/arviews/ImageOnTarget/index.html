@@ -28,10 +28,17 @@
 <div id="loadingMessage1" style='display: table-cell;vertical-align: middle; text-align: right; width: 50%; padding-right: 15px;'>Scan Target &#35;1 (home), then move closer to the target</div>
 <div id="loadingMessage2" style='display: table-cell;vertical-align: middle; text-align: left;'><img src='assets/target.png'></img></div>
 
-<div id="thumbnails" style ="display:none;">
-	<img id ="datamining1" src = "assets/target.png" class = "thumbnailFormat"/>
-	<img id ="datamining2" src = "assets/target.png" class = "thumbnailFormat"/>
-	<img id ="datamining3" src = "assets/target.png" class = "thumbnailFormat"/>
+<div id="thumbnails" style ="position: fixed; z-index:100; display:none;">
+	<div class="container">
+		<img id ="datamining1" src = "" onclick="World.replaceWithThumbnailImage(this.src);"/>
+	</div>
+
+	<div class="container">
+		<img id ="datamining2" src = "" onclick="World.replaceWithThumbnailImage(this.src);"/>
+	</div>
+	<div class="container">
+		<img id ="datamining3" src = "" onclick="World.replaceWithThumbnailImage(this.src);"/>
+	</div>
 </div>
 
 <div data-role="footer" data-id="footernavbar" data-position="fixed" data-theme="c">
