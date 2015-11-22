@@ -43,6 +43,7 @@ dependencies {
     compile("org.springframework:spring-webmvc:2.5.2")
     compile("com.cloudinary:cloudinary-taglib:1.2.2")
     compile("com.cloudinary:cloudinary-http43:1.2.2")
+	compile("nz.ac.waikato.cms.weka:weka-stable:3.6.6")
     testCompile("junit:junit")
 }
 
