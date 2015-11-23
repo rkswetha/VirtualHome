@@ -241,24 +241,24 @@ public class ProductRecommendationDAO {
 	    
 	    // - nominal
 	    attVals = new FastVector();
-	    attVals.addElement("Female");
-	    attVals.addElement("Male");
+	    attVals.addElement("female");
+	    attVals.addElement("male");
 	    atts.addElement(new Attribute("gender", attVals));
 	    
 	    
 	    //Family
 	    attFamilyVals = new FastVector();
 	    attFamilyVals.addElement("single");
-	    attFamilyVals.addElement("familyboykid");
+	    attFamilyVals.addElement("familywithboykids");
 	    attFamilyVals.addElement("family");
-	    attFamilyVals.addElement("familygirlkid");
+	    attFamilyVals.addElement("familywithgirlkids");
 	    atts.addElement(new Attribute("family", attFamilyVals));
 	    
 	    
 	    
 	    //Profession
 	    attProffVals = new FastVector();
-	    attProffVals.addElement("it");
+	    attProffVals.addElement("itfield");
 	    attProffVals.addElement("business");
 	    attProffVals.addElement("educational");
 	    attProffVals.addElement("homemaker");
