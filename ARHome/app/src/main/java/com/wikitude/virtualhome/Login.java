@@ -52,6 +52,7 @@ public class Login extends Activity {
     private boolean creationNotSuccess=false;
     private boolean networkError=false;
     private boolean LoginSuccess=false;
+	String ConstantURL = URLAPIConstant.URL;
 
 
 
