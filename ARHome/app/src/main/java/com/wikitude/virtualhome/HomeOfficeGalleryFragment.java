@@ -371,7 +371,7 @@ public class HomeOfficeGalleryFragment extends Fragment {
                     descriptions[i] = jsonAttributes.getString("description");
                     prices[i] = jsonAttributes.getString("price");
                     imageLocations[i] = jsonAttributes.getString("url");
-                    galleryImages.add(new GalleryItem( names[i], descriptions[i], imageLocations[i].toString()));
+                    galleryImages.add(new GalleryItem( names[i], descriptions[i], imageLocations[i].toString(),productID[i]));
 
 
                 }
@@ -445,6 +445,8 @@ public class HomeOfficeGalleryFragment extends Fragment {
                         //location
 
                         intent.putExtra("location", item.getGalleryItemLocation());
+                        //product id
+                        intent.putExtra("productid", item.getGalleryItemProductID());
 
                         //Start details activity
                         startActivity(intent);

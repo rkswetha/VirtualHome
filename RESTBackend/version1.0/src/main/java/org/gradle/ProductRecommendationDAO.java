@@ -101,6 +101,8 @@ public class ProductRecommendationDAO {
 		     //Evaluate cluster
 		     ClusterEvaluation clsEval = new ClusterEvaluation();
 		     
+		     
+		     
 		     //Another method of creating test file:
 		 /*    try{
 		     File file = new File("test-new.arff");
@@ -401,13 +403,17 @@ public class ProductRecommendationDAO {
 		//Pick up a random number in the set size range
 		Random rand=new Random();
 		Long[] list = (Long[]) totalItems.toArray(new Long[totalItems.size()]);
+		//Set<Long> duplicateCheck = new HashSet<Long>();
 		
 		for(int i=0;i<3;i++)
 		{
 		int n = rand.nextInt(totalItems.size()-1)+1;
-		if(list[n]==chosenProductID)
+		System.out.println("duplicate check: "+ list[n]+" "+ items.contains(list[n]));
+		if(list[n]==chosenProductID||items.contains(list[n]))
 		{
-			n=n+1;
+			//n=n+1;
+			//Or generate another random number
+			n = rand.nextInt(totalItems.size()-1)+1;
 		}
 		items.add(list[n]);		
 		

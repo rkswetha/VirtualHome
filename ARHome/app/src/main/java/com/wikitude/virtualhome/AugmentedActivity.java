@@ -68,6 +68,7 @@ import java.io.FileOutputStream;
      String imagePath;
      String selectedImagePath;
      boolean galleryJsonStreamSuccess;
+     String productID;
      String ConstantURL = URLAPIConstant.URL;
      JSONObject userPrefJson;
 
@@ -80,6 +81,7 @@ import java.io.FileOutputStream;
 
          markerPresent = getIntent().getStringExtra("MarkerPresent");
          imagePath = getIntent().getStringExtra("ImagePath");
+         productID= getIntent().getStringExtra("productid");
 
          Log.e(TAG, "VIRTUALHOME: User has marker?" + markerPresent);
          Log.e(TAG, "VIRTUALHOME: User selected image path:" + imagePath);
@@ -269,7 +271,7 @@ import java.io.FileOutputStream;
              userPrefJson.put("painting", painting);
              userPrefJson.put("reading", reading);
              userPrefJson.put("music", music);
-             userPrefJson.put("productID", 1234);
+             userPrefJson.put("productID", productID);
 
              /*userPrefJson.put("user_id", userID);
              userPrefJson.put("sex", "Male");

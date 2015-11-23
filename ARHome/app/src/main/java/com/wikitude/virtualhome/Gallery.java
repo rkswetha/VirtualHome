@@ -370,7 +370,8 @@ import java.util.Date;
                         descriptions[i] = jsonAttributes.getString("description");
                         prices[i] = jsonAttributes.getString("price");
                         imageLocations[i] = jsonAttributes.getString("url");
-                        galleryImages.add(new GalleryItem( names[i], descriptions[i], imageLocations[i].toString()));
+                        // final "" is for a temporary . NEED to delete this file
+                        galleryImages.add(new GalleryItem( names[i], descriptions[i], imageLocations[i].toString(),""));
 
 
                     }

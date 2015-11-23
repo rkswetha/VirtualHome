@@ -21,6 +21,7 @@ public class ProductView extends Activity {
 
     String markerPresent = null;
     String location = null;
+    String productID = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class ProductView extends Activity {
 
         String title = getIntent().getStringExtra("title");
         String description = getIntent().getStringExtra("description");
+         productID = getIntent().getStringExtra("productid");
 
         //Trying to get access the image from the storage
 
@@ -124,6 +126,7 @@ public class ProductView extends Activity {
                             Intent theIntent = new Intent (getApplication(), AugmentedActivity.class);
                             theIntent.putExtra("MarkerPresent", "YES");
                             theIntent.putExtra("ImagePath", location);
+                            theIntent.putExtra("productid",productID);
                             startActivity(theIntent);
 
                         } catch (Exception e) {
@@ -146,6 +149,7 @@ public class ProductView extends Activity {
                             Intent theIntent = new Intent (getApplication(), AugmentedActivity.class);
                             theIntent.putExtra("MarkerPresent", "NO");
                             theIntent.putExtra("ImagePath", location);
+                            theIntent.putExtra("productid",productID);
                             startActivity(theIntent);
                         } catch (Exception e) {
                             Toast.makeText(getApplicationContext(), "\n className not defined/accessible",
