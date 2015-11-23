@@ -52,13 +52,7 @@ public class Login extends Activity {
     private boolean creationNotSuccess=false;
     private boolean networkError=false;
     private boolean LoginSuccess=false;
-<<<<<<< Updated upstream
 	String ConstantURL = URLAPIConstant.URL;
-
-=======
-    String ConstantURL = URLAPIConstant.URL;
->>>>>>> Stashed changes
-
 
 
     public static final String PREFERENCES_Gallery_FILE_NAME = "VHGalleryPreferences";
@@ -607,15 +601,7 @@ public class Login extends Activity {
                                 Log.i("VirtualHome", jsonObject.toString());
 
                                 //Saving the userID in shared preferences:
-
-<<<<<<< Updated upstream
-                            Log.i("Login ", "User ID: " + userID);
-
-=======
                                 Log.i("Login ", "User ID: " + userID);
-
-
->>>>>>> Stashed changes
 
                                 //Save email id, password and user id.
                                 SharedPreferences settings = getSharedPreferences(PREFERENCES_Gallery_FILE_NAME, 0);
@@ -631,18 +617,6 @@ public class Login extends Activity {
                                 editor.putString("email", email);
                                 editor.putString("password", pwd);
 
-<<<<<<< Updated upstream
-                            //saving all the preferences
-                            editor.putString("gender", gender);
-                            editor.putString("family", family);
-                            editor.putString("profession", profession);
-                            editor.putBoolean("gardening", Boolean.parseBoolean(gardening));
-                            editor.putBoolean("interiorDesign", Boolean.parseBoolean(interiorDesign));
-                            editor.putBoolean("cooking", Boolean.parseBoolean(cooking));
-                            editor.putBoolean("painting", Boolean.parseBoolean(painting));
-                            editor.putBoolean("reading", Boolean.parseBoolean(reading));
-                            editor.putBoolean("music", Boolean.parseBoolean(music));
-=======
                                 //saving all the preferences
                                 editor.putString("gender", gender);
                                 editor.putString("family", family);
@@ -653,9 +627,6 @@ public class Login extends Activity {
                                 editor.putBoolean("painting", Boolean.parseBoolean(painting));
                                 editor.putBoolean("reading", Boolean.parseBoolean(reading));
                                 editor.putBoolean("music", Boolean.parseBoolean(music));
->>>>>>> Stashed changes
-
-
                                 editor.commit();
 
                        /*     //For confirmation
