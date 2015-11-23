@@ -298,6 +298,7 @@ public class ProductDetailDAO {
 		return true;
 	}
 
+/*
 	public String getProductByCategory(String category){
 
 		final JSONArray jsonarray = new JSONArray();
@@ -314,7 +315,7 @@ public class ProductDetailDAO {
 		}
 		if(find.first() == null)
 		{
-			System.out.println(mainObj.toString());
+			//System.out.println(mainObj.toString());
 			System.out.println("result set empty condition");
 			return mainObj.toString();
 		}
@@ -322,7 +323,7 @@ public class ProductDetailDAO {
 		find.forEach(new Block<Document>() {
 			@Override
 			public void apply(final Document doc) {
-				System.out.println(doc);
+				//System.out.println(doc);
 				JSONObject jsonobj = new JSONObject();
 				jsonobj.put("name", doc.getString("name"));
 				jsonobj.put("category", doc.getString("category"));
@@ -340,7 +341,43 @@ public class ProductDetailDAO {
 
 		return mainObj.toString();
 	}
+*/
 
+    public String getProductByCategory(String category){
+        FindIterable<Document> find = prodCollection.find(new Document("category",category));
+    	if(find.first() == null)
+    		return null;
+
+        final JSONArray jsonarray = new JSONArray();
+
+	find.forEach(new Block<Document>() {
+    		@Override
+    		public void apply(final Document doc) {
+        		System.out.println(doc);
+
+	        	JSONObject jsonobj = new JSONObject();
+	        	jsonobj.put("productid", doc.getInteger("_id"));
+	        	jsonobj.put("name", doc.getString("name"));
+	        	jsonobj.put("category", doc.getString("category"));
+	        	jsonobj.put("description", doc.getString("description"));
+	        	jsonobj.put("price", doc.getString("price"));
+	        	jsonobj.put("url", doc.getString("url"));
+	        	jsonarray.put(jsonobj);
+		}
+	});
+
+        JSONObject mainObj = new JSONObject();
+	mainObj.put("total_results_count", jsonarray.length());
+	mainObj.put("code", "OK");
+	mainObj.put("offset", "0");
+	mainObj.put("results", jsonarray);
+	        
+	//System.out.println("JSON data created from MongoDB");
+	//System.out.println(mainObj.toString());
+    	//System.out.println("The product details are :" + find.toString());
+
+        return mainObj.toString();
+    }
 
 	public void updateProduct(ProductDetail prod, int id) {
 		FindIterable<Document> find = prodCollection.find(new Document("_id",id));

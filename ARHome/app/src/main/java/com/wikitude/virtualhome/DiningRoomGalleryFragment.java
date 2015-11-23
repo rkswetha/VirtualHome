@@ -161,6 +161,7 @@ public class DiningRoomGalleryFragment extends Fragment {
 
     private class GalleryAsynTask extends AsyncTask<String, String, String> {
 
+        private String[] productID;
         private String[] names;
         private String[] descriptions;
         private String[] prices;
@@ -335,7 +336,7 @@ public class DiningRoomGalleryFragment extends Fragment {
                 JSONArray queryArray = jsonObject.getJSONArray("results");
                 int resultSize = queryArray.length();
 
-
+                productID = new String[resultSize];
                 names = new String[resultSize];
                 descriptions = new String[resultSize];
                 prices = new String[resultSize];
@@ -374,6 +375,7 @@ public class DiningRoomGalleryFragment extends Fragment {
                 for (int i = 0; i < queryArray.length(); i++) {
                     JSONObject jsonAttributes = queryArray.getJSONObject(i);
 
+                    productID[i] = jsonAttributes.getString("productid");
                     names[i] = jsonAttributes.getString("name");
                     descriptions[i] = jsonAttributes.getString("description");
                     prices[i] = jsonAttributes.getString("price");

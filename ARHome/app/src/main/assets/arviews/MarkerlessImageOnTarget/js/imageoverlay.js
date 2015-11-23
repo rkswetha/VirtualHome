@@ -16,9 +16,9 @@ var recommendedUrls = [];
 $(function() {
     setButtons();
     draggableObjects();
-    getRecommendedProducts("http://res.cloudinary.com/cmpe295b/image/upload/c_fit,h_500,w_500/116.PNG",
+    /*getRecommendedProducts("http://res.cloudinary.com/cmpe295b/image/upload/c_fit,h_500,w_500/116.PNG",
                   "http://res.cloudinary.com/cmpe295b/image/upload/c_fit,h_500,w_500/brusaliik.PNG",
-                  "http://res.cloudinary.com/cmpe295b/image/upload/c_fit,h_500,w_500/135.PNG");
+                  "http://res.cloudinary.com/cmpe295b/image/upload/c_fit,h_500,w_500/135.PNG"); */
 
 });
 
@@ -114,6 +114,8 @@ function getRecommendedProducts(url1, url2, url3){
     recommendedUrls.push(url1);
     recommendedUrls.push(url2);
     recommendedUrls.push(url3);
+
+    showDataMiningThumbnail();
 };
 
 function showDataMiningThumbnail(){

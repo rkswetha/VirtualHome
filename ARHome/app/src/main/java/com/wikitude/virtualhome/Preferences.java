@@ -163,31 +163,38 @@ changed the braces: changed that if the call is from a different location->then 
 
 
             }} else {
-                //getting the preferences:
+            //getting the preferences:
 
-                //Log.i("pref:", "inside new user");
+            //Log.i("pref:", "inside new user");
 
 
+<<<<<<< Updated upstream
                 String gender=settings.getString("gender", null);
                 String family=settings.getString("family", null);
                 String profession=settings.getString("profession", null);
+=======
+            String gender=settings.getString("gender", null);
+            String family=settings.getString("family", null);
+            String profession=settings.getString("profession", null);
+>>>>>>> Stashed changes
 
-                boolean gardening=settings.getBoolean("gardening", false);
-                boolean interiorDesign=settings.getBoolean("interiorDesign",false);
-                boolean cooking=settings.getBoolean("cooking",false);
-                boolean painting=settings.getBoolean("painting",false);
-                boolean reading=settings.getBoolean("reading",false);
-                boolean music=settings.getBoolean("music",false);
-
-
-
-
-
-                Log.i("pref:", "inside returning user");
-
-               // Log.i("pref:", "gender"+gender+" family"+family+"profession"+profession);
+            boolean gardening=settings.getBoolean("gardening", false);
+            boolean interiorDesign=settings.getBoolean("interiorDesign",false);
+            boolean cooking=settings.getBoolean("cooking",false);
+            boolean painting=settings.getBoolean("painting",false);
+            boolean reading=settings.getBoolean("reading",false);
+            boolean music=settings.getBoolean("music",false);
 
 
+
+
+
+            Log.i("pref:", "inside returning user");
+
+            // Log.i("pref:", "gender"+gender+" family"+family+"profession"+profession);
+
+
+<<<<<<< Updated upstream
                 if(gender!=null&&family!=null&&profession!=null)
                 {
                     // Spinner element
@@ -228,30 +235,72 @@ changed the braces: changed that if the call is from a different location->then 
                         int spinnerPosition = adapter3.getPosition(profession);
                         spinner3.setSelection(spinnerPosition);
                     }
-
+=======
+            if(gender!=null&&family!=null&&profession!=null)
+            {
+                // Spinner element
+                spinner1 = (Spinner) findViewById(R.id.FamilyType);
+                ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
+                        R.array.familytypelist, R.layout.spinner_style_preferences);
+                // Specify the layout to use when the list of choices appears
+                adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                // Apply the adapter to the spinner
+                spinner1.setAdapter(adapter1);
+                if (!family.equals(null)) {
+                    int spinnerPosition = adapter1.getPosition(family);
+                    spinner1.setSelection(spinnerPosition);
                 }
 
-                checkbox1.setChecked(gardening);
-                checkbox2.setChecked(interiorDesign);
-                checkbox3.setChecked(cooking);
-                checkbox4.setChecked(painting);
-                checkbox5.setChecked(reading);
-                checkbox6.setChecked(music);
+
+                spinner2 = (Spinner) findViewById(R.id.SexType1);
+                ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
+                        R.array.sextypelist, R.layout.spinner_style_preferences);
+                // Specify the layout to use when the list of choices appears
+                adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                // Apply the adapter to the spinner
+                spinner2.setAdapter(adapter2);
+                if (!gender.equals(null)) {
+                    int spinnerPosition = adapter2.getPosition(gender);
+                    spinner2.setSelection(spinnerPosition);
+                }
+>>>>>>> Stashed changes
 
 
-
-                button.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        // Perform action on click
-                        onSubmit();
-                    }
-                });
-
-
+                spinner3 = (Spinner) findViewById(R.id.ProfessionType);
+                ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this,
+                        R.array.professiontypelist, R.layout.spinner_style_preferences);
+                // Specify the layout to use when the list of choices appears
+                adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                // Apply the adapter to the spinner
+                spinner3.setAdapter(adapter3);
+                if (!profession.equals(null)) {
+                    int spinnerPosition = adapter3.getPosition(profession);
+                    spinner3.setSelection(spinnerPosition);
+                }
 
             }
 
+            checkbox1.setChecked(gardening);
+            checkbox2.setChecked(interiorDesign);
+            checkbox3.setChecked(cooking);
+            checkbox4.setChecked(painting);
+            checkbox5.setChecked(reading);
+            checkbox6.setChecked(music);
+
+
+
+            button.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    // Perform action on click
+                    onSubmit();
+                }
+            });
+
+
+
         }
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -286,7 +335,11 @@ changed the braces: changed that if the call is from a different location->then 
         gender = String.valueOf(spinner2.getSelectedItem());
         profession = String.valueOf(spinner3.getSelectedItem());
 
+<<<<<<< Updated upstream
         
+=======
+
+>>>>>>> Stashed changes
 
         checkbox1= (CheckBox) findViewById(R.id.checkbox_hobby1); //gardening
         chstate1=checkbox1.isChecked();
@@ -335,7 +388,7 @@ changed the braces: changed that if the call is from a different location->then 
 
 
         //Launching the gallery after data insertion
-       // launchGallery();
+        // launchGallery();
 
 
     }
@@ -379,7 +432,7 @@ changed the braces: changed that if the call is from a different location->then 
 
 
         //Post to the server
-       // postToServer();
+        // postToServer();
         new PreferenceAsynTask().execute();
 
 
@@ -520,4 +573,3 @@ changed the braces: changed that if the call is from a different location->then 
 
     }
 }
-
