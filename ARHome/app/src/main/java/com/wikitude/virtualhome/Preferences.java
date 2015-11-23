@@ -168,9 +168,9 @@ changed the braces: changed that if the call is from a different location->then 
                 //Log.i("pref:", "inside new user");
 
 
-                int gender=settings.getInt("gender",-1);
-                int family=settings.getInt("family",-1);
-                int profession=settings.getInt("profession",-1);
+                String gender=settings.getString("gender", null);
+                String family=settings.getString("family", null);
+                String profession=settings.getString("profession", null);
 
                 boolean gardening=settings.getBoolean("gardening", false);
                 boolean interiorDesign=settings.getBoolean("interiorDesign",false);
@@ -188,7 +188,7 @@ changed the braces: changed that if the call is from a different location->then 
                // Log.i("pref:", "gender"+gender+" family"+family+"profession"+profession);
 
 
-                if(gender!=-1&&family!=-1&&profession!=-1)
+                if(gender!=null&&family!=null&&profession!=null)
                 {
                     // Spinner element
                     spinner1 = (Spinner) findViewById(R.id.FamilyType);
@@ -198,7 +198,11 @@ changed the braces: changed that if the call is from a different location->then 
                     adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     // Apply the adapter to the spinner
                     spinner1.setAdapter(adapter1);
-                    spinner1.setSelection(family);
+					if (!family.equals(null)) {
+                        int spinnerPosition = adapter1.getPosition(family);
+                        spinner1.setSelection(spinnerPosition);
+                    }
+
 
                     spinner2 = (Spinner) findViewById(R.id.SexType1);
                     ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
@@ -207,7 +211,10 @@ changed the braces: changed that if the call is from a different location->then 
                     adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     // Apply the adapter to the spinner
                     spinner2.setAdapter(adapter2);
-                    spinner2.setSelection(gender);
+				if (!gender.equals(null)) {
+				int spinnerPosition = adapter2.getPosition(gender);
+				spinner2.setSelection(spinnerPosition);
+                    }
 
 
                     spinner3 = (Spinner) findViewById(R.id.ProfessionType);
@@ -217,7 +224,10 @@ changed the braces: changed that if the call is from a different location->then 
                     adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     // Apply the adapter to the spinner
                     spinner3.setAdapter(adapter3);
-                    spinner3.setSelection(profession);
+					if (!profession.equals(null)) {
+                        int spinnerPosition = adapter3.getPosition(profession);
+                        spinner3.setSelection(spinnerPosition);
+                    }
 
                 }
 
@@ -276,9 +286,7 @@ changed the braces: changed that if the call is from a different location->then 
         gender = String.valueOf(spinner2.getSelectedItem());
         profession = String.valueOf(spinner3.getSelectedItem());
 
-        int familyIndex=spinner1.getSelectedItemPosition();
-        int genderIndex=spinner2.getSelectedItemPosition();
-        int professionIndex=spinner3.getSelectedItemPosition();
+        
 
         checkbox1= (CheckBox) findViewById(R.id.checkbox_hobby1); //gardening
         chstate1=checkbox1.isChecked();
@@ -298,7 +306,7 @@ changed the braces: changed that if the call is from a different location->then 
         checkbox6= (CheckBox) findViewById(R.id.checkbox_hobby6); //music
         chstate6=checkbox6.isChecked();
 
-        String result = family + " " + gender + " " + profession + " " + "1:" + chstate1 + "2:" + chstate2 + "3:" + chstate3 + "4:" + chstate4 + "5:" + chstate5 + "6:" + chstate6 + "x:" + familyIndex+ "y:" + genderIndex+ "z:" + professionIndex;
+        String result = family + " " + gender + " " + profession + " " + "1:" + chstate1 + "2:" + chstate2 + "3:" + chstate3 + "4:" + chstate4 + "5:" + chstate5 + "6:" + chstate6 ;
         Log.i("pref", result);
 
         Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
@@ -312,9 +320,9 @@ changed the braces: changed that if the call is from a different location->then 
         SharedPreferences.Editor editor = settings.edit();
 
 
-        editor.putInt("gender", genderIndex) ;
-        editor.putInt("family", familyIndex);
-        editor.putInt("profession", professionIndex);
+        editor.putString("gender", gender);
+        editor.putString("family", family);
+        editor.putString("profession", profession);
         editor.putBoolean("gardening", chstate1);
         editor.putBoolean("interiorDesign", chstate2);
         editor.putBoolean("cooking", chstate3);

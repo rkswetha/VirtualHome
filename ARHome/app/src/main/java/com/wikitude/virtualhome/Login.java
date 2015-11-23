@@ -52,10 +52,7 @@ public class Login extends Activity {
     private boolean creationNotSuccess=false;
     private boolean networkError=false;
     private boolean LoginSuccess=false;
-    String[] genderArray;
-    String[] familyArray;
-    String[] occupationArray;
-    String ConstantURL = URLAPIConstant.URL;
+
 
 
     public static final String PREFERENCES_Gallery_FILE_NAME = "VHGalleryPreferences";
@@ -72,15 +69,6 @@ public class Login extends Activity {
 
          //getting the arrays.
         // String[] genderArray= R.array.familytypelist;
-        genderArray = getResources().getStringArray(R.array.sextypelist);
-        familyArray = getResources().getStringArray(R.array.familytypelist);
-        occupationArray = getResources().getStringArray(R.array.professiontypelist);
-
-       /* for(int i =0;i<genderArray.length;i++)
-        {
-            Log.i("gender Array",genderArray[i]);
-        }
-*/
         handleOnClickSubmitButton();
 
         handleLoginFromFacebook();
@@ -615,22 +603,7 @@ public class Login extends Activity {
                             //Saving the userID in shared preferences:
 
                             Log.i("Login ", "User ID: " + userID);
-                            int sexIndex = 0, professionIndex = 0, familyIndex = 0;
 
-                            //convert the values of spinners elements to ints:
-                            for (int i = 0; i < genderArray.length; i++) {
-                                if (genderArray[i].equalsIgnoreCase(gender))
-                                    sexIndex = i;
-                            }
-
-                            for (int i = 0; i < familyArray.length; i++) {
-                                if (familyArray[i].equalsIgnoreCase(family))
-                                    familyIndex = i;
-                            }
-                            for (int i = 0; i < occupationArray.length; i++) {
-                                if (occupationArray[i].equalsIgnoreCase(profession))
-                                    professionIndex = i;
-                            }
 
 
                             //Save email id, password and user id.
@@ -648,9 +621,9 @@ public class Login extends Activity {
                             editor.putString("password", pwd);
 
                             //saving all the preferences
-                            editor.putInt("gender", sexIndex);
-                            editor.putInt("family", familyIndex);
-                            editor.putInt("profession", professionIndex);
+                            editor.putString("gender", gender);
+                            editor.putString("family", family);
+                            editor.putString("profession", profession);
                             editor.putBoolean("gardening", Boolean.parseBoolean(gardening));
                             editor.putBoolean("interiorDesign", Boolean.parseBoolean(interiorDesign));
                             editor.putBoolean("cooking", Boolean.parseBoolean(cooking));
