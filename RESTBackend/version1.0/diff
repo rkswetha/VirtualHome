@@ -1,0 +1,107 @@
+diff -r src/main/java/org/gradle/ProductDetailController.java ../../../../tmp/src/main/java/org/gradle/ProductDetailController.java
+44c44
+<     	final MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://karan:karan345@ds047792.mongolab.com:47792/cmpe295"));
+---
+>     	final MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://root:password@ds047792.mongolab.com:47792/cmpe295"));
+80a81,88
+>                System.out.println("inside updateProduct");
+>                return new ResponseEntity<ProductDetail>(HttpStatus.OK);
+>     }
+> 	@RequestMapping(value = "/productswithtrans/{id}", method = RequestMethod.PUT, produces="application/json")
+>     @ResponseBody
+>     public ResponseEntity<ProductDetail> updateProductWithTrans(@NotBlank @PathVariable int id,@Valid @RequestBody ProductDetail prod ){
+>                prodDAO.updateProductWithTrans(prod, id);
+>                System.out.println("inside updateProductWithTrans");
+diff -r src/main/java/org/gradle/ProductDetailDAO.java ../../../../tmp/src/main/java/org/gradle/ProductDetailDAO.java
+162a163,164
+>     	 
+>     	 System.out.println("Inside createTransparent");
+179c181
+<      
+---
+>      System.out.println("exiting createTransparent");
+301d302
+< /*
+318c319
+< 			//System.out.println(mainObj.toString());
+---
+> 			System.out.println(mainObj.toString());
+326c327
+< 				//System.out.println(doc);
+---
+> 				System.out.println(doc);
+344,377d344
+< */
+< 
+<     public String getProductByCategory(String category){
+<         FindIterable<Document> find = prodCollection.find(new Document("category",category));
+<     	if(find.first() == null)
+<     		return null;
+< 
+<         final JSONArray jsonarray = new JSONArray();
+< 
+< 	find.forEach(new Block<Document>() {
+<     		@Override
+<     		public void apply(final Document doc) {
+<         		System.out.println(doc);
+< 
+< 	        	JSONObject jsonobj = new JSONObject();
+< 	        	jsonobj.put("productid", doc.getInteger("_id"));
+< 	        	jsonobj.put("name", doc.getString("name"));
+< 	        	jsonobj.put("category", doc.getString("category"));
+< 	        	jsonobj.put("description", doc.getString("description"));
+< 	        	jsonobj.put("price", doc.getString("price"));
+< 	        	jsonobj.put("url", doc.getString("url"));
+< 	        	jsonarray.put(jsonobj);
+< 		}
+< 	});
+< 
+<         JSONObject mainObj = new JSONObject();
+< 	mainObj.put("total_results_count", jsonarray.length());
+< 	mainObj.put("code", "OK");
+< 	mainObj.put("offset", "0");
+< 	mainObj.put("results", jsonarray);
+< 	        
+< 	//System.out.println("JSON data created from MongoDB");
+< 	//System.out.println(mainObj.toString());
+<     	//System.out.println("The product details are :" + find.toString());
+379,380d345
+<         return mainObj.toString();
+<     }
+382a348,380
+> 		System.out.println("inside updateProduct DAO");
+> 		FindIterable<Document> find = prodCollection.find(new Document("_id",id));
+> 		Document document = find.first();
+> 		System.out.println(find.first().toString());
+> 		document.append("name", prod.getName());
+> 		document.append("prices", prod.getPrices());
+> 		document.append("description", prod.getDescription());
+> 		document.append("url", prod.getUrl());
+> 		System.out.println(document.toString());
+> 		Document setDocument=new Document("$set",document);
+> 		prodCollection.updateOne(new Document("_id",id), setDocument);
+> 	}
+> 	
+> 	public void updateProductWithTrans(ProductDetail prod, int id) {
+> 		
+> 		System.out.println("Inside :: updateProductWithTrans");
+> 		if(prod.getName() == null || prod.getCategory() == null || 
+> 				prod.getDescription() == null || prod.getPrices()==null ||prod.getUrl() == null){
+> 			return;
+> 		}
+> 		  
+> 		
+> 		String prodName = prod.getName().replaceAll("\\s", "");
+> 		System.out.println("Product URL to be added: "+prod.getUrl() +"and name:" + prodName);
+> 		
+> 		String newUrl = createTransparentImage(prod.getUrl(), prodName);
+> 		
+> 		System.out.println("New Product URL to be added: "+newUrl);
+> 		
+> 		System.out.println("Saving to product info to Database");
+> 		prod.setUrl(newUrl);
+> 		prod.setName(prodName);
+> 		
+Only in src/main/java/org/gradle: ProductRecommendationController.java
+Only in src/main/java/org/gradle: ProductRecommendationDAO.java
+Only in src/main/java/org/gradle: ProductRecommendation.java

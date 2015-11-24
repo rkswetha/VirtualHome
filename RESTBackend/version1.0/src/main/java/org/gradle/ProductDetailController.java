@@ -41,7 +41,7 @@ public class ProductDetailController {
 	private AtomicLong along;
 	
 	public ProductDetailController() {
-    	final MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://karan:karan345@ds047792.mongolab.com:47792/cmpe295"));
+    	final MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://root:password@ds047792.mongolab.com:47792/cmpe295"));
         final MongoDatabase pollDatabase = mongoClient.getDatabase("cmpe295");
         prodDAO=new ProductDetailDAO(pollDatabase);
 	MongoCollection<Document> prodCollection = pollDatabase.getCollection("productdetails");;
@@ -78,6 +78,14 @@ public class ProductDetailController {
     @ResponseBody
     public ResponseEntity<ProductDetail> updateProduct(@NotBlank @PathVariable int id,@Valid @RequestBody ProductDetail prod ){
                prodDAO.updateProduct(prod, id);
+               System.out.println("inside updateProduct");
+               return new ResponseEntity<ProductDetail>(HttpStatus.OK);
+    }
+	@RequestMapping(value = "/productswithtrans/{id}", method = RequestMethod.PUT, produces="application/json")
+    @ResponseBody
+    public ResponseEntity<ProductDetail> updateProductWithTrans(@NotBlank @PathVariable int id,@Valid @RequestBody ProductDetail prod ){
+               prodDAO.updateProductWithTrans(prod, id);
+               System.out.println("inside updateProductWithTrans");
                return new ResponseEntity<ProductDetail>(HttpStatus.OK);
     }
 }
