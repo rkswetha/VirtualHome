@@ -87,6 +87,7 @@ public class LivingRoomGalleryFragment extends Fragment {
         setHasOptionsMenu(true);
         ActionBar actionbar = getActivity().getActionBar();
         actionbar.setTitle("Living Room Gallery");
+        this.setRetainInstance(true);
         return v;
 
     }
@@ -160,6 +161,7 @@ public class LivingRoomGalleryFragment extends Fragment {
 
     private class GalleryAsynTask extends AsyncTask<String, String, String> {
 
+        private String[] productID;
         private String[] names;
         private String[] descriptions;
         private String[] prices;
@@ -326,6 +328,7 @@ public class LivingRoomGalleryFragment extends Fragment {
                 JSONArray queryArray = jsonObject.getJSONArray("results");
                 int resultSize = queryArray.length();
 
+                productID = new String[resultSize];
                 names = new String[resultSize];
                 descriptions = new String[resultSize];
                 prices = new String[resultSize];
@@ -364,11 +367,12 @@ public class LivingRoomGalleryFragment extends Fragment {
                 for (int i = 0; i < queryArray.length(); i++) {
                     JSONObject jsonAttributes = queryArray.getJSONObject(i);
 
+                    productID[i] = jsonAttributes.getString("productid");
                     names[i] = jsonAttributes.getString("name");
                     descriptions[i] = jsonAttributes.getString("description");
                     prices[i] = jsonAttributes.getString("price");
                     imageLocations[i] = jsonAttributes.getString("url");
-                    galleryImages.add(new GalleryItem( names[i], descriptions[i], imageLocations[i].toString()));
+                    galleryImages.add(new GalleryItem( names[i], descriptions[i], imageLocations[i],productID[i]));
 
 
                 }
@@ -442,6 +446,7 @@ public class LivingRoomGalleryFragment extends Fragment {
                         //location
 
                         intent.putExtra("location", item.getGalleryItemLocation());
+                        intent.putExtra("productid", item.getGalleryItemProductID());
 
                         //Start details activity
                         startActivity(intent);
@@ -452,7 +457,6 @@ public class LivingRoomGalleryFragment extends Fragment {
 
 
     }
-
 
 
 

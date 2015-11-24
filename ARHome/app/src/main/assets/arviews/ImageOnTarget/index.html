@@ -28,17 +28,24 @@
 <div id="loadingMessage1" style='display: table-cell;vertical-align: middle; text-align: right; width: 50%; padding-right: 15px;'>Scan Target &#35;1 (home), then move closer to the target</div>
 <div id="loadingMessage2" style='display: table-cell;vertical-align: middle; text-align: left;'><img src='assets/target.png'></img></div>
 
-<div id="thumbnails" style ="display:none;">
-	<img id ="datamining1" src = "assets/target.png" class = "thumbnailFormat"/>
-	<img id ="datamining2" src = "assets/target.png" class = "thumbnailFormat"/>
-	<img id ="datamining3" src = "assets/target.png" class = "thumbnailFormat"/>
+<div id="thumbnails" style ="position: fixed; z-index:100; display:none;">
+	<div class="container">
+		<img id ="datamining1" src = "" onclick="World.replaceWithThumbnailImage(this.src);"/>
+	</div>
+
+	<div class="container">
+		<img id ="datamining2" src = "" onclick="World.replaceWithThumbnailImage(this.src);"/>
+	</div>
+	<div class="container">
+		<img id ="datamining3" src = "" onclick="World.replaceWithThumbnailImage(this.src);"/>
+	</div>
 </div>
 
 <div data-role="footer" data-id="footernavbar" data-position="fixed" data-theme="c">
 	<a href="javascript: World.scaleUp()" data-inline="true" data-icon="plus">ZoomIn</a>
 	<a href="javascript: World.scaleDown()" data-icon="minus" data-inline="true" data-mini="true">ZoomOut</a>
 	<a href="javascript: World.rotate()" data-icon="refresh" data-inline="true" data-mini="true">Rotate</a>
-	<a href="javascript: World.showDataMiningThumbnail()" data-inline="true" data-icon="shop">Recommended</a>
+	<!--<a href="javascript: World.showDataMiningThumbnail()" data-inline="true" data-icon="shop">Recommended</a>-->
 </div>
 
 <script src="js/imageontarget.js"></script>

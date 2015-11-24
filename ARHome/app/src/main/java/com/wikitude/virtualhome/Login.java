@@ -52,10 +52,7 @@ public class Login extends Activity {
     private boolean creationNotSuccess=false;
     private boolean networkError=false;
     private boolean LoginSuccess=false;
-    String[] genderArray;
-    String[] familyArray;
-    String[] occupationArray;
-    String ConstantURL = URLAPIConstant.URL;
+	String ConstantURL = URLAPIConstant.URL;
 
 
     public static final String PREFERENCES_Gallery_FILE_NAME = "VHGalleryPreferences";
@@ -70,17 +67,8 @@ public class Login extends Activity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
 
-         //getting the arrays.
+        //getting the arrays.
         // String[] genderArray= R.array.familytypelist;
-        genderArray = getResources().getStringArray(R.array.sextypelist);
-        familyArray = getResources().getStringArray(R.array.familytypelist);
-        occupationArray = getResources().getStringArray(R.array.professiontypelist);
-
-       /* for(int i =0;i<genderArray.length;i++)
-        {
-            Log.i("gender Array",genderArray[i]);
-        }
-*/
         handleOnClickSubmitButton();
 
         handleLoginFromFacebook();
@@ -153,7 +141,7 @@ public class Login extends Activity {
 
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.setReadPermissions(Arrays.asList("email"));
-         // Callback registration
+        // Callback registration
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -321,7 +309,7 @@ public class Login extends Activity {
 
 
 
-//create a new USER
+    //create a new USER
     private class PostAsynTask extends AsyncTask<String, String, String> {
         protected String doInBackground(String... arg0) {
             HttpURLConnection urlConnection = null;
@@ -363,7 +351,7 @@ public class Login extends Activity {
 //TODO: Check for re entry condition here
                 if (urlConnection.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
 
-               Log.i("Login", "---Failed : HTTP error code : "
+                    Log.i("Login", "---Failed : HTTP error code : "
                             + urlConnection.getResponseCode());
                     creationNotSuccess=true;
 
@@ -572,69 +560,51 @@ public class Login extends Activity {
                     }
                     else
                     {
-                    //Parsing the returned json
-                    JSONObject jsonObject = null;
-                    String userID = null;
-                    String gender = null;
-                    String family = null;
-                    String profession = null;
-                    String gardening = null;
-                    String interiorDesign = null;
-                    String cooking = null;
-                    String painting = null;
-                    String music = null;
-                    String reading = null;
+                        //Parsing the returned json
+                        JSONObject jsonObject = null;
+                        String userID = null;
+                        String gender = null;
+                        String family = null;
+                        String profession = null;
+                        String gardening = null;
+                        String interiorDesign = null;
+                        String cooking = null;
+                        String painting = null;
+                        String music = null;
+                        String reading = null;
 
 
-                    try {
-                        Log.i("LoginAsync ", "Retrieve jsonContent");
+                        try {
+                            Log.i("LoginAsync ", "Retrieve jsonContent");
 
-                        //System.out.println("inside : " + serverSB);
+                            //System.out.println("inside : " + serverSB);
 
-                        jsonObject = new JSONObject(serverSB.toString());
-                        //Assuming only 1 jsonObject is returned.
-                        if (jsonObject != null) {
-                            //Obtaining the data
-                            userID = jsonObject.getString("user_id");
-                            gender = jsonObject.getString("sex");
-                            family = jsonObject.getString("family");
-                            profession = jsonObject.getString("profession");
-                            interiorDesign = jsonObject.getString("interiorDesign");
-                            cooking = jsonObject.getString("cooking");
-                            painting = jsonObject.getString("painting");
-                            reading = jsonObject.getString("reading");
-                            music = jsonObject.getString("music");
-                            gardening = jsonObject.getString("gardening");
+                            jsonObject = new JSONObject(serverSB.toString());
+                            //Assuming only 1 jsonObject is returned.
+                            if (jsonObject != null) {
+                                //Obtaining the data
+                                userID = jsonObject.getString("user_id");
+                                gender = jsonObject.getString("sex");
+                                family = jsonObject.getString("family");
+                                profession = jsonObject.getString("profession");
+                                interiorDesign = jsonObject.getString("interiorDesign");
+                                cooking = jsonObject.getString("cooking");
+                                painting = jsonObject.getString("painting");
+                                reading = jsonObject.getString("reading");
+                                music = jsonObject.getString("music");
+                                gardening = jsonObject.getString("gardening");
 
-                            Log.i("VirtualHome- individual", gender + " " + family + " " + profession + " " + interiorDesign + " " + cooking + " " + painting + " " + reading + " " + music);
-
-
-                            //Printing the whole json data obtained:
-                            Log.i("VirtualHome", jsonObject.toString());
-
-                            //Saving the userID in shared preferences:
-
-                            Log.i("Login ", "User ID: " + userID);
-                            int sexIndex = 0, professionIndex = 0, familyIndex = 0;
-
-                            //convert the values of spinners elements to ints:
-                            for (int i = 0; i < genderArray.length; i++) {
-                                if (genderArray[i].equalsIgnoreCase(gender))
-                                    sexIndex = i;
-                            }
-
-                            for (int i = 0; i < familyArray.length; i++) {
-                                if (familyArray[i].equalsIgnoreCase(family))
-                                    familyIndex = i;
-                            }
-                            for (int i = 0; i < occupationArray.length; i++) {
-                                if (occupationArray[i].equalsIgnoreCase(profession))
-                                    professionIndex = i;
-                            }
+                                Log.i("VirtualHome- individual", gender + " " + family + " " + profession + " " + interiorDesign + " " + cooking + " " + painting + " " + reading + " " + music);
 
 
-                            //Save email id, password and user id.
-                            SharedPreferences settings = getSharedPreferences(PREFERENCES_Gallery_FILE_NAME, 0);
+                                //Printing the whole json data obtained:
+                                Log.i("VirtualHome", jsonObject.toString());
+
+                                //Saving the userID in shared preferences:
+                                Log.i("Login ", "User ID: " + userID);
+
+                                //Save email id, password and user id.
+                                SharedPreferences settings = getSharedPreferences(PREFERENCES_Gallery_FILE_NAME, 0);
 
                           /*  //Initially for cross checking
                             System.out.println(settings.getString("user_id", "0"));
@@ -642,24 +612,22 @@ public class Login extends Activity {
                             System.out.println(settings.getString("password", "0"));
 */
 
-                            SharedPreferences.Editor editor = settings.edit();
-                            editor.putString("user_id", userID);
-                            editor.putString("email", email);
-                            editor.putString("password", pwd);
+                                SharedPreferences.Editor editor = settings.edit();
+                                editor.putString("user_id", userID);
+                                editor.putString("email", email);
+                                editor.putString("password", pwd);
 
-                            //saving all the preferences
-                            editor.putInt("gender", sexIndex);
-                            editor.putInt("family", familyIndex);
-                            editor.putInt("profession", professionIndex);
-                            editor.putBoolean("gardening", Boolean.parseBoolean(gardening));
-                            editor.putBoolean("interiorDesign", Boolean.parseBoolean(interiorDesign));
-                            editor.putBoolean("cooking", Boolean.parseBoolean(cooking));
-                            editor.putBoolean("painting", Boolean.parseBoolean(painting));
-                            editor.putBoolean("reading", Boolean.parseBoolean(reading));
-                            editor.putBoolean("music", Boolean.parseBoolean(music));
-
-
-                            editor.commit();
+                                //saving all the preferences
+                                editor.putString("gender", gender);
+                                editor.putString("family", family);
+                                editor.putString("profession", profession);
+                                editor.putBoolean("gardening", Boolean.parseBoolean(gardening));
+                                editor.putBoolean("interiorDesign", Boolean.parseBoolean(interiorDesign));
+                                editor.putBoolean("cooking", Boolean.parseBoolean(cooking));
+                                editor.putBoolean("painting", Boolean.parseBoolean(painting));
+                                editor.putBoolean("reading", Boolean.parseBoolean(reading));
+                                editor.putBoolean("music", Boolean.parseBoolean(music));
+                                editor.commit();
 
                        /*     //For confirmation
                             System.out.println("=========================================");
@@ -679,16 +647,16 @@ public class Login extends Activity {
                             System.out.println(settings.getBoolean("reading", false));
                             System.out.println(settings.getBoolean("music", false));
 */
+                            }
+
+
+                        } catch (JSONException ex) {
+                            Log.i("VirtualHome-Gallery", " caught JSON exception");
+                            ex.printStackTrace();
+                            return null;
                         }
 
-
-                    } catch (JSONException ex) {
-                        Log.i("VirtualHome-Gallery", " caught JSON exception");
-                        ex.printStackTrace();
-                        return null;
                     }
-
-                }
 
                 }
 
@@ -749,4 +717,3 @@ public class Login extends Activity {
     }
 
 }
-

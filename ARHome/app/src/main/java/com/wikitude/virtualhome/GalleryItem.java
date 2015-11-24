@@ -7,6 +7,18 @@ public class GalleryItem {
     private String galleryItemTitle;
     private String galleryItemDescription;
     private String galleryItemLocation;
+    private String galleryItemProductID;
+
+    public String getGalleryItemProductID() {
+        return galleryItemProductID;
+    }
+
+    public void setGalleryItemProductID(String galleryItemProductID) {
+        this.galleryItemProductID = galleryItemProductID;
+    }
+
+
+
 
     public String getGalleryItemLocation() {
         return galleryItemLocation;
@@ -16,12 +28,13 @@ public class GalleryItem {
         this.galleryItemLocation = galleryItemLocation;
     }
 
-    public GalleryItem(String galleryItemTitle, String galleryItemDescription,String galleryItemLocation) {
+    public GalleryItem(String galleryItemTitle, String galleryItemDescription,String galleryItemLocation,String galleryItemProductID) {
         super();
         //this.galleryItemImageURL = galleryItemImage;
         this.galleryItemTitle = galleryItemTitle;
         this.galleryItemDescription = galleryItemDescription;
         this.galleryItemLocation=galleryItemLocation;
+        this.galleryItemProductID=galleryItemProductID;
     }
 
    /* public String getGalleryItemImage() {

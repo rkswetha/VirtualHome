@@ -1,0 +1,52 @@
+buildscript {
+    repositories {
+        maven { url "http://repo.spring.io/libs-release" }
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'application' 
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+jar {
+    baseName = 'VirtualHome'
+    version =  '0.1.0'
+}
+
+mainClassName = 'org.gradle.UserConfig'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "http://repo.spring.io/libs-release" }
+}
+
+dependencies {
+	compile("org.springframework.boot:spring-boot-starter-web:1.2.1.RELEASE")
+    compile("org.mongodb:mongo-java-driver:3.0.0-rc1")
+    compile("org.webjars:bootstrap:3.1.1")
+    compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.apache.httpcomponents:httpclient:4.3.4")
+    compile("org.apache.httpcomponents:httpasyncclient:4.0.1")
+    compile("org.apache.httpcomponents:httpmime:4.3.4")
+    compile("org.json:json:20140107")
+    compile("org.springframework.data:spring-data-mongodb:1.6.0.RELEASE")
+    compile("org.springframework.social:spring-social-facebook:2.0.1.RELEASE")
+    compile("org.springframework:spring-webmvc:2.5.2")
+    compile("com.cloudinary:cloudinary-taglib:1.2.2")
+    compile("com.cloudinary:cloudinary-http43:1.2.2")
+	compile("nz.ac.waikato.cms.weka:weka-stable:3.6.6")
+    testCompile("junit:junit")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.11'
+}

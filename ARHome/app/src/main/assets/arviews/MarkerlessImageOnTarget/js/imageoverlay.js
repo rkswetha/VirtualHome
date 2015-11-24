@@ -16,7 +16,10 @@ var recommendedUrls = [];
 $(function() {
     setButtons();
     draggableObjects();
-    getRecommendedProducts(text);
+    /*getRecommendedProducts("http://res.cloudinary.com/cmpe295b/image/upload/c_fit,h_500,w_500/116.PNG",
+                  "http://res.cloudinary.com/cmpe295b/image/upload/c_fit,h_500,w_500/brusaliik.PNG",
+                  "http://res.cloudinary.com/cmpe295b/image/upload/c_fit,h_500,w_500/135.PNG"); */
+
 });
 
 function setButtons(){
@@ -106,49 +109,13 @@ function updateImageElements(){
     }
 };
 
-/*
-var httprequesttest=
-function GetJSON() {
-  var xhr = new XMLHttpRequest();
-  var url = 'https://mathiasbynens.be/demo/ip';
-  xhr.open('get', url, true);
-  xhr.responseType = 'json';
-  xhr.onreadystatechange = function() {
-    var status;
-    var data;
-    // https://xhr.spec.whatwg.org/#dom-xmlhttprequest-readystate
-    if (xhr.readyState == 4) { // `DONE`
-      status = xhr.status;
-      if (status == 200) {
-        console.log('Your public IP address is: ' + xhr.response.ip)
-        //successHandler && successHandler(xhr.response);
-      } else {
-        console.log('Something went wrong.');
-      }
-    }
-  };
-  xhr.send();
-};
-setInterval(httprequesttest, 10000);
-*/
 
-//var arrayPointer = 0;
-/*
-function arrayIncrement(){
-    var len = recommendedUrls.length;
-    if (arrayPointer < len){
-        arrayPointer++;
-    };
-    if (arrayPointer == len){
-        arrayPointer = 0;
-    };
-};
-*/
-function getRecommendedProducts(jsonInput){
-    var input = jsonInput;
-    for(var items in input["results"]) {
-	    recommendedUrls.push(input["results"][items]["url"]);
-    };
+function getRecommendedProducts(url1, url2, url3){
+    recommendedUrls.push(url1);
+    recommendedUrls.push(url2);
+    recommendedUrls.push(url3);
+
+    showDataMiningThumbnail();
 };
 
 function showDataMiningThumbnail(){
@@ -160,42 +127,16 @@ function showDataMiningThumbnail(){
     //var d4 = document.getElementById("datamining4");
 
     if (elem.style.display == "none"){
-        d1.src = recommendedUrls[0];
-        //arrayIncrement();
-
-        d2.src = recommendedUrls[1];
-        //arrayIncrement();
-
-        d3.src = recommendedUrls[2];
-        //arrayIncrement();
-
-        //d4.src = recommendedUrls[arrayPointer];
-        //arrayIncrement();
-
-        d1.addEventListener('click', function () {
-                addImage(d1.src);
-                //d1.src = recommendedUrls[arrayPointer];
-                //arrayIncrement();
-            });
-
-            d2.addEventListener('click', function () {
-                addImage(d2.src);
-                //d2.src = recommendedUrls[arrayPointer];
-                //arrayIncrement();
-            });
-
-            d3.addEventListener('click', function () {
-                addImage(d3.src);
-                //d3.src = recommendedUrls[arrayPointer];
-                //arrayIncrement();
-            });
-
-            /*d4.addEventListener('click', function () {
-               addImage(d4.src);
-               d4.src = recommendedUrls[arrayPointer];
-               arrayIncrement();
-            });*/
-
+        if (recommendedUrls[0] != null){
+            d1.src = recommendedUrls[0];
+            d2.src = recommendedUrls[1];
+            d3.src = recommendedUrls[2];
+        } else
+        {
+            d1.src = "";
+            d2.src = "";
+            d3.src = "";
+        }
         elem.style.display = 'inline-block';
     }else
     {
@@ -203,68 +144,43 @@ function showDataMiningThumbnail(){
     }
 };
 
+function addThumbnailImage(inputSrc){
+    if (inputSrc != ""){
+        addImage(inputSrc);
+    }
+}
+
 function addImage(sourceUrl){
-      //if (document.getElementsByClassName("enableDrag").length>=1){
-      //updateImageElements();
-      //};
-      imageId++;
-      //Canvas editing - To make the background transparent.
-      //var img = new Image;
-      //img.src = sourceUrl;
 
-      /*var doc = document.createElement('canvas');
-      doc.setAttribute("id", "document"+imageId);
-      var ctx = doc.getContext("2d");
-
-
-          // First create the image...
-      img.onload = function(){
-            doc.width=img.width;
-            doc.height=img.height;
-            ctx.drawImage(img,0,0,img.width,img.height);
-            var imgData = ctx.getImageData(0, 0, img.width,img.height);
-            ctx.putImageData(adjustImage(imgData), 0, 0);
-
-            var x = new Image();
-            var imgU=doc.toDataURL();
-        */
-            var x = new Image();
-            x.setAttribute("src", sourceUrl);
-            x.setAttribute("width", '50%');
-            x.setAttribute("height", 'auto');
-            x.setAttribute("id", "virtualObject"+imageId);
-            x.style.position='absolute';
-            x.setAttribute("z-index", 1);
-            x.classList.add("image");
-            x.classList.add("enableDrag");
-            virtualObjectInfo["virtualObject"+imageId]={};
-            virtualObjectInfo["virtualObject"+imageId]["source"] = sourceUrl;
-            virtualObjectInfo["virtualObject"+imageId]["zValue"] = 2;
-            virtualObjectInfo["virtualObject"+imageId]["width"] = x.width;
-            virtualObjectInfo["virtualObject"+imageId]["height"] = x.height;
-            document.body.appendChild(x);
-            //console.log("TEST: AddImage function converting image transparency: " + assert(sourceUrl != imgU));
-           // console.log("TEST: AddImage function inserted new image to data structure: " + assert(virtualObjectInfo.hasOwnProperty("virtualObject"+imageId)));
-           // console.log("TEST: AddImage function inserted image to DOM: " + assert(document.getElementById("virtualObject"+imageId).hasAttribute("id")));
-            ot = document.getElementById("virtualObject"+imageId).offsetTop;
-            ol = document.getElementById("virtualObject"+imageId).offsetLeft;
-            virtualObjectInfo["virtualObject"+imageId]["offsetTopValue"] = ot;
-            virtualObjectInfo["virtualObject"+imageId]["offsetLeftValue"] = ol;
-            draggableObjects();
-            //}
+        //if (document.getElementsByClassName("enableDrag").length>=1){
+        //updateImageElements();
+        //};
+        imageId++;
+        var x = new Image();
+        x.setAttribute("src", sourceUrl);
+        x.setAttribute("width", '50%');
+        x.setAttribute("height", 'auto');
+        x.setAttribute("id", "virtualObject"+imageId);
+        x.style.position='absolute';
+        x.setAttribute("z-index", 1);
+        x.classList.add("image");
+        x.classList.add("enableDrag");
+        virtualObjectInfo["virtualObject"+imageId]={};
+        virtualObjectInfo["virtualObject"+imageId]["source"] = sourceUrl;
+        virtualObjectInfo["virtualObject"+imageId]["zValue"] = 2;
+        virtualObjectInfo["virtualObject"+imageId]["width"] = x.width;
+        virtualObjectInfo["virtualObject"+imageId]["height"] = x.height;
+        document.body.appendChild(x);
+        // console.log("TEST: AddImage function converting image transparency: " + assert(sourceUrl != imgU));
+        // console.log("TEST: AddImage function inserted new image to data structure: " + assert(virtualObjectInfo.hasOwnProperty("virtualObject"+imageId)));
+        // console.log("TEST: AddImage function inserted image to DOM: " + assert(document.getElementById("virtualObject"+imageId).hasAttribute("id")));
+        ot = document.getElementById("virtualObject"+imageId).offsetTop;
+        ol = document.getElementById("virtualObject"+imageId).offsetLeft;
+        virtualObjectInfo["virtualObject"+imageId]["offsetTopValue"] = ot;
+        virtualObjectInfo["virtualObject"+imageId]["offsetLeftValue"] = ol;
+        draggableObjects();
 };
-/*
-function adjustImage(iArray) {
-    var imageData = iArray.data;
 
-    for (var i = 0; i < imageData.length; i+= 4) {
-            if((imageData[i] >= 170 && imageData[i] <=  255) && (imageData[i+1] >= 170 && imageData[i+1] <=  255) && (imageData[i+2] >= 170 && imageData[i+2] <=  255)){
-                imageData[i+3] = 0;
-            }
-        }
-    return iArray;
-};
-*/
 
 var scaleIncrement = 0.2;
 function scaleUp(){
@@ -465,27 +381,17 @@ function assert(outcome) {
     return ans;
 };
 
-var text = {
-  "results":[
-    {
-      "name": "KNISLINGE",
-      "description": "Width: 80 3/4 , Depth: 35 , Height under furniture: 3 1/8 Width: 205 cm, Depth: 89 cm, Height under furniture: 8 cm \n Product description \n Loveseat frame:\n Back and seat frame: Fiberboard, Moisture resistant particleboard, Plywood, Solid wood\n Armrest frame: Solid wood, Fiberboard, Moisture resistant particleboard, Plywood\n Seat cushion: High-resilience polyurethane foam (cold foam) 2.2 lb/cu.ft., Polyurethane memory foam 3.1 lb/cu.ft, Polyester wadding \n Back cushion: Polyester fiber balls",
-      "price": "$299.00",
-      "url": "http://res.cloudinary.com/cmpe295b/image/upload/c_fit,h_500,w_500/100.PNG"
-    },
-    {
-      "description": "Product dimensions \n Max. width: 110 1/4 '\n Min. depth: 37 3/8 ' \n Max. depth: 64 1/8 ' \n Height: 32 5/8 '\n Min. seat depth: 23 5/8 \n Max. seat depth: 48 7/8 ' \n Seat height: 17 3/4 \n Product description \n Loveseat frame:\n Back and seat frame: Fiberboard, Moisture resistant particleboard, Plywood, Solid wood\n Armrest frame: Solid wood, Fiberboard, Moisture resistant particleboard, Plywood\n Seat cushion: High-resilience polyurethane foam (cold foam) 2.2 lb/cu.ft., Polyurethane memory foam 3.1 lb/cu.ft, Polyester wadding \n Back cushion: Polyester fiber balls" ,
-      "name": "TIMSFORS2",
-      "price": "$1,999.00",
-      "url": "http://res.cloudinary.com/cmpe295b/image/upload/c_fit,h_500,w_500/101.PNG"
-    },
-    {
-      "description": "Product dimensions \n Max. width: 110 1/4 '\n Min. depth: 37 3/8 ' \n Max. depth: 64 1/8 ' \n Height: 32 5/8 '\n Min. seat depth: 23 5/8 \n Max. seat depth: 48 7/8 ' \n Seat height: 17 3/4 \n Product description \n Loveseat frame:\n Back and seat frame: Fiberboard, Moisture resistant particleboard, Plywood, Solid wood\n Armrest frame: Solid wood, Fiberboard, Moisture resistant particleboard, Plywood\n Seat cushion: High-resilience polyurethane foam (cold foam) 2.2 lb/cu.ft., Polyurethane memory foam 3.1 lb/cu.ft, Polyester wadding \n Back cushion: Polyester fiber balls" ,
-      "name": "KLIPPAN",
-      "price": "$399",
-      "url": "http://res.cloudinary.com/cmpe295b/image/upload/c_fit,h_500,w_500/105.PNG"
-    }
-  ]
-};
+function disableRecommendation(){
 
+    var recommendationIconElement = document.getElementById('recommendationIcon');
+    recommendationIconElement.style.display = 'none';
+/*
+    var elem = document.getElementById("loadingMessage1");
+    elem.style.display = 'inline-block';
 
+    setTimeout(function() {
+      		var e = document.getElementById('loadingMessage1');
+     		e.parentElement.removeChild(e);
+    }, 10000); */
+
+}

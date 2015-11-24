@@ -3,7 +3,7 @@ Android application for Real-estate with Augmented Reality and Data mining
 
 # VirtualHome
 --------------
-> Group project developed for Master project CMPE294A/B (Summer 2015)
+> Group project developed for Master project CMPE294A/B 
 > at San Jose State University
  - Title: VirtualHome - Augmented Reality and Data mining for Real Estate
  
@@ -16,13 +16,24 @@ Android application for Real-estate with Augmented Reality and Data mining
  * Overlay augmented image(marker & markerless)
  * Edit options for overlay image.
  * Web server backend with database support. 
+ 
+Features supported as part of Phase 2(CMPE295B)
+ * User login from Facebook
+ * Display Furniture gallery based on product category
+ * Cache implementation while loading gallery images. 
+ * Markerless additional features: Multiple images, change background, Display produt recommendations
+ * Marker based additional features: Replace image, Display product recommendations
+ * Web server integration with Cloudinary.
+ * Image transaparency conversion in web server.
+ * Data mining based on user preference dataset.
 
-##Tools being used
+##Tools used
 --------------
 * Android Studio (API 22)
 * Wikitude SDK 5.0
 * Java Spring Framework
 * MongoLab
+* Weka
 
 ##Project Contributors
 ----------------------

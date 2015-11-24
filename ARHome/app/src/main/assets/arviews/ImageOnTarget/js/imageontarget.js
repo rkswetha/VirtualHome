@@ -1,29 +1,7 @@
 var overlayOne;
 var imagePath;
 var recommendedUrls = [];
-var arrayPointer = 0;
-var text = {
-  "results":[
-    {
-      "name": "KNISLINGE",
-      "description": "Width: 80 3/4 , Depth: 35 , Height under furniture: 3 1/8 Width: 205 cm, Depth: 89 cm, Height under furniture: 8 cm \n Product description \n Loveseat frame:\n Back and seat frame: Fiberboard, Moisture resistant particleboard, Plywood, Solid wood\n Armrest frame: Solid wood, Fiberboard, Moisture resistant particleboard, Plywood\n Seat cushion: High-resilience polyurethane foam (cold foam) 2.2 lb/cu.ft., Polyurethane memory foam 3.1 lb/cu.ft, Polyester wadding \n Back cushion: Polyester fiber balls",
-      "price": "$299.00",
-      "url": "http://res.cloudinary.com/cmpe295b/image/upload/c_fit,h_500,w_500/100.PNG"
-    },
-    {
-      "description": "Product dimensions \n Max. width: 110 1/4 '\n Min. depth: 37 3/8 ' \n Max. depth: 64 1/8 ' \n Height: 32 5/8 '\n Min. seat depth: 23 5/8 \n Max. seat depth: 48 7/8 ' \n Seat height: 17 3/4 \n Product description \n Loveseat frame:\n Back and seat frame: Fiberboard, Moisture resistant particleboard, Plywood, Solid wood\n Armrest frame: Solid wood, Fiberboard, Moisture resistant particleboard, Plywood\n Seat cushion: High-resilience polyurethane foam (cold foam) 2.2 lb/cu.ft., Polyurethane memory foam 3.1 lb/cu.ft, Polyester wadding \n Back cushion: Polyester fiber balls" ,
-      "name": "TIMSFORS2",
-      "price": "$1,999.00",
-      "url": "http://res.cloudinary.com/cmpe295b/image/upload/c_fit,h_500,w_500/101.PNG"
-    },
-    {
-      "description": "Product dimensions \n Max. width: 110 1/4 '\n Min. depth: 37 3/8 ' \n Max. depth: 64 1/8 ' \n Height: 32 5/8 '\n Min. seat depth: 23 5/8 \n Max. seat depth: 48 7/8 ' \n Seat height: 17 3/4 \n Product description \n Loveseat frame:\n Back and seat frame: Fiberboard, Moisture resistant particleboard, Plywood, Solid wood\n Armrest frame: Solid wood, Fiberboard, Moisture resistant particleboard, Plywood\n Seat cushion: High-resilience polyurethane foam (cold foam) 2.2 lb/cu.ft., Polyurethane memory foam 3.1 lb/cu.ft, Polyester wadding \n Back cushion: Polyester fiber balls" ,
-      "name": "KLIPPAN",
-      "price": "$399",
-      "url": "http://res.cloudinary.com/cmpe295b/image/upload/c_fit,h_500,w_500/105.PNG"
-    }
-  ]
-};
+
 
 var World = {
 
@@ -31,7 +9,7 @@ var World = {
 
 	init: function initFn() {
 
-		World.loaded = true; // Overlay is complete
+		World.loaded = false; // Overlay is complete
 	},
 
  	// called to read user selected image path
@@ -39,11 +17,11 @@ var World = {
 
 		imagePath = decodeURIComponent(readPath);
         this.createOverlays();
+
 	},
 
 
 	createOverlays: function createOverlaysFn() {
-		//this.changeToTransparent();
 		/*
 			First an AR.ClientTracker needs to be created in order to start the recognition engine. It is initialized with a URL specific to the target collection. Optional parameters are passed as object in the last argument. In this case a callback function for the onLoaded trigger is set. Once the tracker is fully loaded the function worldLoaded() is called.
 			Important: If you replace the tracker file with your own, make sure to change the target name accordingly.
@@ -85,16 +63,24 @@ var World = {
             onExitFieldOfVision: this.disappear
 		});
 
+		World.loaded = true; // Overlay is complete
 	},
 
 	worldLoaded: function worldLoadedFn() {
+
+	   console.log(World.loaded);
+	   if(World.loaded === true){
 			// Remove Scan target message after 10 sec.
     		setTimeout(function() {
+
     			var e = document.getElementById('loadingMessage1');
     			e.parentElement.removeChild(e);
     			var e = document.getElementById('loadingMessage2');
-                    			e.parentElement.removeChild(e);
+                e.parentElement.removeChild(e);
+
     		}, 10000);
+       }
+       World.loaded = false;
 	},
 
 	scaleUp: function scaleUpFn(){
@@ -118,61 +104,6 @@ var World = {
         overlayOne.rotation+=30;
     },
 
-	changeToTransparent: function changeToTransparentFn(){
-
-	//Canvas editing - To make the background transparent.
-          var img = new Image;
-          var imageId=1;
-
-          img.src = "assets/furniture1.png";
-
-          var doc = document.createElement('canvas');
-          doc.setAttribute("id", "document"+imageId);
-          var ctx = doc.getContext("2d");
-
-
-              // First create the image...
-          img.onload = function(){
-                console.log("inside on load");
-              // ...then set the onload handler...
-                console.log("ht "+img.height);
-                console.log("wt "+img.width);
-                doc.width=img.width;
-                doc.height=img.height;
-                ctx.drawImage(img,0,0,img.width,img.height);
-                var imgData = ctx.getImageData(0, 0, img.width,img.height);
-
-                var imageData = imgData.data;
-                      console.log("inside for loop");
-
-                for (var i = 0; i < imageData.length; i+= 4) {
-                        //console.log("inside for loop");
-                                if((imageData[i] >= 170 && imageData[i] <=  255) && (imageData[i+1] >= 170 && imageData[i+1] <=  255) && (imageData[i+2] >= 170 && imageData[i+2] <=  255)){
-                                    imageData[i+3] = 0;
-                                }
-                }
-				console.log(imageData);
-				console.log(imgData);
-				imgData.data = imageData;
-
-                ctx.putImageData(imgData, 0, 0);
-                var x = new Image();
-                var imgU=doc.toDataURL();
-                console.log(imgU);
-
-                x.setAttribute("src", imgU);
-                //x.setAttribute("src", sourceUrl);
-                x.setAttribute("width", '50%');
-                x.setAttribute("height", 'auto');
-                x.setAttribute("id", "virtualObject"+imageId);
-                x.style.position='relative';
-                x.setAttribute("z-index", 1);
-                x.classList.add("image");
-
-                document.body.appendChild(x);
-			}
-	},
-
 	chooseAnotherImage: function chooseAnotherImagesFn(readPath) {
 
 		window.overlayOne.destroy();
@@ -192,7 +123,8 @@ var World = {
 		});
 
 		/*
-			The AR.Trackable2DObject for the second page uses the same tracker but with a different target name and the second overlay.
+			The AR.Trackable2DObject for the second page uses the same tracker
+			but with a different target name and the second overlay.
 		*/
 		var pageTwo = new AR.Trackable2DObject(this.tracker, "*", {
 			drawables: {
@@ -206,11 +138,12 @@ var World = {
     },
 
     // Thumbnail Recommendations START
-    getRecommendedProducts: function getRecommendedProducts(jsonInput){
-        var input = jsonInput;
-        for(var items in input["results"]) {
-    	    recommendedUrls.push(input["results"][items]["url"]);
-        };
+    getRecommendedProducts: function getRecommendedProducts(url1, url2, url3){
+        recommendedUrls.push(url1);
+        recommendedUrls.push(url2);
+        recommendedUrls.push(url3);
+
+        this.showDataMiningThumbnail();
     },
 
 
@@ -222,46 +155,34 @@ var World = {
         var d3 = document.getElementById("datamining3");
 
         if (elem.style.display == "none"){
-            d1.src = recommendedUrls[arrayPointer];
-            arrayPointer++;
-
-            d2.src = recommendedUrls[arrayPointer];
-            arrayPointer++;
-
-            d3.src = recommendedUrls[arrayPointer];
-            arrayPointer++;
-
-            d1.addEventListener('click', function () {
-                    World.chooseAnotherImage(d1.src);
-                    alert("Please rescan target");
-                    //d1.src = recommendedUrls[arrayPointer];
-                    //World.arrayIncrement();
-                });
-
-                d2.addEventListener('click', function () {
-                    World.chooseAnotherImage(d2.src);
-                    alert("Please rescan target");
-                    //d2.src = recommendedUrls[arrayPointer];
-                    //World.arrayIncrement();
-                });
-
-                d3.addEventListener('click', function () {
-                    World.chooseAnotherImage(d3.src);
-                    alert("Please rescan target");
-                    //d3.src = recommendedUrls[arrayPointer];
-                    //World.arrayIncrement();
-                });
-
-
-            elem.style.display = 'inline-block';
+             if (recommendedUrls[0] != null){
+                d1.src = recommendedUrls[0];
+                d2.src = recommendedUrls[1];
+                d3.src = recommendedUrls[2];
+             } else {
+                d1.src = "";
+                d2.src = "";
+                d3.src = "";
+             }
+             elem.style.display = 'inline-block';
         }else
         {
             elem.style.display = 'none';
         }
-    }
+    },
+
+    replaceWithThumbnailImage: function replaceWithThumbnailImage(src){
+
+        console.log("enter replaceWithThumbnailImage ");
+        console.log(World.loaded);
+
+        if(src != ""){
+            World.chooseAnotherImage(src);
+            alert('Please rescan target');
+        }
+     }
     // Thumbnail Recommendations END
 
 };
 
 World.init();
-World.getRecommendedProducts(text);

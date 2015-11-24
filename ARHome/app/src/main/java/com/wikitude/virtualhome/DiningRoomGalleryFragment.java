@@ -58,6 +58,7 @@ public class DiningRoomGalleryFragment extends Fragment {
     boolean networkError;
     String filePath;
     String ConstantURL = URLAPIConstant.URL;
+    View v;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,7 +68,7 @@ public class DiningRoomGalleryFragment extends Fragment {
                 .build();
         ImageLoader.getInstance().init(config);
 
-        View v = inflater.inflate(R.layout.activity_sofa_gallery, container, false);
+        v = inflater.inflate(R.layout.activity_sofa_gallery, container, false);
         System.out.println("just outside listener");
 
         startTime = new Timestamp( new Date().getTime());
@@ -160,6 +161,7 @@ public class DiningRoomGalleryFragment extends Fragment {
 
     private class GalleryAsynTask extends AsyncTask<String, String, String> {
 
+        private String[] productID;
         private String[] names;
         private String[] descriptions;
         private String[] prices;
@@ -265,6 +267,12 @@ public class DiningRoomGalleryFragment extends Fragment {
                         serverSB.append(serverOutput);
 
                     }
+//                    if (count ==1){
+//                        Intent i = new Intent(getActivity(), Home.class);
+//                        startActivity(i);
+//                        //Toast.makeText(getActivity(), "Gallery Does not have images", Toast.LENGTH_SHORT);
+//                        System.out.println("inside 0");
+//                    }
                     System.out.println("Full server output: "+ serverSB.toString());
                     Log.i("gallery", "count:" + count);
 
@@ -282,8 +290,8 @@ public class DiningRoomGalleryFragment extends Fragment {
 
                             jsonObject = new JSONObject(serverSB.toString());
                             System.out.println("Full json object: "+jsonObject.toString());
-
                             JSONArray queryArray = jsonObject.getJSONArray("results");
+
                             int resultSize = queryArray.length();
 
                             Log.i("gallery","resultSize:"+resultSize);
@@ -296,6 +304,8 @@ public class DiningRoomGalleryFragment extends Fragment {
                         {
                             Log.i("VirtualHome-Gallery", " caught JSON exception");
                             e.printStackTrace();
+
+
                             return null;
                         }
                     }
@@ -326,6 +336,7 @@ public class DiningRoomGalleryFragment extends Fragment {
                 JSONArray queryArray = jsonObject.getJSONArray("results");
                 int resultSize = queryArray.length();
 
+                productID = new String[resultSize];
                 names = new String[resultSize];
                 descriptions = new String[resultSize];
                 prices = new String[resultSize];
@@ -364,11 +375,12 @@ public class DiningRoomGalleryFragment extends Fragment {
                 for (int i = 0; i < queryArray.length(); i++) {
                     JSONObject jsonAttributes = queryArray.getJSONObject(i);
 
+                    productID[i] = jsonAttributes.getString("productid");
                     names[i] = jsonAttributes.getString("name");
                     descriptions[i] = jsonAttributes.getString("description");
                     prices[i] = jsonAttributes.getString("price");
                     imageLocations[i] = jsonAttributes.getString("url");
-                    galleryImages.add(new GalleryItem( names[i], descriptions[i], imageLocations[i].toString()));
+                    galleryImages.add(new GalleryItem( names[i], descriptions[i], imageLocations[i].toString(),productID[i]));
 
 
                 }
@@ -397,8 +409,7 @@ public class DiningRoomGalleryFragment extends Fragment {
             Log.i("VirtualHome-Gallery", "end time:2" + eTime);
             Log.i("VirtualHome-Gallery", "Total time taken for gallery load2 " + (eTime - sTime));
 
-
-            gridView = (GridView) getView().findViewById(R.id.gridViewSofa);
+            gridView = (GridView) v.findViewById(R.id.gridViewSofa);
             gridAdapter = new GalleryGridAdapter(getActivity(), R.layout.grid_item_sofa, galleryImages);
             gridView.setAdapter(gridAdapter);
 
@@ -413,7 +424,7 @@ public class DiningRoomGalleryFragment extends Fragment {
                     GalleryItem item = (GalleryItem) parent.getItemAtPosition(position);
                     System.out.println("after image creation");
 
-                    if(morePictures!=null) {
+                    if (morePictures != null) {
                         Log.i("Dining Room Gallery", "inside not null");
                         if (morePictures.trim().equals("yes")) {
                             //This is called if additional images have to be added to the AR screen
@@ -426,13 +437,12 @@ public class DiningRoomGalleryFragment extends Fragment {
                             Log.i("Dining Room Gallery", "inside morePicture-end");
                             getActivity().finish();
                         }
-                    }
-                    else {
+                    } else {
                         //This is called if it is the initial image to be chosen.
                         Log.i("Dining Room Gallery", "inside first picture choice");
 
                         //Create intent
-                        Intent intent = new Intent(getActivity(),  ProductView.class);
+                        Intent intent = new Intent(getActivity(), ProductView.class);
                         intent.putExtra("title", item.getGalleryItemTitle());
 
 
@@ -442,6 +452,8 @@ public class DiningRoomGalleryFragment extends Fragment {
                         //location
 
                         intent.putExtra("location", item.getGalleryItemLocation());
+                        //product id
+                        intent.putExtra("productid", item.getGalleryItemProductID());
 
                         //Start details activity
                         startActivity(intent);
