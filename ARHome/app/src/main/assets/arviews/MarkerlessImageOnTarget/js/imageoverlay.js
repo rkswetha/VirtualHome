@@ -380,3 +380,18 @@ function assert(outcome) {
     var ans = outcome ? 'PASS' : 'FAIL';
     return ans;
 };
+
+function disableRecommendation(){
+
+    var recommendationIconElement = document.getElementById('recommendationIcon');
+    recommendationIconElement.style.display = 'none';
+/*
+    var elem = document.getElementById("loadingMessage1");
+    elem.style.display = 'inline-block';
+
+    setTimeout(function() {
+      		var e = document.getElementById('loadingMessage1');
+     		e.parentElement.removeChild(e);
+    }, 10000); */
+
+}
