@@ -40,6 +40,7 @@ import weka.filters.unsupervised.attribute.Remove;
 public class ProductRecommendationDAO {
 
 	private final MongoCollection<Document> productCollection;
+	private final int maxCount = 10;
     
     public ProductRecommendationDAO(final MongoDatabase blogDatabase) {
     	productCollection = blogDatabase.getCollection("productdetails");            
@@ -48,7 +49,12 @@ public class ProductRecommendationDAO {
     
     public String datamine(ProductRecommendation prodDetails){
     	System.out.println("The sent product id:"+prodDetails.getProductID());
-    	String result=getRecomProducts(prodDetails);
+    	String result="";
+    	result=getRecomProducts(prodDetails);
+    	if(result==null)
+    	{
+    		result=defaultJSON();
+    	}
     	return result;
     	
         
@@ -102,30 +108,7 @@ public class ProductRecommendationDAO {
 		     ClusterEvaluation clsEval = new ClusterEvaluation();
 		     
 		     
-		     
-		     //Another method of creating test file:
-		 /*    try{
-		     File file = new File("test-new.arff");
-		     file.createNewFile();
-		     
-		     if(!file.exists())
-		     {
-		    	 file.createNewFile();
-		     }
-		     FileWriter fw = new FileWriter(file.getAbsoluteFile());
-		     BufferedWriter bw = new BufferedWriter(fw);
-		     bw.write(testData.toString());
-		     bw.close();
-		     }catch(IOException e)
-		     {
-		    	 e.printStackTrace();
-		     }
-			
-			//Evaluate the cluster
-			ClusterEvaluation clsEval = new ClusterEvaluation();
-			String datasetTest = "test-new.arff";
-			DataSource dataSource1 = new DataSource(datasetTest);*/
-		     
+
 		     
 			
 			DataSource dataSource1 = new DataSource(testData);
@@ -139,29 +122,17 @@ public class ProductRecommendationDAO {
 			
 			 Instances filteredInstances = Filter.useFilter(data1, atr); 
 			 
-			//Second method of evaluation
-			/*clsEval.setClusterer(model);
-			clsEval.evaluateClusterer(filteredInstances);	
-			System.out.println("***********Filtered instances*************");
-			System.out.println(filteredInstances);
-		
-			System.out.println("RESULTS: "+clsEval.clusterResultsToString());
-			System.out.println("************");
-			double[] results=clsEval.getClusterAssignments();
-			
-			for(double result:results)
-			{
-				System.out.println(result);
-			}
-			*/
-			
 			int firstClus=model.clusterInstance(filteredInstances.firstInstance());
 			System.out.println("Assigned Cluster: "+firstClus);
 			
 			
 			//call to the getItemList
 			String clusterId ="cluster"+(firstClus+1);
-			 items=getItemList(newInstances, clusterId, prodDetails.getProductID());
+			items=getItemList(newInstances, clusterId, prodDetails.getProductID());
+			if(items==null)
+			{
+				return null;
+			}
 			
 			} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -181,6 +152,14 @@ public class ProductRecommendationDAO {
 		{
 			//DB access:
 				System.out.println(" getUser called for id" + image);
+				//Checking if the product exists in DB
+				 long count = productCollection.count(new Document("_id",image));
+				 if(count==0)
+				 {
+					 System.out.println("The image" + image+" does not exist in the database. Calling the default JSON");
+					 return null;
+				 }
+				 
 	         FindIterable<Document> find = productCollection.find(new Document("_id",image));
 	         Document prodDoc = find.first();     
 	         url = prodDoc.getString("url");     
@@ -204,7 +183,8 @@ public class ProductRecommendationDAO {
     
     
     
-    public static Instances createTestDataset(ProductRecommendation prodDetails){
+    
+    public  Instances createTestDataset(ProductRecommendation prodDetails){
     	
     	//Getting the input params
 	      Integer userID= prodDetails.getUser_id();
@@ -350,7 +330,7 @@ public class ProductRecommendationDAO {
     	
     }
     
-    public static ArrayList<Long> getItemList(Instances data, String clusterID, long chosenProductID)
+    public  ArrayList<Long> getItemList(Instances data, String clusterID, long chosenProductID)
 	{
 		ArrayList<Long> items= new ArrayList<Long>();
 		ArrayList<Long> usersInList= new ArrayList<Long>();
@@ -388,33 +368,57 @@ public class ProductRecommendationDAO {
 		
 		
 		//Print the userIDs:
-		for(Long id:usersInList)
+		/*for(Long id:usersInList)
 		{
 			System.out.println("User id: "+id);			
-		}
+		}*/
 		
 		//Print the total images set:
-		System.out.println("The images are");
+		/*System.out.println("The images are");
 		for(Long image:totalItems)
 		{
 			System.out.println(image);			
-		}
+		}*/
 		
 		//Pick up a random number in the set size range
 		Random rand=new Random();
 		Long[] list = (Long[]) totalItems.toArray(new Long[totalItems.size()]);
 		//Set<Long> duplicateCheck = new HashSet<Long>();
 		
+		
+		
+		
 		for(int i=0;i<3;i++)
 		{
+		int tempCount=0;
 		int n = rand.nextInt(totalItems.size()-1)+1;
 		System.out.println("duplicate check: "+ list[n]+" "+ items.contains(list[n]));
-		if(list[n]==chosenProductID||items.contains(list[n]))
+		
+		while (list[n]==chosenProductID||items.contains(list[n]))
 		{
+			if(tempCount>maxCount)
+			{
+				break;
+			}
 			//n=n+1;
 			//Or generate another random number
 			n = rand.nextInt(totalItems.size()-1)+1;
+			tempCount++;
 		}
+		
+		// System.out.println("tempCount: "+tempCount);
+		
+		if (tempCount>maxCount)
+		{
+			System.out.println("Final chosen items");
+			for(Long image:items)
+			{
+				System.out.println(image);
+			}
+			System.out.println("Max no. of trials for random no. generation exceeded. calling default JSON");
+			return null;
+		}
+		
 		items.add(list[n]);		
 		
 	}
@@ -427,6 +431,27 @@ public class ProductRecommendationDAO {
 		
 		return items;
 	}
+    
+    
+    public  String defaultJSON(){
+    	JSONArray jsonarray = new JSONArray();
+		JSONObject mainObj = new JSONObject();
+		
+		String[] urls = {"http://res.cloudinary.com/cmpe295b/image/upload/c_fit,h_500,w_500/beddinge.PNG","http://res.cloudinary.com/cmpe295b/image/upload/c_fit,h_500,w_500/108.PNG","http://res.cloudinary.com/cmpe295b/image/upload/c_fit,h_500,w_500/127.PNG"};
+		
+		for(String url:urls)
+		{
+			JSONObject jsonobj = new JSONObject();
+			jsonobj.put("url", url);
+			jsonarray.put(jsonobj);
+		}
+		mainObj.put("results", jsonarray);
+		System.out.println("Default JSON created");
+		System.out.println(mainObj.toString());
+		return mainObj.toString();
+		
+		
+    }
     
     
     
