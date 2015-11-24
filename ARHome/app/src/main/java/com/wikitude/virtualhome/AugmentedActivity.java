@@ -52,7 +52,6 @@ import java.io.FileOutputStream;
      private static final String TAG = AugmentedActivity.class.getSimpleName();
      protected boolean isLoading = false;
 
-
      //protected static final String WIKITUDE_4_1_SDK_KEY = "Z4eEVW8h32G9F2bo4eYaOrAI9Oq4ncTwh7GFpwoijkQyInzS2a2yqR1/8plTni+NYOl/MxdL+D5sBnjl8neSg37eyvx1eyz8Ho+09gprMbsUwpj8PNSCm0RljKFZ3h1MS/zUkp6lpGDl7RaCO5aN3OeEVwjoIXMTjHcCugD+q71TYWx0ZWRfX8rXhV9sRtlf7GEobnGagIUT2CCjqd3xAIniI8kLzfHHhucAwodvlsN7CW331kB9WzItqnBGxvFZuSmUQZTAglHfExq+CtcSenaxNgglgZGZhdO3QKEFjevm9plsuU2P3mYHqLxYMSiW9J+PvOyhbmWH4ldfq0c1FlNOuaQB9n8zzfPoBFD9O8+/RWaDqSW+eY2kd8yLFnZ8025T6JZk0Poty0JgoknYZI1p1lXRIVWzv4GMbN10Dv9phTMJjw5xWNYzpxRyFK3wAmeyw0d2YueGgGYAmcAjZNJwPIMiJWDb8drjj6lXJJUZDs+PRxuuP4sqse9WpL+6fAPjUVPNJvxX8oz0pJBM8BjVi7rf0OXSWCpUmufpMyb7MrGFko3PevB1X/mlcHKTXI9LvJLTssemFiXAets6IFwhCwP3EBzaFpz4CITHWgqy7gNG9ZycqhWLBWnV6nPbAedvHClyFMXMg9ek07E0gl06CUYzGpQKoO9R/Wn4TyE=";
      protected static final String WIKITUDE_5_0_SDK_KEY = "Z4eEVW8h32G9F2bo4eYaOrAI9Oq4ncTwh7GFpwoijkQyInzS2a2yqR1/8plTni+NYOl/MxdL+D5sBnjl8neSg37eyvx1eyz8Ho+09gprMbsUwpj8PNSCm0RljKFZ3h1MS/zUkp6lpGDl7RaCO5aN3OeEVwjoIXMTjHcCugD+q71TYWx0ZWRfX8rXhV9sRtlf7GEobnGagIUT2CCjqd3xAIniI8kLzfHHhucAwodvlsN7CW331kB9WzItqnBGxvFZuSmUQZTAglHfExq+CtcSenaxNgglgZGZhdO3QKEFjevm9plsuU2P3mYHqLxYMSiW9J+PvOyhbmWH4ldfq0c1FlNOuaQB9n8zzfPoBFD9O8+/RWaDqSW+eY2kd8yLFnZ8025T6JZk0Poty0JgoknYZI1p1lXRIVWzv4GMbN10Dv9phTMJjw5xWNYzpxRyFK3wAmeyw0d2YueGgGYAmcAjZNJwPIMiJWDb8drjj6lXJJUZDs+PRxuuP4sqse9WpL+6fAPjUVPNJvxX8oz0pJBM8BjVi7rf0OXSWCpUmufpMyb7MrGFko3PevB1X/mlcHKTXI9LvJLTssemFiXAets6IFwhCwP3EBzaFpz4CITHWgqy7gNG9ZycqhWLBWnV6nPbAedvHClyFMXMg9ek07E0gl06CUYzGpQKoO9R/Wn4TyE=";
 
@@ -92,7 +91,6 @@ import java.io.FileOutputStream;
              }
          }
 
-
          this.architectView = (ArchitectView) this.findViewById(R.id.architectView);
 
 //		To use the Wikitude Android SDK you need to provide a valid license key to the onCreate lifecycle-method of the ArchitectView.
@@ -103,7 +101,6 @@ import java.io.FileOutputStream;
          try {
 
              this.architectView.onCreate(config);
-
 
          } catch (RuntimeException rex) {
              this.architectView = null;
@@ -235,13 +232,10 @@ import java.io.FileOutputStream;
          return uri.getPath();
      }
 
-     public void createUserPreferenceJson() {
+     public void getProductRecommendations() {
 
          SharedPreferences settings = getSharedPreferences(PREFERENCES_Gallery_FILE_NAME, MODE_PRIVATE);
          SharedPreferences.Editor editor = settings.edit();
-
-
-
          String userIDStr = settings.getString("user_id", "-1").replaceAll("\\s", "").toLowerCase();
          int userID = Integer.parseInt(userIDStr);
          String gender= settings.getString("gender",null).replaceAll("\\s", "").toLowerCase();
@@ -254,8 +248,6 @@ import java.io.FileOutputStream;
          boolean painting=settings.getBoolean("painting",false);
          boolean reading=settings.getBoolean("reading",false);
          boolean music=settings.getBoolean("music",false);
-
-
 
          userPrefJson = new JSONObject();
          try {
@@ -272,18 +264,6 @@ import java.io.FileOutputStream;
              userPrefJson.put("reading", reading);
              userPrefJson.put("music", music);
              userPrefJson.put("productID", productID);
-
-             /*userPrefJson.put("user_id", userID);
-             userPrefJson.put("sex", "Male");
-             userPrefJson.put("family", "single");
-             userPrefJson.put("profession", "homemaker");
-             userPrefJson.put("gardening", true);
-             userPrefJson.put("interiorDesign", true);
-             userPrefJson.put("cooking", true);
-             userPrefJson.put("painting", true);
-             userPrefJson.put("reading", false);
-             userPrefJson.put("music", false);
-             userPrefJson.put("productID", 1234);*/
 
 
          } catch (JSONException e) {
@@ -409,7 +389,6 @@ import java.io.FileOutputStream;
 
                  for (int i = 0; i < imageLocations.length; i++) {
                      Log.i("VirtualHome-AR", "onPostExecute:URL"+imageLocations[i]);
-
                  }
 
                  try {
@@ -469,6 +448,12 @@ This function is used to add more product images to the AR screen
     protected void onPostCreate( final Bundle savedInstanceState ) {
         super.onPostCreate(savedInstanceState);
 
+        //getting no userID status:
+        SharedPreferences settings = getSharedPreferences(PREFERENCES_Gallery_FILE_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+        String userID = settings.getString("user_id", "-1");
+        Log.i("Pref", "UserIDStatus: " + userID);
+
         if ( this.architectView != null ) {
 
             // call mandatory live-cycle method of architectView
@@ -482,7 +467,12 @@ This function is used to add more product images to the AR screen
 
                         this.architectView.load("arviews/ImageOnTarget/index.html");
 
-                        createUserPreferenceJson();
+                        // User is a Guest user, so recommendations thumbnail shouldnt be displayed
+                        if(userID == "-1")
+                            Toast.makeText(getApplicationContext(), "Login to get product recommendation!", Toast.LENGTH_SHORT).show();
+                        else
+                           getProductRecommendations();
+
                         callJavaScript("World.readImagePath", URLEncoder.encode(imagePath, "UTF-8"));
 
                     }
@@ -491,7 +481,19 @@ This function is used to add more product images to the AR screen
                         Log.e(this.getClass().getName(), " VIRTUALHOME: Invoking Markerless based AR View");
                         this.architectView.load("arviews/MarkerlessImageOnTarget/index.html");
 
-                        createUserPreferenceJson();
+                        // User is a Guest user, so recommendations thumbnail shouldnt be displayed
+                        if(userID == "-1") {
+
+                            Toast.makeText(getApplicationContext(), "Login to get product recommendation!", Toast.LENGTH_SHORT).show();
+                            // method to disable recommendation icon in AR screen
+                            final String js = ( "disableRecommendation" + "(\"" +  "\");" );
+                            Log.e(this.getClass().getName(), " VIRTUALHOME: calling JS method:" + js);
+                            this.architectView.callJavascript(js);
+
+                        }
+                        else
+                            getProductRecommendations();
+
                         callJavaScript("addImage", URLEncoder.encode(imagePath, "UTF-8"));
 
                     }
@@ -573,7 +575,6 @@ This function is used to add more product images to the AR screen
          }
     }
 
-
     public void shareSnapShot(){
 
         Log.e(this.getClass().getName(), " VIRTUALHOME: calling captureSnapShot method");
@@ -617,7 +618,6 @@ This function is used to add more product images to the AR screen
             }
         });
     }
-
 
     //url listener fired once e.g. 'document.location = "architectsdk://foo?bar=123"' is called in JS
     public ArchitectView.ArchitectUrlListener getUrlListener() {
