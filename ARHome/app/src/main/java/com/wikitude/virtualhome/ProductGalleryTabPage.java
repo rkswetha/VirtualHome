@@ -1,14 +1,13 @@
 package com.wikitude.virtualhome;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-/**
- * Created by anusha on 10/23/15.
- */
 public class ProductGalleryTabPage extends FragmentActivity {
 
     @Override
@@ -28,7 +27,7 @@ public class ProductGalleryTabPage extends FragmentActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         //super.onCreateOptionsMenu(menu);
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_sofa_gallery, menu);
+        inflater.inflate(R.menu.menu_gallery_tab, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -44,12 +43,16 @@ public class ProductGalleryTabPage extends FragmentActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_editpreferences) {
+
+            Log.i("VirtualHome-Gallery", "Invoke Edit preference for returning user");
+            Intent intent = new Intent(this, Preferences.class);
+            intent.putExtra("newUserFlag","false");
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 
 }

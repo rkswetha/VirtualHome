@@ -67,8 +67,6 @@ public class Login extends Activity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
 
-        //getting the arrays.
-        // String[] genderArray= R.array.familytypelist;
         handleOnClickSubmitButton();
 
         handleLoginFromFacebook();
@@ -86,21 +84,6 @@ public class Login extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_login, menu);
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     public void handleOnClickSubmitButton() {
@@ -275,9 +258,6 @@ public class Login extends Activity {
     public void createUserJson() {
         userDetailsJson = new JSONObject();
         try {
-           /* userDetailsJson.put("email", email);
-            userDetailsJson.put("password", pwd);
-            userDetailsJson.put("newUserFlag", newUserFlag);*/
 
             Log.i("VirtualHome-Login","create json user");
 
@@ -314,10 +294,7 @@ public class Login extends Activity {
         protected String doInBackground(String... arg0) {
             HttpURLConnection urlConnection = null;
 
-            //DO NOT USE String url1= "http://ec2-54-219-182-125.us-west-1.compute.amazonaws.com:8080/api/v1/users";
             String url1= ConstantURL+"users";
-            //String url1= "http://ec2-52-11-109-4.us-west-2.compute.amazonaws.com:8080/api/v8/users";
-            // DO NOT USE String url1= "http://192.168.0.14:8080/api/v5/users";
 
             StringBuilder sb = new StringBuilder();
             try {
@@ -490,10 +467,7 @@ public class Login extends Activity {
             HttpURLConnection urlConnection = null;
             Log.i("Login","inside returning user aync");
 
-            //String url1= " DO NOT USE http://ec2-54-193-107-243.us-west-1.compute.amazonaws.com:8080/api/v5/login";
             String url1= ConstantURL+"login";
-            //String url1= "http://ec2-52-11-109-4.us-west-2.compute.amazonaws.com:8080/api/v8/login";
-            //String url1= "DO NOT USE http://192.168.0.14:8080/api/v5/login";
 
             StringBuilder sb = new StringBuilder();
             try {
@@ -605,12 +579,6 @@ public class Login extends Activity {
 
                                 //Save email id, password and user id.
                                 SharedPreferences settings = getSharedPreferences(PREFERENCES_Gallery_FILE_NAME, 0);
-
-                          /*  //Initially for cross checking
-                            System.out.println(settings.getString("user_id", "0"));
-                            System.out.println(settings.getString("email", "0"));
-                            System.out.println(settings.getString("password", "0"));
-*/
 
                                 SharedPreferences.Editor editor = settings.edit();
                                 editor.putString("user_id", userID);

@@ -54,15 +54,10 @@ public class ProductView extends Activity {
 
         String title = getIntent().getStringExtra("title");
         String description = getIntent().getStringExtra("description");
-         productID = getIntent().getStringExtra("productid");
-
-        //Trying to get access the image from the storage
-
-        //location:
+        productID = getIntent().getStringExtra("productid");
         location = getIntent().getStringExtra("location");
 
         //CACHING
-
         DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.ic_stub)
                 .showImageForEmptyUri(R.drawable.ic_empty)
@@ -258,11 +253,10 @@ public class ProductView extends Activity {
     }
 
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_product_view, menu);
+        //getMenuInflater().inflate(R.menu.menu_product_view, menu);
         return true;
     }
 

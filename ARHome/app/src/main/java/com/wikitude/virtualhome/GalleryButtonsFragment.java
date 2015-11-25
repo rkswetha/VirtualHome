@@ -8,9 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-/**
- * Created by anusha on 11/4/15.
- */
 public class GalleryButtonsFragment extends Fragment implements View.OnClickListener {
 
         Button livingRoom;
@@ -124,30 +121,4 @@ public class GalleryButtonsFragment extends Fragment implements View.OnClickList
             }
         }
 
-
-        /*
-        @Override
-        public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-            super.onCreateOptionsMenu(menu, inflater);
-            menu.clear();
-            inflater.inflate(R.menu.menu_sofa_gallery, menu);
-        }
-
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-            // Handle action bar item clicks here. The action bar will
-            // automatically handle clicks on the Home/Up button, so long
-            // as you specify a parent activity in AndroidManifest.xml.
-            System.out.println("Something clicked");
-
-            int id = item.getItemId();
-
-            //noinspection SimplifiableIfStatement
-            if (id == R.id.action_settings) {
-                return true;
-            }
-
-            return super.onOptionsItemSelected(item);
-        }
-        */
 }

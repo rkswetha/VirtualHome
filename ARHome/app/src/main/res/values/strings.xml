@@ -6,6 +6,7 @@
 
     <string name="text_testing_ar">Testing AR!</string>
     <string name="action_settings">Settings</string>
+    <string name="action_editpreferences">Edit Preferences</string>
     <string name="action_chooseAnother">Choose Another</string>
     <string name="action_snapShot">Share Snapshot</string>
     <string name="action_snaptoscreen">Snap To Screen</string>

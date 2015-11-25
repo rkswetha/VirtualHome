@@ -96,26 +96,8 @@ public class DiningRoomGalleryFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear();
-        inflater.inflate(R.menu.menu_sofa_gallery, menu);
+        inflater.inflate(R.menu.menu_product_gallery, menu);
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        System.out.println("Something clicked");
-
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
 
     /* Checks if external storage is available for read and write */
     public boolean isExternalStorageWritable() {
@@ -382,10 +364,7 @@ public class DiningRoomGalleryFragment extends Fragment {
                     imageLocations[i] = jsonAttributes.getString("url");
                     galleryImages.add(new GalleryItem( names[i], descriptions[i], imageLocations[i].toString(),productID[i]));
 
-
                 }
-
-
 
             } catch (JSONException ex) {
                 Log.i("VirtualHome-Gallery", " caught JSON exception");
@@ -427,6 +406,7 @@ public class DiningRoomGalleryFragment extends Fragment {
                     if (morePictures != null) {
                         Log.i("Dining Room Gallery", "inside not null");
                         if (morePictures.trim().equals("yes")) {
+
                             //This is called if additional images have to be added to the AR screen
                             Log.i("Dining Room Gallery", "inside morePicture");
                             Intent intent1 = new Intent();
@@ -438,24 +418,16 @@ public class DiningRoomGalleryFragment extends Fragment {
                             getActivity().finish();
                         }
                     } else {
+
                         //This is called if it is the initial image to be chosen.
                         Log.i("Dining Room Gallery", "inside first picture choice");
 
                         //Create intent
                         Intent intent = new Intent(getActivity(), ProductView.class);
                         intent.putExtra("title", item.getGalleryItemTitle());
-
-
-                        //decription:
                         intent.putExtra("description", item.getGalleryItemDescription());
-
-                        //location
-
                         intent.putExtra("location", item.getGalleryItemLocation());
-                        //product id
                         intent.putExtra("productid", item.getGalleryItemProductID());
-
-                        //Start details activity
                         startActivity(intent);
                     }
                 }

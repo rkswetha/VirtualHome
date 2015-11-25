@@ -6,12 +6,6 @@
         android:showAsAction="always"
         />
 
-    <item android:id="@+id/action_preference"
-        android:icon="@drawable/ic_build_black_24dp"
-        android:title="settings"
-        android:showAsAction="always|withText"
-        />
-
     <item android:id="@+id/action_login"
         android:icon="@drawable/ic_perm_identity_black_24dp"
         android:title="login"

@@ -95,28 +95,10 @@ public class MiscGalleryFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear();
-        inflater.inflate(R.menu.menu_sofa_gallery, menu);
+        inflater.inflate(R.menu.menu_product_gallery, menu);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        System.out.println("Something clicked");
-
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    /* Checks if external storage is available for read and write */
+     /* Checks if external storage is available for read and write */
     public boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
         if (Environment.MEDIA_MOUNTED.equals(state)) {
@@ -419,6 +401,7 @@ public class MiscGalleryFragment extends Fragment {
                     if(morePictures!=null) {
                         Log.i("Misc Gallery", "inside not null");
                         if (morePictures.trim().equals("yes")) {
+
                             //This is called if additional images have to be added to the AR screen
                             Log.i("Misc Gallery", "inside morePicture");
                             Intent intent1 = new Intent();
@@ -437,20 +420,11 @@ public class MiscGalleryFragment extends Fragment {
                         //Create intent
                         Intent intent = new Intent(getActivity(),  ProductView.class);
                         intent.putExtra("title", item.getGalleryItemTitle());
-
-
-                        //decription:
                         intent.putExtra("description", item.getGalleryItemDescription());
-
-                        //location
-
                         intent.putExtra("location", item.getGalleryItemLocation());
-
-                        //product id
                         intent.putExtra("productid", item.getGalleryItemProductID());
-
-                        //Start details activity
                         startActivity(intent);
+
                     }
                 }
             });

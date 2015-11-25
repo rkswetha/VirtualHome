@@ -58,22 +58,12 @@ public class Preferences extends Activity {
 
         userID = settings.getString("user_id", "-1");
         emailID=settings.getString("email", "-1");
-       /* //For checking:
-        userID = "-1";*/
-
 
         Log.i("Pref", "UserIDStatus: " + userID);
-
-
         Log.i("Preference","newUserFlag before getString: "+ newUserFlag);
         //Obtaining the new user flag status flg status
         newUserFlag = getIntent().getStringExtra("newUserFlag");
         Log.i("Preference","newUserFlag after getString: "+ newUserFlag);
-
-
-
-     /*   //Just for checking:
-        newUserFlag="false";*/
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preferences);
@@ -95,7 +85,7 @@ public class Preferences extends Activity {
 
 
         //getting the preferences
-//Disabling the button if no user has logged
+        //Disabling the button if no user has logged
         if (userID.equals("-1")) {
             noUserID = true;
             Toast.makeText(getApplicationContext(), "You have not logged in! Please login to set preferences", Toast.LENGTH_SHORT).show();
@@ -107,14 +97,6 @@ public class Preferences extends Activity {
             newUserFlag="true";
 
         }
-
-
-
-
-/*
-Changed the if(newUserFlag!=null){ }
-changed the braces: changed that if the call is from a different location->then the newUserFlag will be null;
- */
 
         /*
         In this new method, with the delinking of the login and preferences- there is no http call from server, while loading this page.
@@ -144,7 +126,6 @@ changed the braces: changed that if the call is from a different location->then 
                 spinner2.setAdapter(adapter2);
 
 
-
                 spinner3 = (Spinner) findViewById(R.id.ProfessionType);
                 ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this,
                         R.array.professiontypelist, R.layout.spinner_style_preferences);
@@ -162,88 +143,81 @@ changed the braces: changed that if the call is from a different location->then 
                 });
 
 
-            }} else {
-            //getting the preferences:
+            } else {
+                //getting the preferences:
 
-            //Log.i("pref:", "inside new user");
+                //Log.i("pref:", "inside new user");
 
+                String gender = settings.getString("gender", null);
+                String family = settings.getString("family", null);
+                String profession = settings.getString("profession", null);
+                boolean gardening = settings.getBoolean("gardening", false);
+                boolean interiorDesign = settings.getBoolean("interiorDesign", false);
+                boolean cooking = settings.getBoolean("cooking", false);
+                boolean painting = settings.getBoolean("painting", false);
+                boolean reading = settings.getBoolean("reading", false);
+                boolean music = settings.getBoolean("music", false);
 
-            String gender=settings.getString("gender", null);
-            String family=settings.getString("family", null);
-            String profession=settings.getString("profession", null);
-            boolean gardening=settings.getBoolean("gardening", false);
-            boolean interiorDesign=settings.getBoolean("interiorDesign",false);
-            boolean cooking=settings.getBoolean("cooking",false);
-            boolean painting=settings.getBoolean("painting",false);
-            boolean reading=settings.getBoolean("reading",false);
-            boolean music=settings.getBoolean("music",false);
+                Log.i("pref:", "inside returning user");
 
-            Log.i("pref:", "inside returning user");
-
-            // Log.i("pref:", "gender"+gender+" family"+family+"profession"+profession);
-
-
-            if(gender!=null&&family!=null&&profession!=null)
-            {
-                // Spinner element
-                spinner1 = (Spinner) findViewById(R.id.FamilyType);
-                ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
-                        R.array.familytypelist, R.layout.spinner_style_preferences);
-                // Specify the layout to use when the list of choices appears
-                adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                // Apply the adapter to the spinner
-                spinner1.setAdapter(adapter1);
-                if (!family.equals(null)) {
-                    int spinnerPosition = adapter1.getPosition(family);
-                    spinner1.setSelection(spinnerPosition);
-                }
+                // Log.i("pref:", "gender"+gender+" family"+family+"profession"+profession);
 
 
-                spinner2 = (Spinner) findViewById(R.id.SexType1);
-                ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
-                        R.array.sextypelist, R.layout.spinner_style_preferences);
-                // Specify the layout to use when the list of choices appears
-                adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                // Apply the adapter to the spinner
-                spinner2.setAdapter(adapter2);
-                if (!gender.equals(null)) {
-                    int spinnerPosition = adapter2.getPosition(gender);
-                    spinner2.setSelection(spinnerPosition);
-                }
-
-
-                spinner3 = (Spinner) findViewById(R.id.ProfessionType);
-                ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this,
-                        R.array.professiontypelist, R.layout.spinner_style_preferences);
-                // Specify the layout to use when the list of choices appears
-                adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                // Apply the adapter to the spinner
-                spinner3.setAdapter(adapter3);
-                if (!profession.equals(null)) {
-                    int spinnerPosition = adapter3.getPosition(profession);
-                    spinner3.setSelection(spinnerPosition);
-                }
-
-                checkbox1.setChecked(gardening);
-                checkbox2.setChecked(interiorDesign);
-                checkbox3.setChecked(cooking);
-                checkbox4.setChecked(painting);
-                checkbox5.setChecked(reading);
-                checkbox6.setChecked(music);
-
-
-
-                button.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        // Perform action on click
-                        onSubmit();
+                if (gender != null && family != null && profession != null) {
+                    // Spinner element
+                    spinner1 = (Spinner) findViewById(R.id.FamilyType);
+                    ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
+                            R.array.familytypelist, R.layout.spinner_style_preferences);
+                    // Specify the layout to use when the list of choices appears
+                    adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    // Apply the adapter to the spinner
+                    spinner1.setAdapter(adapter1);
+                    if (!family.equals(null)) {
+                        int spinnerPosition = adapter1.getPosition(family);
+                        spinner1.setSelection(spinnerPosition);
                     }
-                });
 
 
+                    spinner2 = (Spinner) findViewById(R.id.SexType1);
+                    ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
+                            R.array.sextypelist, R.layout.spinner_style_preferences);
+                    // Specify the layout to use when the list of choices appears
+                    adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    // Apply the adapter to the spinner
+                    spinner2.setAdapter(adapter2);
+                    if (!gender.equals(null)) {
+                        int spinnerPosition = adapter2.getPosition(gender);
+                        spinner2.setSelection(spinnerPosition);
+                    }
 
+
+                    spinner3 = (Spinner) findViewById(R.id.ProfessionType);
+                    ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this,
+                            R.array.professiontypelist, R.layout.spinner_style_preferences);
+                    // Specify the layout to use when the list of choices appears
+                    adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    // Apply the adapter to the spinner
+                    spinner3.setAdapter(adapter3);
+                    if (!profession.equals(null)) {
+                        int spinnerPosition = adapter3.getPosition(profession);
+                        spinner3.setSelection(spinnerPosition);
+                    }
+
+                    checkbox1.setChecked(gardening);
+                    checkbox2.setChecked(interiorDesign);
+                    checkbox3.setChecked(cooking);
+                    checkbox4.setChecked(painting);
+                    checkbox5.setChecked(reading);
+                    checkbox6.setChecked(music);
+
+                    button.setOnClickListener(new View.OnClickListener() {
+                        public void onClick(View v) {
+                            // Perform action on click
+                            onSubmit();
+                        }
+                    });
+                }
             }
-
          }
        }
 
@@ -254,22 +228,7 @@ changed the braces: changed that if the call is from a different location->then 
             return true;
         }
 
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-            // Handle action bar item clicks here. The action bar will
-            // automatically handle clicks on the Home/Up button, so long
-            // as you specify a parent activity in AndroidManifest.xml.
-            int id = item.getItemId();
-
-            //noinspection SimplifiableIfStatement
-            if (id == R.id.action_settings) {
-                return true;
-            }
-
-            return super.onOptionsItemSelected(item);
-        }
-
-    public void onSubmit()
+     public void onSubmit()
     {
         //collect on the data
         spinner1 = (Spinner) findViewById(R.id.FamilyType);
@@ -321,14 +280,7 @@ changed the braces: changed that if the call is from a different location->then 
         editor.putBoolean("painting", chstate4);
         editor.putBoolean("reading", chstate5);
         editor.putBoolean("music", chstate6);
-
         editor.commit();
-
-
-
-        //Launching the gallery after data insertion
-        // launchGallery();
-
 
     }
 
@@ -346,8 +298,6 @@ changed the braces: changed that if the call is from a different location->then 
     {
         userPrefJson=new JSONObject();
         try {
-
-            //userEmail
 
             userPrefJson.put("user_id",Integer.parseInt(userID));
             userPrefJson.put("email",emailID );
@@ -368,13 +318,7 @@ changed the braces: changed that if the call is from a different location->then 
             e.printStackTrace();
         }
 
-
-
-        //Post to the server
-        // postToServer();
         new PreferenceAsynTask().execute();
-
-
 
     }
 
@@ -387,25 +331,16 @@ changed the braces: changed that if the call is from a different location->then 
             String jsonData = userPrefJson.toString();
             Log.i("VirtualHome userJson", jsonData);
             HttpURLConnection urlConnection = null;
-
-
-
-            //String url1 = "http://ec2-54-193-107-243.us-west-1.compute.amazonaws.com:8080/api/v5/userpreferences";
-
-            //Different url for put & post
-            //21.10.2015:
             String url1=null;
             int expectedResponseCode=0;
 
             if(newUserFlag==null || newUserFlag.equals("false") )
             {
-                //url1 = "http://ec2-52-11-109-4.us-west-2.compute.amazonaws.com:8080/api/v8/userpreferences"+"/"+userID;
                 url1 = ConstantURL+"userpreferences"+"/"+userID;
                 expectedResponseCode=HttpURLConnection.HTTP_OK;
             }
             else  if(newUserFlag.equals("true")) {
                 url1 = ConstantURL+"userpreferences";
-                //url1 = "http://ec2-52-11-109-4.us-west-2.compute.amazonaws.com:8080/api/v8/userpreferences";
                 expectedResponseCode=HttpURLConnection.HTTP_CREATED;
             }
             //String url1 = "http://192.168.0.14:8080/api/v5/userpreferences";
