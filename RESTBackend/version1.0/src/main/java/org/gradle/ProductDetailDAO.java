@@ -331,6 +331,7 @@ public class ProductDetailDAO {
 				jsonobj.put("description", doc.getString("description"));
 				jsonobj.put("price", doc.getString("price"));
 				jsonobj.put("url", doc.getString("url"));
+				jsonobj.put("productid", doc.getInteger("_id"));	
 				jsonarray.put(jsonobj);
 			}
 		});
