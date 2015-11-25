@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.wikitude.virtualhome"
+    android:installLocation="auto"
+    android:versionCode="4000"
+    android:versionName="4.0.0" >
+
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="22" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_GPS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- Tell the system this app requires OpenGL ES 2.0. -->
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <!-- rear facing cam -->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <!-- users location -->
+    <uses-feature
+        android:name="android.hardware.location"
+        android:required="true" />
+
+    <!-- accelerometer -->
+    <uses-feature
+        android:name="android.hardware.sensor.accelerometer"
+        android:required="true" />
+
+    <!-- compass -->
+    <uses-feature
+        android:name="android.hardware.sensor.compass"
+        android:required="true" />
+
+    <!-- do not support small resolution screens -->
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="false"
+        android:xlargeScreens="true" />
+
+    <!-- <android:uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
+    <!--
+<android:uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+    -->
+    <!--
+ set android:debuggable="false" or remove android:debuggable="true" to disable debugging for Android 4.4+
+    In case of a compile-error you have to update "Project - Properties - Android Lint Preferences" - Security - HardcodedDebugMode (set "Severity" to "Warning")
+    -->
+    <application
+        android:allowBackup="true"
+        android:debuggable="true"
+        android:icon="@drawable/ic_logo"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.Holo.Light" >
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <!-- MainActivity is used for debugging prupose to directly invoke AR screen -->
+        <activity
+            android:name="com.wikitude.virtualhome.MainActivity"
+            android:label="@string/title_activity_main" >
+        </activity>
+        <activity
+            android:name="com.wikitude.virtualhome.AugmentedActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_augmented" >
+        </activity>
+        <activity
+            android:name="com.wikitude.virtualhome.Login"
+            android:label="@string/title_activity_login" >
+        </activity>
+        <activity
+            android:name="com.wikitude.virtualhome.Home"
+            android:label="@string/title_activity_home" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <!--  -->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.wikitude.virtualhome.Preferences"
+            android:label="@string/title_activity_preferences" >
+        </activity>
+        <activity
+            android:name="com.wikitude.virtualhome.ProductView"
+            android:label="@string/title_activity_product_view" >
+        </activity>
+        <activity
+            android:name="com.wikitude.virtualhome.ProductGalleryTabPage"
+            android:configChanges="keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/title_activity_product_view" >
+        </activity>
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+    </application>
+
+</manifest>

@@ -2,25 +2,11 @@
 <items version="2" >
 
     <item
-        jar="/Users/swethark/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.0/support-annotations-22.2.0.jar"
+        jar="/Users/swethark/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.2.0/6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd/bolts-android-1.2.0.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
-        <dex dex="/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.0-9d665d06fecbe89f9597615cde05c489439a1e70.jar" />
-    </item>
-    <item
-        jar="/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/exploded-aar/com.astuetz/pagerslidingtabstrip/1.0.1/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="7912610ed96381c25c36d986eba422731b9641b6">
-        <dex dex="/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/pre-dexed/debug/classes-b79bec8a246bbd7d44611217097dada0fe0aa7a0.jar" />
-    </item>
-    <item
-        jar="/Users/swethark/Desktop/VirtualHome/ARHome/app/libs/universal-image-loader-1.9.4.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="dd9eeb557650c4ad7394df23f0f5cf27a7cfc697">
-        <dex dex="/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/pre-dexed/debug/universal-image-loader-1.9.4-c6750ec5532dca9e171687eeae13addadccdebba.jar" />
+        sha1="6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd">
+        <dex dex="/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/pre-dexed/debug/bolts-android-1.2.0-54dc9f1e9db01cd0530636ee3ef50c0abee657e8.jar" />
     </item>
     <item
         jar="/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/classes.jar"
@@ -30,13 +16,6 @@
         <dex dex="/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/pre-dexed/debug/classes-53e2948def4ec78b89cdc859912685d539b6ba05.jar" />
     </item>
     <item
-        jar="/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/libs/internal_impl-22.2.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
-        <dex dex="/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-d0fdbb777ee274e3b8e2f8c5f7bae1651bd83cdc.jar" />
-    </item>
-    <item
         jar="/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.6.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
@@ -44,11 +23,11 @@
         <dex dex="/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/pre-dexed/debug/classes-cc5342db6d8c7b74dc96c914e9d3a40134f38ae2.jar" />
     </item>
     <item
-        jar="/Users/swethark/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.2.0/6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd/bolts-android-1.2.0.jar"
+        jar="/Users/swethark/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.0/support-annotations-22.2.0.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd">
-        <dex dex="/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/pre-dexed/debug/bolts-android-1.2.0-54dc9f1e9db01cd0530636ee3ef50c0abee657e8.jar" />
+        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
+        <dex dex="/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.0-9d665d06fecbe89f9597615cde05c489439a1e70.jar" />
     </item>
     <item
         jar="/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/exploded-aar/wikitudesdk/jars/classes.jar"
@@ -56,6 +35,20 @@
         revision="22.0.1"
         sha1="37832d8c5a8e311a0a7e9f3cf73266887476a89d">
         <dex dex="/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/pre-dexed/debug/classes-cfaf3652c740898cc10637ab0cd8c81e56a91afb.jar" />
+    </item>
+    <item
+        jar="/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/libs/internal_impl-22.2.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
+        <dex dex="/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-d0fdbb777ee274e3b8e2f8c5f7bae1651bd83cdc.jar" />
+    </item>
+    <item
+        jar="/Users/swethark/Desktop/VirtualHome/ARHome/app/libs/universal-image-loader-1.9.4.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="dd9eeb557650c4ad7394df23f0f5cf27a7cfc697">
+        <dex dex="/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/pre-dexed/debug/universal-image-loader-1.9.4-c6750ec5532dca9e171687eeae13addadccdebba.jar" />
     </item>
 
 </items>

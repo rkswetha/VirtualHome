@@ -74,64 +74,6 @@
     <string name="title_activity_gallery">Gallery</string>
     <string name="title_activity_gallery__furniture">Gallery_Furniture</string>
 
-
-    <string-array name="sofa_images">
-        <item></item>
-        <item>@drawable/sofa1_timsfors</item>
-        <item>@drawable/sofa2_beddinge</item>
-        <item>@drawable/sofa3_ektorp</item>
-        <item>@drawable/sofa4_hawagia</item>
-        <item>@drawable/sofa5_karlstad</item>
-        <item>@drawable/sofa6_kivik</item>
-        <item>@drawable/sofa7_nipprig</item>
-        <item>@drawable/sofa8_knopparp</item>
-        <item>@drawable/sofa9_dagarn</item>
-        <item>@drawable/sofa10_stockholm</item>
-        <item>@drawable/sofa11_stocksund</item>
-        <item>@drawable/sofa12_knislinge</item>
-
-    </string-array>
-
-
-
-
-    <string-array name="sofanamelist">
-        <item>TIMSFORS</item>
-        <item>BEDDINGE</item>
-        <item>EKTORP</item>
-        <item>HAWAGIA</item>
-        <item>KARLSTAD</item>
-        <item>KIVIK</item>
-        <item>NIPPRIG</item>
-        <item>KNOPPARP</item>
-        <item>DAGARN</item>
-        <item>STOCKHOLM</item>
-        <item>STOCKSUND</item>
-        <item>KNISLINGE</item>
-    </string-array>
-
-    <string-array name="sofadescriptionlist">
-        <item>Leather: Dyed through top-grain leather with a treated, embossed and pigmented surface.\n
-            Key features
-            - Soft, dyed-through 3/64" thick grain leather that is supple and smooth to the touch.
-            - The outer surfaces are covered in a durable coated fabric with the same look and feel as leather. \n
-            Dimensions:
-            Seat width, chaise lounge: 28 3/8"
-            Depth: 23 5/8" </item>
-        <item>BEDDINGE ddd</item>
-        <item>EKTORP ddd</item>
-        <item>HAWAGIA dddd</item>
-        <item>KARLSTAD dddd</item>
-        <item>KIVIK dddd</item>
-        <item>NIPPRIG dddd</item>
-        <item>KNOPPARP dddd</item>
-        <item>DAGARN ddddddd</item>
-        <item>STOCKHOLM dddd</item>
-        <item>STOCKSUND dddd</item>
-        <item>KNISLINGE dddd</item>
-    </string-array>
-
-
     <string name="title_activity_gallery__sofa1">Gallery_Sofa</string>
     <string name="title_activity_detail__image_display">Sofa Details</string>
     <string name="title_activity_sofa_gallery">SofaGallery</string>

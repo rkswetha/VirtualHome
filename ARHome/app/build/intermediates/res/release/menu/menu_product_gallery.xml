@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.wikitude.virtualhome.ProductGallery">
+
+</menu><!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/src/main/res/menu/menu_product_gallery.xml -->

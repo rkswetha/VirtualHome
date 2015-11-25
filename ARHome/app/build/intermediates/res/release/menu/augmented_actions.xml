@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/action_gallery"
+        android:icon="@drawable/ic_insert_photo_black_24dp"
+        android:title="Android Gallery"
+        android:showAsAction="always|withText"
+        />
+
+    <item android:id="@+id/action_addPhoto"
+        android:icon="@drawable/ic_library_add_black_24dp"
+        android:title="Add Product"
+        android:showAsAction="always|withText"
+        />
+    <item android:id="@+id/action_snapShotOnMarkerless"
+        android:icon="@drawable/ic_camera_black_24dp"
+        android:title="Take Snapshot"
+        android:showAsAction="always|withText"
+        />
+
+</menu><!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/src/main/res/menu/augmented_actions.xml -->

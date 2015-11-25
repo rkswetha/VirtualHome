@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/action_camera"
+        android:icon="@drawable/ic_camera_black_24dp"
+        android:title="camera"
+        android:showAsAction="always"
+        />
+
+    <item android:id="@+id/action_login"
+        android:icon="@drawable/ic_perm_identity_black_24dp"
+        android:title="login"
+        android:showAsAction="always|withText"
+        />
+
+</menu><!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/src/main/res/menu/home_actions.xml -->

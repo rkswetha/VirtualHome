@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" tools:context="com.wikitude.virtualhome.Home">
+
+    <item android:id="@+id/action_camera"
+        android:icon="@drawable/ic_camera_black_24dp"
+        android:title="camera"
+        android:showAsAction="always"
+        />
+
+    <item android:id="@+id/action_login"
+        android:icon="@drawable/ic_perm_identity_black_24dp"
+        android:title="Login"
+        android:showAsAction="always|withText"
+        />
+
+</menu>
+<!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/src/main/res/menu/menu_home.xml -->

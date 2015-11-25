@@ -1,0 +1,172 @@
+<!-- copyrighted content owned by Android Arena (www.androidarena.co.in)-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:background="@drawable/loginbackground"
+        >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:background="#E91E63"
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true">
+
+            <ImageView android:layout_width="40dp"
+                android:layout_height="40dp"
+
+                android:layout_marginLeft="10dp"/>
+
+
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Login/Sign up"
+                android:textColor="#ffffff"
+                android:layout_marginLeft="25dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+
+                android:layout_gravity="center_horizontal|center_vertical"/>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:gravity="right"
+                android:orientation="horizontal" >
+
+                <ImageView android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/ic_build_black_24dp"
+
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="0dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+
+            android:left="10dp"
+            android:top="10dp"
+            android:right="10dp"
+            android:bottom="10dp"
+            >
+
+            <ImageView android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/ic_logo"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center_horizontal"/>
+
+            <EditText
+                android:id="@+id/text_email"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:hint="Email id"
+                android:typeface="sans"
+                android:background="#f3f3f3"
+                android:textColor="#880E4F"
+                android:paddingLeft="5dp"
+                android:layout_marginTop="30dp"
+                />
+
+            <EditText
+                android:id="@+id/text_password"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:hint="Password"
+                android:background="#f3f3f3"
+                android:textColor="#880E4F"
+                android:typeface="sans"
+                android:paddingLeft="5dp"
+                android:layout_marginTop="15dp"
+                android:inputType="textPassword"/>
+
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                >
+
+                <CheckBox android:id="@+id/checkbox_newuser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New User"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    android:textColor="#000000"
+                    />
+
+                <!--
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:textColor="#000000"
+                    android:text="|"
+                    android:textStyle="bold"
+                    />
+                <TextView
+                    android:id="@+id/forgot_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+                    android:textColor="#000000"
+                    android:text="Reset Password?"
+                    android:textStyle="bold"
+
+                    />
+                    -->
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/button_submit"
+                android:layout_width="190dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:text="SUBMIT"
+                android:textColor="#fff"
+                android:textSize="13dp"
+                android:background="#E91E63"/>
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="30dp" />
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
+<!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/src/main/res/layout/activity_login.xml -->

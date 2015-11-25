@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/src/main/res/values/arrays.xml -->
+    <eat-comment/>
+    <string-array name="familytypelist">
+        <item>@string/family1</item>
+        <item>@string/family2</item>
+        <item>@string/family3</item>
+        <item>@string/family4</item>
+    </string-array>
+    <string-array name="professiontypelist">
+        <item>@string/job1</item>
+        <item>@string/job2</item>
+        <item>@string/job3</item>
+    </string-array>
+    <!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string-array name="sextypelist">
+        <item>@string/sex1</item>
+        <item>@string/sex2</item>
+    </string-array>
+    <string-array name="sofa_images">
+        <item/>
+        <item>@drawable/sofa1_timsfors</item>
+        <item>@drawable/sofa2_beddinge</item>
+        <item>@drawable/sofa3_ektorp</item>
+        <item>@drawable/sofa4_hawagia</item>
+        <item>@drawable/sofa5_karlstad</item>
+        <item>@drawable/sofa6_kivik</item>
+        <item>@drawable/sofa7_nipprig</item>
+        <item>@drawable/sofa8_knopparp</item>
+        <item>@drawable/sofa9_dagarn</item>
+        <item>@drawable/sofa10_stockholm</item>
+        <item>@drawable/sofa11_stocksund</item>
+        <item>@drawable/sofa12_knislinge</item>
+
+    </string-array>
+    <string-array name="sofadescriptionlist">
+        <item>Leather: Dyed through top-grain leather with a treated, embossed and pigmented surface.\n
+            Key features
+            - Soft, dyed-through 3/64" thick grain leather that is supple and smooth to the touch.
+            - The outer surfaces are covered in a durable coated fabric with the same look and feel as leather. \n
+            Dimensions:
+            Seat width, chaise lounge: 28 3/8"
+            Depth: 23 5/8" </item>
+        <item>BEDDINGE ddd</item>
+        <item>EKTORP ddd</item>
+        <item>HAWAGIA dddd</item>
+        <item>KARLSTAD dddd</item>
+        <item>KIVIK dddd</item>
+        <item>NIPPRIG dddd</item>
+        <item>KNOPPARP dddd</item>
+        <item>DAGARN ddddddd</item>
+        <item>STOCKHOLM dddd</item>
+        <item>STOCKSUND dddd</item>
+        <item>KNISLINGE dddd</item>
+    </string-array>
+    <string-array name="sofanamelist">
+        <item>TIMSFORS</item>
+        <item>BEDDINGE</item>
+        <item>EKTORP</item>
+        <item>HAWAGIA</item>
+        <item>KARLSTAD</item>
+        <item>KIVIK</item>
+        <item>NIPPRIG</item>
+        <item>KNOPPARP</item>
+        <item>DAGARN</item>
+        <item>STOCKHOLM</item>
+        <item>STOCKSUND</item>
+        <item>KNISLINGE</item>
+    </string-array>
+    <!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.6.0/res/values/values.xml -->
+    <eat-comment/>
+    <color name="com_facebook_blue">#3B5998</color>
+    <color name="com_facebook_button_background_color">#415dae</color>
+    <color name="com_facebook_button_background_color_disabled">#bdc1c9</color>
+    <color name="com_facebook_button_background_color_pressed">#2f477a</color>
+    <color name="com_facebook_button_like_background_color_selected">#7c8fc8</color>
+    <color name="com_facebook_button_login_silver_background_color">#f4f6f8</color>
+    <color name="com_facebook_button_login_silver_background_color_pressed">#e9eaf0</color>
+    <color name="com_facebook_button_send_background_color">#0084ff</color>
+    <color name="com_facebook_button_send_background_color_pressed">#006fff</color>
+    <color name="com_facebook_likeboxcountview_border_color">#6a7180</color>
+    <color name="com_facebook_likeboxcountview_text_color">#6a7180</color>
+    <color name="com_facebook_likeview_text_color">#6a7180</color>
+    <color name="com_facebook_share_button_text_color">#FFFFFF</color>
+    <declare-styleable name="com_facebook_like_view"><attr format="color" name="com_facebook_foreground_color"/><attr format="string" name="com_facebook_object_id"/><attr name="com_facebook_object_type"><enum name="unknown" value="0"/><enum name="open_graph" value="1"/><enum name="page" value="2"/></attr><attr name="com_facebook_style"><enum name="standard" value="0"/><enum name="button" value="1"/><enum name="box_count" value="2"/></attr><attr name="com_facebook_auxiliary_view_position"><enum name="bottom" value="0"/><enum name="inline" value="1"/><enum name="top" value="2"/></attr><attr name="com_facebook_horizontal_alignment"><enum name="center" value="0"/><enum name="left" value="1"/><enum name="right" value="2"/></attr></declare-styleable>
+    <declare-styleable name="com_facebook_login_view"><attr format="boolean" name="com_facebook_confirm_logout"/><attr format="string" name="com_facebook_login_text"/><attr format="string" name="com_facebook_logout_text"/><attr name="com_facebook_tooltip_mode"><enum name="automatic" value="0"/><enum name="display_always" value="1"/><enum name="never_display" value="2"/></attr></declare-styleable>
+    <declare-styleable name="com_facebook_profile_picture_view"><attr name="com_facebook_preset_size"><enum name="small" value="-2"/><enum name="normal" value="-3"/><enum name="large" value="-4"/></attr><attr format="boolean" name="com_facebook_is_cropped"/></declare-styleable>
+    <!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/src/main/res/values/dimens.xml -->
+    <eat-comment/>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.6.0/res/values/values.xml -->
+    <eat-comment/>
+    <dimen name="com_facebook_likeboxcountview_border_radius">3dp</dimen>
+    <dimen name="com_facebook_likeboxcountview_border_width">1dp</dimen>
+    <dimen name="com_facebook_likeboxcountview_caret_height">3dp</dimen>
+    <dimen name="com_facebook_likeboxcountview_caret_width">6dp</dimen>
+    <dimen name="com_facebook_likeboxcountview_text_padding">6dp</dimen>
+    <dimen name="com_facebook_likeboxcountview_text_size">11.0sp</dimen>
+    <dimen name="com_facebook_likeview_edge_padding">2dp</dimen>
+    <dimen name="com_facebook_likeview_internal_padding">6dp</dimen>
+    <dimen name="com_facebook_likeview_text_size">11.0sp</dimen>
+    <dimen name="com_facebook_profilepictureview_preset_size_large">180dp</dimen>
+    <dimen name="com_facebook_profilepictureview_preset_size_normal">100dp</dimen>
+    <dimen name="com_facebook_profilepictureview_preset_size_small">50dp</dimen>
+    <dimen name="com_facebook_share_button_compound_drawable_padding">12dp</dimen>
+    <dimen name="com_facebook_share_button_padding_bottom">12dp</dimen>
+    <dimen name="com_facebook_share_button_padding_left">12dp</dimen>
+    <dimen name="com_facebook_share_button_padding_right">16dp</dimen>
+    <dimen name="com_facebook_share_button_padding_top">12dp</dimen>
+    <dimen name="com_facebook_share_button_text_size">16.0sp</dimen>
+    <dimen name="com_facebook_tooltip_horizontal_padding">10dp</dimen>
+    <!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="action_chooseAnother">Choose Another</string>
+    <string name="action_editpreferences">Edit Preferences</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="action_snapShot">Share Snapshot</string>
+    <string name="action_snaptoscreen">Snap To Screen</string>
+    <string name="app_name">Virtual Home</string>
+    <string name="button_name_startar">Start AR</string>
+    <!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.6.0/res/values/values.xml -->
+    <eat-comment/>
+    <string name="com_facebook_image_download_unknown_error">Unexpected error while downloading an image.</string>
+    <string name="com_facebook_internet_permission_error_message">WebView login requires INTERNET permission</string>
+    <string name="com_facebook_internet_permission_error_title">AndroidManifest Error</string>
+    <string name="com_facebook_like_button_liked">Liked</string>
+    <string name="com_facebook_like_button_not_liked">Like</string>
+    <string name="com_facebook_loading">Loading...</string>
+    <string name="com_facebook_loginview_cancel_action">Cancel</string>
+    <string name="com_facebook_loginview_log_in_button">Log in</string>
+    <string name="com_facebook_loginview_log_in_button_long">Log in with Facebook</string>
+    <string name="com_facebook_loginview_log_out_action">Log out</string>
+    <string name="com_facebook_loginview_log_out_button">Log out</string>
+    <string name="com_facebook_loginview_logged_in_as">Logged in as: %1$s</string>
+    <string name="com_facebook_loginview_logged_in_using_facebook">Logged in using Facebook</string>
+    <string name="com_facebook_send_button_text">Send</string>
+    <string name="com_facebook_share_button_text">Share</string>
+    <string name="com_facebook_tooltip_default">New! You\'re in control - choose what info you want to share with apps.</string>
+    <!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="description_string">Description: </string>
+    <string name="dimension_string">Dimension: </string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="facebook_app_id">492864677558331</string>
+    <string name="family1">Single</string>
+    <string name="family2">Family</string>
+    <string name="family3">Family with boy kids</string>
+    <string name="family4">Family with girl kids</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="hobby1">Gardening</string>
+    <string name="hobby2">Interior Design</string>
+    <string name="hobby3">Cooking</string>
+    <string name="hobby4">Painting</string>
+    <string name="hobby5">Reading</string>
+    <string name="hobby6">Music</string>
+    <string name="hobbytitle">Choose interested hobbies</string>
+    <string name="job1">IT field</string>
+    <string name="job2">Educational</string>
+    <string name="job3">Business</string>
+    <!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.6.0/res/values/values.xml -->
+    <eat-comment/>
+    <string name="messenger_send_button_text">Send</string>
+    <!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="price_string">Price: </string>
+    <string name="product_name">Product Name: </string>
+    <string name="professiontitle">Profession details</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="prompt_sex">Enter Gender</string>
+    <string name="sex1">Male</string>
+    <string name="sex2">Female</string>
+    <string name="sextype">Gender</string>
+    <string name="text_testing_ar">Testing AR!</string>
+    <string name="title_activity_augmented">augmented</string>
+    <string name="title_activity_detail__image_display">Sofa Details</string>
+    <string name="title_activity_gallery">Gallery</string>
+    <string name="title_activity_gallery__furniture">Gallery_Furniture</string>
+    <string name="title_activity_gallery__sofa1">Gallery_Sofa</string>
+    <string name="title_activity_home">Home</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_main">Virtual Home</string>
+    <string name="title_activity_preferences">Preferences</string>
+    <string name="title_activity_product_info">ProductInfo</string>
+    <string name="title_activity_product_view">ProductView</string>
+    <string name="title_activity_sofa_gallery">SofaGallery</string>
+    <!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+
+    </style>
+    <!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.6.0/res/values/values.xml -->
+    <eat-comment/>
+    <style name="MessengerButton">
+    <item name="android:clickable">true</item>
+  </style>
+    <style name="MessengerButton.Blue">
+    <item name="android:background">@drawable/messenger_button_blue_bg_selector</item>
+  </style>
+    <style name="MessengerButton.Blue.Large">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">44dp</item>
+    <item name="android:layout_marginLeft">16dp</item>
+    <item name="android:layout_marginRight">16dp</item>
+  </style>
+    <style name="MessengerButton.Blue.Small">
+    <item name="android:layout_width">158dp</item>
+    <item name="android:layout_height">36dp</item>
+  </style>
+    <style name="MessengerButton.White">
+    <item name="android:background">@drawable/messenger_button_white_bg_selector</item>
+  </style>
+    <style name="MessengerButton.White.Large">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">44dp</item>
+    <item name="android:layout_marginLeft">16dp</item>
+    <item name="android:layout_marginRight">16dp</item>
+  </style>
+    <style name="MessengerButton.White.Small">
+    <item name="android:layout_width">158dp</item>
+    <item name="android:layout_height">36dp</item>
+  </style>
+    <style name="MessengerButtonText">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_gravity">center</item>
+    <item name="android:drawablePadding">4dp</item>
+    <item name="android:gravity">center</item>
+    <!--suppress NewApi -->
+    <item name="android:textAllCaps">true</item>
+    <item name="android:textSize">14sp</item>
+    <item name="android:textStyle">bold</item>
+  </style>
+    <style name="MessengerButtonText.Blue">
+    <item name="android:textColor">#ffffff</item>
+  </style>
+    <style name="MessengerButtonText.Blue.Large">
+    <item name="android:drawableLeft">@drawable/messenger_bubble_large_white</item>
+  </style>
+    <style name="MessengerButtonText.Blue.Small">
+    <item name="android:drawableLeft">@drawable/messenger_bubble_small_white</item>
+  </style>
+    <style name="MessengerButtonText.White">
+    <item name="android:textColor">#0084ff</item>
+  </style>
+    <style name="MessengerButtonText.White.Large">
+    <item name="android:drawableLeft">@drawable/messenger_bubble_large_blue</item>
+  </style>
+    <style name="MessengerButtonText.White.Small">
+    <item name="android:drawableLeft">@drawable/messenger_bubble_small_blue</item>
+  </style>
+    <style name="com_facebook_button" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/com_facebook_button_background</item>
+        <item name="android:drawablePadding">6dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">14.0dp</item>
+    </style>
+    <style name="com_facebook_button_like" parent="com_facebook_button">
+        <item name="android:background">@drawable/com_facebook_button_like_background</item>
+    </style>
+    <style name="com_facebook_button_send" parent="com_facebook_button">
+        <item name="android:background">@drawable/com_facebook_button_send_background</item>
+        <item name="android:drawableLeft">@drawable/com_facebook_button_send_icon</item>
+        <item name="android:text">@string/com_facebook_send_button_text</item>
+    </style>
+    <style name="com_facebook_button_share" parent="com_facebook_button">
+        <item name="android:drawableLeft">@drawable/com_facebook_button_icon</item>
+        <item name="android:text">@string/com_facebook_share_button_text</item>
+    </style>
+    <style name="com_facebook_loginview_default_style" parent="com_facebook_button">
+        <item name="android:drawableLeft">@drawable/com_facebook_button_icon</item>
+    </style>
+    <style name="com_facebook_loginview_silver_style" parent="com_facebook_loginview_default_style">
+        <item name="android:background">@drawable/com_facebook_button_login_silver_background</item>
+        <item name="android:drawableLeft">@null</item>
+        <item name="android:textColor">#4b5164</item>
+    </style>
+    <style name="tooltip_bubble_text">
+	    <item name="android:textColor">@android:color/white</item>
+	    <item name="android:gravity">left</item>
+	    <item name="android:textSize">12sp</item>
+	    <item name="android:shadowDy">-1</item>
+	    <item name="android:shadowRadius">0.25</item>
+	    <item name="android:shadowColor">#40000000</item>
+    </style>
+</resources>

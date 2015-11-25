@@ -1,0 +1,73 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#0000000c">
+
+    <LinearLayout
+
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        tools:context="course.examples.virtualhome1.ProductView">
+
+        <RelativeLayout
+            android:layout_width="452dp"
+            android:layout_height="452dp"
+            android:layout_gravity="center"
+            android:layout_weight="2">
+            <ImageView
+                android:id="@+id/galleryItemImage"
+                android:layout_width="270dp"
+                android:layout_height="270dp"
+                android:layout_gravity="top"
+                android:clickable="true"
+                android:background="#fff"
+
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+            <TextView android:id="@+id/clicktext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Click image for live view!"
+                android:textSize="12dp"
+                android:textColor="#E91E63"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="40dp"
+
+                />
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/galleryItemTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textColor="#010101"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="0.5" />
+
+        <TextView
+            android:id="@+id/galleryItemDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="#040404"
+            android:textSize="16dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="0.5" />
+
+
+    </LinearLayout>
+</ScrollView><!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/src/main/res/layout/activity_product_view.xml -->

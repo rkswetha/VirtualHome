@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.wikitude.virtualhome.AugmentedActivity">
+
+    <item android:id="@+id/action_chooseAnother" android:title="@string/action_chooseAnother"
+        android:orderInCategory="100" android:icon="@drawable/ic_library_add_black_24dp"
+        android:showAsAction="always" />
+
+    <item android:id="@+id/action_snapShot" android:title="@string/action_snapShot"
+        android:orderInCategory="100"  android:icon="@drawable/ic_camera_black_24dp"
+        android:showAsAction="always" />
+
+    <item android:id="@+id/action_snapToScreen" android:title="@string/action_snaptoscreen"
+        android:orderInCategory="100" android:showAsAction="never" />
+</menu>
+<!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/src/main/res/menu/menu_augmented.xml -->

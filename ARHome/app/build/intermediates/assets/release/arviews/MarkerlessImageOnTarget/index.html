@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes" name="viewport">
+
+	<title>Markerless Augmented Reality</title>
+
+	<script src="architect://architect.js"></script>
+	<script type="text/javascript" src="../ade.js"></script>
+	<link rel="stylesheet" href="css/default.css">
+
+	<!-- JQuery UI Touch Punch -->
+	<script src="js/jquery-1.7.2.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
+	<script src="js/jquery.ui.touch-punch.min.js"></script>
+
+</head>
+<body>
+<div id = "buttonspanel" style="position: fixed; z-index: 1000" >
+	<div id = "plusIcon" class="imgIcon" style="background-image:url('assets/plus.png');margin-right: 10px;"></div>
+	<div id = "minusIcon" class="imgIcon" style="background-image:url('assets/minus.png');margin-right: 10px"></div>
+	<div id = "flipIcon" class="imgIcon" style="background-image:url('assets/flip.png');margin-right: 10px"></div>
+	<div id = "rotateIcon" class="imgIcon" style="background-image:url('assets/rotate.png');margin-right: 10px"></div>
+	<div id = "bringtofrontIcon" class="imgIcon" style="background-image:url('assets/BTF.png');margin-right: 10px"></div>
+	<div id = "backgroundIcon" class="imgIcon" style="background-image:url('assets/camera.png');margin-right: 10px"></div>
+	<div id = "deleteIcon" class="imgIcon" style="background-image:url('assets/delete.png');margin-right: 10px"></div>
+	<div id = "recommendationIcon" class="imgIcon" style="background-image:url('assets/Recommendation.png');margin-right: 1px"></div>
+</div>
+
+<!--<div id="loadingMessage1" style="position: fixed; z-index:100; display:none;">Login to get product recommendations!</div> -->
+
+<div id="thumbnails" style ="position: fixed; z-index:100; display:none;">
+<div class="container">
+	<img id ="datamining1" src = "" onclick="addThumbnailImage(this.src)"/>
+</div>
+<div class="container">
+	<img id ="datamining2" src = "" onclick="addThumbnailImage(this.src)"/>
+</div>
+<div class="container">
+	<img id ="datamining3" src = "" onclick="addThumbnailImage(this.src)"/>
+</div>
+</div>
+
+<script src="js/imageoverlay.js"></script>
+
+</body>
+</html>
+

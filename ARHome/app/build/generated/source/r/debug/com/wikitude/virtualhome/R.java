@@ -12,9 +12,6 @@ public final class R {
         public static final int familytypelist=0x7f070000;
         public static final int professiontypelist=0x7f070001;
         public static final int sextypelist=0x7f070002;
-        public static final int sofa_images=0x7f070003;
-        public static final int sofadescriptionlist=0x7f070004;
-        public static final int sofanamelist=0x7f070005;
     }
     public static final class attr {
         /** <p>Must be one of the following constant values.</p>
@@ -222,19 +219,7 @@ containing a value of this type.
         public static final int messenger_button_send_round_shadow=0x7f020029;
         public static final int messenger_button_white_bg_round=0x7f02002a;
         public static final int messenger_button_white_bg_selector=0x7f02002b;
-        public static final int sofa10_stockholm=0x7f02002c;
-        public static final int sofa11_stocksund=0x7f02002d;
-        public static final int sofa12_knislinge=0x7f02002e;
-        public static final int sofa1_timsfors=0x7f02002f;
-        public static final int sofa2_beddinge=0x7f020030;
-        public static final int sofa3_ektorp=0x7f020031;
-        public static final int sofa4_hawagia=0x7f020032;
-        public static final int sofa5_karlstad=0x7f020033;
-        public static final int sofa6_kivik=0x7f020034;
-        public static final int sofa7_nipprig=0x7f020035;
-        public static final int sofa8_knopparp=0x7f020036;
-        public static final int sofa9_dagarn=0x7f020037;
-        public static final int white_sofa=0x7f020038;
+        public static final int white_sofa=0x7f02002c;
     }
     public static final class id {
         public static final int BedroomGalleryButton=0x7f0a003c;

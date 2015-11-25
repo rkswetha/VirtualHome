@@ -1,0 +1,274 @@
+<ScrollView
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/scrollView1"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+>
+<LinearLayout
+
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/loginbackground"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:background="#E91E63"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true">
+
+        <ImageView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginLeft="10dp"/>
+
+
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Preferences"
+            android:textColor="#FFFFFF"
+            android:layout_marginLeft="25dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+
+            android:layout_gravity="center_horizontal|center_vertical"/>
+
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:gravity="right"
+            android:orientation="horizontal" >
+
+            <ImageView android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_build_black_24dp"
+                android:layout_marginTop="6dp"
+
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout android:layout_width="fill_parent"
+        android:layout_height="890dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="30dp"
+        android:orientation="vertical"
+
+        >
+
+        <EditText android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/logo"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="center_horizontal"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#e8e8e7"
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="15dp">
+
+
+            <Spinner
+                android:id="@+id/SexType1"
+                android:layout_height="40dp"
+                android:layout_width="0dp"
+                android:background="#CCFF90"
+                android:paddingLeft="5dp"
+                android:maxLines="1" android:singleLine="true"
+                android:gravity="center"
+
+                android:layout_weight="1" />
+
+            <Spinner
+                android:id="@+id/FamilyType"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="Family Background"
+                android:background="#CCFF90"
+                android:paddingLeft="10dp"
+                android:maxLines="1" android:singleLine="true"
+                android:layout_weight="1">
+            </Spinner>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:background="#CCFF90"
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:layout_height="fill_parent"
+                android:layout_width="0dp"
+                android:text="Choose Profession:"
+                android:textStyle="italic"
+                android:gravity="center_vertical"
+                android:background="#CCFF90"
+                android:paddingLeft="5dp"
+                android:textSize="16dp"
+                android:textColor="@android:color/black"
+
+                android:layout_weight="1" />
+
+            <Spinner
+                android:id="@+id/ProfessionType"
+                android:hint="@string/professiontitle"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:background="#CCFF90"
+                android:paddingLeft="10dp"
+                android:entries="@array/professiontypelist"
+                android:maxLines="1" android:singleLine="true"
+                android:layout_weight="1">
+            </Spinner>
+
+        </LinearLayout>
+
+
+
+
+
+
+        <TextView android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:textColor="#FFFFFF"
+            android:text="@string/hobbytitle"
+            android:textStyle="bold"
+            android:background="#E91E63"
+            android:paddingLeft="5dp"
+            android:layout_marginTop="15dp"
+            android:gravity="center"/>
+
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp">
+
+            <CheckBox android:id="@+id/checkbox_hobby1"
+                android:layout_width="0dp"
+                android:text="@string/hobby1"
+                android:layout_height="40dp"
+                android:paddingLeft="5dp"
+                android:textSize="16dp"
+
+                android:layout_weight="1" />
+
+
+            <CheckBox android:id="@+id/checkbox_hobby2"
+                android:layout_width="0dp"
+                android:text="@string/hobby2"
+                android:layout_height="40dp"
+                android:paddingLeft="5dp"
+                android:textSize="16dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="15dp">
+
+            <CheckBox android:id="@+id/checkbox_hobby3"
+                android:layout_width="0dp"
+                android:text="@string/hobby3"
+                android:layout_height="40dp"
+                android:paddingLeft="5dp"
+                android:textSize="16dp"
+                android:layout_weight="1" />
+
+
+            <CheckBox android:id="@+id/checkbox_hobby4"
+                android:layout_width="0dp"
+                android:text="@string/hobby4"
+                android:layout_height="40dp"
+                android:paddingLeft="5dp"
+                android:textSize="16dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="15dp">
+
+            <CheckBox android:id="@+id/checkbox_hobby5"
+                android:layout_width="0dp"
+                android:text="@string/hobby5"
+                android:layout_height="40dp"
+                android:paddingLeft="5dp"
+                android:textSize="16dp"
+                android:layout_weight="1" />
+
+
+            <CheckBox android:id="@+id/checkbox_hobby6"
+                android:layout_width="0dp"
+                android:text="@string/hobby6"
+                android:layout_height="40dp"
+                android:paddingLeft="5dp"
+                android:textSize="16dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+
+        <Button android:id="@+id/button_submit_preferences"
+            android:layout_width="190dp"
+            android:layout_height="38dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:text="SUBMIT"
+            android:textColor="#fff"
+
+            android:background="@drawable/loginbutton"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        >
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+
+
+</ScrollView>
+<!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/src/main/res/layout/activity_preferences.xml -->
