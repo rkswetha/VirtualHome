@@ -68,6 +68,8 @@
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Holo.Light" >
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        
+        <!-- MainActivity is used for debugging prupose to directly invoke AR screen -->
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main" >
@@ -76,10 +78,6 @@
             android:name=".AugmentedActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_augmented" >
-        </activity>
-        <activity
-            android:name=".ProductInfo"
-            android:label="@string/title_activity_product_info" >
         </activity>
         <activity
             android:name=".Login"
