@@ -1,8 +1,0 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.wikitude.virtualhome.SofaGallery_Old">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:showAsAction="never" />
-
-</menu>
