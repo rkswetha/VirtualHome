@@ -16,7 +16,8 @@
         android:stretchMode="columnWidth"
         android:verticalSpacing="5dp"
         android:focusable="true"
-        android:clickable="true"/>
+        android:clickable="true"
+        android:horizontalSpacing="5dp" />
 
 </RelativeLayout>
 <!-- From: file:/Users/swethark/Desktop/VirtualHome/ARHome/app/src/main/res/layout/activity_sofa_gallery.xml -->

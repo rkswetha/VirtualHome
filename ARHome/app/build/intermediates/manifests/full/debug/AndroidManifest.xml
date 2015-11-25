@@ -71,6 +71,7 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
+        <!-- MainActivity is used for debugging prupose to directly invoke AR screen -->
         <activity
             android:name="com.wikitude.virtualhome.MainActivity"
             android:label="@string/title_activity_main" >
@@ -79,10 +80,6 @@
             android:name="com.wikitude.virtualhome.AugmentedActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_augmented" >
-        </activity>
-        <activity
-            android:name="com.wikitude.virtualhome.ProductInfo"
-            android:label="@string/title_activity_product_info" >
         </activity>
         <activity
             android:name="com.wikitude.virtualhome.Login"
@@ -102,15 +99,12 @@
             android:label="@string/title_activity_preferences" >
         </activity>
         <activity
-            android:name="com.wikitude.virtualhome.SofaGallery"
-            android:label="@string/title_activity_sofa_gallery" >
-        </activity>
-        <activity
             android:name="com.wikitude.virtualhome.ProductView"
             android:label="@string/title_activity_product_view" >
         </activity>
         <activity
             android:name="com.wikitude.virtualhome.ProductGalleryTabPage"
+            android:configChanges="keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/title_activity_product_view" >
         </activity>
         <activity

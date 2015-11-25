@@ -56,7 +56,7 @@ android:layout_height="fill_parent"
 
 
     <LinearLayout android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="890dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
@@ -73,7 +73,7 @@ android:layout_height="fill_parent"
 
 
         <LinearLayout
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="#e8e8e7"
             android:orientation="horizontal"
@@ -84,23 +84,23 @@ android:layout_height="fill_parent"
             <Spinner
                 android:id="@+id/SexType1"
                 android:layout_height="40dp"
-                android:layout_width="150dp"
+                android:layout_width="0dp"
                 android:background="#CCFF90"
                 android:paddingLeft="5dp"
                 android:maxLines="1" android:singleLine="true"
                 android:gravity="center"
 
-                />
+                android:layout_weight="1" />
 
             <Spinner
                 android:id="@+id/FamilyType"
-                android:layout_width="203dp"
-                android:layout_height="40dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:text="Family Background"
                 android:background="#CCFF90"
                 android:paddingLeft="10dp"
                 android:maxLines="1" android:singleLine="true"
-                >
+                android:layout_weight="1">
             </Spinner>
 
         </LinearLayout>
@@ -116,7 +116,7 @@ android:layout_height="fill_parent"
 
             <TextView
                 android:layout_height="fill_parent"
-                android:layout_width="150dp"
+                android:layout_width="0dp"
                 android:text="Choose Profession:"
                 android:textStyle="italic"
                 android:gravity="center_vertical"
@@ -125,17 +125,18 @@ android:layout_height="fill_parent"
                 android:textSize="16dp"
                 android:textColor="@android:color/black"
 
-                />
+                android:layout_weight="1" />
 
             <Spinner
                 android:id="@+id/ProfessionType"
                 android:hint="@string/professiontitle"
-                android:layout_width="203dp"
+                android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:background="#CCFF90"
                 android:paddingLeft="10dp"
                 android:entries="@array/professiontypelist"
-                android:maxLines="1" android:singleLine="true">
+                android:maxLines="1" android:singleLine="true"
+                android:layout_weight="1">
             </Spinner>
 
         </LinearLayout>
@@ -166,22 +167,22 @@ android:layout_height="fill_parent"
             android:layout_marginTop="10dp">
 
             <CheckBox android:id="@+id/checkbox_hobby1"
-                android:layout_width="150dp"
+                android:layout_width="0dp"
                 android:text="@string/hobby1"
                 android:layout_height="40dp"
                 android:paddingLeft="5dp"
                 android:textSize="16dp"
 
-                />
+                android:layout_weight="1" />
 
 
             <CheckBox android:id="@+id/checkbox_hobby2"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:text="@string/hobby2"
                 android:layout_height="40dp"
                 android:paddingLeft="5dp"
                 android:textSize="16dp"
-                />
+                android:layout_weight="1" />
 
         </LinearLayout>
 
@@ -194,21 +195,21 @@ android:layout_height="fill_parent"
             android:layout_marginTop="15dp">
 
             <CheckBox android:id="@+id/checkbox_hobby3"
-                android:layout_width="150dp"
+                android:layout_width="0dp"
                 android:text="@string/hobby3"
                 android:layout_height="40dp"
                 android:paddingLeft="5dp"
                 android:textSize="16dp"
-                />
+                android:layout_weight="1" />
 
 
             <CheckBox android:id="@+id/checkbox_hobby4"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:text="@string/hobby4"
                 android:layout_height="40dp"
                 android:paddingLeft="5dp"
                 android:textSize="16dp"
-                />
+                android:layout_weight="1" />
 
         </LinearLayout>
 
@@ -221,21 +222,21 @@ android:layout_height="fill_parent"
             android:layout_marginTop="15dp">
 
             <CheckBox android:id="@+id/checkbox_hobby5"
-                android:layout_width="150dp"
+                android:layout_width="0dp"
                 android:text="@string/hobby5"
                 android:layout_height="40dp"
                 android:paddingLeft="5dp"
                 android:textSize="16dp"
-                />
+                android:layout_weight="1" />
 
 
             <CheckBox android:id="@+id/checkbox_hobby6"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:text="@string/hobby6"
                 android:layout_height="40dp"
                 android:paddingLeft="5dp"
                 android:textSize="16dp"
-                />
+                android:layout_weight="1" />
 
         </LinearLayout>
 
