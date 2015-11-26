@@ -2,14 +2,14 @@
 
  import android.app.Activity;
 import android.content.Intent;
- import android.content.SharedPreferences;
- import android.content.pm.ApplicationInfo;
+import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.opengl.GLES20;
- import android.os.AsyncTask;
- import android.os.Build;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -17,34 +17,26 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
- import android.view.View;
- import android.webkit.WebView;
- import android.widget.AdapterView;
- import android.widget.GridView;
- import android.widget.Toast;
+import android.webkit.WebView;
+import android.widget.Toast;
 
 import com.wikitude.architect.ArchitectView;
 import com.wikitude.architect.StartupConfiguration;
 
- import org.json.JSONArray;
- import org.json.JSONException;
- import org.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
- import java.io.BufferedReader;
- import java.io.File;
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileOutputStream;
- import java.io.FileWriter;
- import java.io.IOException;
- import java.io.InputStream;
- import java.io.InputStreamReader;
- import java.io.OutputStreamWriter;
- import java.net.HttpURLConnection;
- import java.net.MalformedURLException;
- import java.net.URL;
- import java.net.URLEncoder;
- import java.sql.Timestamp;
- import java.util.ArrayList;
- import java.util.Date;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 
 
  public class AugmentedActivity extends Activity {
@@ -70,7 +62,7 @@ import java.io.FileOutputStream;
      String productID;
      String ConstantURL = URLAPIConstant.URL;
      JSONObject userPrefJson;
-
+     String[] PastTransaction;
      @Override
      protected void onCreate(Bundle savedInstanceState) {
          super.onCreate(savedInstanceState);
@@ -81,6 +73,14 @@ import java.io.FileOutputStream;
          markerPresent = getIntent().getStringExtra("MarkerPresent");
          imagePath = getIntent().getStringExtra("ImagePath");
          productID= getIntent().getStringExtra("productid");
+         PastTransaction = getIntent().getStringArrayExtra("PastTransaction");
+         if (PastTransaction== null){
+             PastTransaction = new String[0];
+         }
+         System.out.println("array length"+ PastTransaction.length);
+
+      //   Log.i("images intent", PastTransaction.toString());
+
 
          Log.e(TAG, "VIRTUALHOME: User has marker?" + markerPresent);
          Log.e(TAG, "VIRTUALHOME: User selected image path:" + imagePath);
@@ -164,10 +164,11 @@ import java.io.FileOutputStream;
                  shareSnapShot();
                  return true;
 
-             case R.id.action_snapToScreen:
+             /*case R.id.action_snapToScreen:
                  Toast.makeText(getApplicationContext(), "Snap to Screen", Toast.LENGTH_SHORT).show();
                  this.architectView.callJavascript("World.displaySnapToScreen()");
                  return true;
+             */
 
              default:
                  return super.onOptionsItemSelected(item);
@@ -398,12 +399,54 @@ import java.io.FileOutputStream;
                          String url1 = URLEncoder.encode(imageLocations[0], "UTF-8");
                          String url2 = URLEncoder.encode(imageLocations[1], "UTF-8");
                          String url3 = URLEncoder.encode(imageLocations[2], "UTF-8");
+                         String transactionurl1 = URLEncoder.encode("", "UTF-8");
+                         String transactionurl2 = URLEncoder.encode("", "UTF-8");
+                         String transactionurl3 = URLEncoder.encode("", "UTF-8");
+
+                         int total = PastTransaction.length;
+                         if (total == 0){
+                             transactionurl1 = URLEncoder.encode("", "UTF-8");
+                             transactionurl2 = URLEncoder.encode("", "UTF-8");
+                             transactionurl3 = URLEncoder.encode("", "UTF-8");
+                         }
+                         if (total == 1){
+                             transactionurl1 = URLEncoder.encode(PastTransaction[0], "UTF-8");
+                             transactionurl2 = URLEncoder.encode("", "UTF-8");
+                             transactionurl3 = URLEncoder.encode("", "UTF-8");
+                         }
+                         if (total == 2){
+                             transactionurl1 = URLEncoder.encode(PastTransaction[0], "UTF-8");
+                             transactionurl2 = URLEncoder.encode(PastTransaction[1], "UTF-8");
+                             transactionurl3 = URLEncoder.encode("", "UTF-8");
+                         }
+                         if (total == 3){
+                             transactionurl1 = URLEncoder.encode(PastTransaction[0], "UTF-8");
+                             transactionurl2 = URLEncoder.encode(PastTransaction[1], "UTF-8");
+                             transactionurl3 = URLEncoder.encode(PastTransaction[2], "UTF-8");
+                         }
+
+                         System.out.println(transactionurl1 + "\n" + transactionurl2 + "\n" + transactionurl3);
+                         /*if (PastTransaction[0] != null) {
+                             transactionurl1 = URLEncoder.encode(PastTransaction[0], "UTF-8");
+                         } else{
+                             transactionurl1 = URLEncoder.encode("", "UTF-8");
+                         }
+                         if (PastTransaction[1] != null) {
+                             transactionurl2 = URLEncoder.encode(PastTransaction[1], "UTF-8");
+                         } else{
+                             transactionurl2 = URLEncoder.encode("", "UTF-8");
+                         }
+                         if (PastTransaction[2] != null) {
+                             transactionurl3 = URLEncoder.encode(PastTransaction[2], "UTF-8");
+                         } else{
+                             transactionurl3 = URLEncoder.encode("", "UTF-8");
+                         }*/
 
                          String js;
                          if (markerPresent.equals("YES"))
-                             js = "World.getRecommendedProducts" + "(\"" + url1 + "\",\"" + url2 + "\",\"" + url3 + "\");";
+                             js = "World.getRecommendedProducts" + "(\"" + url1 + "\",\"" + url2 + "\",\"" + url3 + "\",\"" + transactionurl1 + "\", \"" + transactionurl2 + "\", \"" + transactionurl3 + "\");";
                          else
-                             js = "getRecommendedProducts" + "(\"" + url1 + "\",\"" + url2 + "\",\"" + url3 + "\");";
+                             js = "getRecommendedProducts" + "(\"" + url1 + "\",\"" + url2 + "\",\"" + url3 + "\",\"" + transactionurl1 + "\", \"" + transactionurl2 + "\", \"" + transactionurl3 + "\");";
 
                          Log.e(this.getClass().getName(), " VIRTUALHOME: calling JS method:" + js);
 

@@ -13,11 +13,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -150,7 +150,7 @@ public class LivingRoomGalleryFragment extends Fragment {
 
         private String[] imageLocations;
         Bitmap[] images;
-
+        int resultSize;
         private void createJSONProductFile(String jsonStr) {
 
             try{
@@ -308,7 +308,7 @@ public class LivingRoomGalleryFragment extends Fragment {
                 jsonObject = new JSONObject(serverSB.toString());
 
                 JSONArray queryArray = jsonObject.getJSONArray("results");
-                int resultSize = queryArray.length();
+                resultSize = queryArray.length();
 
                 productID = new String[resultSize];
                 names = new String[resultSize];
@@ -393,6 +393,7 @@ public class LivingRoomGalleryFragment extends Fragment {
             morePictures = getActivity().getIntent().getStringExtra("additionalProduct");
             Log.i("Living Room Gallery", "morePictures " + morePictures);
 
+            if (resultSize>0){
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                     System.out.println("Inside listener");
@@ -429,6 +430,10 @@ public class LivingRoomGalleryFragment extends Fragment {
                     }
                 }
             });
+            } else {
+                Toast.makeText(getActivity(), "Cannot load Living Room product gallery at this time", Toast.LENGTH_SHORT).show();
+                getFragmentManager().popBackStack();
+            }
         }
 
 

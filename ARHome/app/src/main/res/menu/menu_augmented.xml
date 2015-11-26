@@ -10,6 +10,6 @@
         android:orderInCategory="100"  android:icon="@drawable/ic_camera_black_24dp"
         android:showAsAction="always" />
 
-    <item android:id="@+id/action_snapToScreen" android:title="@string/action_snaptoscreen"
-        android:orderInCategory="100" android:showAsAction="never" />
+   <!-- <item android:id="@+id/action_snapToScreen" android:title="@string/action_snaptoscreen"
+        android:orderInCategory="100" android:showAsAction="never" />-->
 </menu>

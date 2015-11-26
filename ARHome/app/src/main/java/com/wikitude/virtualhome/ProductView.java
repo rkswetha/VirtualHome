@@ -31,7 +31,6 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 
 public class ProductView extends Activity {
 
@@ -43,7 +42,7 @@ public class ProductView extends Activity {
     String ConstantURL = URLAPIConstant.URL;
     JSONObject userPrefJson;
     boolean galleryJsonStreamSuccess;
-
+    String[] imageLocations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +87,7 @@ public class ProductView extends Activity {
         //getting no userID status:
         SharedPreferences settings = getSharedPreferences(PREFERENCES_Gallery_FILE_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
-         userIDStr = settings.getString("user_id", "-1");
+        userIDStr = settings.getString("user_id", "-1");
         Log.i("Pref", "UserID: " + userIDStr);
 
 
@@ -97,12 +96,12 @@ public class ProductView extends Activity {
         imageView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(userIDStr == "-1")
-                openARView(null);
+                    openARView();
                 else
                     getUserTransactions();
             }
         });
-		
+
     }
 
 
@@ -133,7 +132,7 @@ public class ProductView extends Activity {
 
     private class UserTransactionAsynTask extends AsyncTask<String, String, String> {
 
-        private String[] imageLocations;
+
         JSONArray queryArray;
 
         protected String doInBackground(String... arg0) {
@@ -205,11 +204,13 @@ public class ProductView extends Activity {
                         Log.i("VirtualHome:AR", "resultSize:" + resultSize);
                         Log.i("VirtualHome:AR", "queryArray:" + queryArray);
 
-                        imageLocations = new String[resultSize];
+                        if (resultSize > 0) {
+                            imageLocations = new String[resultSize];
 
-                        for (int i = 0; i < queryArray.length(); i++) {
-                            JSONObject jsonAttributes = queryArray.getJSONObject(i);
-                            imageLocations[i] = jsonAttributes.getString("url");
+                            for (int i = 0; i < queryArray.length(); i++) {
+                                JSONObject jsonAttributes = queryArray.getJSONObject(i);
+                                imageLocations[i] = jsonAttributes.getString("url");
+                            }
                         }
 
                     } catch (JSONException e) {
@@ -244,7 +245,7 @@ public class ProductView extends Activity {
                 for (int i = 0; i < imageLocations.length; i++) {
                     Log.i("VirtualHome-ProductView", "onPostExecute:URL obtained"+imageLocations[i]);
                 }
-                openARView(imageLocations);
+                openARView();
 
             }
 
@@ -276,11 +277,11 @@ public class ProductView extends Activity {
     }
 
 
-    public void openARView(String[] imageLocations)
+    public void openARView()
     {
 
         //If null
-        final String[] images = imageLocations;
+        //final String[] images = imageLocations;
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
         // set title
@@ -304,9 +305,9 @@ public class ProductView extends Activity {
                             theIntent.putExtra("MarkerPresent", "YES");
                             theIntent.putExtra("ImagePath", location);
                             theIntent.putExtra("productid",productID);
-                            theIntent.putExtra("PastTransaction",images );
-                            Log.i("images intent", images.toString());
-                            Log.i("images intent",images[0]);
+                            theIntent.putExtra("PastTransaction",imageLocations );
+                           // Log.i("images intent", imageLocations.toString());
+                           // Log.i("images intent",imageLocations[0]);
                             startActivity(theIntent);
 
                         } catch (Exception e) {
@@ -330,8 +331,8 @@ public class ProductView extends Activity {
                             theIntent.putExtra("MarkerPresent", "NO");
                             theIntent.putExtra("ImagePath", location);
                             theIntent.putExtra("productid",productID);
-                            theIntent.putExtra("PastTransaction",images );
-                            Log.i("images intent", images[0]);
+                            theIntent.putExtra("PastTransaction",imageLocations );
+                           // Log.i("images intent", imageLocations[0]);
                             startActivity(theIntent);
                         } catch (Exception e) {
                             Toast.makeText(getApplicationContext(), "\n className not defined/accessible",

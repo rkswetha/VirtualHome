@@ -1,6 +1,7 @@
 var overlayOne;
 var imagePath;
 var recommendedUrls = [];
+var pastTransactionUrls = [];
 
 
 var World = {
@@ -138,10 +139,14 @@ var World = {
     },
 
     // Thumbnail Recommendations START
-    getRecommendedProducts: function getRecommendedProducts(url1, url2, url3){
-        recommendedUrls.push(url1);
-        recommendedUrls.push(url2);
-        recommendedUrls.push(url3);
+    getRecommendedProducts: function getRecommendedProducts(url1, url2, url3, url4, url5, url6){
+     	recommendedUrls[0] = url1;
+         recommendedUrls[1] = url2;
+         recommendedUrls[2] = url3;
+
+         pastTransactionUrls[0] = url4;
+         pastTransactionUrls[1] = url5;
+         pastTransactionUrls[2] = url6;
 
         this.showDataMiningThumbnail();
     },
@@ -150,25 +155,46 @@ var World = {
     showDataMiningThumbnail: function showDataMiningThumbnail(){
 
         var elem = document.getElementById("thumbnails");
-        var d1 = document.getElementById("datamining1");
-        var d2 = document.getElementById("datamining2");
-        var d3 = document.getElementById("datamining3");
+            var d1 = document.getElementById("datamining1");
+            var d2 = document.getElementById("datamining2");
+            var d3 = document.getElementById("datamining3");
 
-        if (elem.style.display == "none"){
-             if (recommendedUrls[0] != null){
-                d1.src = recommendedUrls[0];
-                d2.src = recommendedUrls[1];
-                d3.src = recommendedUrls[2];
-             } else {
-                d1.src = "";
-                d2.src = "";
-                d3.src = "";
-             }
-             elem.style.display = 'inline-block';
-        }else
-        {
-            elem.style.display = 'none';
-        }
+            var t1 = document.getElementById("transaction1");
+            var t2 = document.getElementById("transaction2");
+            var t3 = document.getElementById("transaction3");
+
+            var recentitemstitle = document.getElementById("recenttitle");
+
+            if (elem.style.display == "none"){
+                if (recommendedUrls[0] != null){
+                    d1.src = recommendedUrls[0];
+                    d2.src = recommendedUrls[1];
+                    d3.src = recommendedUrls[2];
+
+                    if (pastTransactionUrls[0] !=""){
+                        t1.src = pastTransactionUrls[0];
+                        recentitemstitle.style.display = "inline";
+                        document.getElementById("t1").style.display = 'inline';
+                    }
+                    if (pastTransactionUrls[1] !=""){
+                        t2.src = pastTransactionUrls[1];
+                        document.getElementById("t2").style.display = 'inline';
+                    }
+                    if (pastTransactionUrls[2] !=""){
+                        t3.src = pastTransactionUrls[2];
+                        document.getElementById("t3").style.display = 'inline';
+                    }
+                } else
+                {
+                    d1.src = "";
+                    d2.src = "";
+                    d3.src = "";
+                }
+                elem.style.display = 'inline-block';
+            }else
+            {
+                elem.style.display = 'none';
+            }
     },
 
     replaceWithThumbnailImage: function replaceWithThumbnailImage(src){

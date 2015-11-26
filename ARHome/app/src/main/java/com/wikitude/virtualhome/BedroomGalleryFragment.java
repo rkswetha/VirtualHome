@@ -13,11 +13,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -148,6 +148,7 @@ public class BedroomGalleryFragment extends Fragment {
 
         private String[] imageLocations;
         Bitmap[] images;
+        int resultSize;
 
         private void createJSONProductFile(String jsonStr) {
 
@@ -306,7 +307,7 @@ public class BedroomGalleryFragment extends Fragment {
                 jsonObject = new JSONObject(serverSB.toString());
 
                 JSONArray queryArray = jsonObject.getJSONArray("results");
-                int resultSize = queryArray.length();
+                resultSize = queryArray.length();
 
                 productID = new String[resultSize];
                 names = new String[resultSize];
@@ -381,6 +382,7 @@ public class BedroomGalleryFragment extends Fragment {
             Log.i("VirtualHome-Gallery", "end time:2" + eTime);
             Log.i("VirtualHome-Gallery", "Total time taken for gallery load2 " + (eTime - sTime));
 
+            if(resultSize >0){
 
             gridView = (GridView) getView().findViewById(R.id.gridViewSofa);
             gridAdapter = new GalleryGridAdapter(getActivity(), R.layout.grid_item_sofa, galleryImages);
@@ -433,6 +435,10 @@ public class BedroomGalleryFragment extends Fragment {
                     }
                 }
             });
+            } else {
+                Toast.makeText(getActivity(), "Cannot load Bedroom product gallery at this time", Toast.LENGTH_SHORT).show();
+                getFragmentManager().popBackStack();
+            }
         }
 
 
