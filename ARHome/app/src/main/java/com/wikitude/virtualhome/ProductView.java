@@ -200,13 +200,15 @@ public class ProductView extends Activity {
 
                         queryArray = jsonObject.getJSONArray("results");
                         int resultSize = queryArray.length();
-
-                        Log.i("VirtualHome:AR", "resultSize:" + resultSize);
+                        int count = jsonObject.getInt("total_results_count");
                         Log.i("VirtualHome:AR", "queryArray:" + queryArray);
-
-                        if (resultSize > 0) {
-                            imageLocations = new String[resultSize];
-
+                        Log.i("VirtualHome:AR", "queryArray size:" + resultSize);
+                        if (count ==0) {
+                            //If count ==0 send an empty array-- First time registration user
+                            imageLocations = new String[count];
+                        }
+                         else if (count > 0) {
+                            imageLocations = new String[count];
                             for (int i = 0; i < queryArray.length(); i++) {
                                 JSONObject jsonAttributes = queryArray.getJSONObject(i);
                                 imageLocations[i] = jsonAttributes.getString("url");
@@ -306,8 +308,6 @@ public class ProductView extends Activity {
                             theIntent.putExtra("ImagePath", location);
                             theIntent.putExtra("productid",productID);
                             theIntent.putExtra("PastTransaction",imageLocations );
-                           // Log.i("images intent", imageLocations.toString());
-                           // Log.i("images intent",imageLocations[0]);
                             startActivity(theIntent);
 
                         } catch (Exception e) {

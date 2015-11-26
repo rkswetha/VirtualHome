@@ -74,12 +74,7 @@ import java.net.URLEncoder;
          imagePath = getIntent().getStringExtra("ImagePath");
          productID= getIntent().getStringExtra("productid");
          PastTransaction = getIntent().getStringArrayExtra("PastTransaction");
-         if (PastTransaction== null){
-             PastTransaction = new String[0];
-         }
          System.out.println("array length"+ PastTransaction.length);
-
-      //   Log.i("images intent", PastTransaction.toString());
 
 
          Log.e(TAG, "VIRTUALHOME: User has marker?" + markerPresent);
