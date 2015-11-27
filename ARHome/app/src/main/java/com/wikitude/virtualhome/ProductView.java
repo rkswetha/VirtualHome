@@ -95,8 +95,10 @@ public class ProductView extends Activity {
         //update transactions only for the logged in user
         imageView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(userIDStr == "-1")
+                if(userIDStr.equals("-1")) {
                     openARView();
+                    imageLocations = new String[0];
+                }
                 else
                     getUserTransactions();
             }
@@ -131,7 +133,6 @@ public class ProductView extends Activity {
 
 
     private class UserTransactionAsynTask extends AsyncTask<String, String, String> {
-
 
         JSONArray queryArray;
 
