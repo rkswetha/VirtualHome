@@ -50,12 +50,12 @@ public class Home extends Activity {
         switch (item.getItemId()) {
             case R.id.action_camera:
                 // OPen camera
-                Toast.makeText(getApplicationContext(), "Gallery clicked", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Gallery clicked", Toast.LENGTH_SHORT).show();
                 showGallery();
                 return true;
             case R.id.action_login:
                 // OPen login page
-                Toast.makeText(getApplicationContext(), "Preferences", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Preferences", Toast.LENGTH_SHORT).show();
                 openLogin();
                 return true;
             default:
