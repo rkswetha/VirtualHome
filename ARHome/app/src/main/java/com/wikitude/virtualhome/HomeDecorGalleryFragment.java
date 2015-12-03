@@ -376,6 +376,10 @@ public class HomeDecorGalleryFragment extends Fragment {
 
             Log.i("VirtualHome", "onPostExecute");
 
+            if(networkError) {
+                Toast.makeText(getActivity(), "Network Error!!", Toast.LENGTH_SHORT).show();
+                networkError = false;
+            }
 
             endTime = new Timestamp(new Date().getTime());
             Log.i("VirtualHome-Gallery", "end time:" + endTime);
@@ -385,6 +389,8 @@ public class HomeDecorGalleryFragment extends Fragment {
             Log.i("VirtualHome-Gallery", "Total time taken for gallery load2 " + (eTime - sTime));
 
             System.out.println("id of gridviewsofa: " + R.id.gridViewSofa);
+            if (resultSize > 0){
+
             gridView = (GridView) getView().findViewById(R.id.gridViewSofa);
             gridAdapter = new GalleryGridAdapter(getActivity(), R.layout.grid_item_sofa, galleryImages);
             gridView.setAdapter(gridAdapter);
@@ -394,7 +400,7 @@ public class HomeDecorGalleryFragment extends Fragment {
             morePictures = getActivity().getIntent().getStringExtra("additionalProduct");
             Log.i("Home Decor Gallery", "morePictures " + morePictures);
 
-            if (resultSize > 0){
+
 
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {

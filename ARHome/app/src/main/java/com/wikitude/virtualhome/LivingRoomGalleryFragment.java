@@ -376,6 +376,11 @@ public class LivingRoomGalleryFragment extends Fragment {
             Log.i("VirtualHome", "onPostExecute");
 
 
+            if(networkError) {
+                Toast.makeText(getActivity(), "Network Error!!", Toast.LENGTH_SHORT).show();
+                networkError = false;
+            }
+
             endTime = new Timestamp(new Date().getTime());
             Log.i("VirtualHome-Gallery", "end time:" + endTime);
             eTime = endTime.getTime();
@@ -383,24 +388,23 @@ public class LivingRoomGalleryFragment extends Fragment {
             Log.i("VirtualHome-Gallery", "end time:2" + eTime);
             Log.i("VirtualHome-Gallery", "Total time taken for gallery load2 " + (eTime - sTime));
 
-
+            if (resultSize>0){
             gridView = (GridView) getView().findViewById(R.id.gridViewSofa);
             gridAdapter = new GalleryGridAdapter(getActivity(), R.layout.grid_item_sofa, galleryImages);
             gridView.setAdapter(gridAdapter);
-
 
             //getting the extra:
             morePictures = getActivity().getIntent().getStringExtra("additionalProduct");
             Log.i("Living Room Gallery", "morePictures " + morePictures);
 
-            if (resultSize>0){
+
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                     System.out.println("Inside listener");
                     GalleryItem item = (GalleryItem) parent.getItemAtPosition(position);
                     System.out.println("after image creation");
 
-                    if(morePictures!=null) {
+                    if (morePictures != null) {
                         Log.i("Living Room Gallery", "inside not null");
 
                         if (morePictures.trim().equals("yes")) {
@@ -415,13 +419,12 @@ public class LivingRoomGalleryFragment extends Fragment {
                             Log.i("Living Room Gallery", "inside morePicture-end");
                             getActivity().finish();
                         }
-                    }
-                    else {
+                    } else {
                         //This is called if it is the initial image to be chosen.
                         Log.i("Living Room Gallery", "inside first picture choice");
 
                         //Create intent
-                        Intent intent = new Intent(getActivity(),  ProductView.class);
+                        Intent intent = new Intent(getActivity(), ProductView.class);
                         intent.putExtra("title", item.getGalleryItemTitle());
                         intent.putExtra("description", item.getGalleryItemDescription());
                         intent.putExtra("location", item.getGalleryItemLocation());

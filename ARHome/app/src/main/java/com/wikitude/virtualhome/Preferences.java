@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
@@ -47,6 +46,8 @@ public class Preferences extends Activity {
     String emailID=null;
     private boolean preferenceCreationNotSuccess=false;
     String ConstantURL = URLAPIConstant.URL;
+
+    boolean networkError;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -260,7 +261,7 @@ public class Preferences extends Activity {
         String result = family + " " + gender + " " + profession + " " + "1:" + chstate1 + "2:" + chstate2 + "3:" + chstate3 + "4:" + chstate4 + "5:" + chstate5 + "6:" + chstate6 ;
         Log.i("pref", result);
 
-        Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
 
 
         //Create preferences json and call the server.
@@ -419,9 +420,11 @@ public class Preferences extends Activity {
             } catch (MalformedURLException e) {
 
                 e.printStackTrace();
+                networkError =true;
             } catch (IOException e) {
 
                 e.printStackTrace();
+                networkError =true;
             } finally {
                 if (urlConnection != null)
                     urlConnection.disconnect();
@@ -434,6 +437,11 @@ public class Preferences extends Activity {
 
         protected void onPostExecute(String result) {
             Log.i("VirtualHome-Preferences", "onPostExecute-Create User Preferences");
+
+            if(networkError) {
+                Toast.makeText(getApplicationContext(), "Network Error", Toast.LENGTH_SHORT).show();
+                networkError = false;
+            }
 
             if(preferenceCreationNotSuccess){
 

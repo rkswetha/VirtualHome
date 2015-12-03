@@ -381,6 +381,10 @@ public class DiningRoomGalleryFragment extends Fragment {
 
             Log.i("VirtualHome", "onPostExecute");
 
+            if(networkError) {
+                Toast.makeText(getActivity(), "Network Error!!", Toast.LENGTH_SHORT).show();
+                networkError = false;
+            }
 
             endTime = new Timestamp(new Date().getTime());
             Log.i("VirtualHome-Gallery", "end time:" + endTime);

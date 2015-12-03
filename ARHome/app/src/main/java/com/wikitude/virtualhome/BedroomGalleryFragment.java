@@ -59,6 +59,7 @@ public class BedroomGalleryFragment extends Fragment {
     String filePath;
     String ConstantURL = URLAPIConstant.URL;
 
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // caching initialization
@@ -373,6 +374,11 @@ public class BedroomGalleryFragment extends Fragment {
         protected void onPostExecute(String result) {
 
             Log.i("VirtualHome", "onPostExecute");
+
+            if(networkError) {
+                Toast.makeText(getActivity(), "Network Error!!", Toast.LENGTH_SHORT).show();
+                networkError = false;
+            }
 
 
             endTime = new Timestamp(new Date().getTime());
