@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wikitude.virtualhome"
     android:installLocation="auto"
-    android:versionCode="4000"
-    android:versionName="4.0.0" >
+    android:versionCode="5000"
+    android:versionName="5.0.0" >
 
     <uses-sdk
         android:minSdkVersion="16"
