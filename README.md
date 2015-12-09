@@ -26,6 +26,12 @@ Features supported as part of Phase 2(CMPE295B)
  * Web server integration with Cloudinary.
  * Image transaparency conversion in web server.
  * Data mining based on user preference dataset.
+ * Data mining based on user transaction history.
+
+Demo video link:
+https://www.youtube.com/watch?v=oCGHkgZ2UAc
+
+Google play deployed name: Virtual Home
 
 ##Tools used
 --------------
@@ -35,11 +41,6 @@ Features supported as part of Phase 2(CMPE295B)
 * MongoLab
 * Weka
 
-##Project Contributors
-----------------------
-* Anusha Ravikumar
-* Karanjot Singh
-* Radhika SNM
-* Swetha RK
+
 
 
